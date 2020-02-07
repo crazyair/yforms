@@ -1,5 +1,5 @@
 {
-    "name": "yform-demo",
+    "name": "father-doc-yform",
     "version": "0.0.2",
     "homepage": "https://crazyair.github.io/father-doc-yform",
     "repository": {
@@ -38,6 +38,12 @@
         "react": ">=16.8.0",
         "react-dom": ">=16.8.0"
     },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "files": [
+        "dist"
+    ],
     "devDependencies": {
         "@babel/polyfill": "^7.8.3",
         "@testing-library/react": "^9.4.0",
