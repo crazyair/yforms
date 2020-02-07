@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { YForm } from '../../index';
+import { YForm } from 'father-doc-yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

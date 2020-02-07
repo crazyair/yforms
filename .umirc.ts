@@ -1,8 +1,13 @@
+// import path from 'path';
+
 import { IConfig } from 'umi-types';
 
 // ref: https://umijs.org/config/
 const config: IConfig = {
     treeShaking: true,
+    // alias: {
+    //     'father-doc-yform': path.resolve(__dirname, './src/index.tsx'),
+    // },
     // routes: [
     //   {
     //     path: '/',

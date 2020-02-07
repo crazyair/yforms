@@ -1,11 +1,7 @@
 {
     "name": "father-doc-yform",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "homepage": "https://crazyair.github.io/father-doc-yform",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/crazyair/father-doc-yform"
-    },
     "description": "自定义表单组件",
     "main": "dist/index.esm.js",
     "typings": "dist/index.d.ts",
@@ -88,5 +84,6 @@
     },
     "engines": {
         "node": ">=8.0.0"
-    }
+    },
+    "license": "MIT"
 }
