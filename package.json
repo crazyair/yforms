@@ -5,7 +5,8 @@
     "build": "umi build",
     "test": "umi test",
     "lint": "eslint {src,mock,tests}/**/*.{ts,tsx} --fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "dev": "father-doc dev"
   },
   "dependencies": {
     "antd": "^3.19.5",
@@ -24,6 +25,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "father-doc": "^1.0.0-alpha.19",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "react-test-renderer": "^16.7.0",
@@ -32,8 +34,14 @@
     "umi-types": "^0.3.0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["eslint --fix", "git add"],
-    "*.{js,jsx}": ["eslint --fix", "git add"]
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8.0.0"
