@@ -15,5 +15,5 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dict
+          FOLDER: dist
           BUILD_SCRIPT: yarn && yarn doc:build
