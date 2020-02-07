@@ -1,6 +1,6 @@
 {
     "name": "father-doc-yform",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "homepage": "https://crazyair.github.io/father-doc-yform",
     "description": "自定义表单组件",
     "main": "dist/index.esm.js",
@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@ant-design/icons": "^4.0.0-rc.0",
+        "@babel/runtime": "^7.8.4",
         "antd": "^4.0.0-rc.3",
         "classnames": "^2.2.6",
         "lodash": "^4.17.15",

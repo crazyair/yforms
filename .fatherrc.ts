@@ -6,6 +6,7 @@ const options: IBundleOptions = {
     esm: 'rollup',
     // cjs: 'babel',
     // esm: 'babel',
+    runtimeHelpers: true,
     preCommit: { eslint: true, prettier: true },
     // extraBabelPlugins: [['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
 };
