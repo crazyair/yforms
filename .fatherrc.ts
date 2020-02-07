@@ -2,7 +2,7 @@ import { IBundleOptions } from 'father';
 
 const options: IBundleOptions = {
     entry: 'src/index.tsx',
-    // cjs: 'rollup',
+    cjs: 'rollup',
     esm: 'rollup',
     // cjs: 'babel',
     // esm: 'babel',
