@@ -4,3 +4,5 @@
 **/*.html
 .umi
 .umi-production
+
+/.github
