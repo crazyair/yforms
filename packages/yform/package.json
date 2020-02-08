@@ -15,7 +15,7 @@
     "repository": {
         "type": "git",
         "url": "http://github.com/crazyair/father-doc-yform",
-        "directory": "father-doc"
+        "directory": "yform"
     },
     "homepage": "http://github.com/crazyair/father-doc-yform",
     "bugs": "http://github.com/crazyair/father-doc-yform/issues",
