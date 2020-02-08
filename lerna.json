@@ -11,9 +11,14 @@
         "cacheDir": ".changelog"
     },
     "packages": ["packages/*"],
+    "npmClient": "yarn",
     "command": {
         "version": {
             "exact": true
+        },
+        "publish": {
+            "message": "chore(release): publish",
+            "registry": "https://npm.pkg.github.com"
         }
     },
     "version": "independent"
