@@ -35,6 +35,9 @@
         "typescript": "^3.7.5",
         "umi-types": "^0.5.3"
     },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
     "lint-staged": {
         "*.{ts,tsx}": [
             "eslint --fix",
