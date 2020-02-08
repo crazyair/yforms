@@ -10,6 +10,8 @@
         "fa:build": "father build",
         "precommit": "lint-staged",
         "dev": "father-doc dev",
+        "changelog": "lerna-changelog",
+        "pub": "npm run changelog && npm run build && lerna publish",
         "doc:build": "father-doc build"
     },
     "devDependencies": {
