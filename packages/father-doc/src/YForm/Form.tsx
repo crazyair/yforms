@@ -37,7 +37,7 @@ export function useFormatFieldsValue<T = any>() {
     };
 }
 
-export interface YFormProps extends Omit<FormProps, 'children'> {
+export interface YFormProps extends FormProps {
     isShow?: boolean;
     loading?: boolean;
     disabled?: boolean;
@@ -49,7 +49,16 @@ export interface YFormProps extends Omit<FormProps, 'children'> {
 }
 
 const InternalForm = (props: YFormProps) => {
-    const { disabled, required, loading, itemsType, children, onFinish, formatFieldsValue, ...rest } = props;
+    const {
+        disabled,
+        required,
+        loading,
+        itemsType,
+        children,
+        onFinish,
+        formatFieldsValue,
+        ...rest
+    } = props;
 
     const _itemsTypeAll = {
         ...baseItemsType,

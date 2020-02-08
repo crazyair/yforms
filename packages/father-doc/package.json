@@ -9,6 +9,7 @@
         "email": "645381995@qq.com"
     },
     "scripts": {
+        "lint:tsc": "tsc -p tsconfig.json --noEmit",
         "fa:build": "father build"
     },
     "repository": {

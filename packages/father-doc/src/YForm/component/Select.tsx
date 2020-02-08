@@ -9,7 +9,14 @@ import { OptionsProps } from '../ItemsType';
 export interface YSelectProps extends OptionsProps, Omit<SelectProps<any>, 'options'> {}
 
 export default (props: YSelectProps) => {
-    const { postField = 'id', showField = 'name', options, renderOption, onAddProps, ...rest } = props;
+    const {
+        postField = 'id',
+        showField = 'name',
+        options,
+        renderOption,
+        onAddProps,
+        ...rest
+    } = props;
     const children = map(options, (item, index: number) => {
         if (item) {
             const _postField = getFieldKeyValue(item, index, postField);

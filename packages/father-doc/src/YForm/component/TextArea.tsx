@@ -9,7 +9,10 @@ export interface YTextAreaProps extends TextAreaProps {
     inputMax?: number;
 }
 
-export const textModify = (fProps: YFormItemProps, cProps: YTextAreaProps): [YFormItemProps, YTextAreaProps] => {
+export const textModify = (
+    fProps: YFormItemProps,
+    cProps: YTextAreaProps,
+): [YFormItemProps, YTextAreaProps] => {
     const _fProps = { ...fProps };
     const _cProps = { ...cProps };
     if (cProps.inputMax) {
@@ -34,7 +37,9 @@ export default (props: YTextAreaProps) => {
     return (
         <div className="can-input-length">
             <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} {...rest} />
-            <div className="length">{inputMax && `${calculateStrLength(`${value || ''}`)}/${inputMax}`}</div>
+            <div className="length">
+                {inputMax && `${calculateStrLength(`${value || ''}`)}/${inputMax}`}
+            </div>
         </div>
     );
 };

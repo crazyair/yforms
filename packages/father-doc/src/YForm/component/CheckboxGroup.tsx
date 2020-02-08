@@ -9,7 +9,15 @@ import { OptionsProps } from '../ItemsType';
 export interface YCheckGroupProps extends OptionsProps, Omit<CheckboxGroupProps, 'options'> {}
 
 export default (props: YCheckGroupProps) => {
-    const { value, postField = 'id', showField = 'name', options, renderOption, onAddProps, ...rest } = props;
+    const {
+        value,
+        postField = 'id',
+        showField = 'name',
+        options,
+        renderOption,
+        onAddProps,
+        ...rest
+    } = props;
     const children = map(options, (item, index: number) => {
         if (item) {
             const _postField = getFieldKeyValue(item, index, postField);

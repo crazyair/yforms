@@ -21,7 +21,11 @@ export interface YFormItemProps extends Omit<FormItemProps, 'children'> {
     addonAfter?: React.ReactElement;
     style?: React.CSSProperties;
     offset?: number;
-    children?: (YFormDataSource | YFormDataSource[] | boolean)[] | React.ReactElement | YFormRenderChildren | boolean;
+    children?:
+        | (YFormDataSource | YFormDataSource[] | boolean)[]
+        | React.ReactElement
+        | YFormRenderChildren
+        | boolean;
     dataSource?: YFormItemProps['children'];
 }
 
@@ -59,9 +63,14 @@ const Items = (props: YFormItemsProps) => {
                 return each(item, index);
             }
             if (React.isValidElement(item)) {
-                const domProps = merge(item.props, { style: item.style, className: item.className });
+                const domProps = merge(item.props, {
+                    style: item.style,
+                    className: item.className,
+                });
                 return list.push(
-                    <React.Fragment key={_index}>{React.cloneElement(item, { ...domProps })}</React.Fragment>
+                    <React.Fragment key={_index}>
+                        {React.cloneElement(item, { ...domProps })}
+                    </React.Fragment>,
                 );
             }
             if (isObject(item)) {
@@ -69,7 +78,11 @@ const Items = (props: YFormItemsProps) => {
                 const _base = merge({}, mergeProps, item);
 
                 const { labelCol, wrapperCol, offset } = _base;
-                const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({ labelCol, wrapperCol, offset });
+                const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
+                    labelCol,
+                    wrapperCol,
+                    offset,
+                });
 
                 let _plugins: YFormPluginsType = {};
                 if (typeof _base.plugins === 'boolean') {
@@ -88,7 +101,15 @@ const Items = (props: YFormItemsProps) => {
                 if ('isShow' in item && !item.isShow) {
                     return undefined;
                 }
-                const { type, componentProps, dataSource, items, addonAfter, plugins, ...fieldRest } = item; //  list 默认不需要 FormItem 样式
+                const {
+                    type,
+                    componentProps,
+                    dataSource,
+                    items,
+                    addonAfter,
+                    plugins,
+                    ...fieldRest
+                } = item; //  list 默认不需要 FormItem 样式
 
                 let dom;
                 let _children = item.children;
@@ -105,39 +126,66 @@ const Items = (props: YFormItemsProps) => {
                 _componentProps = { ..._componentProps, ...componentProps };
                 // 添加无 label 处理
                 if (noLabelLayout && !label) {
-                    _formItemProps = { ..._formItemProps, ...noLabelLayoutValue, labelCol: undefined };
+                    _formItemProps = {
+                        ..._formItemProps,
+                        ...noLabelLayoutValue,
+                        labelCol: undefined,
+                    };
                 }
                 if (item.type && itemsType) {
                     const _fieldData = itemsType[item.type];
                     if (_fieldData) {
-                        const { component, render, formatStr, formItemProps, modifyProps } = _fieldData;
+                        const {
+                            component,
+                            render,
+                            formatStr,
+                            formItemProps,
+                            modifyProps,
+                        } = _fieldData;
                         // 注入定义类型传的默认数据
                         _formItemProps = { ..._formItemProps, ...formItemProps };
 
                         //  添加必填 placeholder 处理
                         if ((placeholder || required) && name) {
-                            const _formatStr = typeof label === 'string' && replaceMessage(formatStr || '', { label });
+                            const _formatStr =
+                                typeof label === 'string' &&
+                                replaceMessage(formatStr || '', { label });
                             if (placeholder) {
-                                _componentProps = { placeholder: _formatStr || '请输入', ..._componentProps };
+                                _componentProps = {
+                                    placeholder: _formatStr || '请输入',
+                                    ..._componentProps,
+                                };
                             }
                             if (required) {
                                 _formItemProps.rules = merge(
                                     [],
-                                    [{ required: mergeRequired, message: _formatStr || '此处不能为空' }],
-                                    _formItemProps.rules
+                                    [
+                                        {
+                                            required: mergeRequired,
+                                            message: _formatStr || '此处不能为空',
+                                        },
+                                    ],
+                                    _formItemProps.rules,
                                 );
                             }
                         }
                         // 最后修改参数
                         if (modifyProps) {
-                            [_formItemProps, _componentProps] = modifyProps(_formItemProps, _componentProps);
+                            [_formItemProps, _componentProps] = modifyProps(
+                                _formItemProps,
+                                _componentProps,
+                            );
                         }
                         const _key = name ? `${name}` : key;
                         key = find(list, { key: _key }) ? key : _key;
                         // 包含 items 类型把当前 item 属性全部透传过去
                         if (items) {
                             // list 类型需要 disabled
-                            _componentProps = { ...pick(_componentProps, 'disabled'), ...item, key };
+                            _componentProps = {
+                                ...pick(_componentProps, 'disabled'),
+                                ...item,
+                                key,
+                            };
                         }
 
                         if (render) {
@@ -176,7 +224,7 @@ const Items = (props: YFormItemsProps) => {
                                       );
                                   }
                                 : _children}
-                        </ItemChildren>
+                        </ItemChildren>,
                     );
                 }
             } else {
@@ -191,7 +239,9 @@ const Items = (props: YFormItemsProps) => {
         list.push(children);
     }
 
-    const child = <YFormItemsContext.Provider value={{ ...mergeProps }}>{list}</YFormItemsContext.Provider>;
+    const child = (
+        <YFormItemsContext.Provider value={{ ...mergeProps }}>{list}</YFormItemsContext.Provider>
+    );
     return noStyle ? (
         child
     ) : (

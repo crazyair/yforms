@@ -8,7 +8,11 @@ import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import { SwitchProps } from 'antd/lib/switch';
 
 import CustomTypography from './component/Typography';
-import OneLine, { oneLineModify, YFormOneLineComponentProps, YFormOneLineProps } from './component/OneLine';
+import OneLine, {
+    oneLineModify,
+    YFormOneLineComponentProps,
+    YFormOneLineProps,
+} from './component/OneLine';
 import Radio, { YRadioProps } from './component/Radio';
 import List, { YFormListComponentProps, YFormListProps } from './component/List';
 import CheckboxGroup, { YCheckGroupProps } from './component/CheckboxGroup';
@@ -78,18 +82,18 @@ export const itemsType: YFormItemsType = {
     checkbox: {
         component: <Checkbox />,
         formatStr: '请选择${label}',
-        modifyProps: (fProps: YFormItemProps, cProps: CheckboxProps): [YFormItemProps, CheckboxProps] => [
-            { valuePropName: 'checked', ...fProps },
-            cProps,
-        ],
+        modifyProps: (
+            fProps: YFormItemProps,
+            cProps: CheckboxProps,
+        ): [YFormItemProps, CheckboxProps] => [{ valuePropName: 'checked', ...fProps }, cProps],
     },
     switch: {
         component: <Switch />,
         formatStr: '请选择${label}',
-        modifyProps: (fProps: YFormItemProps, cProps: SwitchProps): [YFormItemProps, SwitchProps] => [
-            { valuePropName: 'checked', ...fProps },
-            cProps,
-        ],
+        modifyProps: (
+            fProps: YFormItemProps,
+            cProps: SwitchProps,
+        ): [YFormItemProps, SwitchProps] => [{ valuePropName: 'checked', ...fProps }, cProps],
     },
     checkboxGroup: { component: <CheckboxGroup />, formatStr: '请选择${label}' },
     radio: { component: <Radio />, formatStr: '请选择${label}' },
