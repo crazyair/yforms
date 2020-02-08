@@ -1,6 +1,6 @@
 {
     "name": "father-doc-yform",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "自定义表单组件",
     "main": "es/index.js",
     "typings": "es/index.d.ts",
@@ -38,6 +38,7 @@
         "registry": "https://registry.npmjs.org/"
     },
     "files": [
+        "es",
         "dist"
     ],
     "devDependencies": {
@@ -69,5 +70,6 @@
         "umi-plugin-react": "^1.8.0",
         "umi-types": "^0.3.0"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "gitHead": "bd0e2dfdebe8be949b73101976df6fbc162c4731"
 }
