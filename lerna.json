@@ -21,5 +21,6 @@
             "registry": "https://registry.npmjs.org"
         }
     },
+    "publishConfig": { "registry": "https://registry.npmjs.org" },
     "version": "independent"
 }
