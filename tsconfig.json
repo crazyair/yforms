@@ -1,18 +1,10 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
         "moduleResolution": "node",
-        "importHelpers": true,
-        "jsx": "react",
-        "esModuleInterop": true,
-        "sourceMap": true,
-        "baseUrl": ".",
-        "strict": true,
-        "paths": {
-            "@/*": ["src/*"],
-            "father-doc-yform": ["src/index.tsx"]
-        },
-        "allowSyntheticDefaultImports": true
+        "jsx": "preserve",
+        "declaration": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true
     }
 }

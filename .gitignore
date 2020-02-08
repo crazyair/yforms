@@ -20,3 +20,8 @@
 /.history
 /.vscode
 /coverage
+
+
+/packages/*/node_modules
+/packages/*/es
+/packages/*/lib

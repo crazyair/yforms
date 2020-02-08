@@ -1,90 +1,31 @@
 {
-    "name": "father-doc-yform",
-    "version": "0.0.9",
-    "homepage": "https://crazyair.github.io/father-doc-yform",
-    "description": "自定义表单组件",
-    "main": "dist/index.esm.js",
-    "typings": "dist/index.d.ts",
-    "authors": {
-        "name": "crazyair",
-        "email": "645381995@qq.com"
-    },
+    "private": true,
     "scripts": {
         "start": "umi dev",
         "test": "umi test",
         "lint": "eslint {src,mock,tests}/**/*.{ts,tsx} --fix",
         "lint:es": "eslint --ext .js,jsx,ts,tsx src",
         "lint:tsc": "tsc -p tsconfig.json --noEmit",
-        "precommit": "lint-staged",
-        "build": "father build",
+        "build": "father-build build",
+        "fa:build": "father build",
         "dev": "father-doc dev",
         "doc:build": "father-doc build"
     },
-    "dependencies": {
-        "@ant-design/icons": "^4.0.0-rc.0",
-        "@babel/runtime": "^7.8.4",
-        "antd": "^4.0.0-rc.3",
-        "classnames": "^2.2.6",
-        "lodash": "^4.17.15",
-        "moment": "^2.24.0",
-        "numbro": "^2.1.2",
-        "nzh": "^1.0.4",
-        "warning": "^4.0.3"
-    },
-    "peerDependencies": {
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
-    },
-    "files": [
-        "dist"
-    ],
     "devDependencies": {
-        "@babel/polyfill": "^7.8.3",
-        "@testing-library/react": "^9.4.0",
-        "@testing-library/react-hooks": "^3.1.1",
-        "@types/classnames": "^2.2.9",
-        "@types/enzyme": "^3.10.4",
-        "@types/jest": "^23.3.12",
-        "@types/lodash": "^4.14.149",
-        "@types/react": "^16.7.18",
-        "@types/react-dom": "^16.0.11",
-        "@types/react-test-renderer": "^16.0.3",
-        "@types/warning": "^3.0.0",
-        "@typescript-eslint/eslint-plugin": "^2.13.0",
-        "@typescript-eslint/parser": "^2.18.0",
-        "babel-eslint": "^9.0.0",
-        "enzyme": "^3.11.0",
-        "eslint": "^5.4.0",
-        "eslint-config-umi": "^1.4.0",
-        "eslint-plugin-flowtype": "^2.50.0",
-        "eslint-plugin-import": "^2.14.0",
-        "eslint-plugin-jsx-a11y": "^5.1.1",
-        "eslint-plugin-react": "^7.11.1",
+        "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+        "@types/jest": "^24.0.13",
+        "@umijs/fabric": "^2.0.0-beta.4",
+        "antd": "^4.0.0-rc.3",
+        "babel-plugin-import": "^1.13.0",
+        "cross-env": "^6.0.3",
+        "eslint": "^6.7.2",
         "father": "^2.29.2",
-        "father-doc": "^1.0.0-alpha.19",
-        "husky": "^0.14.3",
-        "lint-staged": "^7.2.2",
-        "rc-util": "^4.19.0",
-        "react-test-renderer": "^16.7.0",
-        "umi": "^2.9.0",
-        "umi-plugin-react": "^1.8.0",
-        "umi-types": "^0.3.0"
-    },
-    "lint-staged": {
-        "*.{ts,tsx}": [
-            "eslint --fix",
-            "git add"
-        ],
-        "*.{js,jsx}": [
-            "eslint --fix",
-            "git add"
-        ]
-    },
-    "engines": {
-        "node": ">=8.0.0"
+        "father-build": "^1.14.2",
+        "lerna": "^3.6.0",
+        "lerna-changelog": "^0.8.2",
+        "prettier": "^1.19.1",
+        "umi-test": "^1.5.12",
+        "umi-types": "^0.5.3"
     },
     "license": "MIT"
 }
