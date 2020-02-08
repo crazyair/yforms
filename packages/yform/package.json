@@ -1,6 +1,6 @@
 {
     "name": "father-doc-yform",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "description": "自定义表单组件",
     "main": "es/index.js",
     "typings": "es/index.d.ts",
@@ -71,5 +71,5 @@
         "umi-types": "^0.3.0"
     },
     "license": "MIT",
-    "gitHead": "6cc9358587d627ecd3cae50376375071b8d4f7c9"
+    "gitHead": "2956fc19a59905ee9767f1b5e22b756e86953ed4"
 }
