@@ -10,7 +10,9 @@
         "repo": "crazyair/father-doc-yform",
         "cacheDir": ".changelog"
     },
-    "packages": ["packages/*"],
+    "packages": [
+        "packages/*"
+    ],
     "npmClient": "yarn",
     "command": {
         "version": {
@@ -21,6 +23,8 @@
             "registry": "https://registry.npmjs.org"
         }
     },
-    "publishConfig": { "registry": "https://registry.npmjs.org" },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    },
     "version": "independent"
 }
