@@ -28,6 +28,7 @@
         "eslint": "^6.7.2",
         "father": "^2.29.2",
         "father-build": "^1.14.2",
+        "father-doc": "^1.0.0-alpha.19",
         "lerna": "^3.6.0",
         "lerna-changelog": "^0.8.2",
         "lint-staged": "^7.2.2",
