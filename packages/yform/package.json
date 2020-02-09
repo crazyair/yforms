@@ -8,6 +8,10 @@
         "name": "crazyair",
         "email": "645381995@qq.com"
     },
+    "files": [
+        "es",
+        "dist"
+    ],
     "scripts": {
         "lint:tsc": "tsc -p tsconfig.json --noEmit",
         "fa:build": "father build"
@@ -34,41 +38,11 @@
         "react": ">=16.8.0",
         "react-dom": ">=16.8.0"
     },
+    "devDependencies": {
+        "@babel/polyfill": "^7.8.3"
+    },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
-    },
-    "files": [
-        "es",
-        "dist"
-    ],
-    "devDependencies": {
-        "@babel/polyfill": "^7.8.3",
-        "@testing-library/react": "^9.4.0",
-        "@testing-library/react-hooks": "^3.1.1",
-        "@types/classnames": "^2.2.9",
-        "@types/enzyme": "^3.10.4",
-        "@types/jest": "^23.3.12",
-        "@types/lodash": "^4.14.149",
-        "@types/react": "^16.7.18",
-        "@types/react-dom": "^16.0.11",
-        "@types/react-test-renderer": "^16.0.3",
-        "@types/warning": "^3.0.0",
-        "@typescript-eslint/eslint-plugin": "^2.13.0",
-        "@typescript-eslint/parser": "^2.18.0",
-        "babel-eslint": "^9.0.0",
-        "enzyme": "^3.11.0",
-        "eslint": "^5.4.0",
-        "eslint-config-umi": "^1.4.0",
-        "eslint-plugin-flowtype": "^2.50.0",
-        "eslint-plugin-import": "^2.14.0",
-        "eslint-plugin-jsx-a11y": "^5.1.1",
-        "eslint-plugin-react": "^7.11.1",
-        "father": "^2.29.2",
-        "rc-util": "^4.19.0",
-        "react-test-renderer": "^16.7.0",
-        "umi": "^2.9.0",
-        "umi-plugin-react": "^1.8.0",
-        "umi-types": "^0.3.0"
     },
     "license": "MIT",
     "gitHead": "2956fc19a59905ee9767f1b5e22b756e86953ed4"
