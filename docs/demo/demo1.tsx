@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { YForm } from 'father-doc-yform';
 
-import 'antd/dist/antd.css';
-
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 const Demo = () => {
