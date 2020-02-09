@@ -1,19 +1,3 @@
----
-title: 文档
-order: 10
----
-
-## 前言
-
-> 一个基于 antd@4 form 封装简单配置化 form 组件
-
-## 特性
-
--   简单快速创建复杂表单。
--   原生 `antd form api`。
--   可自行添加 `type`。
--   使用 `TypeScript` 开发，提供完整的类型定义文件。
-
 ## yform-demo
 
 antd v4 配置化 Form
@@ -29,6 +13,33 @@ yarn add yform-demo
 ```
 
 ## 示例
+
+```jsx
+import React from 'react';
+import { YForm } from 'yform-demo';
+
+const Demo = () => {
+    return (
+        <YForm>
+            {[
+                { type: 'input', label: '姓名', name: 'name' },
+                {
+                    type: 'radio',
+                    label: '性别',
+                    name: 'gender',
+                    componentProps: {
+                        options: [
+                            { id: true, name: '男' },
+                            { id: false, name: '女' },
+                        ],
+                    },
+                },
+            ]}
+        </YForm>
+    );
+};
+export default Demo;
+```
 
 ## API
 
@@ -59,7 +70,7 @@ yarn add yform-demo
 | disabled      | 字段禁用状态                             | boolean | -                   |
 | noLabelLayout | 没有 label 下，自动 push 当前 label 的值 | -       | -                   |
 
-```jsx | pure
+```jsx
 const dataSource = [{ label: '年龄', type: 'input', name: 'age' }];
 ```
 

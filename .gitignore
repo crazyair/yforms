@@ -24,5 +24,6 @@
 /.changelog
 
 /packages/*/node_modules
+/packages/*/yarn.lock
 /packages/*/es
 /packages/*/lib
