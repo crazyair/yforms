@@ -40,6 +40,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: yarn
       - run: yarn bootstrap
-      - run: yarn pub
+      - run: yarn pub --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
