@@ -75,9 +75,9 @@
 
 export default {
     target: 'node',
-    // extraBabelPlugins: [
-    //     ['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
-    // ],
+    extraBabelPlugins: [
+        ['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+    ],
     runtimeHelpers: true,
     esm: 'babel',
     // cjs: { type: 'babel', lazy: true },
