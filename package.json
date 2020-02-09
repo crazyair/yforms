@@ -3,6 +3,7 @@
     "scripts": {
         "start": "umi dev",
         "test": "umi test",
+        "bootstrap": "lerna bootstrap",
         "lint": "eslint --ext .js,jsx,ts,tsx packages/**/src --fix",
         "lint:es": "eslint --ext .js,jsx,ts,tsx packages/**/src",
         "lint:tsc": "tsc -p tsconfig.json --noEmit",

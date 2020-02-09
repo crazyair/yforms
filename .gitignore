@@ -21,6 +21,7 @@
 /.vscode
 /coverage
 
+/.changelog
 
 /packages/*/node_modules
 /packages/*/es
