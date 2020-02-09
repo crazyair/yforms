@@ -16,7 +16,12 @@ const YFormDemo = (props: YFormProps) => {
     onFormatFieldsValue([{ name: ['demo', 'aa'], format: (value: { users: any }) => value.users }]);
 
     return (
-        <YForm onFinish={onFinish} formatFieldsValue={formatFieldsValue} initialValues={{ money: '1' }} {...props}>
+        <YForm
+            onFinish={onFinish}
+            formatFieldsValue={formatFieldsValue}
+            initialValues={{ money: '1' }}
+            {...props}
+        >
             {[
                 { type: 'input', name: 'demo' },
                 { type: 'money', name: 'money', label: 'money' },
@@ -26,7 +31,11 @@ const YFormDemo = (props: YFormProps) => {
                             type: 'button',
                             noStyle: true,
                             plugins: { disabled: false },
-                            componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
+                            componentProps: {
+                                type: 'primary',
+                                htmlType: 'submit',
+                                children: 'submit',
+                            },
                         },
                     ],
                 },
@@ -53,7 +62,7 @@ describe('YForm', () => {
             <div>
                 <YFormDemo {...layout} />
                 <YFormDemo {...layoutMore} />
-            </div>
+            </div>,
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -63,7 +72,9 @@ describe('YForm', () => {
             render: { render: () => <div>1</div> },
         };
         YForm.config({ itemsType });
-        const wrapper = render(<YForm name="basic">{[{ type: 'demo' }, { type: 'render' }] as any}</YForm>);
+        const wrapper = render(
+            <YForm name="basic">{[{ type: 'demo' }, { type: 'render' }] as any}</YForm>,
+        );
         expect(wrapper).toMatchSnapshot();
     });
     test('onFinish', () => {

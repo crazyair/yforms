@@ -22,7 +22,7 @@ class InputMoney extends React.PureComponent<YMoneyProps> {
                 Numbro(_number).format({
                     trimMantissa: true,
                     mantissa: 2,
-                })
+                }),
             );
             // 这个会强制有小数
             // onChange(number.toFixed(2));

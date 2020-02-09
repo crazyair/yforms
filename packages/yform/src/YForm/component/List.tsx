@@ -12,7 +12,11 @@ import { YFormItemProps } from '../Items';
 
 type showButtonType = boolean | { text?: string };
 
-export type ShowIconsType = { showBottomAdd?: showButtonType; showAdd?: showButtonType; showRemove?: showButtonType };
+export type ShowIconsType = {
+    showBottomAdd?: showButtonType;
+    showAdd?: showButtonType;
+    showRemove?: showButtonType;
+};
 
 export interface YFormListComponentProps extends BaseComponentProps {
     maxNum?: number;
@@ -31,7 +35,9 @@ export interface YFormListItems {
     icons: React.ReactNode;
 }
 
-export interface YFormListProps extends Pick<YFormItemProps, 'label'>, Pick<YFormProps, 'children' | 'disabled'> {
+export interface YFormListProps
+    extends Pick<YFormItemProps, 'label'>,
+        Pick<YFormProps, 'children' | 'disabled'> {
     // TODO  field-form 和 antd 的 name 类型不一致
     name?: string | number | (string | number)[];
     items?: (p: YFormListItems) => YFormItemProps['children'];
@@ -45,7 +51,11 @@ export default (props: YFormListProps) => {
         maxNum,
         minNum,
         showRightIcons = true,
-        showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {} as ShowIconsType,
+        showIcons: {
+            showBottomAdd = true,
+            showAdd = true,
+            showRemove = true,
+        } = {} as ShowIconsType,
         onShowIcons,
     } = componentProps;
     return (
@@ -62,7 +72,7 @@ export default (props: YFormListProps) => {
                                 const { showAdd: _showAdd, showRemove: _showRemove } = merge(
                                     {},
                                     { showAdd, showRemove },
-                                    _showIcons
+                                    _showIcons,
                                 );
                                 const icons: React.ReactNode[] = [];
                                 if (!disabled) {
@@ -76,11 +86,16 @@ export default (props: YFormListProps) => {
                                                     // 再把最后一位移动到当前
                                                     move(fields.length, index + 1);
                                                 }}
-                                            />
+                                            />,
                                         );
                                     }
                                     if (isMin && _showRemove) {
-                                        icons.push(<MinusCircleOutlined key="minus" onClick={() => remove(index)} />);
+                                        icons.push(
+                                            <MinusCircleOutlined
+                                                key="minus"
+                                                onClick={() => remove(index)}
+                                            />,
+                                        );
                                     }
                                 }
 
@@ -89,10 +104,13 @@ export default (props: YFormListProps) => {
                                 // 第一行有 label（当然，外部需要传 label 参数）
                                 const _label = index === 0 && label;
 
-                                const _iconsDom = <div className={classNames('padding-icons')}>{icons}</div>;
+                                const _iconsDom = (
+                                    <div className={classNames('padding-icons')}>{icons}</div>
+                                );
 
                                 const dataSource =
-                                    items && items({ index, field, add, remove, move, icons: _iconsDom });
+                                    items &&
+                                    items({ index, field, add, remove, move, icons: _iconsDom });
                                 let _children = dataSource;
                                 if (isArray(dataSource)) {
                                     _children = map(dataSource, (item, index) => {
@@ -101,20 +119,27 @@ export default (props: YFormListProps) => {
                                             {
                                                 offset,
                                                 componentProps: !disabled &&
-                                                    showRightIcons && { style: { ..._oneLineStyle[0] } },
+                                                    showRightIcons && {
+                                                        style: { ..._oneLineStyle[0] },
+                                                    },
                                                 plugins: { noLabelLayout: true },
                                                 label: index === 0 && _label,
-                                                addonAfter: showRightIcons && !disabled && index === 0 && (
-                                                    <div
-                                                        className={classNames('padding-icons', 'inline-icons')}
-                                                        style={_oneLineStyle[1]}
-                                                    >
-                                                        {icons}
-                                                    </div>
-                                                ),
+                                                addonAfter: showRightIcons &&
+                                                    !disabled &&
+                                                    index === 0 && (
+                                                        <div
+                                                            className={classNames(
+                                                                'padding-icons',
+                                                                'inline-icons',
+                                                            )}
+                                                            style={_oneLineStyle[1]}
+                                                        >
+                                                            {icons}
+                                                        </div>
+                                                    ),
                                             },
                                             item,
-                                            { key: index }
+                                            { key: index },
                                         );
                                         return _item;
                                     });

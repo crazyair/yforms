@@ -136,7 +136,10 @@ export const getLabelLayout = ({ labelCol, wrapperCol, offset = 0 }: NoLabelLayo
     return { noLabelLayoutValue, labelLayoutValue };
 };
 
-export function submitFormatValues<T>(values: FieldsType<T>, formatFieldsValue?: FormatFieldsValue[]): KeyValue {
+export function submitFormatValues<T>(
+    values: FieldsType<T>,
+    formatFieldsValue?: FormatFieldsValue[],
+): KeyValue {
     const _values = cloneDeep(values) as KeyValue;
     forEach(formatFieldsValue, item => {
         if (item && item.name) {

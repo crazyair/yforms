@@ -23,7 +23,7 @@ export interface YFormOneLineProps {
 
 export const oneLineModify = (
     fProps: YFormItemProps,
-    cProps: YFormOneLineProps
+    cProps: YFormOneLineProps,
 ): [YFormItemProps, YFormOneLineProps] => {
     const _fProps = { ...fProps, className: classNames(fProps.className, 'mb0') };
     const _cProps = { ...cProps };
@@ -48,7 +48,7 @@ export default (props: YFormOneLineProps) => {
                         plugins: { labelLayout: false, noLabelLayout: false },
                         style: { display: 'inline-block', ..._style },
                     },
-                    { ...item, className: classNames('dib', get(item, 'className')) }
+                    { ...item, className: classNames('dib', get(item, 'className')) },
                 );
             }
         }).filter(x => x);

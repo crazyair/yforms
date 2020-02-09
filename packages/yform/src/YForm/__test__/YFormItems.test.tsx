@@ -25,7 +25,11 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
                                 type: 'button',
                                 noStyle: true,
                                 plugins: { disabled: false },
-                                componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
+                                componentProps: {
+                                    type: 'primary',
+                                    htmlType: 'submit',
+                                    children: 'submit',
+                                },
                             },
                         ],
                     },
@@ -71,7 +75,7 @@ describe('YFormItems', () => {
         const wrapper = render(
             <YForm>
                 <YForm.Items />
-            </YForm>
+            </YForm>,
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -96,12 +100,18 @@ describe('YFormItems', () => {
                         {
                             type: 'radio',
                             name: '单选框',
-                            componentProps: { onAddProps: () => 'a', options: [{ name: '真的', id: '1' }] },
+                            componentProps: {
+                                onAddProps: () => 'a',
+                                options: [{ name: '真的', id: '1' }],
+                            },
                         },
                         {
                             type: 'radio',
                             name: '单选框',
-                            componentProps: { renderOption: () => 'a', options: [{ name: '真的', id: '1' }] },
+                            componentProps: {
+                                renderOption: () => 'a',
+                                options: [{ name: '真的', id: '1' }],
+                            },
                         },
                         {
                             type: 'select',
@@ -136,14 +146,23 @@ describe('YFormItems', () => {
                         {
                             type: 'checkboxGroup',
                             name: 'checkboxGroup',
-                            componentProps: { onAddProps: () => 'a', options: [{ id: '1', name: 'a' }] },
+                            componentProps: {
+                                onAddProps: () => 'a',
+                                options: [{ id: '1', name: 'a' }],
+                            },
                         },
                         {
                             type: 'checkboxGroup',
                             name: 'checkboxGroup2',
-                            componentProps: { options: [{ id: '1', name: 'a' }], renderOption: () => 'b' },
+                            componentProps: {
+                                options: [{ id: '1', name: 'a' }],
+                                renderOption: () => 'b',
+                            },
                         },
-                        { type: 'list', items: ({ index }) => [{ type: 'input', name: [index, 'd'] }] },
+                        {
+                            type: 'list',
+                            items: ({ index }) => [{ type: 'input', name: [index, 'd'] }],
+                        },
                         { type: 'money', name: 'money' },
                         { label: 'text', name: 'text', type: 'text' },
                         { label: 'switch', name: 'switch', type: 'switch' },
@@ -153,7 +172,7 @@ describe('YFormItems', () => {
                     <div>1</div>
                     123
                 </YForm.Items>
-            </YForm>
+            </YForm>,
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -170,7 +189,7 @@ describe('YFormItems', () => {
                         },
                     ]}
                 </YForm.Items>
-            </YForm>
+            </YForm>,
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -191,12 +210,18 @@ describe('YFormItems', () => {
                                 onShowIcons: () => ({ showAdd: true, showRemove: true }),
                             },
                             items: ({ index }) => {
-                                return [{ label: index === 0 && '手机号', type: 'input', name: [index, 'phone'] }];
+                                return [
+                                    {
+                                        label: index === 0 && '手机号',
+                                        type: 'input',
+                                        name: [index, 'phone'],
+                                    },
+                                ];
                             },
                         },
                     ]}
                 </YForm.Items>
-            </YForm>
+            </YForm>,
         );
 
         await operate(wrapper, '.ant-btn-dashed');
@@ -210,7 +235,7 @@ describe('YFormItems', () => {
         const wrapper = mount(
             <YForm initialValues={{ money: '1' }}>
                 <YForm.Items>{[{ type: 'money', name: 'money' }]}</YForm.Items>
-            </YForm>
+            </YForm>,
         );
         const dom = await wrapper.find('.ant-input').last();
         dom.simulate('change', { target: { value: '2' } });
@@ -220,7 +245,15 @@ describe('YFormItems', () => {
     });
     test('text', async () => {
         const wrapper = mount(
-            <YForm>{[{ name: 'text', type: 'text', componentProps: { editable: { onStart: () => {} } } }]}</YForm>
+            <YForm>
+                {[
+                    {
+                        name: 'text',
+                        type: 'text',
+                        componentProps: { editable: { onStart: () => {} } },
+                    },
+                ]}
+            </YForm>,
         );
         wrapper
             .find('.ant-typography-edit')
@@ -242,7 +275,7 @@ describe('YFormItems', () => {
                         componentProps: { inputMax: 9 },
                     },
                 ]}
-            </YForm>
+            </YForm>,
         );
         const dom = await wrapper.find('.ant-input').last();
         dom.simulate('change', { target: { value: 'a' } });
@@ -266,7 +299,7 @@ describe('YFormItems', () => {
                     },
                     { label: '多字段', type: 'oneLine', items: () => [undefined] },
                 ]}
-            </YForm>
+            </YForm>,
         );
         expect(wrapper).toMatchSnapshot();
     });
