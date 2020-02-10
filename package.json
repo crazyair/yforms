@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "dev": "father-doc dev",
-    "build": "father-build build",
+    "build": "father-build",
     "doc:build": "father-doc build",
     "fa:build": "father build",
     "test": "umi-test",

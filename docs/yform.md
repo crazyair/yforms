@@ -1,6 +1,6 @@
 ---
-title: 好好写 Demo
-order: 8
+title: Demo
+order: -2
 ---
 
 ## 代码演示

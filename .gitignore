@@ -25,5 +25,6 @@
 
 /packages/*/node_modules
 /packages/*/yarn.lock
+/packages/*/dist
 /packages/*/es
 /packages/*/lib
