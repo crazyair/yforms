@@ -1,6 +1,6 @@
 ---
 title: 好好写 Demo
-order: 8
+order: -2
 ---
 
 ## 代码演示

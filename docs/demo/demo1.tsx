@@ -31,7 +31,7 @@ const Demo = () => {
       {[
         { type: 'input', label: 'name', name: 'name' },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-        { type: 'money', label: 'money', name: 'money' },
+        { type: 'textarea', label: 'money', name: 'money' },
         {
           dataSource: [
             {
