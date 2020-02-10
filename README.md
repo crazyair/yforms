@@ -19,24 +19,24 @@ import React from 'react';
 import { YForm } from 'yform-demo';
 
 const Demo = () => {
-    return (
-        <YForm>
-            {[
-                { type: 'input', label: '姓名', name: 'name' },
-                {
-                    type: 'radio',
-                    label: '性别',
-                    name: 'gender',
-                    componentProps: {
-                        options: [
-                            { id: true, name: '男' },
-                            { id: false, name: '女' },
-                        ],
-                    },
-                },
-            ]}
-        </YForm>
-    );
+  return (
+    <YForm>
+      {[
+        { type: 'input', label: '姓名', name: 'name' },
+        {
+          type: 'radio',
+          label: '性别',
+          name: 'gender',
+          componentProps: {
+            options: [
+              { id: true, name: '男' },
+              { id: false, name: '女' },
+            ],
+          },
+        },
+      ]}
+    </YForm>
+  );
 };
 export default Demo;
 ```
@@ -88,7 +88,7 @@ const dataSource = [{ label: '年龄', type: 'input', name: 'age' }];
 | onShowIcons    | 控制当前索引是否显示添加删除按钮                             | -    | -      |
 | componentProps | maxNum 最大数量、minNum 最小数量、showIcons 控制是否显示按钮 | -    | -      |
 
--   showIcons.showBottomAdd 可为字符串控制显示内容 `{ text: '添加 xxx' }`
+- showIcons.showBottomAdd 可为字符串控制显示内容 `{ text: '添加 xxx' }`
 
 ### oneLine
 
@@ -97,4 +97,4 @@ const dataSource = [{ label: '年龄', type: 'input', name: 'age' }];
 | items          | 一行显示的字段                | -    | -      |
 | componentProps | oneLineStyle 控制每个元素宽度 | -    | -      |
 
--   oneLineStyle `['50%', 10, '50%']`
+- oneLineStyle `['50%', 10, '50%']`

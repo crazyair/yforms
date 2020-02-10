@@ -1,50 +1,50 @@
 {
-    "name": "father-doc-yform",
-    "version": "0.1.35",
-    "description": "自定义表单组件2",
-    "main": "es/index.js",
-    "typings": "es/index.d.ts",
-    "authors": {
-        "name": "crazyair",
-        "email": "645381995@qq.com"
-    },
-    "files": [
-        "es",
-        "lib",
-        "dist"
-    ],
-    "scripts": {
-        "lint:tsc": "tsc -p tsconfig.json --noEmit",
-        "fa:build": "father build"
-    },
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/crazyair/father-doc-yform",
-        "directory": "yform"
-    },
-    "homepage": "http://github.com/crazyair/father-doc-yform",
-    "bugs": "http://github.com/crazyair/father-doc-yform/issues",
-    "dependencies": {
-        "@ant-design/icons": "^4.0.0-rc.0",
-        "@babel/runtime": "^7.8.4",
-        "antd": "^4.0.0-rc.4",
-        "classnames": "^2.2.6",
-        "lodash": "^4.17.15",
-        "moment": "^2.24.0",
-        "numbro": "^2.1.2",
-        "nzh": "^1.0.4",
-        "warning": "^4.0.3"
-    },
-    "peerDependencies": {
-        "antd": "next",
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
-    },
-    "devDependencies": {
-        "@babel/polyfill": "^7.8.3"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
-    },
-    "license": "MIT"
+  "name": "father-doc-yform",
+  "version": "0.1.35",
+  "description": "自定义表单组件2",
+  "main": "es/index.js",
+  "typings": "es/index.d.ts",
+  "authors": {
+    "name": "crazyair",
+    "email": "645381995@qq.com"
+  },
+  "files": [
+    "es",
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "lint:tsc": "tsc -p tsconfig.json --noEmit",
+    "fa:build": "father build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/crazyair/father-doc-yform",
+    "directory": "yform"
+  },
+  "homepage": "http://github.com/crazyair/father-doc-yform",
+  "bugs": "http://github.com/crazyair/father-doc-yform/issues",
+  "dependencies": {
+    "@ant-design/icons": "^4.0.0-rc.0",
+    "@babel/runtime": "^7.8.4",
+    "antd": "^4.0.0-rc.4",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "numbro": "^2.1.2",
+    "nzh": "^1.0.4",
+    "warning": "^4.0.3"
+  },
+  "peerDependencies": {
+    "antd": "next",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/polyfill": "^7.8.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
 }

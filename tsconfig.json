@@ -1,12 +1,12 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "moduleResolution": "node",
-        "baseUrl": "./packages",
-        "paths": { "father-doc-yform": ["yform/src"] },
-        "jsx": "preserve",
-        "declaration": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true
-    }
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "./packages",
+    "paths": { "father-doc-yform": ["yform/src"] },
+    "jsx": "preserve",
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  }
 }

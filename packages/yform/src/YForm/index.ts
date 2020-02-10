@@ -8,13 +8,13 @@ import './index.less';
 
 type InternalYForm = typeof YForm;
 interface RefYForm extends InternalYForm {
-    config: typeof Config;
-    ItemsType: typeof ItemsType;
-    Items: typeof Items;
-    Item: typeof AntForm.Item;
-    useFormatFieldsValue: typeof useFormatFieldsValue;
-    submitFormatValues: typeof submitFormatValues;
-    onFormatFieldsValue: typeof onFormatFieldsValue;
+  config: typeof Config;
+  ItemsType: typeof ItemsType;
+  Items: typeof Items;
+  Item: typeof AntForm.Item;
+  useFormatFieldsValue: typeof useFormatFieldsValue;
+  submitFormatValues: typeof submitFormatValues;
+  onFormatFieldsValue: typeof onFormatFieldsValue;
 }
 
 const Form: RefYForm = YForm as RefYForm;

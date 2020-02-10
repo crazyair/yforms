@@ -5,34 +5,57 @@ order: 10
 
 ## 前言
 
-> 一个基于 antd@4 form 封装简单配置化 form 组件
+> 一个基于 antd@4 Form 封装简单配置化 Form 组件
 
 ## 特性
 
--   简单快速创建复杂表单。
--   原生 `antd form api`。
--   可自行添加 `type`。
--   使用 `TypeScript` 开发，提供完整的类型定义文件。
-
-## yform-demo
-
-antd v4 配置化 Form
+- 简单快速创建复杂表单。
+- 原生 `antd form api`。
+- 可自行添加 `type`。
+- 使用 `TypeScript` 开发，提供完整的类型定义文件。
 
 ## 📦 Install
 
 ```bash
-npm install yform-demo
+npm install father-doc-yform
 ```
 
 ```bash
-yarn add yform-demo
+yarn add father-doc-yform
 ```
 
 ## 示例
 
+```jsx | pure
+import React from 'react';
+import { YForm } from 'father-doc-yform';
+
+const Demo = () => {
+  return (
+    <YForm>
+      {[
+        { type: 'input', label: 'name', name: 'name' },
+        { type: 'money', label: 'money', name: 'money' },
+        {
+          dataSource: [
+            {
+              type: 'button',
+              noStyle: true,
+              plugins: { disabled: false },
+              componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
+            },
+          ],
+        },
+      ]}
+    </YForm>
+  );
+};
+export default Demo;
+```
+
 ## API
 
-[antd form API 地址](https://next.ant.design/components/form-cn/#API)
+对 `Form` 不熟悉的请移步 [Antd Form API 地址](https://next.ant.design/components/form-cn/#API)
 
 ### YForm
 
@@ -77,7 +100,7 @@ const dataSource = [{ label: '年龄', type: 'input', name: 'age' }];
 | onShowIcons    | 控制当前索引是否显示添加删除按钮                             | -    | -      |
 | componentProps | maxNum 最大数量、minNum 最小数量、showIcons 控制是否显示按钮 | -    | -      |
 
--   showIcons.showBottomAdd 可为字符串控制显示内容 `{ text: '添加 xxx' }`
+- showIcons.showBottomAdd 可为字符串控制显示内容 `{ text: '添加 xxx' }`
 
 ### oneLine
 
@@ -86,4 +109,4 @@ const dataSource = [{ label: '年龄', type: 'input', name: 'age' }];
 | items          | 一行显示的字段                | -    | -      |
 | componentProps | oneLineStyle 控制每个元素宽度 | -    | -      |
 
--   oneLineStyle `['50%', 10, '50%']`
+- oneLineStyle `['50%', 10, '50%']`

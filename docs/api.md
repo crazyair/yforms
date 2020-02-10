@@ -5,19 +5,19 @@ order: 9
 
 ## 字段类型
 
--   input
--   [textarea](#textarea)
--   [money](#money)
--   checkbox
--   switch
--   checkboxGroup
--   select
--   radio
--   text
--   button
--   oneLine
--   list
--   custom
+- input
+- [textarea](#textarea)
+- [money](#money)
+- checkbox
+- switch
+- checkboxGroup
+- select
+- radio
+- text
+- button
+- oneLine
+- list
+- custom
 
 <!-- | 字段类型 | 说明     | 类型                                 |
 | -------- | -------- | ------------------------------------ |
