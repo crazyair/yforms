@@ -79,6 +79,9 @@ export default {
     ['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   ],
   runtimeHelpers: true,
+  cssModules: false, // https://github.com/umijs/father/issues/131
+  extractCSS: true,
+  lessInBabelMode: true,
   esm: 'babel',
-  // cjs: { type: 'babel', lazy: true },
+  cjs: { type: 'babel', lazy: true },
 };
