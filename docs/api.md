@@ -5,6 +5,8 @@ order: -1
 
 # 文档
 
+- 对 `Form` 不熟悉的请移步 [Antd Form API 地址](https://next.ant.design/components/form-cn/#API)
+
 ### 共同的 API
 
 - 以下 API 为 `YForm` `YForm.Items` 及字段共享的 API。
