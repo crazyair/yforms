@@ -35,11 +35,6 @@
     "nzh": "^1.0.4",
     "warning": "^4.0.3"
   },
-  "peerDependencies": {
-    "antd": "next",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
   "devDependencies": {
     "@babel/polyfill": "^7.8.3"
   },

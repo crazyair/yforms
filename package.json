@@ -50,9 +50,9 @@
     "rc-util": "^4.19.0",
     "react-test-renderer": "^16.7.0",
     "typescript": "^3.7.5",
-    "umi": "^2.9.0",
+    "umi": "^2.13.3",
     "umi-plugin-react": "^1.8.0",
-    "umi-test": "^1.5.12",
+    "umi-test": "^1.9.3",
     "umi-types": "^0.5.3"
   },
   "lint-staged": {
