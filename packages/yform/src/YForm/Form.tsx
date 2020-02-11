@@ -39,9 +39,9 @@ export function useFormatFieldsValue<T = any>() {
 
 export interface YFormProps extends FormProps {
   isShow?: boolean;
-  loading?: boolean;
   disabled?: boolean;
   required?: boolean;
+  loading?: boolean;
   plugins?: YFormPluginsType | boolean;
   itemsType?: YFormItemsType;
   formatFieldsValue?: FormatFieldsValue[];

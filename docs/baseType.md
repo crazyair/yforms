@@ -1,5 +1,5 @@
 ---
-title: 基本类型
+title: 基础类型
 order: -3
 ---
 
@@ -61,7 +61,13 @@ export default () => {
               </div>
             ),
             options: [
-              { id: '1', name: '开' },
+              {
+                id: '1',
+                name: '开',
+                onChange: e => {
+                  console.log(e);
+                },
+              },
               { id: '2', name: '关' },
             ],
           },
@@ -97,32 +103,28 @@ export default () => {
 };
 ```
 
-## 特殊类型
+## API
 
-### oneLine
+### 共同的 API
 
-```tsx
-import React from 'react';
-import { YForm } from 'father-doc-yform';
+- 以下 API 为 `checkboxGroup` `radio` `select` 共享的 API。
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
+### componentProps
 
-export default () => {
-  return (
-    <YForm {...layout} initialValues={{ phones: [{}], card: [{}], users: [{}, {}] }}>
-      {[
-        {
-          label: '用户',
-          type: 'oneLine',
-          componentProps: { oneLineStyle: ['50%', 8, '50%'] },
-          items: () => [
-            { label: '姓名', type: 'input', name: 'name' },
-            <span key="center" />,
-            { label: '年龄', type: 'input', name: 'age' },
-          ],
-        },
-      ]}
-    </YForm>
-  );
-};
-```
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| options | 数据源，说明[见下](#options) | Array | - |
+| showField | 默认显示字段（为 `function` 则为返回值） | string \| ((record: T, index: number) => React.ReactNode) | id |
+| postField | 默认提交字段（为 `function` 则为返回值） | string \| ((record: T, index: number) => React.ReactNode) | name |
+| renderOption | 自定义显示内容 | (item: any) => any | - |
+| onAddProps | 对每一项追加参数 | (item: T, index: number) => { disabled?: boolean; [key: string]: React.ReactNode } | - |
+
+### options
+
+- `id` `name` 为默认字段，可以使用 `showField` `postField` 修改默认字段。
+
+| 参数     | 说明     | 类型            | 默认值 |
+| -------- | -------- | --------------- | ------ |
+| id       | 提交字段 | React.ReactNode | -      |
+| name     | 显示字段 | React.ReactNode | -      |
+| disabled | 禁用当前 | boolean         | -      |

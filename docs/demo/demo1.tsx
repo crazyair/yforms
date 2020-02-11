@@ -23,7 +23,6 @@ const Demo = () => {
       {...layout}
       loading={loading}
       initialValues={data}
-      required
       name="basic"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}

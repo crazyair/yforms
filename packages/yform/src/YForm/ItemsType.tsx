@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Checkbox, Switch, Button } from 'antd';
 import { InputProps } from 'antd/lib/input';
-import { CheckboxProps, CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { CheckboxProps } from 'antd/lib/checkbox';
 import { TextProps } from 'antd/lib/typography/Text';
 import { ButtonProps } from 'antd/lib/button';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
@@ -42,7 +42,6 @@ export interface OptionsProps<T = any> {
     id?: React.ReactNode;
     name?: CheckboxValueType;
     disabled?: boolean;
-    onChange?: (e: CheckboxChangeEvent) => void;
   }[];
   postField?: stringAndFunc<T>;
   showField?: stringAndFunc<T>;

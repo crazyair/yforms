@@ -41,7 +41,8 @@ interface InternalYFormItemProps extends YFormItemProps {
   component?: any;
 }
 
-export interface YFormItemsProps extends YFormProps {
+export interface YFormItemsProps
+  extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue'> {
   offset?: number;
   noStyle?: boolean;
 }

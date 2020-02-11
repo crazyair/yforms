@@ -31,28 +31,48 @@ group:
 ## 用例
 
 ```tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from 'antd';
 import { YForm } from 'father-doc-yform';
-import { YFormListProps } from 'father-doc-yform/lib/YForm/component/List';
+import { YFormListProps, YFormListComponentProps } from 'father-doc-yform/lib/YForm/component/List';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 export default () => {
+  const [disabled, setDisabled] = useState(false);
   return (
-    <YForm {...layout} initialValues={{ phones: [{}], card: [{}], users: [{}] }}>
+    <YForm
+      {...layout}
+      disabled={disabled}
+      initialValues={{ phones: [{}], card: [{}], users: [{}] }}
+    >
       {[
         {
           type: 'list',
           name: 'phones',
+          componentProps: {
+            showIcons: { showBottomAdd: { text: '添加手机号' }, showAdd: true, showRemove: false },
+            onShowIcons: (): ReturnType<Required<YFormListComponentProps>['onShowIcons']> => ({
+              showAdd: true,
+              showRemove: true,
+            }),
+          },
           items: ({ index }): ReturnType<Extract<YFormListProps['items'], Function>> => {
-            return [{ label: index === 0 && '手机号', type: 'input', name: [index, 'phone'] }];
+            return [
+              {
+                label: index === 0 && '手机号',
+                type: 'input',
+                name: [index, 'phone'],
+                // index > 0 后没有 label，无法得到 label 内容，需要用户自己添加 placeholder
+                componentProps: { placeholder: '请输入手机号' },
+              },
+            ];
           },
         },
         {
           type: 'list',
           name: 'card',
-          label: 'card',
+          label: '卡片',
           componentProps: { showRightIcons: false },
           items: ({ index, icons }): ReturnType<Extract<YFormListProps['items'], Function>> => {
             return [
@@ -85,6 +105,20 @@ export default () => {
               },
             ];
           },
+        },
+        {
+          dataSource: [
+            {
+              type: 'button',
+              noStyle: true,
+              plugins: { disabled: false },
+              componentProps: {
+                type: 'primary',
+                onClick: () => setDisabled(c => !c),
+                children: '更改禁用状态',
+              },
+            },
+          ],
         },
       ]}
     </YForm>
@@ -122,8 +156,8 @@ items 返回为 YForm 返回类型
 
 ### ShowIconsType
 
-| 参数          | 说明                                        | 类型    | 默认值            |
-| ------------- | ------------------------------------------- | ------- | ----------------- |
-| showBottomAdd | 显示底部添加按钮（`text` 可以控制按钮文案） | boolean | { text?: string } | true |
-| showAdd       | 显示右侧添加按钮                            | boolean | true              |
-| showRemove    | 显示右侧删除按钮                            | boolean | true              |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| showBottomAdd | 显示底部添加按钮（`text` 可以控制按钮文案） | boolean \| { text?: string } | true |
+| showAdd | 显示右侧添加按钮 | boolean | true |
+| showRemove | 显示右侧删除按钮 | boolean | true |
