@@ -1,6 +1,10 @@
 {
   "private": true,
   "name": "father-doc-yform",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazyair/father-doc-yform.git"
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "dev": "father-doc dev",
