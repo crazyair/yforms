@@ -5,7 +5,7 @@ order: -1
 
 # 文档
 
-- 对 `Form` 不熟悉的请移步 [Antd Form API 地址](https://next.ant.design/components/form-cn/#API)
+- 以下内容不包含 `Antd Form API` 如需查看请[点击此处](https://next.ant.design/components/form-cn/#API)
 
 ### 共同的 API
 

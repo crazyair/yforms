@@ -5,7 +5,7 @@
 ## 特性
 
 - 简单快速创建复杂表单。
-- 原生 `antd form api`。
+- 兼容原生 `antd form api`。
 - 可自行添加 `type`。
 - 使用 `TypeScript` 开发，提供完整的类型定义文件。
 
