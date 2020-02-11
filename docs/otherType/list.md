@@ -34,17 +34,18 @@ group:
 import React from 'react';
 import { Card } from 'antd';
 import { YForm } from 'father-doc-yform';
+import { YFormListProps } from 'father-doc-yform/lib/YForm/component/List';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 export default () => {
   return (
-    <YForm {...layout} initialValues={{ phones: [{}], card: [{}], users: [{}, {}] }}>
+    <YForm {...layout} initialValues={{ phones: [{}], card: [{}], users: [{}] }}>
       {[
         {
           type: 'list',
           name: 'phones',
-          items: ({ index }) => {
+          items: ({ index }): ReturnType<Extract<YFormListProps['items'], Function>> => {
             return [{ label: index === 0 && '手机号', type: 'input', name: [index, 'phone'] }];
           },
         },
@@ -53,7 +54,7 @@ export default () => {
           name: 'card',
           label: 'card',
           componentProps: { showRightIcons: false },
-          items: ({ index, icons }) => {
+          items: ({ index, icons }): ReturnType<Extract<YFormListProps['items'], Function>> => {
             return [
               {
                 dataSource: [
@@ -71,7 +72,7 @@ export default () => {
           label: '用户',
           type: 'list',
           name: 'users',
-          items: ({ index }) => {
+          items: ({ index }): ReturnType<Extract<YFormListProps['items'], Function>> => {
             return [
               {
                 type: 'oneLine',
