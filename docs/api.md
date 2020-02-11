@@ -75,3 +75,23 @@ order: -1
   ],
 }
 ```
+
+## 添加自定义类型
+
+- 可以在项目 `src/index.ts` 添加类型，之后全局使用。
+
+```tsx | pure
+import { YForm } from 'father-doc-yform';
+import { YFormItemsType } from 'father-doc-yform/lib/YForm/ItemsType';
+
+declare module 'father-doc-yform/lib/YForm/ItemsType' {
+  export interface YFormItemsTypeDefine {
+    demo: { componentProps?: { str: string } };
+  }
+}
+
+export const itemsType: YFormItemsType = {
+  demo: { component: <div>demo str</div> },
+};
+YForm.config({ itemsType });
+```
