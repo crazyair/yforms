@@ -113,7 +113,10 @@ export default (props: YFormListProps) => {
                         plugins: { noLabelLayout: true },
                         label: index === 0 && _label,
                         addonAfter: showRightIcons && !disabled && index === 0 && (
-                          <div className={classNames('padding-icons')} style={_oneLineStyle[1]}>
+                          <div
+                            className={classNames('padding-icons', 'inline-icons')}
+                            style={_oneLineStyle[1]}
+                          >
                             {icons}
                           </div>
                         ),
