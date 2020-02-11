@@ -10,12 +10,10 @@ import { YFormProps } from '../Form';
 import { BaseComponentProps } from '../ItemsType';
 import { YFormItemProps } from '../Items';
 
-type showButtonType = boolean | { text?: string };
-
 export type ShowIconsType = {
-  showBottomAdd?: showButtonType;
-  showAdd?: showButtonType;
-  showRemove?: showButtonType;
+  showBottomAdd?: boolean | { text?: string };
+  showAdd?: boolean;
+  showRemove?: boolean;
 };
 
 export interface YFormListComponentProps extends BaseComponentProps {
@@ -23,7 +21,7 @@ export interface YFormListComponentProps extends BaseComponentProps {
   minNum?: number;
   showRightIcons?: boolean;
   showIcons?: ShowIconsType;
-  onShowIcons?: ({ index }: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
+  onShowIcons?: (p: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
 }
 
 export interface YFormListItems {

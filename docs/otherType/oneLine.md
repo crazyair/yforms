@@ -1,39 +1,24 @@
 ---
-title: list
-order: -11
+title: oneLine
+order: -12
 group:
   title: 特殊类型
 ---
 
-<!--
-- input
-- [textarea](#textarea)
-- [money](#money)
-- checkbox
-- switch
-- checkboxGroup
-- select
-- radio
-- text
-- button
-- oneLine
-- list
-- custom -->
-
 # list 类型
 
-动态增删单字段多字段或者一个组件。
+一行多个字段。
 
 ## 何时使用
 
-- 需要动态增减字段。
+- 需要一行显示多个字段或者元素的时候。
 
 ## 用例
 
 ```tsx
 import React from 'react';
-import { Card } from 'antd';
 import { YForm } from 'father-doc-yform';
+import { YFormOneLineProps } from 'father-doc-yform/lib/YForm/component/OneLine';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
@@ -42,45 +27,29 @@ export default () => {
     <YForm {...layout} initialValues={{ phones: [{}], card: [{}], users: [{}, {}] }}>
       {[
         {
-          type: 'list',
-          name: 'phones',
-          items: ({ index }) => {
-            return [{ label: index === 0 && '手机号', type: 'input', name: [index, 'phone'] }];
-          },
+          label: '用户 1',
+          type: 'oneLine',
+          componentProps: { oneLineStyle: ['50%', 8, '50%'] },
+          items: (): ReturnType<Required<YFormOneLineProps>['items']> => [
+            { label: '姓名', type: 'input', name: 'name' },
+            <span key="center" />,
+            { label: '年龄', type: 'input', name: 'age' },
+          ],
         },
         {
-          type: 'list',
-          name: 'card',
-          label: 'card',
-          componentProps: { showRightIcons: false },
-          items: ({ index, icons }) => {
+          label: '用户 2',
+          type: 'oneLine',
+          componentProps: { oneLineStyle: ['50%', 8, '50%'] },
+          items: ({ style }): ReturnType<Required<YFormOneLineProps>['items']> => {
             return [
+              { label: '姓名', type: 'input', name: 'name2' },
+              <span key="center" />,
               {
-                dataSource: [
-                  <Card key="card" size="small" title={`card_${index + 1}`} extra={icons}>
-                    <YForm.Items>
-                      {[{ label: '手机号', type: 'input', name: [index, 'phone'] }]}
-                    </YForm.Items>
-                  </Card>,
-                ],
-              },
-            ];
-          },
-        },
-        {
-          label: '用户',
-          type: 'list',
-          name: 'users',
-          items: ({ index }) => {
-            return [
-              {
-                type: 'oneLine',
-                componentProps: { oneLineStyle: ['50%', 8, '50%'] },
-                items: () => [
-                  { label: '姓名', type: 'input', name: [index, 'name'] },
-                  <span key="center" />,
-                  { label: '年龄', type: 'input', name: [index, 'age'] },
-                ],
+                noStyle: true,
+                shouldUpdate: true,
+                children: () => {
+                  return [{ style: style[2], label: '年龄', type: 'input', name: 'age2' }];
+                },
               },
             ];
           },
