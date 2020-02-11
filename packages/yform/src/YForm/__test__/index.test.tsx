@@ -71,7 +71,7 @@ describe('YForm', () => {
       demo: { component: <p>123</p>, formatStr: '请输入${label}' },
       render: { render: () => <div>1</div> },
     };
-    YForm.config({ itemsType });
+    YForm.Config({ itemsType });
     const wrapper = render(
       <YForm name="basic">{[{ type: 'demo' }, { type: 'render' }] as any}</YForm>,
     );

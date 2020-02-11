@@ -93,5 +93,5 @@ declare module 'father-doc-yform/lib/YForm/ItemsType' {
 export const itemsType: YFormItemsType = {
   demo: { component: <div>demo str</div> },
 };
-YForm.config({ itemsType });
+YForm.Config({ itemsType });
 ```
