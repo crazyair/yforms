@@ -1,6 +1,6 @@
 ---
 title: list
-order: -11
+order: 7
 group:
   title: 特殊类型
 ---

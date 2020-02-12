@@ -1,6 +1,6 @@
 ---
 title: oneLine
-order: -12
+order: 6
 group:
   title: 特殊类型
 ---

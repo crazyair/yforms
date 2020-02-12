@@ -1,6 +1,6 @@
 ---
 title: custom
-order: -13
+order: 5
 group:
   title: 特殊类型
 ---
