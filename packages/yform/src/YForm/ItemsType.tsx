@@ -21,6 +21,7 @@ import { searchSelect } from './utils';
 import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
 import { YFormItemProps } from './Items';
+import Submit, { YFormSubmitProps } from './component/Submit';
 
 interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -66,6 +67,7 @@ export interface YFormItemsTypeDefine {
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
   list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
   custom: { componentProps?: any; component?: React.ReactElement };
+  submit: { componentProps?: YFormSubmitProps };
 }
 
 export type YFormItemsType<T = YFormFieldBaseProps> = {
@@ -102,6 +104,7 @@ export const itemsType: YFormItemsType = {
   list: { component: <List />, formItemProps: { noStyle: true, rules: [{ required: false }] } },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
+  submit: { component: <Submit /> },
 };
 
 export default itemsType;
