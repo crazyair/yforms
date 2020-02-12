@@ -5,7 +5,22 @@ import { YForm } from 'father-doc-yform';
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 const Demo = () => {
+  const [data, setData] = useState({});
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData({ name: '张三', age: '10' });
+      setLoading(false);
+    }, 10);
+  }, []);
+
+  onFormatFieldsValue([
+    { name: 'append_field', format: () => '提交前追加字段' },
+    { name: 'name', format: ({ name }) => `${name}_改变了` },
+  ]);
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -16,22 +31,7 @@ const Demo = () => {
   const onSave = (values: any) => {
     console.log('values:', values);
   };
-  const [loading, setLoading] = useState(true);
 
-  const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
-
-  onFormatFieldsValue([
-    { name: 'append_field', format: () => '提交前追加字段' },
-    { name: 'name', format: ({ name }) => `${name}_改变了` },
-  ]);
-
-  const [data, setData] = useState({});
-  useEffect(() => {
-    setTimeout(() => {
-      setData({ name: '张三', age: '10' });
-      setLoading(false);
-    }, 10);
-  }, []);
   return (
     <YForm
       {...layout}
@@ -49,7 +49,7 @@ const Demo = () => {
         { type: 'input', label: 'name', name: 'name' },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'money', label: 'money', name: 'money' },
-        { type: 'submit', componentProps: { children: '提交' } },
+        { type: 'submit' },
         {
           className: 'button-more-left',
           dataSource: [
