@@ -46,6 +46,7 @@ export interface YFormProps extends FormProps {
   itemsType?: YFormItemsType;
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
+  onSave?: (values: { [key: string]: any }) => void;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -56,16 +57,28 @@ const InternalForm = (props: YFormProps) => {
     itemsType,
     children,
     onFinish,
+    onSave,
     formatFieldsValue,
     ...rest
   } = props;
+
+  const [form] = Form.useForm();
 
   const _itemsTypeAll = {
     ...baseItemsType,
     ...itemsType,
     ...globalConfig.itemsType,
   } as YFormItemsType;
-  const _props = { plugins: true, ...props, itemsType: _itemsTypeAll };
+
+  const handleFormatFieldsValue = value => submitFormatValues(value, formatFieldsValue);
+  const _props = {
+    plugins: true,
+    form,
+    ...props,
+    itemsType: _itemsTypeAll,
+    onSave,
+    formatFieldsValue,
+  };
   if ('isShow' in props && !props.isShow) {
     return null;
   }
@@ -79,7 +92,7 @@ const InternalForm = (props: YFormProps) => {
   const handleOnFinish = (value: KeyValue) => {
     if (onFinish) {
       if (formatFieldsValue) {
-        onFinish(submitFormatValues(value, formatFieldsValue));
+        onFinish(handleFormatFieldsValue(value));
       } else {
         onFinish(value);
       }
@@ -87,7 +100,7 @@ const InternalForm = (props: YFormProps) => {
   };
 
   return (
-    <Form {...rest} onFinish={handleOnFinish}>
+    <Form form={form} {...rest} onFinish={handleOnFinish}>
       <YFormContext.Provider value={_props}>
         <Items>{children}</Items>
       </YFormContext.Provider>

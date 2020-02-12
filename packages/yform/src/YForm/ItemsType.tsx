@@ -21,14 +21,19 @@ import { searchSelect } from './utils';
 import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
 import { YFormItemProps } from './Items';
-import Submit, { YFormSubmitProps } from './component/Submit';
+import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
+import { YFormProps } from './Form';
 
 interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
   formItemProps?: YFormItemProps;
   render?: (p?: T) => React.ReactElement;
   formatStr?: string;
-  modifyProps?: (fProps: YFormItemProps, cProps: T) => [YFormItemProps, T];
+  modifyProps?: (
+    formItemProps: YFormItemProps,
+    componentProps: T,
+    formProps: YFormProps,
+  ) => [YFormItemProps, T];
 }
 
 export interface BaseComponentProps {
@@ -104,7 +109,7 @@ export const itemsType: YFormItemsType = {
   list: { component: <List />, formItemProps: { noStyle: true, rules: [{ required: false }] } },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
-  submit: { component: <Submit /> },
+  submit: { component: <Submit />, modifyProps: submitModify },
 };
 
 export default itemsType;

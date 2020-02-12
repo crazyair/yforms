@@ -39,6 +39,7 @@ interface InternalYFormItemProps extends YFormItemProps {
   dataSource?: any;
   items?: any;
   component?: any;
+  onSave?: any;
 }
 
 export interface YFormItemsProps
@@ -153,9 +154,14 @@ const Items = (props: YFormItemsProps) => {
                 );
               }
             }
+
             // 最后修改参数
             if (modifyProps) {
-              [_formItemProps, _componentProps] = modifyProps(_formItemProps, _componentProps);
+              [_formItemProps, _componentProps] = modifyProps(
+                _formItemProps,
+                _componentProps,
+                formProps,
+              );
             }
             const _key = name ? `${name}` : key;
             key = find(list, { key: _key }) ? key : _key;
