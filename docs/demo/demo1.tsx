@@ -49,7 +49,19 @@ const Demo = () => {
         { type: 'input', label: 'name', name: 'name' },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'money', label: 'money', name: 'money' },
-        { type: 'submit' },
+        {
+          type: 'submit',
+          componentProps: {
+            showBtns: {
+              showEdit: {
+                onClick: e => {
+                  e.preventDefault();
+                  setDisabled(c => !c);
+                },
+              },
+            },
+          },
+        },
         {
           className: 'button-more-left',
           dataSource: [

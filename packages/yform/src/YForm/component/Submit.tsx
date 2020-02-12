@@ -13,7 +13,7 @@ export const submitModify = (
   formProps: YFormProps,
 ): [YFormItemProps, YFormSubmitProps] => {
   const { form, onSave, formatFieldsValue } = formProps;
-  const _fProps = { ...fProps };
+  const _fProps = { noStyle: true, ...fProps };
   const _cProps = { form, onSave, formatFieldsValue, ...cProps };
   return [_fProps, _cProps];
 };
@@ -64,42 +64,20 @@ export default (props: YFormSubmitProps) => {
 
   const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);
 
-  const actionBtns: { [key: string]: YFormDataSource } = {
-    submit: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showSubmit,
-      plugins: { disabled: false },
-      componentProps: showSubmit as ButtonProps,
-    },
-    save: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showSave,
-      plugins: { disabled: false },
-      componentProps: showSave as ButtonProps,
-    },
-    cancel: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showCancel,
-      plugins: { disabled: false },
-      componentProps: showCancel as ButtonProps,
-    },
-    edit: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showEdit,
-      plugins: { disabled: false },
-      componentProps: showEdit as ButtonProps,
-    },
-    back: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showBack,
-      plugins: { disabled: false },
-      componentProps: showBack as ButtonProps,
-    },
+  const handleBaseBtn = (btnProps): YFormDataSource => ({
+    type: 'button',
+    noStyle: true,
+    isShow: !!btnProps,
+    plugins: { disabled: false },
+    componentProps: btnProps as ButtonProps,
+  });
+
+  const actionBtns = {
+    submit: handleBaseBtn(showSubmit),
+    save: handleBaseBtn(showSave),
+    cancel: handleBaseBtn(showCancel),
+    edit: handleBaseBtn(showEdit),
+    back: handleBaseBtn(showBack),
   };
 
   let btns: YFormItemProps['children'];
@@ -109,8 +87,8 @@ export default (props: YFormSubmitProps) => {
     btns = [actionBtns.submit, actionBtns.save, actionBtns.cancel];
   }
   return (
-    <YForm.Items plugins={{ noLabelLayout: false }} isShow={!!showBtns}>
-      {[{ className: 'button-more-left mb0', dataSource: btns }]}
+    <YForm.Items isShow={!!showBtns}>
+      {[{ className: 'button-more-left', dataSource: btns }]}
     </YForm.Items>
   );
 };
