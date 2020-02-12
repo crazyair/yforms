@@ -1,10 +1,16 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'father-doc-yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-const Demo = () => {
+const mockData = { params: { type: 'create' } };
+
+interface Demo2Props {}
+const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { match = mockData, history } = props;
   const [data, setData] = useState({});
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -52,6 +58,7 @@ const Demo = () => {
         {
           type: 'submit',
           componentProps: {
+            history,
             showBtns: {
               showEdit: {
                 onClick: e => {
@@ -61,21 +68,6 @@ const Demo = () => {
               },
             },
           },
-        },
-        {
-          className: 'button-more-left',
-          dataSource: [
-            {
-              type: 'button',
-              noStyle: true,
-              plugins: { disabled: false },
-              componentProps: {
-                type: 'primary',
-                onClick: () => setDisabled(c => !c),
-                children: '状态',
-              },
-            },
-          ],
         },
       ]}
     </YForm>

@@ -31,12 +31,19 @@ export interface ShowBtns {
 export interface YFormSubmitProps
   extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
   showBtns?: ShowBtns | boolean;
+  history?: any;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, formatFieldsValue, showBtns = true, disabled } = props;
+  const { form, onSave, formatFieldsValue, showBtns = true, disabled, history } = props;
 
   const { resetFields, getFieldsValue } = form || {};
+
+  const goBack = () => {
+    if (history) {
+      history.goBack();
+    }
+  };
 
   const handleFormatFieldsValue = value => submitFormatValues(value, formatFieldsValue);
 
@@ -45,6 +52,8 @@ export default (props: YFormSubmitProps) => {
     if (onSave && getFieldsValue) {
       const value = handleFormatFieldsValue(getFieldsValue());
       onSave(value);
+      // TODO 这里要成功后才执行下面，后面做 SecureButton 后支持
+      goBack();
     }
   };
   const handleOnCancel = e => {
@@ -59,7 +68,7 @@ export default (props: YFormSubmitProps) => {
     showSave: { type: 'primary', onClick: handleOnSave, children: '保存' },
     showCancel: { onClick: handleOnCancel, children: '取消' },
     showEdit: { onClick: handleOnCancel, children: '编辑' },
-    showBack: { type: 'link', onClick: handleOnCancel, children: '返回' },
+    showBack: { type: 'link', onClick: goBack, children: '返回' },
   } as ShowBtns;
 
   const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);
