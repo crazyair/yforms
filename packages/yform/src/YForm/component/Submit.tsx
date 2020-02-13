@@ -6,6 +6,7 @@ import { ButtonProps } from 'antd/lib/button';
 import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
 import { submitFormatValues } from '../utils';
+import { YFormSecureButtonProps } from './SecureButton';
 
 export const submitModify = (
   fProps: YFormItemProps,
@@ -21,37 +22,37 @@ export const submitModify = (
 // type ButtonType = { text: React.ReactNode };
 
 export interface ShowBtns {
-  showSubmit?: boolean | ButtonProps;
-  showSave?: boolean | ButtonProps;
-  showCancel?: boolean | ButtonProps;
-  showEdit?: boolean | ButtonProps;
-  showBack?: boolean | ButtonProps;
+  showSubmit?: ButtonProps;
+  showSave?: YFormSecureButtonProps;
+  showCancel?: ButtonProps;
+  showEdit?: ButtonProps;
+  showBack?: ButtonProps;
 }
+
+type showBtns = {
+  [P in keyof ShowBtns]?: boolean | ShowBtns[P];
+};
 
 export interface YFormSubmitProps
   extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
-  showBtns?: ShowBtns | boolean;
-  history?: any;
+  showBtns?: showBtns | boolean;
+  goBack?: () => void;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, formatFieldsValue, showBtns = true, disabled, history } = props;
+  const { form, onSave, formatFieldsValue, showBtns = true, disabled, goBack } = props;
 
   const { resetFields, getFieldsValue } = form || {};
 
-  const goBack = () => {
-    if (history) {
-      history.goBack();
-    }
+  const formatValues = values => {
+    return formatFieldsValue ? submitFormatValues(values, formatFieldsValue) : values;
   };
 
-  const handleOnSave = e => {
+  const handleOnSave = async e => {
     e.preventDefault();
     if (onSave && getFieldsValue) {
-      const value = submitFormatValues(getFieldsValue(), formatFieldsValue);
-      onSave(value);
-      // TODO 这里要成功后才执行下面，后面做 SecureButton 后支持
-      goBack();
+      await onSave(formatValues(getFieldsValue()));
+      // await goBack();
     }
   };
   const handleOnCancel = e => {
@@ -61,30 +62,52 @@ export default (props: YFormSubmitProps) => {
     }
   };
 
-  const _showBtns = {
+  const _showBtns: ShowBtns = {
     showSubmit: { type: 'primary', htmlType: 'submit', children: '提交' },
-    showSave: { type: 'primary', onClick: handleOnSave, children: '保存' },
+    showSave: { type: 'primary', onClick: handleOnSave, onLoaded: goBack, children: '保存' },
     showCancel: { onClick: handleOnCancel, children: '取消' },
     showEdit: { onClick: handleOnCancel, children: '编辑' },
     showBack: { type: 'link', onClick: goBack, children: '返回' },
-  } as ShowBtns;
+  };
 
   const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);
 
-  const handleBaseBtn = (btnProps): YFormDataSource => ({
-    type: 'button',
-    noStyle: true,
-    isShow: !!btnProps,
-    plugins: { disabled: false },
-    componentProps: btnProps as ButtonProps,
-  });
-
-  const actionBtns = {
-    submit: handleBaseBtn(showSubmit),
-    save: handleBaseBtn(showSave),
-    cancel: handleBaseBtn(showCancel),
-    edit: handleBaseBtn(showEdit),
-    back: handleBaseBtn(showBack),
+  const actionBtns: { [key: string]: YFormDataSource } = {
+    submit: {
+      type: 'button',
+      noStyle: true,
+      isShow: !!showSubmit,
+      plugins: { disabled: false },
+      componentProps: showSubmit,
+    },
+    save: {
+      type: 'secureButton',
+      noStyle: true,
+      isShow: !!showSave,
+      plugins: { disabled: false },
+      componentProps: showSave,
+    },
+    cancel: {
+      type: 'button',
+      noStyle: true,
+      isShow: !!showCancel,
+      plugins: { disabled: false },
+      componentProps: showCancel,
+    },
+    edit: {
+      type: 'button',
+      noStyle: true,
+      isShow: !!showEdit,
+      plugins: { disabled: false },
+      componentProps: showEdit,
+    },
+    back: {
+      type: 'button',
+      noStyle: true,
+      isShow: !!showBack,
+      plugins: { disabled: false },
+      componentProps: showBack,
+    },
   };
 
   let btns: YFormItemProps['children'];

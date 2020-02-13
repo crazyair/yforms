@@ -35,5 +35,6 @@ module.exports = {
     'no-tabs': 0,
     'no-mixed-spaces-and-tabs': 0,
     'import/no-unresolved': [0],
+    'no-unused-expressions': 0,
   },
 };

@@ -1,5 +1,5 @@
 import { Form, Spin } from 'antd';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { merge } from 'lodash';
 
 import { FormProps } from 'antd/lib/form';
@@ -47,7 +47,11 @@ export interface YFormProps extends FormProps {
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
-  onFinishCallBack?: (values: { [key: string]: any }) => void;
+  submit?: {
+    // onFinishCallBack?: (values: { [key: string]: any }) => void;
+    onFinishCallBack?: (loading?: boolean) => void;
+    submitLoading?: boolean;
+  };
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -60,9 +64,25 @@ const InternalForm = (props: YFormProps) => {
     onFinish,
     onSave,
     formatFieldsValue,
-    onFinishCallBack,
+    submit,
     ...rest
   } = props;
+
+  const timeOut = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeOut.current) {
+        clearTimeout(timeOut.current);
+      }
+    };
+  }, []);
+
+  const {
+    onFinishCallBack = () => {},
+    submitLoading,
+    // onFinishStart, onFinishEnd
+  } = submit || {};
 
   const [form] = Form.useForm();
 
@@ -72,14 +92,6 @@ const InternalForm = (props: YFormProps) => {
     ...globalConfig.itemsType,
   } as YFormItemsType;
 
-  const _props = {
-    plugins: true,
-    form,
-    ...props,
-    itemsType: _itemsTypeAll,
-    onSave,
-    formatFieldsValue,
-  };
   if ('isShow' in props && !props.isShow) {
     return null;
   }
@@ -91,17 +103,42 @@ const InternalForm = (props: YFormProps) => {
     );
   }
   const handleOnFinish = async (value: KeyValue) => {
-    let _value = value;
-    if (formatFieldsValue) {
-      _value = submitFormatValues(value, formatFieldsValue);
-    }
     if (onFinish) {
-      await onFinish(_value);
-      // TOD 这里写提交成功后的 goBack 方法集合
-      if (onFinishCallBack) {
-        onFinishCallBack(value);
+      // 请求为结果返回
+      if (submitLoading) return;
+      const begin = new Date().getTime();
+      onFinishCallBack(true);
+      try {
+        await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
+        const end = new Date().getTime();
+        if (end - begin > 500) {
+          onFinishCallBack(false);
+        } else {
+          timeOut.current = window.setTimeout(() => {
+            onFinishCallBack(false);
+          }, 500);
+        }
+      } catch (error) {
+        onFinishCallBack(false);
       }
+
+      // try {
+      //   await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
+      // } catch (error) {
+      //   onFinishCallBack && onFinishCallBack(error);
+      // }
     }
+  };
+
+  const _props = {
+    plugins: true,
+    form,
+    ...props,
+    itemsType: _itemsTypeAll,
+    onSave,
+    formatFieldsValue,
+    // onFinish: handleOnFinish,
+    onFinish,
   };
 
   return (
