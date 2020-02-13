@@ -1,64 +1,70 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { YFormProps } from './Form';
 import { YFormSubmitProps } from './component/Submit';
 
 export interface YFormUseSubmitProps {
   history?: any;
   form: YFormProps['form'];
+  onCancel?: () => void;
+  perms?: any;
 }
+
+export type ModalOnCancel = (
+  e?: React.MouseEvent<HTMLElement>,
+) => void | boolean | Promise<void | boolean>;
+
 export interface YFormUseSubmitReturnProps {
   disabled?: boolean;
-  submit: YFormProps['submit'];
+  submit: {
+    onFinishLoading?: (loading?: boolean) => void;
+    submitLoading?: boolean;
+    onCancel?: ModalOnCancel;
+  };
   submitComponentProps: YFormSubmitProps;
 }
 
 export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
-  const { history } = props;
-
-  const goBack = () => {
-    if (history) {
-      // history.goBack();
-    }
-  };
+  const { history, form, onCancel, perms } = props;
+  const { resetFields } = form || {};
+  const { create, edit = true, view } = perms || {};
+  // const { create = true, edit, view } = perms || {};
 
   const [disabled, setDisabled] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  // const handleOnSave = e => {
-  //   e.preventDefault();
-  //   console.log('handleOnSave', e);
-  // };
+  const goBack = () => {
+    if (history) {
+      history.goBack();
+    }
+  };
 
-  // const handleOnSubmit = e => {
-  //   // TODO 要允许执行
-  //   e.preventDefault();
-  //   console.log('handleOnSubmit');
-  // };
-
-  // const handleOnSubmitLoaded = () => {
-  //   console.log('handleOnSubmitLoaded', status);
-  // };
+  const handleReset = useCallback(() => {
+    if (typeof onCancel === 'function') {
+      onCancel();
+    } else if (create) {
+      goBack();
+    } else if (edit || view) {
+      resetFields();
+      setDisabled(true);
+    }
+  }, []);
 
   return {
     disabled,
-    submit: { onFinishCallBack: setSubmitLoading, submitLoading },
-    // onFinishCallBack: goBack,
+    submit: { onFinishLoading: setSubmitLoading, submitLoading, onCancel: handleReset },
     submitComponentProps: {
       goBack,
       showBtns: {
+        // form submit 触发后设置 loading = true
+        showSubmit: { loading: submitLoading },
         showEdit: {
           onClick: e => {
             e.preventDefault();
             setDisabled(c => !c);
           },
         },
-        // showSave: {
-        //   onClick: handleOnSave,
-        // },
-        showSubmit: {
-          loading: submitLoading,
-          // onClick: handleOnSubmit,
-          // onLoaded: handleOnSubmitLoaded,
+        showCancel: {
+          onClick: handleReset,
         },
       },
     },

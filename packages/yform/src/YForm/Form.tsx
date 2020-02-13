@@ -8,6 +8,7 @@ import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
 import { onFormatFieldsValue, submitFormatValues } from './utils';
+import { YFormUseSubmitReturnProps } from './useSubmit';
 
 export type YFormPluginsType = {
   placeholder?: boolean;
@@ -47,11 +48,7 @@ export interface YFormProps extends FormProps {
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
-  submit?: {
-    // onFinishCallBack?: (values: { [key: string]: any }) => void;
-    onFinishCallBack?: (loading?: boolean) => void;
-    submitLoading?: boolean;
-  };
+  submit?: YFormUseSubmitReturnProps['submit'];
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -78,11 +75,7 @@ const InternalForm = (props: YFormProps) => {
     };
   }, []);
 
-  const {
-    onFinishCallBack = () => {},
-    submitLoading,
-    // onFinishStart, onFinishEnd
-  } = submit || {};
+  const { onFinishLoading, submitLoading, onCancel } = submit || {};
 
   const [form] = Form.useForm();
 
@@ -104,29 +97,24 @@ const InternalForm = (props: YFormProps) => {
   }
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
-      // 请求为结果返回
+      // 防连点
       if (submitLoading) return;
       const begin = new Date().getTime();
-      onFinishCallBack(true);
+      onFinishLoading && onFinishLoading(true);
       try {
         await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
         const end = new Date().getTime();
-        if (end - begin > 500) {
-          onFinishCallBack(false);
-        } else {
-          timeOut.current = window.setTimeout(() => {
-            onFinishCallBack(false);
-          }, 500);
-        }
+        timeOut.current = window.setTimeout(
+          () => {
+            onFinishLoading && onFinishLoading(false);
+            onCancel && onCancel();
+          },
+          // loading 时间不到 0.5s 的 loading 0.5s 超过的立刻结束
+          end - begin > 500 ? 0 : 500,
+        );
       } catch (error) {
-        onFinishCallBack(false);
+        onFinishLoading && onFinishLoading(false);
       }
-
-      // try {
-      //   await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
-      // } catch (error) {
-      //   onFinishCallBack && onFinishCallBack(error);
-      // }
     }
   };
 
@@ -137,8 +125,6 @@ const InternalForm = (props: YFormProps) => {
     itemsType: _itemsTypeAll,
     onSave,
     formatFieldsValue,
-    // onFinish: handleOnFinish,
-    onFinish,
   };
 
   return (
