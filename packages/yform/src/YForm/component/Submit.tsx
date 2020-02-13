@@ -19,8 +19,6 @@ export const submitModify = (
   return [_fProps, _cProps];
 };
 
-// type ButtonType = { text: React.ReactNode };
-
 export interface ShowBtns {
   showSubmit?: ButtonProps;
   showSave?: YFormSecureButtonProps;
@@ -36,13 +34,12 @@ type showBtns = {
 export interface YFormSubmitProps
   extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
   showBtns?: showBtns | boolean;
-  goBack?: () => void;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, formatFieldsValue, showBtns = true, disabled, goBack } = props;
+  const { form, onSave, formatFieldsValue, showBtns = true, disabled } = props;
 
-  const { resetFields, getFieldsValue } = form || {};
+  const { getFieldsValue } = form || {};
 
   const formatValues = values => {
     return formatFieldsValue ? submitFormatValues(values, formatFieldsValue) : values;
@@ -52,22 +49,15 @@ export default (props: YFormSubmitProps) => {
     e.preventDefault();
     if (onSave && getFieldsValue) {
       await onSave(formatValues(getFieldsValue()));
-      // await goBack();
-    }
-  };
-  const handleOnCancel = e => {
-    e.preventDefault();
-    if (resetFields) {
-      resetFields();
     }
   };
 
   const _showBtns: ShowBtns = {
     showSubmit: { type: 'primary', htmlType: 'submit', children: '提交' },
-    showSave: { type: 'primary', onClick: handleOnSave, onLoaded: goBack, children: '保存' },
-    showCancel: { onClick: handleOnCancel, children: '取消' },
-    showEdit: { onClick: handleOnCancel, children: '编辑' },
-    showBack: { type: 'link', onClick: goBack, children: '返回' },
+    showSave: { type: 'primary', onClick: handleOnSave, children: '保存' },
+    showCancel: { children: '取消' },
+    showEdit: { children: '编辑' },
+    showBack: { type: 'link', children: '返回' },
   };
 
   const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);

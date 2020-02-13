@@ -3,20 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'father-doc-yform';
+import { ParamsType } from 'yform/src/YForm/useSubmit';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-const mockData = { params: { type: 'create' } };
-
 interface Demo2Props {}
-const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { match = mockData, history } = props;
+const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
+  const { match, history } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
   const [form] = YForm.useForm();
-  const { submit, disabled, submitComponentProps } = YForm.useSubmit({ history, form });
+  const { submit, disabled, submitComponentProps } = YForm.useSubmit({
+    params: match.params,
+    history,
+    form,
+  });
 
   useEffect(() => {
     setTimeout(() => {
