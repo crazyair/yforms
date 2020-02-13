@@ -12,9 +12,9 @@ const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { match = mockData, history } = props;
   const [data, setData] = useState({});
-  const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(true);
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
+  const { disabled, submitComponentProps, onFinishCallBack } = YForm.useSubmit({ history });
 
   useEffect(() => {
     setTimeout(() => {
@@ -28,8 +28,10 @@ const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
     { name: 'name', format: ({ name }) => `${name}_改变了` },
   ]);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Success:', values);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    console.log('1', 1);
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -49,25 +51,30 @@ const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
       onSave={onSave}
       formatFieldsValue={formatFieldsValue}
       required
+      onFinishCallBack={onFinishCallBack}
       disabled={disabled}
     >
       {[
         { type: 'input', label: 'name', name: 'name' },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'money', label: 'money', name: 'money' },
+        // {
+        //   type: 'submit',
+        //   componentProps: {
+        //     history,
+        //     showBtns: {
+        //       showEdit: {
+        //         onClick: e => {
+        //           e.preventDefault();
+        //           setDisabled(c => !c);
+        //         },
+        //       },
+        //     },
+        //   },
+        // },
         {
           type: 'submit',
-          componentProps: {
-            history,
-            showBtns: {
-              showEdit: {
-                onClick: e => {
-                  e.preventDefault();
-                  setDisabled(c => !c);
-                },
-              },
-            },
-          },
+          componentProps: submitComponentProps,
         },
       ]}
     </YForm>

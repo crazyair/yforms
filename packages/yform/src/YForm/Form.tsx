@@ -47,6 +47,7 @@ export interface YFormProps extends FormProps {
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
+  onFinishCallBack?: (values: { [key: string]: any }) => void;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -59,6 +60,7 @@ const InternalForm = (props: YFormProps) => {
     onFinish,
     onSave,
     formatFieldsValue,
+    onFinishCallBack,
     ...rest
   } = props;
 
@@ -89,12 +91,16 @@ const InternalForm = (props: YFormProps) => {
       </div>
     );
   }
-  const handleOnFinish = (value: KeyValue) => {
+  const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
       if (formatFieldsValue) {
-        onFinish(handleFormatFieldsValue(value));
+        await onFinish(handleFormatFieldsValue(value));
       } else {
-        onFinish(value);
+        await onFinish(value);
+      }
+      // TOD 这里写提交成功后的 goBack 方法集合
+      if (onFinishCallBack) {
+        onFinishCallBack(value);
       }
     }
   };
