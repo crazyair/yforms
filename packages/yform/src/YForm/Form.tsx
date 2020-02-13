@@ -72,7 +72,6 @@ const InternalForm = (props: YFormProps) => {
     ...globalConfig.itemsType,
   } as YFormItemsType;
 
-  const handleFormatFieldsValue = value => submitFormatValues(value, formatFieldsValue);
   const _props = {
     plugins: true,
     form,
@@ -92,12 +91,12 @@ const InternalForm = (props: YFormProps) => {
     );
   }
   const handleOnFinish = async (value: KeyValue) => {
+    let _value = value;
+    if (formatFieldsValue) {
+      _value = submitFormatValues(value, formatFieldsValue);
+    }
     if (onFinish) {
-      if (formatFieldsValue) {
-        await onFinish(handleFormatFieldsValue(value));
-      } else {
-        await onFinish(value);
-      }
+      await onFinish(_value);
       // TOD 这里写提交成功后的 goBack 方法集合
       if (onFinishCallBack) {
         onFinishCallBack(value);

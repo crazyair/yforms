@@ -45,12 +45,10 @@ export default (props: YFormSubmitProps) => {
     }
   };
 
-  const handleFormatFieldsValue = value => submitFormatValues(value, formatFieldsValue);
-
   const handleOnSave = e => {
     e.preventDefault();
     if (onSave && getFieldsValue) {
-      const value = handleFormatFieldsValue(getFieldsValue());
+      const value = submitFormatValues(getFieldsValue(), formatFieldsValue);
       onSave(value);
       // TODO 这里要成功后才执行下面，后面做 SecureButton 后支持
       goBack();
