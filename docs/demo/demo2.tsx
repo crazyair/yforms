@@ -37,8 +37,7 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
   const onFinish = async (values: any) => {
     console.log('Success:', values);
     // await Promise.reject('err');
-    // await new Promise(resolve => setTimeout(resolve, 500));
-
+    await new Promise(resolve => setTimeout(resolve, 500));
     await new Promise((resolve, reject) => {
       // 请求随机成功或者失败
       if (Math.round(Math.random()) === 0) {
@@ -66,16 +65,19 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
     <>
       <h2>{typeName}</h2>
       <YForm
+        //  默认参数
         {...layout}
-        loading={loading}
+        form={form}
         initialValues={data}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        onSave={onSave}
-        formatFieldsValue={formatFieldsValue}
+        // YForm 参数
         required
-        form={form}
+        formatFieldsValue={formatFieldsValue}
+        loading={loading}
+        // useSubmit 参数
+        onSave={onSave}
         submit={submit}
         disabled={disabled}
       >
@@ -83,32 +85,7 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
           { type: 'input', label: 'name', name: 'name' },
           { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
           // { type: 'money', label: 'money', name: 'money' },
-          // {
-          //   type: 'submit',
-          //   componentProps: {
-          //     history,
-          //     showBtns: {
-          //       showEdit: {
-          //         onClick: e => {
-          //           e.preventDefault();
-          //           setDisabled(c => !c);
-          //         },
-          //       },
-          //     },
-          //   },
-          // },
           { type: 'submit' },
-          {
-            className: 'button-more-left',
-            dataSource: [
-              {
-                type: 'button',
-                noStyle: true,
-                plugins: { disabled: false },
-                componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
-              },
-            ],
-          },
         ]}
       </YForm>
     </>
