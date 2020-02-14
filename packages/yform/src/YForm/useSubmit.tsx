@@ -53,11 +53,11 @@ export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
   const [disabled, setDisabled] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (history) {
       history.goBack();
     }
-  };
+  }, [history]);
 
   const handleReset = useCallback(() => {
     if (typeof onCancel === 'function') {
@@ -68,7 +68,7 @@ export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
       resetFields();
       setDisabled(true);
     }
-  }, []);
+  }, [create, edit, goBack, onCancel, resetFields, view]);
 
   const handleOnEdit = e => {
     e.preventDefault();
