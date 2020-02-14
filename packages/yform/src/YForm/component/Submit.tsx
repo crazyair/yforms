@@ -13,9 +13,10 @@ export const submitModify = (
   cProps: YFormSubmitProps,
   formProps: YFormProps,
 ): [YFormItemProps, YFormSubmitProps] => {
-  const { form, onSave, formatFieldsValue } = formProps;
+  const { form, onSave, formatFieldsValue, submit } = formProps;
   const _fProps = { noStyle: true, ...fProps };
-  const _cProps = { form, onSave, formatFieldsValue, ...cProps };
+  const mergeCProps = merge({}, submit.submitComponentProps, cProps);
+  const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
   return [_fProps, _cProps];
 };
 
@@ -53,11 +54,11 @@ export default (props: YFormSubmitProps) => {
   };
 
   const _showBtns: ShowBtns = {
-    showSubmit: { type: 'primary', htmlType: 'submit', children: '提交' },
-    showSave: { type: 'primary', onClick: handleOnSave, children: '保存' },
+    showSubmit: { children: '提交', type: 'primary', htmlType: 'submit' },
+    showSave: { children: '保存', type: 'primary', onClick: handleOnSave },
     showCancel: { children: '取消' },
     showEdit: { children: '编辑' },
-    showBack: { type: 'link', children: '返回' },
+    showBack: { children: '返回', type: 'link' },
   };
 
   const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);

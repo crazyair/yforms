@@ -12,13 +12,15 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
   const { match, history } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-  const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
+
   const [form] = YForm.useForm();
-  const { submit, disabled, submitComponentProps } = YForm.useSubmit({
-    params: match.params,
-    history,
-    form,
-  });
+  const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
+
+  const {
+    submit,
+    params: { typeName },
+    disabled,
+  } = YForm.useSubmit({ params: match.params, history, form });
 
   useEffect(() => {
     setTimeout(() => {
@@ -61,52 +63,55 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
   };
 
   return (
-    <YForm
-      {...layout}
-      loading={loading}
-      initialValues={data}
-      name="basic"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      onSave={onSave}
-      formatFieldsValue={formatFieldsValue}
-      required
-      form={form}
-      submit={submit}
-      disabled={disabled}
-    >
-      {[
-        { type: 'input', label: 'name', name: 'name' },
-        { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-        // { type: 'money', label: 'money', name: 'money' },
-        // {
-        //   type: 'submit',
-        //   componentProps: {
-        //     history,
-        //     showBtns: {
-        //       showEdit: {
-        //         onClick: e => {
-        //           e.preventDefault();
-        //           setDisabled(c => !c);
-        //         },
-        //       },
-        //     },
-        //   },
-        // },
-        { type: 'submit', componentProps: submitComponentProps },
-        {
-          className: 'button-more-left',
-          dataSource: [
-            {
-              type: 'button',
-              noStyle: true,
-              plugins: { disabled: false },
-              componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
-            },
-          ],
-        },
-      ]}
-    </YForm>
+    <>
+      <h2>{typeName}</h2>
+      <YForm
+        {...layout}
+        loading={loading}
+        initialValues={data}
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        onSave={onSave}
+        formatFieldsValue={formatFieldsValue}
+        required
+        form={form}
+        submit={submit}
+        disabled={disabled}
+      >
+        {[
+          { type: 'input', label: 'name', name: 'name' },
+          { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
+          // { type: 'money', label: 'money', name: 'money' },
+          // {
+          //   type: 'submit',
+          //   componentProps: {
+          //     history,
+          //     showBtns: {
+          //       showEdit: {
+          //         onClick: e => {
+          //           e.preventDefault();
+          //           setDisabled(c => !c);
+          //         },
+          //       },
+          //     },
+          //   },
+          // },
+          { type: 'submit' },
+          {
+            className: 'button-more-left',
+            dataSource: [
+              {
+                type: 'button',
+                noStyle: true,
+                plugins: { disabled: false },
+                componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
+              },
+            ],
+          },
+        ]}
+      </YForm>
+    </>
   );
 };
 export default Demo;

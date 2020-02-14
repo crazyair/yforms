@@ -75,7 +75,7 @@ const InternalForm = (props: YFormProps) => {
     };
   }, []);
 
-  const { onFinishLoading, submitLoading, onCancel } = submit || {};
+  const { onFinishLoading, submitLoading, onFinishCallback } = submit || {};
 
   const [form] = Form.useForm();
 
@@ -107,9 +107,9 @@ const InternalForm = (props: YFormProps) => {
         timeOut.current = window.setTimeout(
           () => {
             onFinishLoading && onFinishLoading(false);
-            onCancel && onCancel();
+            onFinishCallback && onFinishCallback();
           },
-          // loading 时间不到 0.5s 的 loading 0.5s 超过的立刻结束
+          // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
           end - begin > 500 ? 0 : 500,
         );
       } catch (error) {
@@ -125,6 +125,7 @@ const InternalForm = (props: YFormProps) => {
     itemsType: _itemsTypeAll,
     onSave,
     formatFieldsValue,
+    submit,
   };
 
   return (
