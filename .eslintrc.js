@@ -1,9 +1,11 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'react-hooks'],
   extends: ['airbnb-typescript', 'prettier/@typescript-eslint'],
   rules: {
+    'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
+    'react-hooks/exhaustive-deps': 'error', // 检查 effect 的依赖
     'jsx-a11y/heading-has-content': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
@@ -35,5 +37,6 @@ module.exports = {
     'no-tabs': 0,
     'no-mixed-spaces-and-tabs': 0,
     'import/no-unresolved': [0],
+    'no-unused-expressions': 0,
   },
 };

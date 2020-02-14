@@ -1,5 +1,5 @@
 import { Form, Spin } from 'antd';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { merge } from 'lodash';
 
 import { FormProps } from 'antd/lib/form';
@@ -8,6 +8,7 @@ import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
 import { onFormatFieldsValue, submitFormatValues } from './utils';
+import { YFormUseSubmitReturnProps } from './useSubmit';
 
 export type YFormPluginsType = {
   placeholder?: boolean;
@@ -46,6 +47,8 @@ export interface YFormProps extends FormProps {
   itemsType?: YFormItemsType;
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
+  onSave?: (values: { [key: string]: any }) => void;
+  submit?: YFormUseSubmitReturnProps['submit'];
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -56,16 +59,30 @@ const InternalForm = (props: YFormProps) => {
     itemsType,
     children,
     onFinish,
+    onSave,
     formatFieldsValue,
+    submit,
     ...rest
   } = props;
+
+  const timeOut = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeOut.current);
+    };
+  }, []);
+
+  const { onFinishLoading, onFinishCallback } = submit || {};
+
+  const [form] = Form.useForm();
 
   const _itemsTypeAll = {
     ...baseItemsType,
     ...itemsType,
     ...globalConfig.itemsType,
   } as YFormItemsType;
-  const _props = { plugins: true, ...props, itemsType: _itemsTypeAll };
+
   if ('isShow' in props && !props.isShow) {
     return null;
   }
@@ -76,18 +93,39 @@ const InternalForm = (props: YFormProps) => {
       </div>
     );
   }
-  const handleOnFinish = (value: KeyValue) => {
+  const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
-      if (formatFieldsValue) {
-        onFinish(submitFormatValues(value, formatFieldsValue));
-      } else {
-        onFinish(value);
+      const begin = new Date().getTime();
+      onFinishLoading && onFinishLoading(true);
+      try {
+        await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
+        const end = new Date().getTime();
+        timeOut.current = window.setTimeout(
+          () => {
+            onFinishLoading && onFinishLoading(false);
+            onFinishCallback && onFinishCallback();
+          },
+          // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
+          end - begin > 500 ? 0 : 500,
+        );
+      } catch (error) {
+        onFinishLoading && onFinishLoading(false);
       }
     }
   };
 
+  const _props = {
+    plugins: true,
+    form,
+    ...props,
+    itemsType: _itemsTypeAll,
+    onSave,
+    formatFieldsValue,
+    submit,
+  };
+
   return (
-    <Form {...rest} onFinish={handleOnFinish}>
+    <Form form={form} {...rest} onFinish={handleOnFinish}>
       <YFormContext.Provider value={_props}>
         <Items>{children}</Items>
       </YFormContext.Provider>

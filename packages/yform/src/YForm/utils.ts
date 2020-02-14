@@ -5,6 +5,7 @@ import { ColProps } from 'antd/lib/col';
 import { stringAndFunc } from './ItemsType';
 import { FieldsType, KeyValue } from './Form';
 import { FormatFieldsValue } from './Items';
+import { ParamsType } from './useSubmit';
 
 const nzhcn = require('nzh/cn');
 
@@ -157,4 +158,20 @@ export const onFormatFieldsValue = <T>(formatFieldsValue: FormatFieldsValue<T>[]
     });
     return _formatFields;
   };
+};
+
+export const paramsType = (params?: ParamsType) => {
+  const _params = params || ({} as ParamsType);
+  const type = {
+    id: _params.id,
+    edit: _params.type === 'edit',
+    create: _params.type === 'create',
+    view: _params.type === 'view',
+  };
+  let typeName = '';
+  if (type.create) typeName = '新建';
+  if (type.edit) typeName = '编辑';
+  if (type.view) typeName = '查看';
+
+  return { ...type, typeName };
 };

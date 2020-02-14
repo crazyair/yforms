@@ -1,13 +1,15 @@
 // tslint:disable:no-console
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
 import { Input } from 'antd';
 import { YForm } from '../../index';
 import { YFormItemsProps } from '../Items';
+import Submit from '../component/Submit';
 
-const delay = (timeout = 0) =>
+export const delay = (timeout = 0) =>
   new Promise(resolve => {
     setTimeout(resolve, timeout);
   });
@@ -39,15 +41,52 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
   );
 };
 
+const YFormSubmitDemo = (props: any) => {
+  const { params, onCancel, onFinish, onSave } = props;
+  const [form] = YForm.useForm();
+  const history = { goBack: () => {} };
+  const { submit, disabled } = YForm.useSubmit({ params, history, form, onCancel });
+  const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
+
+  onFormatFieldsValue([
+    { name: 'append_field', format: () => '提交前追加字段' },
+    { name: 'name', format: ({ name }) => `${name}_改变了` },
+  ]);
+
+  return (
+    <YForm
+      initialValues={{ age: '1' }}
+      onFinish={onFinish}
+      onSave={onSave}
+      submit={submit}
+      formatFieldsValue={formatFieldsValue}
+      disabled={disabled}
+    >
+      {[
+        { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
+        { type: 'submit' },
+      ]}
+    </YForm>
+  );
+};
+
 describe('YFormItems', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  let container: any;
 
   beforeEach(() => {
+    container = document.createElement('div');
+    const wrapper = mount(<YFormSubmitDemo params={{ type: 'create' }} />, { attachTo: container });
+    wrapper
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
     jest.useRealTimers();
   });
 
   afterEach(() => {
     errorSpy.mockReset();
+    ReactDOM.unmountComponentAtNode(container);
   });
 
   afterAll(() => {
@@ -302,5 +341,76 @@ describe('YFormItems', () => {
       </YForm>,
     );
     expect(wrapper).toMatchSnapshot();
+  });
+  test('useSubmit', async () => {
+    const wrapperCreate = mount(<YFormSubmitDemo params={{ type: 'create' }} />);
+    await wrapperCreate
+      .find('.ant-btn')
+      .at(2)
+      .simulate('click');
+    const wrapperView = mount(<YFormSubmitDemo params={{ type: 'view' }} />);
+    await wrapperView
+      .find('.ant-btn')
+      .at(0)
+      .simulate('click');
+    await wrapperView
+      .find('.ant-btn')
+      .at(2)
+      .simulate('click');
+    const onCancel = jest.fn();
+    const wrapperCancel = mount(<YFormSubmitDemo onCancel={onCancel} params={{ type: 'edit' }} />);
+    await wrapperCancel
+      .find('.ant-btn')
+      .at(2)
+      .simulate('click');
+    expect(onCancel).toHaveBeenCalled();
+  });
+  test('Form submit', async () => {
+    const onFinish = async () => {
+      await delay(501);
+    };
+    const onFinishError = async () => {
+      await Promise.reject('err');
+    };
+    const wrapper = mount(<YFormSubmitDemo onFinish={onFinish} params={{ type: 'create' }} />);
+    await wrapper
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
+    await wrapper
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
+    await new Promise(resolve => setTimeout(resolve, 500 + 100));
+
+    const wrapperError = mount(
+      <YFormSubmitDemo onFinish={onFinishError} params={{ type: 'create' }} />,
+    );
+    await wrapperError
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
+    await delay(600);
+  });
+  test('Form submit onSave', async () => {
+    const onSave = async () => {
+      await delay(501);
+    };
+    const wrapper = mount(<YFormSubmitDemo onSave={onSave} params={{ type: 'create' }} />);
+    await wrapper
+      .find('.ant-btn')
+      .at(1)
+      .simulate('click');
+  });
+  test('Submit', async () => {
+    const wrapper = mount(
+      <YForm>
+        <Submit />
+      </YForm>,
+    );
+    await wrapper
+      .find('.ant-btn')
+      .at(1)
+      .simulate('click');
   });
 });

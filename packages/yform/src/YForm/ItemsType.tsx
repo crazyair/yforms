@@ -1,11 +1,15 @@
 import React from 'react';
 import { Input, Checkbox, Switch, Button } from 'antd';
-import { InputProps } from 'antd/lib/input';
-import { CheckboxProps } from 'antd/lib/checkbox';
 import { TextProps } from 'antd/lib/typography/Text';
-import { ButtonProps } from 'antd/lib/button';
-import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import { InputProps } from 'antd/lib/input';
 import { SwitchProps } from 'antd/lib/switch';
+import { ButtonProps } from 'antd/lib/button';
+import { CheckboxProps } from 'antd/lib/checkbox';
+import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+
+import { YFormProps } from './Form';
+import { YFormItemProps } from './Items';
+import { searchSelect } from './utils';
 
 import CustomTypography from './component/Typography';
 import OneLine, {
@@ -17,17 +21,21 @@ import Radio, { YRadioProps } from './component/Radio';
 import List, { YFormListComponentProps, YFormListProps } from './component/List';
 import CheckboxGroup, { YCheckGroupProps } from './component/CheckboxGroup';
 import Select, { YSelectProps } from './component/Select';
-import { searchSelect } from './utils';
 import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
-import { YFormItemProps } from './Items';
+import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
+import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 
 interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
   formItemProps?: YFormItemProps;
   render?: (p?: T) => React.ReactElement;
   formatStr?: string;
-  modifyProps?: (fProps: YFormItemProps, cProps: T) => [YFormItemProps, T];
+  modifyProps?: (
+    formItemProps: YFormItemProps,
+    componentProps: T,
+    formProps: YFormProps,
+  ) => [YFormItemProps, T];
 }
 
 export interface BaseComponentProps {
@@ -66,6 +74,8 @@ export interface YFormItemsTypeDefine {
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
   list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
   custom: { componentProps?: any; component?: React.ReactElement };
+  submit: { componentProps?: YFormSubmitProps };
+  secureButton: { componentProps?: YFormSecureButtonProps };
 }
 
 export type YFormItemsType<T = YFormFieldBaseProps> = {
@@ -102,6 +112,8 @@ export const itemsType: YFormItemsType = {
   list: { component: <List />, formItemProps: { noStyle: true, rules: [{ required: false }] } },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
+  submit: { component: <Submit />, modifyProps: submitModify },
+  secureButton: { component: <SecureButton /> },
 };
 
 export default itemsType;
