@@ -69,13 +69,11 @@ const InternalForm = (props: YFormProps) => {
 
   useEffect(() => {
     return () => {
-      if (timeOut.current) {
-        clearTimeout(timeOut.current);
-      }
+      clearTimeout(timeOut.current);
     };
   }, []);
 
-  const { onFinishLoading, submitLoading, onFinishCallback } = submit || {};
+  const { onFinishLoading, onFinishCallback } = submit || {};
 
   const [form] = Form.useForm();
 
@@ -97,8 +95,6 @@ const InternalForm = (props: YFormProps) => {
   }
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
-      // 防连点
-      if (submitLoading) return;
       const begin = new Date().getTime();
       onFinishLoading && onFinishLoading(true);
       try {

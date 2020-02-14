@@ -32,14 +32,13 @@ export interface YFormUseSubmitReturnProps {
   params?: ParamsObjType;
   submit: {
     onFinishLoading: (loading?: boolean) => void;
-    submitLoading: boolean;
     onFinishCallback: () => void;
     submitComponentProps: YFormSubmitProps;
   };
 }
 export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
   const { history, form, onCancel, params } = props;
-  const { resetFields } = form || {};
+  const { resetFields } = form;
   const _params = paramsType(params);
   const { create, edit, view } = _params;
 
@@ -72,7 +71,6 @@ export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
     params: _params,
     submit: {
       onFinishLoading: setSubmitLoading,
-      submitLoading,
       onFinishCallback: handleReset,
       submitComponentProps: {
         showBtns: {

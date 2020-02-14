@@ -1,8 +1,8 @@
 import React from 'react';
-import { YForm } from 'father-doc-yform';
 import { merge } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
+import { YForm } from '../..';
 import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
 import { submitFormatValues } from '../utils';

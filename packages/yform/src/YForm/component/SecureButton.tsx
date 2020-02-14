@@ -22,9 +22,7 @@ const SecureButton: React.FC<YFormSecureButtonProps> = props => {
 
   useEffect(() => {
     return () => {
-      if (timeOut.current) {
-        clearTimeout(timeOut.current);
-      }
+      clearTimeout(timeOut.current);
     };
   }, []);
 
@@ -48,7 +46,6 @@ const SecureButton: React.FC<YFormSecureButtonProps> = props => {
   );
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (loading) return;
     if (onClick) {
       setLoading(true);
       const begin = new Date().getTime();
