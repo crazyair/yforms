@@ -43,10 +43,12 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
 
 const YFormSubmitDemo = (props: any) => {
   const { params, onCancel, onFinish, onSave } = props;
-  const [form] = YForm.useForm();
   const history = { goBack: () => {} };
-  const { submit, disabled } = YForm.useSubmit({ params, history, form, onCancel });
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
+
+  const {
+    params: { typeName },
+  } = YForm.useSubmit({ params });
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
@@ -57,11 +59,13 @@ const YFormSubmitDemo = (props: any) => {
     <YForm
       initialValues={{ age: '1' }}
       onFinish={onFinish}
-      onSave={onSave}
-      submit={submit}
       formatFieldsValue={formatFieldsValue}
-      disabled={disabled}
+      onSave={onSave}
+      params={params}
+      onCancel={onCancel}
+      goBack={history.goBack}
     >
+      {typeName}
       {[
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'submit' },

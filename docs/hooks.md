@@ -74,21 +74,23 @@ import { YForm } from 'father-doc-yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-const mockData = { params: { type: 'create' } };
-const history = { goBack: () => {} };
-
 export default () => {
   const [form] = YForm.useForm();
-  const { submit, disabled } = YForm.useSubmit({ params: mockData.params, history, form });
+  const {
+    params: { typeName },
+  } = YForm.useSubmit({ params: { type: 'create' } });
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
 
   return (
-    <YForm {...layout} required submit={submit} disabled={disabled} onFinish={onFinish}>
-      {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
-    </YForm>
+    <>
+      <h4>{typeName}</h4>
+      <YForm {...layout} required onFinish={onFinish}>
+        {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
+      </YForm>
+    </>
   );
 };
 ```
@@ -97,29 +99,17 @@ export default () => {
 
 - `useSubmit` 参数
 
-| 参数    | 说明                         | 类型                           | 默认值 |
-| ------- | ---------------------------- | ------------------------------ | ------ |
-| params  | 页面参数，包括 `id`、`type`  | { id?: string; type?: 'create' | 'edit' | 'view';} | - |
-| history | 主要使用 `goBack` 返回上一页 | RouteComponentProps['history'] | -      |
-| form    | `Form` 实例                  | FormInstance                   | -      |
+| 参数   | 说明                        | 类型                           | 默认值 |
+| ------ | --------------------------- | ------------------------------ | ------ |
+| params | 页面参数，包括 `id`、`type` | { id?: string; type?: 'create' | 'edit' | 'view';} | - |
 
 - `useSubmit` 返回
 
-| 参数     | 说明             | 类型                            | 默认值 |
-| -------- | ---------------- | ------------------------------- | ------ |
-| submit   | 统筹提交逻辑     | [submit](#submit)               | -      |
-| params   | 表单状态         | [ParamsObjType](#ParamsObjType) | -      |
-| disabled | 控制表单禁用状态 | boolean                         | -      |
+| 参数   | 说明     | 类型                            | 默认值 |
+| ------ | -------- | ------------------------------- | ------ |
+| params | 表单状态 | [ParamsObjType](#ParamsObjType) | -      |
 
-#### submit
-
-| 参数                 | 说明                         | 类型                        | 默认值 |
-| -------------------- | ---------------------------- | --------------------------- | ------ |
-| onFinishLoading      | 获取表单提交状态             | (loading?: boolean) => void | -      |
-| onFinishCallback     | 表单提交成功回调             | () => void                  | -      |
-| submitComponentProps | 为 `submit` 增加属性实现关联 | YFormSubmitProps            | -      |
-
-#### ParamsObjType
+### ParamsObjType
 
 | 参数     | 说明         | 类型    | 默认值 |
 | -------- | ------------ | ------- | ------ |

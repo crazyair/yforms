@@ -26,6 +26,11 @@ order: 9
 | loading | 为 `true` 则显示加载效果，用于判断初始化数据是否加载完成再渲染 `Form` | boolean | - |
 | itemsType | 追加类型 | YFormItemsType | - |
 | formatFieldsValue | 表单提交前格式化，说明[见下](#formatFieldsValue) | FormatFieldsValue[] | - |
+| onSave | 保存方法，不校验表单数据，（需用到 `submit` 类型） | (values: { [key: string]: any }) => void | - |
+| onCancel | 点击取消、返回调用的方法，（需用到 `submit` 类型） | () => void | - |
+| goBack | 返回上一页，（需用到 `submit` 类型） | () => void | - |
+| params | 当前表单状态，（需用到 `submit` 类型） | <a href="#/hooks?anchor=paramsobjtype">ParamsObjType</a> | - |
+| submitComponentProps | `submit` 类型参数，（需用到 `submit` 类型，用户不需传） | <a href="#/other-type/submit?anchor=api">YFormSubmitProps</a> | - |
 
 ## YForm.Items
 

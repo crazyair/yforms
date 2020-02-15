@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'father-doc-yform';
-import { ParamsType } from 'yform/src/YForm/Form';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 interface Demo2Props {}
-const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
+const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
   const { match, history } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
