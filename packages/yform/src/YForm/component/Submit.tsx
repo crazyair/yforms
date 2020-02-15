@@ -13,9 +13,8 @@ export const submitModify = (
   cProps: YFormSubmitProps,
   formProps: YFormProps,
 ): [YFormItemProps, YFormSubmitProps] => {
-  const { form, onSave, formatFieldsValue, submit } = formProps;
+  const { form, onSave, formatFieldsValue, submitComponentProps = {} } = formProps;
   const _fProps = { noStyle: true, ...fProps };
-  const { submitComponentProps } = submit || {};
   const mergeCProps = merge({}, submitComponentProps, cProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
   return [_fProps, _cProps];

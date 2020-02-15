@@ -1,5 +1,5 @@
 import { Form, Spin } from 'antd';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { merge } from 'lodash';
 
 import { FormProps } from 'antd/lib/form';
@@ -7,8 +7,8 @@ import baseItemsType, { YFormItemsType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
-import { onFormatFieldsValue, submitFormatValues } from './utils';
-import { YFormUseSubmitReturnProps } from './useSubmit';
+import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
+import { YFormSubmitProps } from './component/Submit';
 
 export type YFormPluginsType = {
   placeholder?: boolean;
@@ -38,6 +38,19 @@ export function useFormatFieldsValue<T = any>() {
   };
 }
 
+export interface ParamsType {
+  id?: string;
+  type?: 'create' | 'edit' | 'view';
+}
+
+export interface ParamsObjType {
+  create?: boolean;
+  edit?: boolean;
+  view?: boolean;
+  id?: string;
+  typeName?: string;
+}
+
 export interface YFormProps extends FormProps {
   isShow?: boolean;
   disabled?: boolean;
@@ -48,7 +61,10 @@ export interface YFormProps extends FormProps {
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
-  submit?: YFormUseSubmitReturnProps['submit'];
+  submitComponentProps?: YFormSubmitProps;
+  onCancel?: () => void;
+  goBack?: () => void;
+  params?: ParamsObjType;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -61,9 +77,18 @@ const InternalForm = (props: YFormProps) => {
     onFinish,
     onSave,
     formatFieldsValue,
-    submit,
+    onCancel,
+    params,
+    goBack,
+    form: propsForm,
     ...rest
   } = props;
+  const [form] = Form.useForm(propsForm);
+  const { resetFields } = form;
+  const _params = paramsType(params);
+  const { create, edit, view } = _params;
+  const [thisDisabled, setDisabled] = useState(view);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   const timeOut = useRef<number | null>(null);
 
@@ -73,15 +98,66 @@ const InternalForm = (props: YFormProps) => {
     };
   }, []);
 
-  const { onFinishLoading, onFinishCallback } = submit || {};
-
-  const [form] = Form.useForm();
+  const handleReset = useCallback(() => {
+    if (typeof onCancel === 'function') {
+      onCancel();
+    } else if (create) {
+      goBack && goBack();
+    } else if (edit || view) {
+      resetFields();
+      setDisabled(true);
+    }
+  }, [create, edit, goBack, onCancel, resetFields, view]);
 
   const _itemsTypeAll = {
     ...baseItemsType,
     ...itemsType,
     ...globalConfig.itemsType,
   } as YFormItemsType;
+
+  const handleOnFinish = async (value: KeyValue) => {
+    if (onFinish) {
+      const begin = new Date().getTime();
+      setSubmitLoading(true);
+      try {
+        await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
+        const end = new Date().getTime();
+        timeOut.current = window.setTimeout(
+          () => {
+            setSubmitLoading(false);
+            handleReset();
+          },
+          // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
+          end - begin > 500 ? 0 : 500,
+        );
+      } catch (error) {
+        setSubmitLoading(false);
+      }
+    }
+  };
+
+  const handleOnEdit = e => {
+    e.preventDefault();
+    setDisabled(c => !c);
+  };
+
+  const _props = {
+    plugins: true,
+    form,
+    disabled: thisDisabled,
+    ...props,
+    itemsType: _itemsTypeAll,
+    submitComponentProps: {
+      showBtns: {
+        // form submit 触发后设置 loading = true
+        showSubmit: { loading: submitLoading },
+        showEdit: { onClick: handleOnEdit },
+        showCancel: { onClick: handleReset },
+        showSave: { onLoaded: handleReset },
+        showBack: { onClick: goBack },
+      },
+    },
+  };
 
   if ('isShow' in props && !props.isShow) {
     return null;
@@ -93,39 +169,9 @@ const InternalForm = (props: YFormProps) => {
       </div>
     );
   }
-  const handleOnFinish = async (value: KeyValue) => {
-    if (onFinish) {
-      const begin = new Date().getTime();
-      onFinishLoading && onFinishLoading(true);
-      try {
-        await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
-        const end = new Date().getTime();
-        timeOut.current = window.setTimeout(
-          () => {
-            onFinishLoading && onFinishLoading(false);
-            onFinishCallback && onFinishCallback();
-          },
-          // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
-          end - begin > 500 ? 0 : 500,
-        );
-      } catch (error) {
-        onFinishLoading && onFinishLoading(false);
-      }
-    }
-  };
-
-  const _props = {
-    plugins: true,
-    form,
-    ...props,
-    itemsType: _itemsTypeAll,
-    onSave,
-    formatFieldsValue,
-    submit,
-  };
 
   return (
-    <Form form={form} {...rest} onFinish={handleOnFinish}>
+    <Form {...rest} form={form} onFinish={handleOnFinish}>
       <YFormContext.Provider value={_props}>
         <Items>{children}</Items>
       </YFormContext.Provider>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'father-doc-yform';
-import { ParamsType } from 'yform/src/YForm/useSubmit';
+import { ParamsType } from 'yform/src/YForm/Form';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
@@ -17,10 +17,8 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
-    submit,
     params: { typeName },
-    disabled,
-  } = YForm.useSubmit({ params: match.params, history, form });
+  } = YForm.useSubmit({ params: match.params });
 
   useEffect(() => {
     setTimeout(() => {
@@ -76,10 +74,10 @@ const Demo: React.FC<Demo2Props & RouteComponentProps<ParamsType>> = props => {
         required
         formatFieldsValue={formatFieldsValue}
         loading={loading}
-        // useSubmit 参数
+        // submit 参数
         onSave={onSave}
-        submit={submit}
-        disabled={disabled}
+        params={match.params}
+        goBack={history.goBack}
       >
         {[
           { type: 'input', label: 'name', name: 'name' },
