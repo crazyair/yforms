@@ -3,9 +3,8 @@ import { get, map, join, set, mapKeys, forEach, cloneDeep } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
 import { stringAndFunc } from './ItemsType';
-import { FieldsType, KeyValue } from './Form';
+import { FieldsType, KeyValue, ParamsType } from './Form';
 import { FormatFieldsValue } from './Items';
-import { ParamsType } from './useSubmit';
 
 const nzhcn = require('nzh/cn');
 
