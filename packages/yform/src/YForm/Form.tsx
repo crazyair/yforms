@@ -117,6 +117,7 @@ const InternalForm = (props: YFormProps) => {
 
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
+      if (submitLoading) return;
       const begin = new Date().getTime();
       setSubmitLoading(true);
       try {

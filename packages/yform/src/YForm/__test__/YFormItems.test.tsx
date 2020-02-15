@@ -417,4 +417,19 @@ describe('YFormItems', () => {
       .at(1)
       .simulate('click');
   });
+  test('Form submit two', async () => {
+    const onFinish = jest.fn();
+
+    const wrapper = mount(<YFormSubmitDemo onFinish={onFinish} params={{ type: 'create' }} />);
+    wrapper
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
+    await delay();
+    wrapper
+      .find('.ant-btn')
+      .at(0)
+      .simulate('submit');
+    expect(onFinish).toHaveBeenCalled();
+  });
 });
