@@ -6,9 +6,9 @@ import { YForm } from 'father-doc-yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-interface Demo2Props {}
-const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
-  const { match, history } = props;
+interface DemoProps {}
+const Demo: React.FC<DemoProps & RouteComponentProps> = props => {
+  const { match } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -76,7 +76,6 @@ const Demo: React.FC<Demo2Props & RouteComponentProps> = props => {
         // submit 参数
         onSave={onSave}
         params={match.params}
-        goBack={history.goBack}
       >
         {[
           { type: 'input', label: 'name', name: 'name' },

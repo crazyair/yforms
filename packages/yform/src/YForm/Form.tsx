@@ -63,8 +63,7 @@ export interface YFormProps extends FormProps {
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
   onCancel?: () => void;
-  goBack?: () => void;
-  params?: ParamsObjType;
+  params?: ParamsType;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -79,7 +78,6 @@ const InternalForm = (props: YFormProps) => {
     formatFieldsValue,
     onCancel,
     params,
-    goBack,
     form: propsForm,
     ...rest
   } = props;
@@ -102,12 +100,12 @@ const InternalForm = (props: YFormProps) => {
     if (typeof onCancel === 'function') {
       onCancel();
     } else if (create) {
-      goBack && goBack();
+      window.history.back();
     } else if (edit || view) {
       resetFields();
       setDisabled(true);
     }
-  }, [create, edit, goBack, onCancel, resetFields, view]);
+  }, [create, edit, onCancel, resetFields, view]);
 
   const _itemsTypeAll = {
     ...baseItemsType,
@@ -155,7 +153,7 @@ const InternalForm = (props: YFormProps) => {
         showEdit: { onClick: handleOnEdit },
         showCancel: { onClick: handleReset },
         showSave: { onLoaded: handleReset },
-        showBack: { onClick: goBack },
+        showBack: { onClick: window.history.back },
       },
     },
   };

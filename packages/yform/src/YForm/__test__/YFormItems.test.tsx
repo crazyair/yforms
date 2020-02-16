@@ -43,7 +43,6 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
 
 const YFormSubmitDemo = (props: any) => {
   const { params, onCancel, onFinish, onSave } = props;
-  const history = { goBack: () => {} };
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
@@ -63,7 +62,6 @@ const YFormSubmitDemo = (props: any) => {
       onSave={onSave}
       params={params}
       onCancel={onCancel}
-      goBack={history.goBack}
     >
       {typeName}
       {[
