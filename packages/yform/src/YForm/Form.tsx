@@ -96,11 +96,15 @@ const InternalForm = (props: YFormProps) => {
     };
   }, []);
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   const handleReset = useCallback(() => {
     if (typeof onCancel === 'function') {
       onCancel();
     } else if (create) {
-      window.history.back();
+      goBack();
     } else if (edit || view) {
       resetFields();
       setDisabled(true);
@@ -153,7 +157,7 @@ const InternalForm = (props: YFormProps) => {
         showEdit: { onClick: handleOnEdit },
         showCancel: { onClick: handleReset },
         showSave: { onLoaded: handleReset },
-        showBack: { onClick: window.history.back },
+        showBack: { onClick: goBack },
       },
     },
   };
