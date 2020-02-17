@@ -13,7 +13,7 @@ export const submitModify = (
   cProps: YFormSubmitProps,
   formProps: YFormProps,
 ): [YFormItemProps, YFormSubmitProps] => {
-  const { form, onSave, formatFieldsValue, submitComponentProps = {} } = formProps;
+  const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
   const _fProps = { noStyle: true, ...fProps };
   const mergeCProps = merge({}, submitComponentProps, cProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };

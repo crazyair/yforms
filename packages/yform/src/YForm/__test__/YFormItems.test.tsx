@@ -42,7 +42,7 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
 };
 
 const YFormSubmitDemo = (props: any) => {
-  const { params, onCancel, onFinish, onSave } = props;
+  const { params, onCancel, onFinish, onSave, reverseBtns } = props;
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
@@ -66,7 +66,7 @@ const YFormSubmitDemo = (props: any) => {
       {typeName}
       {[
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-        { type: 'submit' },
+        { type: 'submit', componentProps: { reverseBtns } },
       ]}
     </YForm>
   );
@@ -429,5 +429,8 @@ describe('YFormItems', () => {
       .at(0)
       .simulate('submit');
     expect(onFinish).toHaveBeenCalled();
+  });
+  test('Form submit reverse', async () => {
+    mount(<YFormSubmitDemo reverseBtns params={{ type: 'create' }} />);
   });
 });
