@@ -174,7 +174,7 @@ const InternalForm = (props: YFormProps) => {
   }
 
   return (
-    <Form {...rest} form={form} onFinish={handleOnFinish}>
+    <Form {...rest} form={form} className="yform" onFinish={handleOnFinish}>
       <YFormContext.Provider value={_props}>
         <Items>{children}</Items>
       </YFormContext.Provider>

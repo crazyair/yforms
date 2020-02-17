@@ -1,5 +1,5 @@
 import React from 'react';
-import { merge } from 'lodash';
+import { merge, reverse } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
 import { YForm } from '../..';
@@ -35,10 +35,11 @@ type showBtns = {
 export interface YFormSubmitProps
   extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
   showBtns?: showBtns | boolean;
+  reverseBtns?: boolean;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, formatFieldsValue, showBtns = true, disabled } = props;
+  const { form, onSave, formatFieldsValue, showBtns = true, reverseBtns, disabled } = props;
 
   const { getFieldsValue } = form || {};
 
@@ -106,6 +107,9 @@ export default (props: YFormSubmitProps) => {
     btns = [actionBtns.edit, actionBtns.back];
   } else {
     btns = [actionBtns.submit, actionBtns.save, actionBtns.cancel];
+  }
+  if (reverseBtns) {
+    btns = reverse(btns);
   }
   return (
     <YForm.Items isShow={!!showBtns}>
