@@ -1,0 +1,12 @@
+@import '~antd/dist/antd.less';
+
+@dialog-prefix-cls: ~'@{ant-prefix}-modal';
+
+.yform .@{dialog-prefix-cls} {
+  &-body {
+    padding: 0;
+  }
+  &-body-children {
+    padding: @modal-body-padding;
+  }
+}
