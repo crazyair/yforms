@@ -1,6 +1,7 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { merge } from 'lodash';
+import classNames from 'classnames';
 
 import { FormProps } from 'antd/lib/form';
 import baseItemsType, { YFormItemsType } from './ItemsType';
@@ -79,6 +80,7 @@ const InternalForm = (props: YFormProps) => {
     onCancel,
     params,
     form: propsForm,
+    className,
     ...rest
   } = props;
   const [form] = Form.useForm(propsForm);
@@ -174,7 +176,12 @@ const InternalForm = (props: YFormProps) => {
   }
 
   return (
-    <Form {...rest} form={form} onFinish={handleOnFinish}>
+    <Form
+      {...rest}
+      form={form}
+      className={classNames('yform', className)}
+      onFinish={handleOnFinish}
+    >
       <YFormContext.Provider value={_props}>
         <Items>{children}</Items>
       </YFormContext.Provider>
