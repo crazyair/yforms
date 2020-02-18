@@ -31,3 +31,10 @@ features:
 ## 参与贡献
 
 欢迎加入到 father-doc-yform 的建设队伍中来，请访问 https://github.com/crazyair/father-doc-yform 。
+
+```jsx | inline
+import React from 'react';
+import gif from './assets/qrcode.jpg';
+
+export default () => <img src={gif} width="300" />;
+```
