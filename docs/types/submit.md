@@ -46,7 +46,7 @@ export default () => {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | showSubmit | 提交按钮 | ButtonProps | - |
-| showSave | 保存按钮 | <a href="#/other-type/secure-button?anchor=api">YFormSecureButtonProps</a> | - |
+| showSave | 保存按钮 | <a href="#/types/secure-button?anchor=api">YFormSecureButtonProps</a> | - |
 | showCancel | 取消按钮 | ButtonProps | - |
 | showEdit | 编辑按钮 | ButtonProps | - |
 | showBack | 返回按钮 | ButtonProps | - |
