@@ -1,11 +1,12 @@
 ---
 title: submit
 order: 4
-group:
-  title: 特殊类型
+nav:
+  title: type
+  order: 7
 ---
 
-# submit 类型
+# submit
 
 提交、保存、取消、编辑、返回按钮。
 

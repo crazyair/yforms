@@ -1,11 +1,12 @@
 ---
 title: oneLine
 order: 6
-group:
-  title: 特殊类型
+nav:
+  title: type
+  order: 7
 ---
 
-# list 类型
+# oneLine
 
 一行多个字段。
 

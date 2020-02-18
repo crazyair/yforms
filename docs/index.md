@@ -1,54 +1,31 @@
 ---
 title: 介绍
 order: 10
+hero:
+  text: father-doc-yform
+  desc: 基于 antd@4 Form 封装简单配置化 Form 组件
+  actions:
+    - text: 快速上手
+      link: /getting-started
+features:
+  - title:
+    desc:
 ---
 
-## 前言
-
-> 一个基于 antd@4 Form 封装简单配置化 Form 组件
+---
 
 ## 特性
 
-- 简单快速创建复杂表单。
-- 兼容原生 `Antd Form API`。
-- 可自行添加 `type`。
-- 使用 `TypeScript` 开发，提供完整的类型定义文件。
+- 简单快速创建复杂表单
+- 兼容原生 `Antd Form API`
+- 可自行定义 `type`
+- 插件机制
+- 使用 `TypeScript` 开发，提供完整的类型定义文件
+- (未完待续...)
 
-## 📦 Install
+## Todo
 
-```bash
-npm install father-doc-yform
-```
-
-```bash
-yarn add father-doc-yform
-```
-
-## 示例
-
-```jsx | pure
-import React from 'react';
-import { YForm } from 'father-doc-yform';
-
-const Demo = () => {
-  return (
-    <YForm>
-      {[
-        { type: 'input', label: 'name', name: 'name' },
-        { type: 'money', label: 'money', name: 'money' },
-        {
-          dataSource: [
-            {
-              type: 'button',
-              noStyle: true,
-              plugins: { disabled: false },
-              componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
-            },
-          ],
-        },
-      ]}
-    </YForm>
-  );
-};
-export default Demo;
-```
+- 纯展示样式
+- 新旧数据对比
+- 动态配置
+- ...

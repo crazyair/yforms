@@ -1,13 +1,16 @@
 ---
 title: 文档
-order: 9
+order: 3
+nav:
+  title: 文档
+  order: 9
 ---
 
 # 文档
 
 - 以下内容不包含 `Antd Form API` 如需查看请[点击此处](https://next.ant.design/components/form-cn/#API)
 
-### 共同的 API
+## 共同的 API
 
 - 以下 API 为 `YForm` `YForm.Items` 及字段共享的 API。
 
@@ -38,26 +41,13 @@ order: 9
 | offset  | 相对 `YForm` 的 `layout` 位移 | number  | -      |
 | noStyle | 是否添加 `yform-items` 样式   | boolean | -      |
 
-## plugins
+### plugins
 
 | 参数          | 说明                             | 类型    | 默认值 |
 | ------------- | -------------------------------- | ------- | ------ |
 | placeholder   | 是否追加占位符                   | boolean | true   |
 | disabled      | 是否禁用                         | boolean | true   |
 | noLabelLayout | 是否无 `label` 添加 `label` 位移 | boolean | true   |
-
-## YForm.useFormatFieldsValue
-
-- 表单提交前格式化字段 hook
-
-### formatFieldsValue
-
-- 在 `YForm` 添加该属性
-
-### onFormatFieldsValue
-
-- 处理需要格式化的字段
-- 例： `onFormatFieldsValue([{ name: ['demo'], format: value => value.demo.split('|') }]);`
 
 ## 字段 dataSource
 

@@ -1,26 +1,12 @@
 ---
 title: list
 order: 7
-group:
-  title: 特殊类型
+nav:
+  title: type
+  order: 7
 ---
 
-<!--
-- input
-- [textarea](#textarea)
-- [money](#money)
-- checkbox
-- switch
-- checkboxGroup
-- select
-- radio
-- text
-- button
-- oneLine
-- list
-- custom -->
-
-# list 类型
+# list
 
 动态增删单字段多字段或者一个组件。
 

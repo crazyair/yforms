@@ -1,9 +1,12 @@
 ---
 title: 基础类型
-order: 8
+order: 100
+nav:
+  title: type
+  order: 7
 ---
 
-## 基础类型
+# 基础类型
 
 ```tsx
 import React from 'react';
