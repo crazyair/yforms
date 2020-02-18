@@ -12,8 +12,6 @@ features:
     desc:
 ---
 
----
-
 ## 特性
 
 - 简单快速创建复杂表单
@@ -29,3 +27,7 @@ features:
 - 新旧数据对比
 - 动态配置
 - ...
+
+## 参与贡献
+
+欢迎加入到 father-doc-yform 的建设队伍中来，请访问 https://github.com/crazyair/father-doc-yform 。
