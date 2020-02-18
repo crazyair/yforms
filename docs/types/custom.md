@@ -1,11 +1,12 @@
 ---
 title: custom
 order: 5
-group:
-  title: 特殊类型
+nav:
+  title: type
+  order: 7
 ---
 
-# custom 类型
+# custom
 
 自定义渲染元素。
 

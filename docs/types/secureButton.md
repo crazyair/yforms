@@ -1,11 +1,12 @@
 ---
 title: secureButton
 order: 3
-group:
-  title: 特殊类型
+nav:
+  title: type
+  order: 7
 ---
 
-# secureButton 类型
+# secureButton
 
 防连击按钮
 

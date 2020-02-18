@@ -4,6 +4,7 @@ export default {
   publicPath: '/father-doc-yform/',
   disableCSSModules: true,
   doc: {
+    mode: 'site',
     title: 'father-doc-yform',
   },
   extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
