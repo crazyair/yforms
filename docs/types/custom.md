@@ -2,7 +2,7 @@
 title: custom
 order: 5
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 

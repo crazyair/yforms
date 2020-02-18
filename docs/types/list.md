@@ -2,7 +2,7 @@
 title: list
 order: 7
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 

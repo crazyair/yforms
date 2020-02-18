@@ -2,7 +2,7 @@
 title: secureButton
 order: 3
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 

@@ -2,7 +2,7 @@
 title: submit
 order: 4
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 

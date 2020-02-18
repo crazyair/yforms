@@ -2,7 +2,7 @@
 title: oneLine
 order: 6
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 

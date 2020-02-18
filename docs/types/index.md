@@ -2,7 +2,7 @@
 title: 基础类型
 order: 100
 nav:
-  title: type
+  title: Type
   order: 7
 ---
 
