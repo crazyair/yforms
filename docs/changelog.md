@@ -1,6 +1,8 @@
 ---
 title: 更新日志
-order: -1000
+nav:
+  title: 更新日志
+  order: 5
 ---
 
 ## 0.4.0

@@ -1,9 +1,8 @@
 ---
 title: 文档
-order: 3
 nav:
   title: 文档
-  order: 9
+  order: 2
 ---
 
 # 文档

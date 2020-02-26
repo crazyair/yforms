@@ -1,0 +1,33 @@
+name: Now Deploy
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: ZEIT Now Deployment
+        uses: amondnet/now-deployment@v2.0.1
+        with:
+          # zeit.co token
+          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }} 
+          now-args: '--prod'
+          # now-args: # optional, default is 
+          # if you want to comment on pr and commit, set true, default: true
+          # github-comment: # optional, default is true
+          # if you want to comment on pr and commit, set token
+          # github-token: # optional
+          # if you want to create github deployment, set true, default: false
+          # github-deployment: # optional, default is false
+          # the working directory
+          # working-directory: # optional
+          # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
+          now-project-id: QmP1AAuKVWbgrBUP1V949TpWakyezZb6hi9QZD3roDTdoq # optional
+          # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
+          now-org-id: OM9gFiNTd1KDCsbBHt8xfMCz # optional

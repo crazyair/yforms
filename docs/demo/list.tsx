@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'umi/link';
+import { Link } from 'umi';
 
 import { BrowserRouter as Router, useLocation, useHistory } from 'react-router-dom';
 
