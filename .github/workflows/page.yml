@@ -17,6 +17,8 @@ jobs:
         with:
           # zeit.co token
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }} 
+          now-args: '--prod'
           # 
           # now-args: # optional, default is 
           # if you want to comment on pr and commit, set true, default: true
@@ -28,6 +30,6 @@ jobs:
           # the working directory
           # working-directory: # optional
           # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
-          now-project-id: father-doc-yform # optional
+          now-project-id: QmP1AAuKVWbgrBUP1V949TpWakyezZb6hi9QZD3roDTdoq # optional
           # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
-          # now-org-id: # optional
+          now-org-id: OM9gFiNTd1KDCsbBHt8xfMCz # optional
