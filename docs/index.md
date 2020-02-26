@@ -5,7 +5,7 @@ hero:
   title: father-doc-yform
   desc: 基于 antd@4 Form 封装简单配置化 Form 组件
   actions:
-    - tite: 快速上手
+    - text: 快速上手
       link: /getting-started
 features:
   - title:
