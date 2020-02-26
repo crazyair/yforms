@@ -1,9 +1,7 @@
 ---
 title: list
-order: 7
 nav:
   title: Type
-  order: 7
 ---
 
 # list

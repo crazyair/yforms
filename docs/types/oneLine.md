@@ -1,9 +1,7 @@
 ---
 title: oneLine
-order: 6
 nav:
   title: Type
-  order: 7
 ---
 
 # oneLine

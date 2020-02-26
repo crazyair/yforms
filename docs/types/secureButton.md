@@ -1,9 +1,7 @@
 ---
 title: secureButton
-order: 3
 nav:
   title: Type
-  order: 7
 ---
 
 # secureButton

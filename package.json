@@ -10,7 +10,7 @@
     "dev": "dumi dev",
     "build": "father-build",
     "doc:build": "dumi build",
-    "now-build": "yarn && yarn bootstrap yarn doc:build",
+    "now-build": "yarn && yarn bootstrap && yarn doc:build",
     "fa:build": "father build",
     "test": "umi-test",
     "lint": "eslint --ext .js,jsx,ts,tsx packages/**/src --fix",

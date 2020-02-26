@@ -1,6 +1,5 @@
 ---
 title: Hooks
-order: 1
 group:
   title: 文档
 ---

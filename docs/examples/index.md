@@ -1,9 +1,8 @@
 ---
 title: 示例
-order: 100
 nav:
   title: Examples
-  order: 6
+  order: 3
 ---
 
 # 示例

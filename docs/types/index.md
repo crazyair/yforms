@@ -1,9 +1,8 @@
 ---
 title: 基础类型
-order: 100
 nav:
   title: Type
-  order: 7
+  order: 4
 ---
 
 # 基础类型
