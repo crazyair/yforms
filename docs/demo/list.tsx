@@ -14,7 +14,7 @@ export default function QueryParamsExample() {
 }
 
 function useQuery() {
-  return new URLSearchParams(useLocation().hash.split('?')[1]);
+  return new URLSearchParams(useLocation().search);
 }
 
 function QueryParamsDemo() {
