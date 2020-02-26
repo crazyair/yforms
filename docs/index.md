@@ -2,10 +2,10 @@
 title: 介绍
 order: 10
 hero:
-  text: father-doc-yform
+  title: father-doc-yform
   desc: 基于 antd@4 Form 封装简单配置化 Form 组件
   actions:
-    - text: 快速上手
+    - tite: 快速上手
       link: /getting-started
 features:
   - title:
