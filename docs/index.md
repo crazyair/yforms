@@ -12,7 +12,7 @@ features:
     desc:
 ---
 
-## 特性 1
+## 特性
 
 - 简单快速创建复杂表单
 - 兼容原生 `Antd Form API`

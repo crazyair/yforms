@@ -1,9 +1,9 @@
-name: GitHub Actions Build and Deploy Demo
-on: [push]
-# on:
-  # push:
-    # branches:
-      # - master
+name: Now Deploy
+
+on:
+  push:
+    branches:
+      - master
       
 jobs:
   build-and-deploy:
@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-
       - name: ZEIT Now Deployment
         uses: amondnet/now-deployment@v2.0.1
         with:
@@ -19,7 +18,6 @@ jobs:
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }} 
           now-args: '--prod'
-          # 
           # now-args: # optional, default is 
           # if you want to comment on pr and commit, set true, default: true
           # github-comment: # optional, default is true
