@@ -1,8 +1,7 @@
 export default {
   // for GitHub Pages before prerender be supported
-  history: 'hash',
-  publicPath: '/father-doc-yform/',
-  disableCSSModules: true,
+  // history: { type: 'hash' },
+  // publicPath: '/father-doc-yform/',
   doc: {
     mode: 'site',
     title: 'father-doc-yform',
