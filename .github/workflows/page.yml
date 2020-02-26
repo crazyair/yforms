@@ -1,8 +1,10 @@
 name: GitHub Actions Build and Deploy Demo
-on:
-  push:
-    branches:
-      - master
+on: [push]
+# on:
+  # push:
+    # branches:
+      # - master
+      
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -10,10 +12,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
-          BUILD_SCRIPT: yarn && yarn bootstrap && yarn doc:build
+      - name: ZEIT Now Deployment
+        uses: amondnet/now-deployment@v2.0.1
+        with:
+          # zeit.co token
+          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+          # 
+          # now-args: # optional, default is 
+          # if you want to comment on pr and commit, set true, default: true
+          # github-comment: # optional, default is true
+          # if you want to comment on pr and commit, set token
+          # github-token: # optional
+          # if you want to create github deployment, set true, default: false
+          # github-deployment: # optional, default is false
+          # the working directory
+          # working-directory: # optional
+          # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
+          now-project-id: father-doc-yform # optional
+          # Now CLI 17+, ❗️  The `name` property in now.json is deprecated (https://zeit.ink/5F)
+          # now-org-id: # optional
