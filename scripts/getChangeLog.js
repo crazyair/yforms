@@ -9,8 +9,8 @@ const stringFromFile = path => {
 const text = stringFromFile('./docs/changelog.md');
 const versionLogs = text.split('---\n\n')[1];
 
-const allMatchingWords = versionLogs.match(/[^##]+/g);
-let changelog = allMatchingWords[0];
+const allMatchingWords = versionLogs.split('##');
+let changelog = allMatchingWords[1];
 changelog = changelog.replace(/%/g, '%25');
 changelog = changelog.replace(/\n/g, '%0A');
 changelog = changelog.replace(/\r/g, '%0D');
