@@ -6,7 +6,7 @@ const stringFromFile = path => {
   return readFileSync(path, 'utf-8');
 };
 
-const text = stringFromFile('../docs/changelog.md');
+const text = stringFromFile('./docs/changelog.md');
 const versionLogs = text.split('---\n\n')[1];
 
 const allMatchingWords = versionLogs.match(/[^##]+/g);
