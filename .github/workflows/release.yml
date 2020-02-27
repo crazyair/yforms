@@ -29,6 +29,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog}}
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
