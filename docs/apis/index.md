@@ -30,8 +30,8 @@ nav:
 | formatFieldsValue | 表单提交前格式化，说明[见下](#formatFieldsValue) | FormatFieldsValue[] | - |
 | onSave | 保存方法，不校验表单数据（需用到 `submit` 类型） | (values: { [key: string]: any }) => void | - |
 | onCancel | 点击取消、返回调用的方法（需用到 `submit` 类型） | () => void | - |
-| params | 当前表单状态（需用到 `submit` 类型） | <a href="#/apis/hooks?anchor=paramsobjtype">ParamsObjType</a> | - |
-| submitComponentProps | `submit` 类型参数，（需用到 `submit` 类型，用户不需传） | <a href="#/types/submit?anchor=api">YFormSubmitProps</a> | - |
+| params | 当前表单状态（需用到 `submit` 类型） | <a href="/apis/hooks#paramsobjtype">ParamsObjType</a> | - |
+| submitComponentProps | 与 `submit` 类型参数结合使用（用户无需传） | <a href="/types/submit#api">YFormSubmitProps</a> | - |
 
 ## YForm.Items
 
@@ -39,6 +39,13 @@ nav:
 | ------- | ----------------------------- | ------- | ------ |
 | offset  | 相对 `YForm` 的 `layout` 位移 | number  | -      |
 | noStyle | 是否添加 `yform-items` 样式   | boolean | -      |
+
+## type
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| isShow | 是否隐藏， `isShow` 为 `function` 情况下实现该功能 <a href="/examples#依赖使用">查看</a> | boolean \|(values: any) => boolean | - |
+| componentProps | 当前类型下组件的参数 | - | - |
 
 ### plugins
 

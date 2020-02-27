@@ -5,14 +5,15 @@ import { FormItemProps } from 'antd/lib/form';
 import { YFormItemProps } from './Items';
 
 export default (props: YFormItemProps) => {
-  const { children, addonAfter, ...rest } = props;
+  const { children, addonAfter, isShow, ...rest } = props;
+  const { shouldUpdate } = rest;
   let _required: boolean | undefined = false;
   // 根据 rules required 判断外部 Form.Item 是否必填
   forEach(props.rules, item => {
     if ('required' in item) _required = item.required;
   });
 
-  return children ? (
+  const ItemDom = children ? (
     <Form.Item
       required={_required}
       {...omit(rest, ['name', 'rules', 'dependencies', 'shouldUpdate'])}
@@ -23,4 +24,16 @@ export default (props: YFormItemProps) => {
       <>{addonAfter}</>
     </Form.Item>
   ) : null;
+
+  if (typeof isShow === 'function') {
+    return (
+      <Form.Item noStyle shouldUpdate={shouldUpdate}>
+        {form => {
+          return isShow(form.getFieldsValue()) && ItemDom;
+        }}
+      </Form.Item>
+    );
+  } else {
+    return ItemDom;
+  }
 };

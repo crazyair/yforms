@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Checkbox, Switch, Button } from 'antd';
 import { TextProps } from 'antd/lib/typography/Text';
-import { InputProps } from 'antd/lib/input';
+import { InputProps, PasswordProps } from 'antd/lib/input';
 import { SwitchProps } from 'antd/lib/switch';
 import { ButtonProps } from 'antd/lib/button';
 import { CheckboxProps } from 'antd/lib/checkbox';
@@ -60,6 +60,7 @@ export interface OptionsProps<T = any> {
 export interface YFormItemsTypeDefine {
   // 字段类型
   input: { componentProps?: InputProps };
+  password: { componentProps?: PasswordProps };
   textarea: { componentProps?: YTextAreaProps };
   money: { componentProps?: YMoneyProps };
   checkbox: { componentProps?: CheckboxProps };
@@ -86,6 +87,7 @@ export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
 export const itemsType: YFormItemsType = {
   input: { component: <Input />, formatStr: '请输入${label}' },
+  password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
   money: { component: <Money />, formatStr: '请输入${label}' },
   checkbox: {

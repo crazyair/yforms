@@ -1,6 +1,6 @@
 ---
 title: Hooks
-group:
+nav:
   title: 文档
 ---
 

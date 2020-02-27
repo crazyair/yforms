@@ -13,8 +13,10 @@ import ItemChildren from './ItemChildren';
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
 export type YFormRenderChildren = (form: FormInstance) => YFormItemProps['children'];
 
+type isShowFunc = (values: any) => boolean;
+
 export interface YFormItemProps extends Omit<FormItemProps, 'children'> {
-  isShow?: boolean;
+  isShow?: boolean | isShowFunc;
   required?: boolean;
   plugins?: YFormPluginsType | boolean;
   className?: string;
@@ -31,7 +33,7 @@ export interface YFormItemProps extends Omit<FormItemProps, 'children'> {
 
 export interface FormatFieldsValue<T = any> {
   name: FormItemProps['name'];
-  format: (value: T) => any;
+  format: (values: T) => any;
 }
 
 // 内部使用，类型不重要
@@ -78,6 +80,7 @@ const Items = (props: YFormItemsProps) => {
         const _base = merge({}, mergeProps, item);
 
         const { labelCol, wrapperCol, offset } = _base;
+
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
           labelCol,
           wrapperCol,
@@ -142,16 +145,17 @@ const Items = (props: YFormItemsProps) => {
                 };
               }
               if (required) {
-                _formItemProps.rules = merge(
-                  [],
-                  [
-                    {
-                      required: mergeRequired,
-                      message: _formatStr || '此处不能为空',
-                    },
-                  ],
-                  _formItemProps.rules,
-                );
+                let hasRequired = false;
+                forEach(_formItemProps.rules, item => {
+                  hasRequired = 'required' in item;
+                });
+                // 没传 required 校验情况下追加默认校验
+                if (!hasRequired) {
+                  _formItemProps.rules = [
+                    { required: mergeRequired, message: _formatStr || '此处不能为空' },
+                    ...(_formItemProps.rules || []),
+                  ];
+                }
               }
             }
 
