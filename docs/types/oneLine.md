@@ -23,7 +23,7 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 export default () => {
   return (
-    <YForm {...layout}>
+    <YForm {...layout} required>
       {[
         {
           label: '用户 1',

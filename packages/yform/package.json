@@ -1,6 +1,6 @@
 {
   "name": "father-doc-yform",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "自定义表单组件2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -25,9 +25,9 @@
   "homepage": "http://github.com/crazyair/father-doc-yform",
   "bugs": "http://github.com/crazyair/father-doc-yform/issues",
   "dependencies": {
-    "@ant-design/icons": "^4.0.0-rc.0",
+    "@ant-design/icons": "^4.0.0",
     "@babel/runtime": "^7.8.4",
-    "antd": "^4.0.0-rc.5",
+    "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",

@@ -1,4 +1,8 @@
-// tslint:disable:no-console
+/**
+ * title: 依赖字段判断隐藏显示
+ * desc: isShow 为 function 可以得到 fieldsValue 判断该 type 隐藏显示
+ */
+
 import React from 'react';
 import { YForm } from 'father-doc-yform';
 
