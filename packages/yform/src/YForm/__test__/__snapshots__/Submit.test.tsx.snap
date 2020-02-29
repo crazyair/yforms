@@ -191,13 +191,17 @@ Object {
                 <div
                   class="ant-form-item-control-input"
                 >
-                  <input
-                    class="ant-input"
-                    id="demo"
-                    placeholder="请输入"
-                    type="text"
-                    value=""
-                  />
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="demo"
+                      placeholder="请输入"
+                      type="text"
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -221,27 +225,31 @@ Object {
                   class="ant-form-item-control-input"
                 >
                   <div
-                    class="input-money"
+                    class="ant-form-item-control-input-content"
                   >
-                    <span
-                      class="ant-input-affix-wrapper"
-                    >
-                      <input
-                        class="ant-input"
-                        id="money"
-                        placeholder="请输入money"
-                        type="text"
-                        value=""
-                      />
-                      <span
-                        class="ant-input-suffix"
-                      >
-                        元
-                      </span>
-                    </span>
                     <div
-                      class="zh"
-                    />
+                      class="input-money"
+                    >
+                      <span
+                        class="ant-input-affix-wrapper"
+                      >
+                        <input
+                          class="ant-input"
+                          id="money"
+                          placeholder="请输入money"
+                          type="text"
+                          value=""
+                        />
+                        <span
+                          class="ant-input-suffix"
+                        >
+                          元
+                        </span>
+                      </span>
+                      <div
+                        class="zh"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -256,16 +264,20 @@ Object {
                   class="ant-form-item-control-input"
                 >
                   <div
-                    class="yform-items"
+                    class="ant-form-item-control-input-content"
                   >
-                    <button
-                      class="ant-btn ant-btn-primary"
-                      type="submit"
+                    <div
+                      class="yform-items"
                     >
-                      <span>
-                        submit
-                      </span>
-                    </button>
+                      <button
+                        class="ant-btn ant-btn-primary"
+                        type="submit"
+                      >
+                        <span>
+                          submit
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -294,13 +306,17 @@ Object {
               <div
                 class="ant-form-item-control-input"
               >
-                <input
-                  class="ant-input"
-                  id="demo"
-                  placeholder="请输入"
-                  type="text"
-                  value=""
-                />
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="demo"
+                    placeholder="请输入"
+                    type="text"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -324,27 +340,31 @@ Object {
                 class="ant-form-item-control-input"
               >
                 <div
-                  class="input-money"
+                  class="ant-form-item-control-input-content"
                 >
-                  <span
-                    class="ant-input-affix-wrapper"
-                  >
-                    <input
-                      class="ant-input"
-                      id="money"
-                      placeholder="请输入money"
-                      type="text"
-                      value=""
-                    />
-                    <span
-                      class="ant-input-suffix"
-                    >
-                      元
-                    </span>
-                  </span>
                   <div
-                    class="zh"
-                  />
+                    class="input-money"
+                  >
+                    <span
+                      class="ant-input-affix-wrapper"
+                    >
+                      <input
+                        class="ant-input"
+                        id="money"
+                        placeholder="请输入money"
+                        type="text"
+                        value=""
+                      />
+                      <span
+                        class="ant-input-suffix"
+                      >
+                        元
+                      </span>
+                    </span>
+                    <div
+                      class="zh"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -359,16 +379,20 @@ Object {
                 class="ant-form-item-control-input"
               >
                 <div
-                  class="yform-items"
+                  class="ant-form-item-control-input-content"
                 >
-                  <button
-                    class="ant-btn ant-btn-primary"
-                    type="submit"
+                  <div
+                    class="yform-items"
                   >
-                    <span>
-                      submit
-                    </span>
-                  </button>
+                    <button
+                      class="ant-btn ant-btn-primary"
+                      type="submit"
+                    >
+                      <span>
+                        submit
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

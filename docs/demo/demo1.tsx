@@ -12,7 +12,7 @@ const Demo = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setData({ name: '张三', age: '10' });
+      setData({ name: '张三', age: '10', money: '10' });
       setLoading(false);
     }, 10);
   }, []);

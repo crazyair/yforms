@@ -208,6 +208,13 @@ describe('YFormItems', () => {
             { label: 'text', name: 'text', type: 'text' },
             { label: 'switch', name: 'switch', type: 'switch' },
             { label: 'custom', type: 'custom', name: 'custom', component: <Input /> },
+            {
+              label: '精简使用',
+              type: 'input',
+              name: 'children_field2',
+              shouldUpdate: (prevValues, curValues) => prevValues.type !== curValues.type,
+              isShow: values => values.type === '2',
+            },
           ]}
           {[{ type: 'noType', name: 'a' }] as any}
           <div>1</div>
