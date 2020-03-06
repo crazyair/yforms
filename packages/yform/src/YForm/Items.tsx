@@ -164,7 +164,7 @@ const Items = (props: YFormItemsProps) => {
               [_formItemProps, _componentProps] = modifyProps(
                 _formItemProps,
                 _componentProps,
-                formProps,
+                mergeProps,
               );
             }
             const _key = name ? `${name}` : key;
@@ -229,7 +229,6 @@ const Items = (props: YFormItemsProps) => {
   } else {
     list.push(children);
   }
-
   const child = (
     <YFormItemsContext.Provider value={{ ...mergeProps }}>{list}</YFormItemsContext.Provider>
   );

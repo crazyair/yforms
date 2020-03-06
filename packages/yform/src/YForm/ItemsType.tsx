@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, Checkbox, Switch, Button } from 'antd';
+import { get, isEqual, isArray } from 'lodash';
 import { TextProps } from 'antd/lib/typography/Text';
 import { InputProps, PasswordProps } from 'antd/lib/input';
 import { SwitchProps } from 'antd/lib/switch';
@@ -8,7 +9,7 @@ import { CheckboxProps } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 
 import { YFormProps } from './Form';
-import { YFormItemProps } from './Items';
+import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
 
 import CustomTypography from './component/Typography';
@@ -85,8 +86,47 @@ export type YFormItemsType<T = YFormFieldBaseProps> = {
 
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
+const showOldDom = (dom: React.ReactNode, extra: React.ReactNode) => {
+  let pl = {};
+  // 文本需要左右加点宽度
+  if (typeof dom === 'string') {
+    pl = { paddingLeft: '1px' };
+  }
+  if (isArray(dom) && (dom as []).length === 0) {
+    dom = undefined;
+  }
+  return (
+    <div>
+      {extra}
+      <div style={{ background: '#fbe9eb', wordBreak: 'break-word', padding: '1px', ...pl }}>
+        {dom || '-/-'}
+      </div>
+    </div>
+  );
+};
+
+export const demoModify = (
+  fProps: YFormItemProps,
+  cProps: any,
+  allProps: YFormItemsProps,
+): [YFormItemProps, YTextAreaProps] => {
+  const _fProps = { ...fProps };
+  const _cProps = { ...cProps };
+  const { name } = _fProps;
+  const { oldInitialValues, initialValues } = allProps;
+  if (!isEqual(get(oldInitialValues, name), get(initialValues, name))) {
+    _fProps.extra = showOldDom(
+      // <Input disabled value={get(oldInitialValues, name)} />,
+      get(oldInitialValues, name),
+      _fProps.extra,
+    );
+  }
+
+  return [_fProps, _cProps];
+};
+
 export const itemsType: YFormItemsType = {
-  input: { component: <Input />, formatStr: '请输入${label}' },
+  input: { component: <Input />, formatStr: '请输入${label}', modifyProps: demoModify },
   password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
   money: { component: <Money />, formatStr: '请输入${label}' },

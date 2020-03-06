@@ -65,6 +65,7 @@ export interface YFormProps extends FormProps {
   submitComponentProps?: YFormSubmitProps;
   onCancel?: () => void;
   params?: ParamsType;
+  oldInitialValues?: FormProps['initialValues'];
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -81,6 +82,7 @@ const InternalForm = (props: YFormProps) => {
     params,
     form: propsForm,
     className,
+    oldInitialValues,
     ...rest
   } = props;
   const [form] = Form.useForm(propsForm);
@@ -162,6 +164,7 @@ const InternalForm = (props: YFormProps) => {
         showBack: { onClick: goBack },
       },
     },
+    oldInitialValues,
   };
 
   if ('isShow' in props && !props.isShow) {
