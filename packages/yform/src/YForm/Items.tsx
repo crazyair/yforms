@@ -62,25 +62,21 @@ const Items = (props: YFormItemsProps) => {
   const list: React.ReactNode[] = [];
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index: number) => {
+      // 如果是数组就回调该方法
+      if (isArray(item)) return each(item, index);
       const _index = pIndex ? `${pIndex}_${index}` : index;
-      if (isArray(item)) {
-        return each(item, index);
-      }
+      // 如果是 dom 直接渲染
       if (React.isValidElement(item)) {
-        const domProps = merge(item.props, {
-          style: item.style,
-          className: item.className,
-        });
+        const domProps = merge(item.props, { style: item.style, className: item.className });
         return list.push(
           <React.Fragment key={_index}>{React.cloneElement(item, { ...domProps })}</React.Fragment>,
         );
       }
       if (isObject(item)) {
+        if ('isShow' in item && !item.isShow) return undefined;
         // 处理插件
         const _base = merge({}, mergeProps, item);
-
         const { labelCol, wrapperCol, offset } = _base;
-
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
           labelCol,
           wrapperCol,
@@ -101,9 +97,6 @@ const Items = (props: YFormItemsProps) => {
           disabled = defaultPlugin,
         } = _plugins;
 
-        if ('isShow' in item && !item.isShow) {
-          return undefined;
-        }
         const { type, componentProps, dataSource, items, addonAfter, plugins, ...fieldRest } = item; //  list 默认不需要 FormItem 样式
 
         let dom;
@@ -164,7 +157,7 @@ const Items = (props: YFormItemsProps) => {
               [_formItemProps, _componentProps] = modifyProps(
                 _formItemProps,
                 _componentProps,
-                formProps,
+                mergeProps,
               );
             }
             const _key = name ? `${name}` : key;
@@ -200,24 +193,20 @@ const Items = (props: YFormItemsProps) => {
             );
           }
         }
-        // list 不需要 Form.Item
-        if (type === 'list') {
-          list.push(_children);
-        } else {
-          list.push(
-            <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
-              {typeof _children === 'function'
-                ? (form: FormInstance) => {
-                    return (
-                      <Items noStyle plugins={plugins}>
-                        {(_children as YFormRenderChildren)(form)}
-                      </Items>
-                    );
-                  }
-                : _children}
-            </ItemChildren>,
-          );
-        }
+
+        list.push(
+          <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
+            {typeof _children === 'function'
+              ? (form: FormInstance) => {
+                  return (
+                    <Items noStyle plugins={plugins}>
+                      {(_children as YFormRenderChildren)(form)}
+                    </Items>
+                  );
+                }
+              : _children}
+          </ItemChildren>,
+        );
       } else {
         return list.push(item);
       }

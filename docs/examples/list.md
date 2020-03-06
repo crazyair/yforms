@@ -6,4 +6,4 @@ nav:
 
 # 列表页面交互
 
-<code src="../demo/list.tsx" />
+<code src="./demo/list.tsx" />
