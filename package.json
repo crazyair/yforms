@@ -10,7 +10,7 @@
     "dev": "dumi dev",
     "build": "father-build",
     "doc:build": "dumi build",
-    "now-build": "yarn && yarn bootstrap && yarn doc:build",
+    "now-build": "npm && npm bootstrap && npm doc:build",
     "fa:build": "father build",
     "test": "umi-test",
     "lint": "eslint --ext .js,jsx,ts,tsx packages/**/src --fix",
@@ -21,7 +21,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "yarn lint:tsc"
+      "npm lint:tsc"
     ],
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
