@@ -16,12 +16,31 @@
     "lint": "eslint --ext .js,jsx,ts,tsx packages/**/src --fix",
     "lint:es": "eslint --ext .js,jsx,ts,tsx packages/**/src",
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
-    "precommit": "lint-staged",
     "changelog": "lerna-changelog",
     "pub": "npm run changelog && npm run build && lerna publish"
   },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn lint:tsc"
+    ],
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    ".{less,css,json}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/react-hooks": "^3.1.1",
     "@types/classnames": "^2.2.9",
@@ -50,9 +69,10 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-hooks": "^2.3.0",
     "father-build": "^1.17.2",
+    "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lerna-changelog": "^0.8.2",
-    "lint-staged": "^7.2.2",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "rc-util": "^4.19.0",
     "react": "^16.12.0",
@@ -62,16 +82,6 @@
     "typescript": "^3.7.5",
     "umi": "^3.0.4",
     "umi-test": "^1.9.3"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ]
   },
   "license": "MIT"
 }
