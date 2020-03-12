@@ -25,9 +25,9 @@
   "homepage": "http://github.com/crazyair/father-doc-yform",
   "bugs": "http://github.com/crazyair/father-doc-yform/issues",
   "dependencies": {
-    "@ant-design/icons": "^4.0.0",
+    "@ant-design/icons": "^4.0.2",
     "@babel/runtime": "^7.8.4",
-    "antd": "^4.0.0",
+    "antd": "^4.0.2",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
