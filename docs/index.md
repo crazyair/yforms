@@ -1,5 +1,5 @@
 ---
-title: 介绍
+title: yform
 order: 10
 hero:
   title: yform
@@ -7,7 +7,7 @@ hero:
 
   actions:
     - text: 快速上手
-      link: /getting-started
+      link: /guide/getting-started
 features:
   - title:
     desc:
