@@ -20,6 +20,7 @@ yform 是一个基于 antd v4 开发，为 Form 场景提供可 DIY 配置的表
 
 - 减少模板代码，一个表单中的字段可无缝应用于表单和搜索场景，2 种场景下的区别交给全局配置。
 - 表单交互可全局自定义配置一套，其他人使用时候不用写 placeholder。
+- 比如搜索场景下产品突然有一天需要每个字段要加可清空功能，这时只需要改全局配置。
 
 ## 使用 Form 和 YForm 对比
 
@@ -54,18 +55,16 @@ yform 是一个基于 antd v4 开发，为 Form 场景提供可 DIY 配置的表
 - 表单代码
 
 ```jsx | pure
-<YForm required>{[{ type: 'input', label: 'name', name: 'name' }]}</YForm>
+<YForm>{[{ type: 'input', label: 'name', name: 'name' }]}</YForm>
 ```
 
 - 搜索代码
 
 ```jsx | pure
-<YForm required plugins={{ required: false, placeholder: false }}>
-  {[{ type: 'input', label: 'name', name: 'name' }]}
-</YForm>
+<YForm scene="search">{[{ type: 'input', label: 'name', name: 'name' }]}</YForm>
 ```
 
-只需要 YForm 设置相关参数即可，name 字段完全一样。当然，plugins 中每个参数的效果用户可自行全局定义。
+只需要 YForm 设置相关参数即可，name 字段完全一样。可定制个`search`场景并使用该场景。
 
 > 当然这只是个示例，其它更多可自行 DIY。
 
