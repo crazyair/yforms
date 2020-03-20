@@ -3,7 +3,7 @@ import { Link } from 'umi';
 
 import { BrowserRouter as Router, useLocation, useHistory } from 'react-router-dom';
 
-import Edit from './demo2';
+import Edit from './edit';
 
 export default function QueryParamsExample() {
   return (
