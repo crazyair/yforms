@@ -3,16 +3,13 @@ import { Input } from 'antd';
 import { TextAreaProps } from 'antd/lib/input';
 
 import { calculateStrLength } from '../utils';
-import { YFormItemProps } from '../Items';
+import { YFormFieldBaseProps } from '../ItemsType';
 
 export interface YTextAreaProps extends TextAreaProps {
   inputMax?: number;
 }
 
-export const textModify = (
-  fProps: YFormItemProps,
-  cProps: YTextAreaProps,
-): [YFormItemProps, YTextAreaProps] => {
+export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = (fProps, cProps) => {
   const _fProps = { ...fProps };
   const _cProps = { ...cProps };
   if (cProps.inputMax) {

@@ -99,8 +99,9 @@ const Items = (props: YFormItemsProps) => {
 
         const { type, componentProps, dataSource, items, addonAfter, plugins, ...fieldRest } = item; //  list 默认不需要 FormItem 样式
 
-        let dom;
         let _children = item.children;
+        // 默认只用 FormItem 包裹
+        let _useFormItem = true;
         let _formItemProps = { ...fieldRest };
         if (labelLayout) {
           _formItemProps = { ..._formItemProps, ...labelLayoutValue };
@@ -123,9 +124,17 @@ const Items = (props: YFormItemsProps) => {
         if (item.type && itemsType) {
           const _fieldData = itemsType[item.type];
           if (_fieldData) {
-            const { component, render, formatStr, formItemProps, modifyProps } = _fieldData;
+            const {
+              component,
+              formatStr,
+              formItemProps,
+              modifyProps,
+              useFormItem = _useFormItem,
+            } = _fieldData;
             // 注入定义类型传的默认数据
             _formItemProps = { ..._formItemProps, ...formItemProps };
+
+            _useFormItem = useFormItem;
 
             //  添加必填 placeholder 处理
             if ((placeholder || required) && name) {
@@ -172,14 +181,11 @@ const Items = (props: YFormItemsProps) => {
               };
             }
 
-            if (render) {
-              dom = render(_componentProps);
-            } else if (component) {
-              dom = React.cloneElement(component, _componentProps);
-            } else if (type === 'custom') {
-              dom = React.cloneElement(item.component, _componentProps);
+            if (component) {
+              _children = React.cloneElement(component, _componentProps);
+            } else if (item.component) {
+              _children = React.cloneElement(item.component, _componentProps);
             }
-            _children = dom;
           } else {
             warning(false, `[YFom.Items] ${type} 类型未找到`);
           }
@@ -193,20 +199,25 @@ const Items = (props: YFormItemsProps) => {
             );
           }
         }
-
-        list.push(
-          <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
-            {typeof _children === 'function'
-              ? (form: FormInstance) => {
-                  return (
-                    <Items noStyle plugins={plugins}>
-                      {(_children as YFormRenderChildren)(form)}
-                    </Items>
-                  );
-                }
-              : _children}
-          </ItemChildren>,
-        );
+        const domChildren =
+          typeof _children === 'function'
+            ? (form: FormInstance) => {
+                return (
+                  <Items noStyle plugins={plugins}>
+                    {(_children as YFormRenderChildren)(form)}
+                  </Items>
+                );
+              }
+            : _children;
+        if (_useFormItem) {
+          list.push(
+            <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
+              {domChildren}
+            </ItemChildren>,
+          );
+        } else {
+          list.push(domChildren);
+        }
       } else {
         return list.push(item);
       }

@@ -26,11 +26,11 @@ import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 
-interface YFormFieldBaseProps<T = any> {
+export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
   formItemProps?: YFormItemProps;
-  render?: (p?: T) => React.ReactElement;
   formatStr?: string;
+  useFormItem?: boolean;
   modifyProps?: (
     formItemProps: YFormItemProps,
     componentProps: T,
@@ -69,9 +69,9 @@ export interface YFormItemsTypeDefine {
   select: { componentProps?: YSelectProps };
   radio: { componentProps?: YRadioProps };
   text: { componentProps?: TextProps };
-  // antd 组件
+  // 展示类型
   button: { componentProps?: ButtonProps };
-  // 功能类型
+  // 其它功能类型
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
   list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
   custom: { componentProps?: any; component?: React.ReactElement };
@@ -83,6 +83,13 @@ export type YFormItemsType<T = YFormFieldBaseProps> = {
   [P in keyof YFormItemsTypeDefine]?: { type?: P } & YFormItemsTypeDefine[P] & T;
 };
 
+const checkboxProps: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = (fProps, cProps) => {
+  return [{ valuePropName: 'checked', ...fProps }, cProps];
+};
+const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = (fProps, cProps) => {
+  return [{ valuePropName: 'checked', ...fProps }, cProps];
+};
+
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
 export const itemsType: YFormItemsType = {
@@ -90,28 +97,14 @@ export const itemsType: YFormItemsType = {
   password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
   money: { component: <Money />, formatStr: '请输入${label}' },
-  checkbox: {
-    component: <Checkbox />,
-    formatStr: '请选择${label}',
-    modifyProps: (
-      fProps: YFormItemProps,
-      cProps: CheckboxProps,
-    ): [YFormItemProps, CheckboxProps] => [{ valuePropName: 'checked', ...fProps }, cProps],
-  },
-  switch: {
-    component: <Switch />,
-    formatStr: '请选择${label}',
-    modifyProps: (fProps: YFormItemProps, cProps: SwitchProps): [YFormItemProps, SwitchProps] => [
-      { valuePropName: 'checked', ...fProps },
-      cProps,
-    ],
-  },
+  checkbox: { component: <Checkbox />, formatStr: '请选择${label}', modifyProps: checkboxProps },
+  switch: { component: <Switch />, formatStr: '请选择${label}', modifyProps: switchProps },
   checkboxGroup: { component: <CheckboxGroup />, formatStr: '请选择${label}' },
   radio: { component: <Radio />, formatStr: '请选择${label}' },
   select: { component: <Select {...searchSelect} />, formatStr: '请选择${label}' },
   text: { component: <CustomTypography /> },
   oneLine: { component: <OneLine />, modifyProps: oneLineModify },
-  list: { component: <List />, formItemProps: { noStyle: true, rules: [{ required: false }] } },
+  list: { component: <List />, useFormItem: false },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
   submit: { component: <Submit />, modifyProps: submitModify },

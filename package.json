@@ -20,9 +20,6 @@
     "pub": "npm run changelog && npm run build && lerna publish"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm run lint:tsc"
-    ],
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
       "prettier --write"
