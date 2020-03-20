@@ -15,10 +15,9 @@ export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] 
   formProps,
 ) => {
   const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
-  const _fProps = { noStyle: true, ...fProps };
   const mergeCProps = merge({}, submitComponentProps, cProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
-  return [_fProps, _cProps];
+  return [fProps, _cProps];
 };
 
 export interface ShowBtns {

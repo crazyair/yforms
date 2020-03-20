@@ -107,7 +107,7 @@ export const itemsType: YFormItemsType = {
   list: { component: <List />, useFormItem: false },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
-  submit: { component: <Submit />, modifyProps: submitModify },
+  submit: { component: <Submit />, useFormItem: false, modifyProps: submitModify },
   secureButton: { component: <SecureButton /> },
 };
 

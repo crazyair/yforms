@@ -216,7 +216,7 @@ const Items = (props: YFormItemsProps) => {
             </ItemChildren>,
           );
         } else {
-          list.push(domChildren);
+          list.push(<React.Fragment key={key}>{domChildren}</React.Fragment>);
         }
       } else {
         return list.push(item);
