@@ -21,7 +21,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "npm lint:tsc"
+      "npm run lint:tsc"
     ],
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
