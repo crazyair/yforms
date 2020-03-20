@@ -124,17 +124,10 @@ const Items = (props: YFormItemsProps) => {
         if (item.type && itemsType) {
           const _fieldData = itemsType[item.type];
           if (_fieldData) {
-            const {
-              component,
-              formatStr,
-              formItemProps,
-              modifyProps,
-              useFormItem = _useFormItem,
-            } = _fieldData;
+            _useFormItem = _fieldData.useFormItem;
+            const { component, formatStr, formItemProps, modifyProps } = _fieldData;
             // 注入定义类型传的默认数据
             _formItemProps = { ..._formItemProps, ...formItemProps };
-
-            _useFormItem = useFormItem;
 
             //  添加必填 placeholder 处理
             if ((placeholder || required) && name) {

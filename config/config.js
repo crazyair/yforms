@@ -1,6 +1,6 @@
 export default {
   mode: 'site',
-  title: 'father-doc-yform',
+  title: 'yform',
   favicon: '/favicon.ico',
   logo: '/logo.png',
   extraBabelPlugins: [
