@@ -24,8 +24,9 @@ export type FieldsType<T> = { [K in keyof T]: string };
 
 export interface YFormConfig {
   itemsType?: YFormItemsType;
+  plugins?: YFormPluginsType | boolean;
 }
-let globalConfig: YFormConfig = {};
+let globalConfig: YFormConfig = { plugins: true };
 
 export const Config = (options: YFormConfig) => {
   globalConfig = merge({}, globalConfig, options);
@@ -81,6 +82,7 @@ const InternalForm = (props: YFormProps) => {
     params,
     form: propsForm,
     className,
+    plugins,
     ...rest
   } = props;
   const [form] = Form.useForm(propsForm);
@@ -145,9 +147,17 @@ const InternalForm = (props: YFormProps) => {
     e.preventDefault();
     setDisabled(c => !c);
   };
+  let _plugins;
+  if (typeof globalConfig.plugins === 'boolean') {
+    _plugins = globalConfig.plugins;
+  } else if (typeof plugins === 'boolean') {
+    _plugins = plugins;
+  } else {
+    _plugins = merge(plugins, globalConfig.plugins);
+  }
 
   const _props = {
-    plugins: true,
+    plugins: _plugins,
     form,
     disabled: thisDisabled,
     ...props,
