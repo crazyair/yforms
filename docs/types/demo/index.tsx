@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Input } from 'antd';
 import { YForm } from 'father-doc-yform';
@@ -5,8 +6,18 @@ import { YForm } from 'father-doc-yform';
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 export default () => {
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+  const onSave = (values: any) => {
+    console.log('values:', values);
+  };
+
   return (
-    <YForm {...layout} required>
+    <YForm {...layout} required onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
       {[
         { type: 'input', label: '文本', name: 'input' },
         { type: 'money', label: '金额', name: 'money' },
