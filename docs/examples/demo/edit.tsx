@@ -1,3 +1,8 @@
+/**
+ * title: edit 源码
+ * desc: 上方点击按钮进入详情页面代码
+ */
+
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
@@ -6,9 +11,8 @@ import { YForm } from 'father-doc-yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-interface DemoProps {}
-const Demo: React.FC<DemoProps & RouteComponentProps> = props => {
-  const { match } = props;
+const Demo: React.FC<RouteComponentProps> = props => {
+  const { match = {} as RouteComponentProps['match'] } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +37,6 @@ const Demo: React.FC<DemoProps & RouteComponentProps> = props => {
 
   const onFinish = async (values: any) => {
     console.log('Success:', values);
-    // await Promise.reject('err');
     await new Promise(resolve => setTimeout(resolve, 500));
     await new Promise((resolve, reject) => {
       // 请求随机成功或者失败
@@ -51,7 +54,6 @@ const Demo: React.FC<DemoProps & RouteComponentProps> = props => {
     console.log('values:', values);
     await new Promise(resolve => setTimeout(resolve, 500));
     await message.success('保存成功', 0.5);
-    // await Promise.reject('err');
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -62,25 +64,22 @@ const Demo: React.FC<DemoProps & RouteComponentProps> = props => {
     <>
       <h2>{typeName}</h2>
       <YForm
-        //  默认参数
         {...layout}
         form={form}
         initialValues={data}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        // YForm 参数
         required
         formatFieldsValue={formatFieldsValue}
         loading={loading}
-        // submit 参数
         onSave={onSave}
         params={match.params}
       >
         {[
           { type: 'input', label: 'name', name: 'name' },
           { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-          // { type: 'money', label: 'money', name: 'money' },
+          { type: 'money', label: 'money', name: 'money' },
           { type: 'submit' },
         ]}
       </YForm>

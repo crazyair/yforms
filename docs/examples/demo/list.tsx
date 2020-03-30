@@ -1,3 +1,10 @@
+/**
+ * title: 列表页+表单使用示例
+ * desc: |
+ *        适用于列表页面有新建、编辑、查看交互（打开此 demo 会找不到 edit.tsx）<br/>
+ *        此 demo 仅为了实现跳转
+ */
+
 import React from 'react';
 import { Link } from 'umi';
 
