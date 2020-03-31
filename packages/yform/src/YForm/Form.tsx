@@ -4,19 +4,21 @@ import { merge } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps } from 'antd/lib/form';
-import baseItemsType, { YFormItemsType } from './ItemsType';
+import baseItemsType, { YFormItemsType, YFormFieldBaseProps } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
 import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 
+type pluginsType = boolean | YFormFieldBaseProps['modifyProps'];
+
 export type YFormPluginsType = {
-  placeholder?: boolean;
-  required?: boolean;
-  disabled?: boolean;
-  labelLayout?: boolean;
-  noLabelLayout?: boolean;
+  placeholder?: pluginsType;
+  required?: pluginsType;
+  disabled?: pluginsType;
+  labelLayout?: pluginsType;
+  noLabelLayout?: pluginsType;
 };
 
 export type KeyValue = { [key: string]: any };
@@ -25,6 +27,7 @@ export type FieldsType<T> = { [K in keyof T]: string };
 export interface YFormConfig {
   itemsType?: YFormItemsType;
   plugins?: YFormPluginsType | boolean;
+  setScene?: any;
 }
 let globalConfig: YFormConfig = { plugins: true };
 
@@ -53,19 +56,18 @@ export interface ParamsObjType {
   typeName?: string;
 }
 
-export interface YFormProps extends FormProps {
+export interface YFormProps extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
   required?: boolean;
   loading?: boolean;
-  plugins?: YFormPluginsType | boolean;
-  itemsType?: YFormItemsType;
   formatFieldsValue?: FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
   onCancel?: () => void;
   params?: ParamsType;
+  scene?: any;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -83,6 +85,7 @@ const InternalForm = (props: YFormProps) => {
     form: propsForm,
     className,
     plugins,
+    scene,
     ...rest
   } = props;
   const [form] = Form.useForm(propsForm);
@@ -147,21 +150,20 @@ const InternalForm = (props: YFormProps) => {
     e.preventDefault();
     setDisabled(c => !c);
   };
+
   let _plugins;
   if (typeof globalConfig.plugins === 'boolean') {
     _plugins = globalConfig.plugins;
   } else if (typeof plugins === 'boolean') {
     _plugins = plugins;
   } else {
-    _plugins = merge(plugins, globalConfig.plugins);
+    _plugins = merge({}, plugins, globalConfig.plugins);
   }
 
   const _props = {
     plugins: _plugins,
     form,
     disabled: thisDisabled,
-    ...props,
-    itemsType: _itemsTypeAll,
     submitComponentProps: {
       showBtns: {
         // form submit 触发后设置 loading = true
@@ -172,6 +174,8 @@ const InternalForm = (props: YFormProps) => {
         showBack: { onClick: goBack },
       },
     },
+    ...props,
+    itemsType: _itemsTypeAll,
   };
 
   if ('isShow' in props && !props.isShow) {
