@@ -101,7 +101,7 @@ const Items = (props: YFormItemsProps) => {
 
         let _children = item.children;
         // 默认只用 FormItem 包裹
-        let _useFormItem = true;
+        let _hasFormItem = true;
         let _formItemProps = { ...fieldRest };
         if (labelLayout) {
           _formItemProps = { ..._formItemProps, ...labelLayoutValue };
@@ -129,10 +129,10 @@ const Items = (props: YFormItemsProps) => {
               formatStr,
               formItemProps,
               modifyProps,
-              useFormItem = _useFormItem,
+              hasFormItem = _hasFormItem,
             } = _fieldData;
 
-            _useFormItem = useFormItem;
+            _hasFormItem = hasFormItem;
             // 注入定义类型传的默认数据
             _formItemProps = { ..._formItemProps, ...formItemProps };
 
@@ -209,7 +209,7 @@ const Items = (props: YFormItemsProps) => {
                 );
               }
             : _children;
-        if (_useFormItem) {
+        if (_hasFormItem) {
           list.push(
             <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
               {domChildren}

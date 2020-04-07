@@ -30,7 +30,7 @@ export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
   formItemProps?: YFormItemProps;
   formatStr?: string;
-  useFormItem?: boolean;
+  hasFormItem?: boolean;
   modifyProps?: (
     formItemProps: YFormItemProps,
     componentProps: T,
@@ -104,10 +104,10 @@ export const itemsType: YFormItemsType = {
   select: { component: <Select {...searchSelect} />, formatStr: '请选择${label}' },
   text: { component: <CustomTypography /> },
   oneLine: { component: <OneLine />, modifyProps: oneLineModify },
-  list: { component: <List />, useFormItem: false },
+  list: { component: <List />, hasFormItem: false },
   button: { component: <Button /> },
   custom: { formatStr: '请输入${label}' },
-  submit: { component: <Submit />, useFormItem: false, modifyProps: submitModify },
+  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
   secureButton: { component: <SecureButton /> },
 };
 
