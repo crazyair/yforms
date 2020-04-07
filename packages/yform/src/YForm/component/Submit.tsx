@@ -9,15 +9,14 @@ import { submitFormatValues } from '../utils';
 import { YFormSecureButtonProps } from './SecureButton';
 import { YFormFieldBaseProps } from '../ItemsType';
 
-export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = (
-  fProps,
-  cProps,
-  formProps,
-) => {
-  const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
-  const mergeCProps = merge({}, submitComponentProps, cProps);
+export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
+  componentProps,
+  itemsProps,
+}) => {
+  const { form, onSave, formatFieldsValue, submitComponentProps } = itemsProps;
+  const mergeCProps = merge({}, submitComponentProps, componentProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
-  return [fProps, _cProps];
+  return { componentProps: _cProps };
 };
 
 export interface ShowBtns {

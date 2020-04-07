@@ -9,15 +9,17 @@ export interface YTextAreaProps extends TextAreaProps {
   inputMax?: number;
 }
 
-export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = (fProps, cProps) => {
-  const _fProps = { ...fProps };
-  const _cProps = { ...cProps };
-  if (cProps.inputMax) {
+export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
+  formItemProps,
+  componentProps,
+}) => {
+  const _fProps = { ...formItemProps };
+  if (componentProps.inputMax) {
     _fProps.rules = [
       ...(_fProps.rules || []),
       () => ({
         validator(_, value) {
-          if (value && calculateStrLength(value) > Number(cProps.inputMax)) {
+          if (value && calculateStrLength(value) > Number(componentProps.inputMax)) {
             return Promise.reject('数量超长');
           }
           return Promise.resolve();
@@ -25,7 +27,8 @@ export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = (f
       }),
     ];
   }
-  return [_fProps, _cProps];
+
+  return { formItemProps: _fProps };
 };
 
 export default (props: YTextAreaProps) => {

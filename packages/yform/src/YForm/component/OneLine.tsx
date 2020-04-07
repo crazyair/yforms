@@ -21,13 +21,12 @@ export interface YFormOneLineProps {
   items?: (p: YFormOneLineItems) => YFormItemProps['children'];
 }
 
-export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = (
-  fProps,
-  cProps,
-) => {
-  const _fProps = { ...fProps, className: classNames(fProps.className, 'mb0') };
-  const _cProps = { ...cProps };
-  return [_fProps, _cProps];
+export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
+  formItemProps,
+}) => {
+  return {
+    formItemProps: { ...formItemProps, className: classNames(formItemProps.className, 'mb0') },
+  };
 };
 
 export default (props: YFormOneLineProps) => {

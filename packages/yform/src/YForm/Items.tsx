@@ -163,11 +163,14 @@ const Items = (props: YFormItemsProps) => {
 
             // 最后修改参数
             if (modifyProps) {
-              [_formItemProps, _componentProps] = modifyProps(
-                _formItemProps,
-                _componentProps,
-                mergeProps,
-              );
+              const demo = modifyProps({
+                formItemProps: _formItemProps,
+                componentProps: _componentProps,
+                itemsProps: mergeProps,
+                itemProps: item,
+              });
+              _formItemProps = demo.formItemProps;
+              _componentProps = demo.componentProps;
             }
             const _key = name ? `${name}` : key;
             key = find(list, { key: _key }) ? key : _key;

@@ -7,15 +7,14 @@ import { ButtonProps } from 'antd/lib/button';
 import { CheckboxProps } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 
-import { YFormProps } from './Form';
 import { YFormItemProps } from './Items';
 import { searchSelect } from './utils';
 
 import CustomTypography from './component/Typography';
 import OneLine, {
-  oneLineModify,
   YFormOneLineComponentProps,
   YFormOneLineProps,
+  oneLineModify,
 } from './component/OneLine';
 import Radio, { YRadioProps } from './component/Radio';
 import List, { YFormListComponentProps, YFormListProps } from './component/List';
@@ -26,16 +25,19 @@ import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 
+type modifyType<T = any> = {
+  formItemProps?: YFormItemProps;
+  componentProps?: T;
+  itemsProps?: any;
+  itemProps?: any;
+};
+
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
   formItemProps?: YFormItemProps;
   formatStr?: string;
   hasFormItem?: boolean;
-  modifyProps?: (
-    formItemProps: YFormItemProps,
-    componentProps: T,
-    formProps: YFormProps,
-  ) => [YFormItemProps, T];
+  modifyProps?: (props: Required<modifyType<T>>) => modifyType<T>;
 }
 
 export interface BaseComponentProps {
@@ -83,11 +85,12 @@ export type YFormItemsType<T = YFormFieldBaseProps> = {
   [P in keyof YFormItemsTypeDefine]?: { type?: P } & YFormItemsTypeDefine[P] & T;
 };
 
-const checkboxProps: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = (fProps, cProps) => {
-  return [{ valuePropName: 'checked', ...fProps }, cProps];
+const checkboxProps: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ formItemProps }) => {
+  return { formItemProps: { valuePropName: 'checked', ...formItemProps } };
 };
-const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = (fProps, cProps) => {
-  return [{ valuePropName: 'checked', ...fProps }, cProps];
+
+const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({ formItemProps }) => {
+  return { formItemProps: { valuePropName: 'checked', ...formItemProps } };
 };
 
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
