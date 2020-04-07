@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, set, merge, forEach, isObject, isArray, pick } from 'lodash';
+import { find, set, merge, forEach, isObject, isArray } from 'lodash';
 import { FormInstance, FormItemProps } from 'antd/lib/form';
 
 import { YFormContext, YFormItemsContext } from './Context';
@@ -176,12 +176,7 @@ const Items = (props: YFormItemsProps) => {
             key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去
             if (items) {
-              // list 类型需要 disabled
-              _componentProps = {
-                ...pick(_componentProps, 'disabled'),
-                ...item,
-                key,
-              };
+              _componentProps = { ..._base, ...item, key };
             }
 
             if (component) {
