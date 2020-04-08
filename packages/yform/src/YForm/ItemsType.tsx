@@ -25,11 +25,11 @@ import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 
-type modifyType<T = any> = {
-  itemProps?: YFormItemProps;
-  componentProps?: T;
+export type modifyType<T = any> = {
   formProps?: any;
   itemsProps?: any;
+  itemProps?: YFormItemProps;
+  componentProps?: T;
   plugins?: any;
 };
 
@@ -38,7 +38,9 @@ export interface YFormFieldBaseProps<T = any> {
   formItemProps?: YFormItemProps;
   formatStr?: string;
   hasFormItem?: boolean;
-  modifyProps?: (props: Required<modifyType<T>>) => modifyType<T>;
+  modifyProps?: (
+    props: Required<modifyType<T>>,
+  ) => Pick<modifyType<T>, 'componentProps' | 'itemProps'>;
 }
 
 export interface BaseComponentProps {

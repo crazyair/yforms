@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps } from 'antd/lib/form';
-import baseItemsType, { YFormItemsType, YFormFieldBaseProps } from './ItemsType';
+import baseItemsType, { YFormItemsType, YFormFieldBaseProps, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
@@ -56,7 +56,7 @@ export interface ParamsObjType {
   typeName?: string;
 }
 
-export interface YFormProps extends FormProps, YFormConfig {
+export interface YFormProps<T = any> extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
   required?: boolean;
@@ -68,10 +68,22 @@ export interface YFormProps extends FormProps, YFormConfig {
   onCancel?: () => void;
   params?: ParamsType;
   scene?: string;
-  getScene?: any;
+  getScene?: {
+    form?: Pick<modifyType<T>, 'formProps' | 'plugins'>;
+    items?: Pick<modifyType<T>, 'itemProps' | 'plugins'>;
+    item?: Pick<modifyType<T>, 'componentProps' | 'itemProps'>;
+  };
 }
 
 const InternalForm = (props: YFormProps) => {
+  const { scene, getScene = globalConfig.getScene } = props;
+  const _scene = (scene && getScene && getScene[scene]) || {};
+  let _props = { ...props };
+  if (_scene.form) {
+    const data = _scene.form({ formProps: _props });
+    if ('formProps' in data) _props = data.formProps;
+  }
+
   const {
     disabled,
     required,
@@ -86,9 +98,8 @@ const InternalForm = (props: YFormProps) => {
     form: propsForm,
     className,
     plugins,
-    getScene = globalConfig.getScene,
     ...rest
-  } = props;
+  } = _props;
   const [form] = Form.useForm(propsForm);
   const { resetFields } = form;
   const _params = paramsType(params);
@@ -160,7 +171,7 @@ const InternalForm = (props: YFormProps) => {
     _plugins = merge({}, plugins, globalConfig.plugins);
   }
 
-  const _props = {
+  const _providerProps = {
     plugins: _plugins,
     form,
     disabled: thisDisabled,
@@ -175,11 +186,11 @@ const InternalForm = (props: YFormProps) => {
       },
     },
     getScene,
-    ...props,
+    ..._props,
     itemsType: _itemsTypeAll,
   };
 
-  if ('isShow' in props && !props.isShow) {
+  if ('isShow' in _props && !_props.isShow) {
     return null;
   }
   if (loading) {
@@ -197,7 +208,7 @@ const InternalForm = (props: YFormProps) => {
       className={classNames('yform', className)}
       onFinish={handleOnFinish}
     >
-      <YFormContext.Provider value={_props}>
+      <YFormContext.Provider value={_providerProps}>
         <Items>{children}</Items>
       </YFormContext.Provider>
     </Form>

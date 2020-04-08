@@ -54,11 +54,22 @@ const Items = (props: YFormItemsProps) => {
   let defaultPlugin = true;
   const formProps = useContext(YFormContext);
   const itemsProps = useContext(YFormItemsContext);
-  const { itemsType } = formProps;
-  const { children = [], className, style, noStyle } = props;
-  if ('isShow' in props && !props.isShow) return null;
-  const mergeProps = merge({}, formProps, itemsProps, props);
-  const { required: mergeRequired, disabled: mergeDisabled, scene, getScene } = mergeProps;
+  const { itemsType, scene, getScene } = formProps;
+
+  const _scene = (scene && getScene && getScene[scene]) || {};
+  let _props = { ...props };
+  let mergeProps = merge({}, formProps, itemsProps, _props);
+  if (_scene.items) {
+    const data = _scene.items({ itemsProps: _props });
+    if ('itemsProps' in data) _props = data.itemsProps;
+    mergeProps = merge({}, mergeProps, _props);
+    if ('plugins' in data) mergeProps.plugins = data.plugins;
+  }
+  if ('isShow' in _props && !_props.isShow) return null;
+
+  const { children = [], className, style, noStyle } = _props;
+  const { required: mergeRequired, disabled: mergeDisabled } = mergeProps;
+
   const list: React.ReactNode[] = [];
 
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
@@ -75,57 +86,36 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
+        const _basePlugins = merge({}, mergeProps, item).plugins;
+
         let defaultProps;
         let _itemProps = { ...item };
-        let _itemsProps = { ...itemsProps };
-        let _formProps = { ...formProps };
         let _componentProps = { ...item.componentProps };
-        let _basePlugins = merge({}, mergeProps, item).plugins;
         const defaultData = {
           // 当前类型参数
           itemProps: _itemProps,
           // 当前类型组件参数
           componentProps: _componentProps,
-          // form 参数
           formProps,
-          // itemsProps 参数
-          itemsProps,
-          // 当前插件参数
-          plugins: _basePlugins,
+          itemsProps: _props,
+          plugins: mergeProps.plugins,
         };
-        const _scene = scene && getScene && getScene[scene];
-        const _modifyProps = itemsType[item.type] && itemsType[item.type].modifyProps;
+        const modifyProps = itemsType[item.type] && itemsType[item.type].modifyProps;
         // 参数修改
-        if (_scene || _modifyProps) {
+        if (_scene.item || modifyProps) {
           // 场景
-          if (_scene) {
-            defaultProps = _scene(defaultData);
+          if (_scene.item) {
+            defaultProps = _scene.item(defaultData);
           }
           // 类型修改
-          if (_modifyProps) {
-            defaultProps = merge({}, defaultProps, _modifyProps(defaultData));
+          if (modifyProps) {
+            defaultProps = merge({}, defaultProps, modifyProps(defaultData));
           }
-          if (defaultProps.itemProps) {
-            _itemProps = defaultProps.itemProps;
-          }
-          if (defaultProps.itemsProps) {
-            _itemsProps = defaultProps.itemsProps;
-          }
-          if (defaultProps.itemsProps) {
-            _itemsProps = defaultProps.itemsProps;
-          }
-          if (defaultProps.formProps) {
-            _formProps = defaultProps.formProps;
-          }
-          if (defaultProps.componentProps) {
-            _componentProps = defaultProps.componentProps;
-          }
-          if ('plugins' in defaultProps) {
-            _basePlugins = defaultProps.plugins;
-          }
+          if ('itemProps' in defaultProps) _itemProps = defaultProps.itemProps;
+          if ('componentProps' in defaultProps) _componentProps = defaultProps.componentProps;
         }
 
-        const _base = merge({}, _formProps, _itemsProps, _itemProps);
+        const _base = merge({}, formProps, itemsProps, _itemProps);
         const { labelCol, wrapperCol, offset } = _base;
         // 处理插件
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
