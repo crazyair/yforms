@@ -127,11 +127,13 @@ const InternalForm = (props: YFormProps) => {
   const handleReset = useCallback(() => {
     if (typeof onCancel === 'function') {
       onCancel();
-    } else if (create) {
-      goBack();
-    } else if (edit || view) {
+    } else {
       resetFields();
-      setDisabled(true);
+      if (create) {
+        goBack();
+      } else if (edit || view) {
+        setDisabled(true);
+      }
     }
   }, [create, edit, onCancel, resetFields, view]);
   const _itemsTypeAll = {
