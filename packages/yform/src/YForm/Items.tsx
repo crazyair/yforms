@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, set, merge, forEach, isObject, isArray, pick } from 'lodash';
+import { find, set, merge, forEach, isObject, isArray } from 'lodash';
 import { FormInstance, FormItemProps } from 'antd/lib/form';
 
 import { YFormContext, YFormItemsContext } from './Context';
@@ -54,12 +54,24 @@ const Items = (props: YFormItemsProps) => {
   let defaultPlugin = true;
   const formProps = useContext(YFormContext);
   const itemsProps = useContext(YFormItemsContext);
-  const { itemsType } = formProps;
-  const { children = [], className, style, noStyle } = props;
-  if ('isShow' in props && !props.isShow) return null;
-  const mergeProps = merge({}, formProps, itemsProps, props);
+  const { itemsType, scene, getScene } = formProps;
+
+  const _scene = (scene && getScene && getScene[scene]) || {};
+  let _props = { ...props };
+  let mergeProps = merge({}, formProps, itemsProps, _props);
+  if (_scene.items) {
+    const data = _scene.items({ itemsProps: _props });
+    if ('itemsProps' in data) _props = data.itemsProps;
+    mergeProps = merge({}, mergeProps, _props);
+    if ('plugins' in data) mergeProps.plugins = data.plugins;
+  }
+  if ('isShow' in _props && !_props.isShow) return null;
+
+  const { children = [], className, style, noStyle } = _props;
   const { required: mergeRequired, disabled: mergeDisabled } = mergeProps;
+
   const list: React.ReactNode[] = [];
+
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index: number) => {
       // 如果是数组就回调该方法
@@ -74,20 +86,62 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
-        // 处理插件
-        const _base = merge({}, mergeProps, item);
+        const _basePlugins = merge({}, mergeProps, item).plugins;
+
+        let defaultProps;
+        let _itemProps = { ...item };
+        let _componentProps = { ...item.componentProps };
+        const defaultData = {
+          // 当前类型参数
+          itemProps: _itemProps,
+          // 当前类型组件参数
+          componentProps: _componentProps,
+          formProps,
+          itemsProps: _props,
+          plugins: mergeProps.plugins,
+        };
+        const modifyProps = itemsType[item.type] && itemsType[item.type].modifyProps;
+        // 参数修改
+        if (_scene.item || modifyProps) {
+          // 场景
+          if (_scene.item) {
+            defaultProps = _scene.item(defaultData);
+          }
+          // 类型修改
+          if (modifyProps) {
+            defaultProps = merge({}, defaultProps, modifyProps(defaultData));
+          }
+          if ('itemProps' in defaultProps) _itemProps = defaultProps.itemProps;
+          if ('componentProps' in defaultProps) _componentProps = defaultProps.componentProps;
+        }
+
+        const _base = merge({}, formProps, itemsProps, _itemProps);
         const { labelCol, wrapperCol, offset } = _base;
+        // 处理插件
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
           labelCol,
           wrapperCol,
           offset,
         });
 
+        const {
+          type,
+          dataSource,
+          items,
+          addonAfter,
+          plugins,
+          componentProps,
+          ...formItemProps
+        } = _itemProps;
+
+        let _formItemProps = formItemProps;
+        const { label, name } = _formItemProps;
+
         let _plugins: YFormPluginsType = {};
-        if (typeof _base.plugins === 'boolean') {
-          defaultPlugin = _base.plugins;
-        } else if (isObject(_base.plugins)) {
-          _plugins = _base.plugins;
+        if (typeof _basePlugins === 'boolean') {
+          defaultPlugin = _basePlugins;
+        } else if (isObject(_basePlugins)) {
+          _plugins = _basePlugins;
         }
         const {
           placeholder = defaultPlugin,
@@ -97,21 +151,18 @@ const Items = (props: YFormItemsProps) => {
           disabled = defaultPlugin,
         } = _plugins;
 
-        const { type, componentProps, dataSource, items, addonAfter, plugins, ...fieldRest } = item; //  list 默认不需要 FormItem 样式
+        if (disabled) {
+          set(_componentProps, 'disabled', mergeDisabled);
+        }
 
-        let dom;
         let _children = item.children;
-        let _formItemProps = { ...fieldRest };
+        // 默认只用 FormItem 包裹
+        let _hasFormItem = true;
         if (labelLayout) {
           _formItemProps = { ..._formItemProps, ...labelLayoutValue };
         }
         let key: React.ReactText = _index;
-        let _componentProps = {};
-        const { label, name } = _formItemProps;
-        if (disabled) {
-          set(_componentProps, 'disabled', mergeDisabled);
-        }
-        _componentProps = { ..._componentProps, ...componentProps };
+
         // 添加无 label 处理
         if (noLabelLayout && !label) {
           _formItemProps = {
@@ -123,9 +174,9 @@ const Items = (props: YFormItemsProps) => {
         if (item.type && itemsType) {
           const _fieldData = itemsType[item.type];
           if (_fieldData) {
-            const { component, render, formatStr, formItemProps, modifyProps } = _fieldData;
-            // 注入定义类型传的默认数据
-            _formItemProps = { ..._formItemProps, ...formItemProps };
+            const { component, formatStr, hasFormItem = _hasFormItem } = _fieldData;
+
+            _hasFormItem = hasFormItem;
 
             //  添加必填 placeholder 处理
             if ((placeholder || required) && name) {
@@ -152,34 +203,18 @@ const Items = (props: YFormItemsProps) => {
               }
             }
 
-            // 最后修改参数
-            if (modifyProps) {
-              [_formItemProps, _componentProps] = modifyProps(
-                _formItemProps,
-                _componentProps,
-                mergeProps,
-              );
-            }
             const _key = name ? `${name}` : key;
             key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去
             if (items) {
-              // list 类型需要 disabled
-              _componentProps = {
-                ...pick(_componentProps, 'disabled'),
-                ...item,
-                key,
-              };
+              _componentProps = { ..._base, key };
             }
 
-            if (render) {
-              dom = render(_componentProps);
-            } else if (component) {
-              dom = React.cloneElement(component, _componentProps);
-            } else if (type === 'custom') {
-              dom = React.cloneElement(item.component, _componentProps);
+            if (component) {
+              _children = React.cloneElement(component, _componentProps);
+            } else if (item.component) {
+              _children = React.cloneElement(item.component, _componentProps);
             }
-            _children = dom;
           } else {
             warning(false, `[YFom.Items] ${type} 类型未找到`);
           }
@@ -193,20 +228,25 @@ const Items = (props: YFormItemsProps) => {
             );
           }
         }
-
-        list.push(
-          <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
-            {typeof _children === 'function'
-              ? (form: FormInstance) => {
-                  return (
-                    <Items noStyle plugins={plugins}>
-                      {(_children as YFormRenderChildren)(form)}
-                    </Items>
-                  );
-                }
-              : _children}
-          </ItemChildren>,
-        );
+        const domChildren =
+          typeof _children === 'function'
+            ? (form: FormInstance) => {
+                return (
+                  <Items noStyle plugins={plugins}>
+                    {(_children as YFormRenderChildren)(form)}
+                  </Items>
+                );
+              }
+            : _children;
+        if (_hasFormItem) {
+          list.push(
+            <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
+              {domChildren}
+            </ItemChildren>,
+          );
+        } else {
+          list.push(<React.Fragment key={key}>{domChildren}</React.Fragment>);
+        }
       } else {
         return list.push(item);
       }

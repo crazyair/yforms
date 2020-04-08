@@ -1,8 +1,16 @@
 export default {
   mode: 'site',
-  title: 'father-doc-yform',
-  favicon: 'https://ae01.alicdn.com/kf/Hdaaad95bedb74b1692208577a8fc972f2.png',
-  logo: 'https://ae01.alicdn.com/kf/Hdaaad95bedb74b1692208577a8fc972f2.png',
+  title: 'yform',
+  favicon: '/favicon.ico',
+  logo: '/logo.png',
+  menus: {
+    '/guide': [
+      {
+        title: '介绍',
+        children: ['guide/index', 'guide/getting-started'],
+      },
+    ],
+  },
   extraBabelPlugins: [
     [
       'import',

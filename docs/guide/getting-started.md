@@ -1,8 +1,8 @@
 ---
 title: 快速上手
+order: 9
 nav:
-  title: 快速上手
-  order: 1
+  order: 10
 ---
 
 # 快速上手

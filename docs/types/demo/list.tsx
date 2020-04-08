@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Card } from 'antd';
 import { YForm } from 'father-doc-yform';
@@ -7,8 +8,15 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 export default () => {
   const [disabled, setDisabled] = useState(false);
+
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+  };
+
   return (
     <YForm
+      onFinish={onFinish}
+      required
       {...layout}
       disabled={disabled}
       initialValues={{ phones: [{}], card: [{}], users: [{}] }}
@@ -73,6 +81,7 @@ export default () => {
             ];
           },
         },
+        { type: 'submit' },
         {
           dataSource: [
             {

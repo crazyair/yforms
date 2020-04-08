@@ -7,17 +7,16 @@ import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
 import { submitFormatValues } from '../utils';
 import { YFormSecureButtonProps } from './SecureButton';
+import { YFormFieldBaseProps } from '../ItemsType';
 
-export const submitModify = (
-  fProps: YFormItemProps,
-  cProps: YFormSubmitProps,
-  formProps: YFormProps,
-): [YFormItemProps, YFormSubmitProps] => {
+export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
+  componentProps,
+  formProps,
+}) => {
   const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
-  const _fProps = { noStyle: true, ...fProps };
-  const mergeCProps = merge({}, submitComponentProps, cProps);
+  const mergeCProps = merge({}, submitComponentProps, componentProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
-  return [_fProps, _cProps];
+  return { componentProps: _cProps };
 };
 
 export interface ShowBtns {

@@ -6,7 +6,6 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 const Demo = () => {
   const [data, setData] = useState({});
-  const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(true);
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
@@ -43,27 +42,12 @@ const Demo = () => {
       onSave={onSave}
       formatFieldsValue={formatFieldsValue}
       required
-      disabled={disabled}
     >
       {[
         { type: 'input', label: 'name', name: 'name' },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'money', label: 'money', name: 'money' },
-        {
-          className: 'button-more-left',
-          dataSource: [
-            {
-              type: 'button',
-              noStyle: true,
-              plugins: { disabled: false },
-              componentProps: {
-                type: 'primary',
-                onClick: () => setDisabled(c => !c),
-                children: '状态',
-              },
-            },
-          ],
-        },
+        { type: 'submit' },
       ]}
     </YForm>
   );

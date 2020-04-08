@@ -599,25 +599,6 @@ Object {
               </div>
             </div>
           </div>
-          <div
-            class="ant-row ant-form-item"
-          >
-            <div
-              class="ant-col ant-form-item-control"
-            >
-              <div
-                class="ant-form-item-control-input"
-              >
-                <div
-                  class="ant-form-item-control-input-content"
-                >
-                  <div>
-                    1
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </form>
     </div>
@@ -645,25 +626,6 @@ Object {
                 <p>
                   123
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-row ant-form-item"
-        >
-          <div
-            class="ant-col ant-form-item-control"
-          >
-            <div
-              class="ant-form-item-control-input"
-            >
-              <div
-                class="ant-form-item-control-input-content"
-              >
-                <div>
-                  1
-                </div>
               </div>
             </div>
           </div>
