@@ -27,7 +27,17 @@ export type FieldsType<T> = { [K in keyof T]: string };
 export interface YFormConfig {
   itemsType?: YFormItemsType;
   plugins?: YFormPluginsType | boolean;
-  getScene?: any;
+  getScene?: {
+    [key: string]: {
+      form?: (
+        props: Required<Pick<modifyType, 'formProps'>>,
+      ) => Pick<modifyType, 'formProps' | 'plugins'>;
+      items?: (
+        props: Required<Pick<modifyType, 'itemsProps'>>,
+      ) => Pick<modifyType, 'itemsProps' | 'plugins'>;
+      item?: (props: Required<modifyType>) => Pick<modifyType, 'itemProps' | 'componentProps'>;
+    };
+  };
 }
 let globalConfig: YFormConfig = { plugins: true };
 
@@ -56,7 +66,7 @@ export interface ParamsObjType {
   typeName?: string;
 }
 
-export interface YFormProps<T = any> extends FormProps, YFormConfig {
+export interface YFormProps extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
   required?: boolean;
@@ -68,11 +78,6 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   onCancel?: () => void;
   params?: ParamsType;
   scene?: string;
-  getScene?: {
-    form?: Pick<modifyType<T>, 'formProps' | 'plugins'>;
-    items?: Pick<modifyType<T>, 'itemProps' | 'plugins'>;
-    item?: Pick<modifyType<T>, 'componentProps' | 'itemProps'>;
-  };
 }
 
 const InternalForm = (props: YFormProps) => {

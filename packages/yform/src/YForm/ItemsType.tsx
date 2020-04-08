@@ -7,7 +7,7 @@ import { ButtonProps } from 'antd/lib/button';
 import { CheckboxProps } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 
-import { YFormItemProps } from './Items';
+import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
 
 import CustomTypography from './component/Typography';
@@ -24,13 +24,14 @@ import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
+import { YFormProps, YFormConfig } from './Form';
 
 export type modifyType<T = any> = {
-  formProps?: any;
-  itemsProps?: any;
+  formProps?: YFormProps;
+  itemsProps?: YFormItemsProps;
   itemProps?: YFormItemProps;
   componentProps?: T;
-  plugins?: any;
+  plugins?: YFormConfig['plugins'];
 };
 
 export interface YFormFieldBaseProps<T = any> {
