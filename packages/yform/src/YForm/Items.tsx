@@ -75,11 +75,12 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
-        const _base = merge({}, mergeProps, item);
         let defaultProps;
         let _itemProps = { ...item };
+        let _itemsProps = { ...itemsProps };
+        let _formProps = { ...formProps };
         let _componentProps = { ...item.componentProps };
-        let _basePlugins = _base.plugins;
+        let _basePlugins = merge({}, mergeProps, item).plugins;
         const defaultData = {
           // 当前类型参数
           itemProps: _itemProps,
@@ -107,6 +108,15 @@ const Items = (props: YFormItemsProps) => {
           if (defaultProps.itemProps) {
             _itemProps = defaultProps.itemProps;
           }
+          if (defaultProps.itemsProps) {
+            _itemsProps = defaultProps.itemsProps;
+          }
+          if (defaultProps.itemsProps) {
+            _itemsProps = defaultProps.itemsProps;
+          }
+          if (defaultProps.formProps) {
+            _formProps = defaultProps.formProps;
+          }
           if (defaultProps.componentProps) {
             _componentProps = defaultProps.componentProps;
           }
@@ -114,6 +124,8 @@ const Items = (props: YFormItemsProps) => {
             _basePlugins = defaultProps.plugins;
           }
         }
+
+        const _base = merge({}, _formProps, _itemsProps, _itemProps);
         const { labelCol, wrapperCol, offset } = _base;
         // 处理插件
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
@@ -205,7 +217,7 @@ const Items = (props: YFormItemsProps) => {
             key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去
             if (items) {
-              _componentProps = { ..._base, ...item, key };
+              _componentProps = { ..._base, key };
             }
 
             if (component) {
