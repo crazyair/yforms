@@ -112,7 +112,7 @@ export default (props: YFormSubmitProps) => {
   }
   return (
     <YForm.Items isShow={!!showBtns}>
-      {[{ className: 'button-more-left', style: { marginBottom: 0 }, dataSource: btns }]}
+      {[{ className: 'button-more-left', dataSource: btns }]}
     </YForm.Items>
   );
 };

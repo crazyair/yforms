@@ -87,6 +87,7 @@ export default () => {
       <YForm required {...layout} name="base_form" onFinish={onFinish}>
         {fieldDom}
         {fieldDom2}
+        {[{ type: 'submit' }]}
       </YForm>
     </div>
   );
