@@ -10,10 +10,10 @@ export interface YTextAreaProps extends TextAreaProps {
 }
 
 export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
-  formItemProps,
+  itemProps,
   componentProps,
 }) => {
-  const _fProps = { ...formItemProps };
+  const _fProps = { ...itemProps };
   if (componentProps.inputMax) {
     _fProps.rules = [
       ...(_fProps.rules || []),
@@ -28,7 +28,7 @@ export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
     ];
   }
 
-  return { formItemProps: _fProps };
+  return { itemProps: _fProps };
 };
 
 export default (props: YTextAreaProps) => {

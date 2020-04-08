@@ -11,9 +11,9 @@ import { YFormFieldBaseProps } from '../ItemsType';
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
   componentProps,
-  itemsProps,
+  formProps,
 }) => {
-  const { form, onSave, formatFieldsValue, submitComponentProps } = itemsProps;
+  const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
   const mergeCProps = merge({}, submitComponentProps, componentProps);
   const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
   return { componentProps: _cProps };

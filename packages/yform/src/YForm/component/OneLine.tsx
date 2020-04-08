@@ -22,10 +22,10 @@ export interface YFormOneLineProps {
 }
 
 export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
-  formItemProps,
+  itemProps = {},
 }) => {
   return {
-    formItemProps: { ...formItemProps, className: classNames(formItemProps.className, 'mb0') },
+    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
   };
 };
 

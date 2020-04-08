@@ -58,8 +58,9 @@ const Items = (props: YFormItemsProps) => {
   const { children = [], className, style, noStyle } = props;
   if ('isShow' in props && !props.isShow) return null;
   const mergeProps = merge({}, formProps, itemsProps, props);
-  const { required: mergeRequired, disabled: mergeDisabled } = mergeProps;
+  const { required: mergeRequired, disabled: mergeDisabled, scene, getScene } = mergeProps;
   const list: React.ReactNode[] = [];
+
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index: number) => {
       // 如果是数组就回调该方法
@@ -74,20 +75,71 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
-        // 处理插件
         const _base = merge({}, mergeProps, item);
+        let defaultProps;
+        let _itemProps = { ...item };
+        let _componentProps = { ...item.componentProps };
+        let _basePlugins = _base.plugins;
+        const defaultData = {
+          // 当前类型参数
+          itemProps: _itemProps,
+          // 当前类型组件参数
+          componentProps: _componentProps,
+          // form 参数
+          formProps,
+          // itemsProps 参数
+          itemsProps,
+          // 当前插件参数
+          plugins: _basePlugins,
+        };
+        const _scene = scene && getScene && getScene[scene];
+        const _modifyProps = itemsType[item.type] && itemsType[item.type].modifyProps;
+        // 参数修改
+        if (_scene || _modifyProps) {
+          // 场景
+          if (_scene) {
+            defaultProps = _scene(defaultData);
+          }
+          // 类型修改
+          if (_modifyProps) {
+            defaultProps = merge({}, defaultProps, _modifyProps(defaultData));
+          }
+          if (defaultProps.itemProps) {
+            _itemProps = defaultProps.itemProps;
+          }
+          if (defaultProps.componentProps) {
+            _componentProps = defaultProps.componentProps;
+          }
+          if ('plugins' in defaultProps) {
+            _basePlugins = defaultProps.plugins;
+          }
+        }
         const { labelCol, wrapperCol, offset } = _base;
+        // 处理插件
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
           labelCol,
           wrapperCol,
           offset,
         });
 
+        const {
+          type,
+          dataSource,
+          items,
+          addonAfter,
+          plugins,
+          componentProps,
+          ...formItemProps
+        } = _itemProps;
+
+        let _formItemProps = formItemProps;
+        const { label, name } = _formItemProps;
+
         let _plugins: YFormPluginsType = {};
-        if (typeof _base.plugins === 'boolean') {
-          defaultPlugin = _base.plugins;
-        } else if (isObject(_base.plugins)) {
-          _plugins = _base.plugins;
+        if (typeof _basePlugins === 'boolean') {
+          defaultPlugin = _basePlugins;
+        } else if (isObject(_basePlugins)) {
+          _plugins = _basePlugins;
         }
         const {
           placeholder = defaultPlugin,
@@ -97,22 +149,18 @@ const Items = (props: YFormItemsProps) => {
           disabled = defaultPlugin,
         } = _plugins;
 
-        const { type, componentProps, dataSource, items, addonAfter, plugins, ...fieldRest } = item; //  list 默认不需要 FormItem 样式
+        if (disabled) {
+          set(_componentProps, 'disabled', mergeDisabled);
+        }
 
         let _children = item.children;
         // 默认只用 FormItem 包裹
         let _hasFormItem = true;
-        let _formItemProps = { ...fieldRest };
         if (labelLayout) {
           _formItemProps = { ..._formItemProps, ...labelLayoutValue };
         }
         let key: React.ReactText = _index;
-        let _componentProps = {};
-        const { label, name } = _formItemProps;
-        if (disabled) {
-          set(_componentProps, 'disabled', mergeDisabled);
-        }
-        _componentProps = { ..._componentProps, ...componentProps };
+
         // 添加无 label 处理
         if (noLabelLayout && !label) {
           _formItemProps = {
@@ -124,17 +172,9 @@ const Items = (props: YFormItemsProps) => {
         if (item.type && itemsType) {
           const _fieldData = itemsType[item.type];
           if (_fieldData) {
-            const {
-              component,
-              formatStr,
-              formItemProps,
-              modifyProps,
-              hasFormItem = _hasFormItem,
-            } = _fieldData;
+            const { component, formatStr, hasFormItem = _hasFormItem } = _fieldData;
 
             _hasFormItem = hasFormItem;
-            // 注入定义类型传的默认数据
-            _formItemProps = { ..._formItemProps, ...formItemProps };
 
             //  添加必填 placeholder 处理
             if ((placeholder || required) && name) {
@@ -161,17 +201,6 @@ const Items = (props: YFormItemsProps) => {
               }
             }
 
-            // 最后修改参数
-            if (modifyProps) {
-              const demo = modifyProps({
-                formItemProps: _formItemProps,
-                componentProps: _componentProps,
-                itemsProps: mergeProps,
-                itemProps: item,
-              });
-              _formItemProps = demo.formItemProps;
-              _componentProps = demo.componentProps;
-            }
             const _key = name ? `${name}` : key;
             key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去

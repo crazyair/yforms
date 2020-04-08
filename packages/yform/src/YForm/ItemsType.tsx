@@ -26,10 +26,11 @@ import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 
 type modifyType<T = any> = {
-  formItemProps?: YFormItemProps;
+  itemProps?: YFormItemProps;
   componentProps?: T;
+  formProps?: any;
   itemsProps?: any;
-  itemProps?: any;
+  plugins?: any;
 };
 
 export interface YFormFieldBaseProps<T = any> {
@@ -85,12 +86,12 @@ export type YFormItemsType<T = YFormFieldBaseProps> = {
   [P in keyof YFormItemsTypeDefine]?: { type?: P } & YFormItemsTypeDefine[P] & T;
 };
 
-const checkboxProps: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ formItemProps }) => {
-  return { formItemProps: { valuePropName: 'checked', ...formItemProps } };
+const checkboxProps: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ itemProps }) => {
+  return { itemProps: { valuePropName: 'checked', ...itemProps } };
 };
 
-const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({ formItemProps }) => {
-  return { formItemProps: { valuePropName: 'checked', ...formItemProps } };
+const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({ itemProps }) => {
+  return { itemProps: { valuePropName: 'checked', ...itemProps } };
 };
 
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];

@@ -5,17 +5,16 @@ import { YForm } from 'father-doc-yform';
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 YForm.Config({
-  setScene: {
-    search: ({ formItemProps, componentProps, itemsProps, itemProps }) => {
-      const _formItemProps = { ...formItemProps };
-      const _componentProps = { ...componentProps };
-      const _itemProps = { ...itemProps };
+  getScene: {
+    search: ({ itemProps, componentProps, itemsProps }) => {
+      const _itemProps = { ...itemProps, label: undefined };
+      const _componentProps = { placeholder: itemProps.label, ...componentProps };
       const _itemsProps = { ...itemsProps };
       return {
-        formItemProps: _formItemProps,
-        componentProps: _componentProps,
-        itemsProps: _itemsProps,
         itemProps: _itemProps,
+        itemsProps: _itemsProps,
+        componentProps: _componentProps,
+        plugins: { required: false },
       };
     },
   },

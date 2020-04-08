@@ -27,7 +27,7 @@ export type FieldsType<T> = { [K in keyof T]: string };
 export interface YFormConfig {
   itemsType?: YFormItemsType;
   plugins?: YFormPluginsType | boolean;
-  setScene?: any;
+  getScene?: any;
 }
 let globalConfig: YFormConfig = { plugins: true };
 
@@ -67,7 +67,8 @@ export interface YFormProps extends FormProps, YFormConfig {
   submitComponentProps?: YFormSubmitProps;
   onCancel?: () => void;
   params?: ParamsType;
-  scene?: any;
+  scene?: string;
+  getScene?: any;
 }
 
 const InternalForm = (props: YFormProps) => {
@@ -85,7 +86,7 @@ const InternalForm = (props: YFormProps) => {
     form: propsForm,
     className,
     plugins,
-    scene,
+    getScene = globalConfig.getScene,
     ...rest
   } = props;
   const [form] = Form.useForm(propsForm);
@@ -117,7 +118,6 @@ const InternalForm = (props: YFormProps) => {
       setDisabled(true);
     }
   }, [create, edit, onCancel, resetFields, view]);
-
   const _itemsTypeAll = {
     ...baseItemsType,
     ...itemsType,
@@ -174,6 +174,7 @@ const InternalForm = (props: YFormProps) => {
         showBack: { onClick: goBack },
       },
     },
+    getScene,
     ...props,
     itemsType: _itemsTypeAll,
   };
