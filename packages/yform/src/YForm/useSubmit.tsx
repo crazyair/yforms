@@ -6,7 +6,7 @@ export interface YFormUseSubmitProps {
 }
 
 export interface YFormUseSubmitReturnProps {
-  params?: ParamsObjType;
+  params: ParamsObjType;
 }
 export default (props: YFormUseSubmitProps): YFormUseSubmitReturnProps => {
   const { params } = props;
