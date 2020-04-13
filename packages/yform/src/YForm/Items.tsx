@@ -211,9 +211,12 @@ const Items = (props: YFormItemsProps) => {
             }
 
             if (component) {
-              _children = React.cloneElement(component, _componentProps);
+              _children = React.cloneElement(component, { ..._componentProps, ...component.props });
             } else if (item.component) {
-              _children = React.cloneElement(item.component, _componentProps);
+              _children = React.cloneElement(item.component, {
+                ..._componentProps,
+                ...item.component.props,
+              });
             }
           } else {
             warning(false, `[YFom.Items] ${type} 类型未找到`);
