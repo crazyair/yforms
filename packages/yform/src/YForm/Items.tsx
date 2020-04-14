@@ -211,7 +211,7 @@ const Items = (props: YFormItemsProps) => {
             }
 
             if (component) {
-              _children = React.cloneElement(component, { ..._componentProps, ...component.props });
+              _children = React.cloneElement(component, { ...component.props, ..._componentProps });
             } else if (item.component) {
               _children = React.cloneElement(item.component, {
                 ..._componentProps,
