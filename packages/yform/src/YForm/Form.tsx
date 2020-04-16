@@ -102,6 +102,7 @@ const InternalForm = (props: YFormProps) => {
     params,
     form: propsForm,
     className,
+    submitComponentProps,
     plugins,
     ...rest
   } = _props;
@@ -181,24 +182,26 @@ const InternalForm = (props: YFormProps) => {
     _plugins = merge({}, plugins, globalConfig.plugins);
   }
 
-  const _providerProps = {
-    plugins: _plugins,
-    form,
-    disabled: thisDisabled,
-    submitComponentProps: {
-      showBtns: {
-        // form submit 触发后设置 loading = true
-        showSubmit: { loading: submitLoading },
-        showEdit: { onClick: handleOnEdit },
-        showCancel: { onClick: () => handleReset({ type: 'onCancel' }) },
-        showSave: { onLoaded: () => handleReset({ type: 'onSave' }) },
-        showBack: { onClick: goBack },
+  const _providerProps = merge(
+    {},
+    {
+      form,
+      plugins: _plugins,
+      disabled: thisDisabled,
+      getScene,
+      submitComponentProps: {
+        showBtns: {
+          // form submit 触发后设置 loading = true
+          showSubmit: { loading: submitLoading },
+          showEdit: { onClick: handleOnEdit },
+          showCancel: { onClick: () => handleReset({ type: 'onCancel' }) },
+          showSave: { onLoaded: () => handleReset({ type: 'onSave' }) },
+          showBack: { onClick: goBack },
+        },
       },
     },
-    getScene,
-    ..._props,
-    itemsType: _itemsTypeAll,
-  };
+    { ..._props, itemsType: _itemsTypeAll },
+  );
 
   if ('isShow' in _props && !_props.isShow) {
     return null;
