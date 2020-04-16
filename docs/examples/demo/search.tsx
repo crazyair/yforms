@@ -16,7 +16,14 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 YForm.Config({
   getScene: {
     search: {
-      form: ({ formProps }) => ({ ...formProps, required: false }),
+      form: ({ formProps }) => ({
+        formProps: {
+          ...formProps,
+          required: false,
+          // 搜索成功后不重置表单
+          onCancel: () => {},
+        },
+      }),
       items: ({ itemsProps }) => {
         return {
           itemsProps: { noStyle: true, ...itemsProps },

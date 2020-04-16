@@ -75,7 +75,7 @@ export interface YFormProps extends FormProps, YFormConfig {
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
-  onCancel?: () => void;
+  onCancel?: (p: { type: 'onSave' | 'onSubmit' | 'onCancel' }) => void;
   params?: ParamsType;
   scene?: string;
 }
@@ -124,18 +124,21 @@ const InternalForm = (props: YFormProps) => {
     window.history.back();
   };
 
-  const handleReset = useCallback(() => {
-    if (typeof onCancel === 'function') {
-      onCancel();
-    } else {
-      resetFields();
-      if (create) {
-        goBack();
-      } else if (edit || view) {
-        setDisabled(true);
+  const handleReset: YFormProps['onCancel'] = useCallback(
+    ({ type }) => {
+      if (typeof onCancel === 'function') {
+        onCancel({ type });
+      } else {
+        resetFields();
+        if (create) {
+          goBack();
+        } else if (edit || view) {
+          setDisabled(true);
+        }
       }
-    }
-  }, [create, edit, onCancel, resetFields, view]);
+    },
+    [create, edit, onCancel, resetFields, view],
+  );
   const _itemsTypeAll = {
     ...baseItemsType,
     ...itemsType,
@@ -153,7 +156,7 @@ const InternalForm = (props: YFormProps) => {
         timeOut.current = window.setTimeout(
           () => {
             setSubmitLoading(false);
-            handleReset();
+            handleReset({ type: 'onSubmit' });
           },
           // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
           end - begin > 500 ? 0 : 500,
@@ -187,8 +190,8 @@ const InternalForm = (props: YFormProps) => {
         // form submit 触发后设置 loading = true
         showSubmit: { loading: submitLoading },
         showEdit: { onClick: handleOnEdit },
-        showCancel: { onClick: handleReset },
-        showSave: { onLoaded: handleReset },
+        showCancel: { onClick: () => handleReset({ type: 'onCancel' }) },
+        showSave: { onLoaded: () => handleReset({ type: 'onSave' }) },
         showBack: { onClick: goBack },
       },
     },
