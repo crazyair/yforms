@@ -22,7 +22,7 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 export default () => {
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
-  const onFinish = (values: any) => {
+  const onFinish = values => {
     console.log('Success:', values);
   };
 
@@ -79,7 +79,7 @@ export default () => {
     params: { typeName },
   } = YForm.useSubmit({ params: { type: 'create' } });
 
-  const onFinish = (values: any) => {
+  const onFinish = values => {
     console.log('Success:', values);
   };
 

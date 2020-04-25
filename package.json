@@ -6,7 +6,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "dev": "dumi dev",
+    "start": "dumi dev",
     "build": "father-build",
     "doc:build": "dumi build",
     "now-build": "yarn && yarn bootstrap && yarn doc:build",
@@ -55,7 +55,7 @@
     "babel-eslint": "^9.0.0",
     "babel-plugin-import": "^1.13.0",
     "cross-env": "^6.0.3",
-    "dumi": "^1.0.14",
+    "dumi": "^1.0.20",
     "enzyme": "^3.11.0",
     "eslint": "^6.7.2",
     "eslint-config-umi": "^1.6.0",
@@ -76,7 +76,7 @@
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.7.0",
     "typescript": "^3.7.5",
-    "umi": "^3.0.18",
+    "umi": "^3.1.2",
     "umi-test": "^1.9.3"
   },
   "license": "MIT",

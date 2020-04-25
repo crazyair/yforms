@@ -152,7 +152,9 @@ const Items = (props: YFormItemsProps) => {
         } = _plugins;
 
         if (disabled) {
-          set(_componentProps, 'disabled', mergeDisabled);
+          if (!('disabled' in _componentProps)) {
+            set(_componentProps, 'disabled', mergeDisabled);
+          }
         }
 
         let _children = item.children;
