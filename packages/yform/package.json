@@ -1,6 +1,6 @@
 {
   "name": "father-doc-yform",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

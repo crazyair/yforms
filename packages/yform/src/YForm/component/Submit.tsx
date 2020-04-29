@@ -1,5 +1,5 @@
 import React from 'react';
-import { merge, reverse } from 'lodash';
+import { merge, reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
 import { YForm } from '../..';
@@ -61,7 +61,18 @@ export default (props: YFormSubmitProps) => {
     showBack: { children: '返回', type: 'link' },
   };
 
-  const { showSubmit, showSave, showCancel, showEdit, showBack } = merge({}, _showBtns, showBtns);
+  const { showSubmit, showSave, showCancel, showEdit, showBack } = mergeWith(
+    _showBtns,
+    showBtns,
+    (objValue, srcValue) => {
+      // boolean 类型如果是 true 则用 objValue
+      if (typeof srcValue === 'boolean') {
+        return srcValue ? objValue : srcValue;
+      }
+      // 对象则合并
+      return merge({}, objValue, srcValue);
+    },
+  );
 
   const actionBtns: { [key: string]: YFormDataSource } = {
     submit: {
