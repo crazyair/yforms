@@ -1,5 +1,5 @@
 import { isValidElement } from 'react';
-import { get, map, join, set, mapKeys, forEach, cloneDeep } from 'lodash';
+import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
 import { stringAndFunc } from './ItemsType';
@@ -141,7 +141,9 @@ export function submitFormatValues<T>(
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
   const _values = cloneDeep(values) as KeyValue;
-  forEach(formatFieldsValue, item => {
+
+  const list: FormatFieldsValue[] = sortBy(formatFieldsValue, item => -`${item.name}`.length);
+  forEach(list, item => {
     if (item && item.name) {
       set(_values, item.name, item.format({ ...values }));
     }

@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./packages",
-    "paths": { "father-doc-yform": ["yform/src"] },
+    "paths": { "yform": ["yform/src"] },
     "jsx": "preserve",
     "declaration": true,
     "skipLibCheck": true,
