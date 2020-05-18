@@ -12,14 +12,14 @@ nav:
 在项目目录下执行以下命令进行安装：
 
 ```bash
-$ yarn add father-doc-yform
+$ yarn add yform
 ```
 
 ## 示例
 
 ```jsx | pure
 import React from 'react';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yform';
 
 const Demo = () => {
   return (

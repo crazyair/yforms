@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
@@ -44,7 +44,17 @@ const Demo = () => {
       required
     >
       {[
-        { type: 'input', label: 'name', name: 'name' },
+        {
+          type: 'input',
+          label: 'name',
+          name: 'name',
+          plugins: {
+            // format: v => {
+            //   console.log('v', v);
+            // },
+            disabled: true,
+          },
+        },
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
         { type: 'money', label: 'money', name: 'money' },
         { type: 'submit' },

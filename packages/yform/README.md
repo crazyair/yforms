@@ -1,3 +1,3 @@
 # yform
 
-See our [main repo](https://github.com/crazyair/father-doc-yform) for more information.
+See our [main repo](https://github.com/crazyair/yform) for more information.

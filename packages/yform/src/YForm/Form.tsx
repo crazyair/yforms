@@ -19,6 +19,8 @@ export type YFormPluginsType = {
   disabled?: pluginsType;
   labelLayout?: pluginsType;
   noLabelLayout?: pluginsType;
+  // format?: (p: any) => any;
+  format?: pluginsType;
 };
 
 export type KeyValue = { [key: string]: any };
@@ -145,6 +147,7 @@ const InternalForm = (props: YFormProps) => {
     ...itemsType,
     ...globalConfig.itemsType,
   } as YFormItemsType;
+  console.log('formatFieldsValue', formatFieldsValue);
 
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {

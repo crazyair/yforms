@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

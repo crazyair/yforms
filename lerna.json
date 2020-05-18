@@ -7,7 +7,7 @@
       "pr(dependency)": ":deciduous_tree: Dependency",
       "pr(chore)": ":turtle: Chore"
     },
-    "repo": "crazyair/father-doc-yform",
+    "repo": "crazyair/yform",
     "cacheDir": ".changelog"
   },
   "packages": ["packages/*"],

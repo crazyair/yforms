@@ -1,5 +1,5 @@
 import { isValidElement } from 'react';
-import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy, isArray } from 'lodash';
+import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy, isArray, find } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
 import { stringAndFunc } from './ItemsType';
@@ -161,7 +161,10 @@ export const onFormatFieldsValue = <T>(formatFieldsValue: FormatFieldsValue<T>[]
   return (list: FormatFieldsValue<T>[]) => {
     const _formatFields = formatFieldsValue;
     forEach(list, item => {
-      _formatFields.push(item);
+      // 已存在不再注册
+      if (!find(_formatFields, { name: item.name })) {
+        _formatFields.push(item);
+      }
     });
     return _formatFields;
   };

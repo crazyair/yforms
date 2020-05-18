@@ -15,7 +15,7 @@ nav:
 ```tsx
 import React from 'react';
 import { Input } from 'antd';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
@@ -69,7 +69,7 @@ export default () => {
 ```tsx
 import React from 'react';
 import { Input } from 'antd';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
