@@ -12,7 +12,7 @@ nav:
 在项目目录下执行以下命令进行安装：
 
 ```bash
-$ yarn add yform
+$ yarn add diy-form
 ```
 
 ## 示例

@@ -1,5 +1,5 @@
 {
-  "name": "yform",
+  "name": "diy-form",
   "version": "0.7.2",
   "description": "自定义表单组件",
   "main": "lib/index.js",
