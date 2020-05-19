@@ -5,7 +5,6 @@ import { ButtonProps } from 'antd/lib/button';
 import { YForm } from '../..';
 import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
-import { submitFormatValues } from '../utils';
 import { YFormSecureButtonProps } from './SecureButton';
 import { YFormFieldBaseProps } from '../ItemsType';
 
@@ -13,9 +12,9 @@ export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] 
   componentProps,
   formProps,
 }) => {
-  const { form, onSave, formatFieldsValue, submitComponentProps } = formProps;
+  const { form, onSave, submitComponentProps } = formProps;
   const mergeCProps = merge({}, submitComponentProps, componentProps);
-  const _cProps = { form, onSave, formatFieldsValue, ...mergeCProps };
+  const _cProps = { form, onSave, ...mergeCProps };
   return { componentProps: _cProps };
 };
 
@@ -38,18 +37,13 @@ export interface YFormSubmitProps
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, formatFieldsValue, showBtns = true, reverseBtns, disabled } = props;
+  const { form, onSave, showBtns = true, reverseBtns, disabled } = props;
+  const { getFieldsValue, getFormatFieldsValue } = form || {};
 
-  const { getFieldsValue } = form || {};
-
-  const formatValues = values => {
-    return formatFieldsValue ? submitFormatValues(values, formatFieldsValue) : values;
-  };
-
-  const handleOnSave = async e => {
+  const handleOnSave = async (e) => {
     e.preventDefault();
     if (onSave && getFieldsValue) {
-      await onSave(formatValues(getFieldsValue()));
+      await onSave(getFormatFieldsValue(getFieldsValue()));
     }
   };
 

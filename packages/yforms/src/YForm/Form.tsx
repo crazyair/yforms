@@ -1,15 +1,16 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge } from 'lodash';
+import { merge, concat } from 'lodash';
 import classNames from 'classnames';
 
-import { FormProps } from 'antd/lib/form';
+import { FormProps, FormInstance } from 'antd/lib/form';
 import baseItemsType, { YFormItemsType, YFormFieldBaseProps, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
 import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
+import useForm from './useForm';
 
 type pluginsType = boolean | YFormFieldBaseProps['modifyProps'];
 
@@ -19,8 +20,6 @@ export type YFormPluginsType = {
   disabled?: pluginsType;
   labelLayout?: pluginsType;
   noLabelLayout?: pluginsType;
-  // format?: (p: any) => any;
-  format?: pluginsType;
 };
 
 export type KeyValue = { [key: string]: any };
@@ -68,12 +67,20 @@ export interface ParamsObjType {
   typeName?: string;
 }
 
-export interface YFormProps extends FormProps, YFormConfig {
+export interface YFormInstance<T = any> extends FormInstance {
+  getFormatFieldsValue: (value?: T) => T;
+}
+
+export interface YFormProps<T = any> extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
   required?: boolean;
   loading?: boolean;
+  form?: YFormInstance;
   formatFieldsValue?: FormatFieldsValue[];
+  onFormatFieldsValue?: (
+    f: FormatFieldsValue<T>[],
+  ) => (f: FormatFieldsValue<T>[]) => FormatFieldsValue<T>[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
@@ -108,8 +115,8 @@ const InternalForm = (props: YFormProps) => {
     plugins,
     ...rest
   } = _props;
-  const [form] = Form.useForm(propsForm);
-  const { resetFields } = form;
+  const [form] = useForm(propsForm);
+  const { resetFields, getFieldsValue } = form;
   const _params = paramsType(params);
   const { create, edit, view } = _params;
   const [thisDisabled, setDisabled] = useState(view);
@@ -147,7 +154,25 @@ const InternalForm = (props: YFormProps) => {
     ...itemsType,
     ...globalConfig.itemsType,
   } as YFormItemsType;
-  console.log('formatFieldsValue', formatFieldsValue);
+
+  // 内部格式化功能
+  const {
+    formatFieldsValue: _formatFieldsValue,
+    onFormatFieldsValue: _onFormatFieldsValue,
+  } = useFormatFieldsValue();
+
+  const handleFormatFieldsValue = (value) => {
+    let _value;
+    if (value) {
+      _value = value;
+    } else {
+      _value = getFieldsValue();
+    }
+    return formatFieldsValue
+      ? submitFormatValues(_value, concat(formatFieldsValue, _formatFieldsValue))
+      : _value;
+  };
+  form.getFormatFieldsValue = handleFormatFieldsValue;
 
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
@@ -155,7 +180,7 @@ const InternalForm = (props: YFormProps) => {
       const begin = new Date().getTime();
       setSubmitLoading(true);
       try {
-        await onFinish(formatFieldsValue ? submitFormatValues(value, formatFieldsValue) : value);
+        await onFinish(handleFormatFieldsValue(value));
         const end = new Date().getTime();
         timeOut.current = window.setTimeout(
           () => {
@@ -171,9 +196,9 @@ const InternalForm = (props: YFormProps) => {
     }
   };
 
-  const handleOnEdit = e => {
+  const handleOnEdit = (e) => {
     e.preventDefault();
-    setDisabled(c => !c);
+    setDisabled((c) => !c);
   };
 
   let _plugins;
@@ -186,12 +211,12 @@ const InternalForm = (props: YFormProps) => {
   }
 
   const _providerProps = merge(
-    {},
     {
       form,
       plugins: _plugins,
       disabled: thisDisabled,
       getScene,
+      onFormatFieldsValue: _onFormatFieldsValue,
       submitComponentProps: {
         showBtns: {
           // form submit 触发后设置 loading = true

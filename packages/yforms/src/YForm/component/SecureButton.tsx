@@ -8,7 +8,7 @@ export interface YFormSecureButtonProps extends ButtonProps {
 
 const { useState, useEffect, useRef, useCallback } = React;
 
-const SecureButton: React.FC<YFormSecureButtonProps> = props => {
+const SecureButton: React.FC<YFormSecureButtonProps> = (props) => {
   const { onClick, children, className, onLoaded, ...rest } = props;
   const [loading, setLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
@@ -29,7 +29,10 @@ const SecureButton: React.FC<YFormSecureButtonProps> = props => {
   const handleSetFalseLoading = useCallback(
     (end: number, begin: number, err?: any) => {
       if (err) {
-        setLoading(false);
+        timeOut.current = window.setTimeout(() => {
+          setLoading(false);
+          if (onLoaded) onLoaded();
+        }, 500);
       } else if (end - begin > 500) {
         // 如果 onClick 执行时间大于 0.5s，就立刻取消 loading
         setLoading(false);

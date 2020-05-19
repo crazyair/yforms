@@ -53,7 +53,6 @@
     "@typescript-eslint/eslint-plugin": "^2.13.0",
     "@typescript-eslint/parser": "^2.18.0",
     "@umijs/fabric": "^2.0.3",
-    "antd": "^4.0.2",
     "babel-eslint": "^9.0.0",
     "babel-plugin-import": "^1.13.0",
     "cross-env": "^6.0.3",
@@ -83,6 +82,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "antd": "^4.2.4",
+    "dayjs": "^1.8.27",
     "rc-queue-anim": "^1.8.4"
   }
 }

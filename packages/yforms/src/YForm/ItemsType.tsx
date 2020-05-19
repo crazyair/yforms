@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Checkbox, Switch, Button } from 'antd';
+import { Input, Checkbox, Switch, Button, DatePicker } from 'antd';
 import { TextProps } from 'antd/lib/typography/Text';
 import { InputProps, PasswordProps } from 'antd/lib/input';
 import { SwitchProps } from 'antd/lib/switch';
@@ -7,6 +7,7 @@ import { ButtonProps } from 'antd/lib/button';
 import { CheckboxProps } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 
+import { DatePickerProps } from 'antd/lib/date-picker';
 import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
 
@@ -66,6 +67,7 @@ export interface OptionsProps<T = any> {
 export interface YFormItemsTypeDefine {
   // 字段类型
   input: { componentProps?: InputProps };
+  datePicker: { componentProps?: DatePickerProps };
   password: { componentProps?: PasswordProps };
   textarea: { componentProps?: YTextAreaProps };
   money: { componentProps?: YMoneyProps };
@@ -101,6 +103,7 @@ export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
 export const itemsType: YFormItemsType = {
   input: { component: <Input />, formatStr: '请输入${label}' },
+  datePicker: { component: <DatePicker />, formatStr: '请选择${label}' },
   password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
   money: { component: <Money />, formatStr: '请输入${label}' },

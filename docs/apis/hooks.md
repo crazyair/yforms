@@ -6,6 +6,24 @@ nav:
 
 # Hooks
 
+## useForm
+
+- 获取表单实例
+
+### 用例
+
+```jsx | pure
+const [form] = YForm.useForm();
+// 获取表单格式化后的值
+form.getFormatFieldsValue();
+```
+
+### API
+
+| 参数                 | 说明                 | 类型 | 默认值 |
+| -------------------- | -------------------- | ---- | ------ |
+| getFormatFieldsValue | 获取表单格式化后的值 | -    | -      |
+
 ## useFormatFieldsValue
 
 - 表单提交前处理数据
