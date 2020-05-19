@@ -1,5 +1,8 @@
 {
-  "name": "yform",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/crazyair/yform.git"
