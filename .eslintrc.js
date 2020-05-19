@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-hooks'],
-  extends: ['airbnb-typescript'],
+  extends: ['airbnb-typescript', 'prettier/@typescript-eslint'],
   rules: {
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
     'react-hooks/exhaustive-deps': 'error', // 检查 effect 的依赖
@@ -41,5 +41,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/anchor-is-valid': 0,
     'jsx-a11y/no-static-element-interactions': 0,
+    'arrow-parens': 0,
   },
 };

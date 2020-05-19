@@ -33,9 +33,13 @@
     "moment": "^2.24.0",
     "numbro": "^2.2.0",
     "nzh": "^1.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "warning": "^4.0.3"
   },
   "devDependencies": {
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
     "@babel/polyfill": "^7.8.3"
   },
   "publishConfig": {

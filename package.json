@@ -58,7 +58,7 @@
     "cross-env": "^7.0.2",
     "dumi": "^1.0.25",
     "enzyme": "^3.11.0",
-    "eslint": "^7.0.0",
+    "eslint": "^6.7.2",
     "eslint-config-umi": "^1.6.0",
     "eslint-plugin-flowtype": "^5.1.0",
     "eslint-plugin-import": "^2.14.0",
