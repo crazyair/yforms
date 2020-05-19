@@ -68,7 +68,7 @@ Object {
     <div>
       <div>
         <form
-          class="ant-form ant-form-horizontal yform"
+          class="ant-form ant-form-horizontal yforms"
         >
           <div
             class="yform-items"
@@ -178,7 +178,7 @@ Object {
           </div>
         </form>
         <form
-          class="ant-form ant-form-horizontal yform"
+          class="ant-form ant-form-horizontal yforms"
         >
           <div
             class="yform-items"
@@ -293,7 +293,7 @@ Object {
   "container": <div>
     <div>
       <form
-        class="ant-form ant-form-horizontal yform"
+        class="ant-form ant-form-horizontal yforms"
       >
         <div
           class="yform-items"
@@ -403,7 +403,7 @@ Object {
         </div>
       </form>
       <form
-        class="ant-form ant-form-horizontal yform"
+        class="ant-form ant-form-horizontal yforms"
       >
         <div
           class="yform-items"
@@ -574,7 +574,7 @@ Object {
   "baseElement": <body>
     <div>
       <form
-        class="ant-form ant-form-horizontal yform"
+        class="ant-form ant-form-horizontal yforms"
         id="basic"
       >
         <div
@@ -605,7 +605,7 @@ Object {
   </body>,
   "container": <div>
     <form
-      class="ant-form ant-form-horizontal yform"
+      class="ant-form ant-form-horizontal yforms"
       id="basic"
     >
       <div
@@ -804,7 +804,7 @@ Object {
   "baseElement": <body>
     <div>
       <form
-        class="ant-form ant-form-horizontal yform"
+        class="ant-form ant-form-horizontal yforms"
       >
         <div
           class="yform-items"
@@ -917,7 +917,7 @@ Object {
   </body>,
   "container": <div>
     <form
-      class="ant-form ant-form-horizontal yform"
+      class="ant-form ant-form-horizontal yforms"
     >
       <div
         class="yform-items"

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Card } from 'antd';
-import { YForm } from '@crazyair/yform';
-import { YFormListComponentProps, YFormListProps } from '@crazyair/yform/lib/YForm/component/List';
+import { YForm } from 'yforms';
+import { YFormListComponentProps, YFormListProps } from 'yforms/lib/YForm/component/List';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

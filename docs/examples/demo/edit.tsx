@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
-import { YForm } from '@crazyair/yform';
+import { YForm } from 'yforms';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

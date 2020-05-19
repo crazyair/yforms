@@ -1,5 +1,5 @@
 {
-  "name": "@crazyair/yform",
+  "name": "yforms",
   "version": "0.7.4",
   "description": "自定义表单组件",
   "main": "lib/index.js",
@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/crazyair/yform",
-    "directory": "yform"
+    "url": "http://github.com/crazyair/yforms",
+    "directory": "yforms"
   },
-  "homepage": "http://github.com/crazyair/yform",
-  "bugs": "http://github.com/crazyair/yform/issues",
+  "homepage": "http://github.com/crazyair/yforms",
+  "bugs": "http://github.com/crazyair/yforms/issues",
   "dependencies": {
     "@ant-design/icons": "^4.0.3",
     "@babel/runtime": "^7.8.4",

@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crazyair/yform.git"
+    "url": "git+https://github.com/crazyair/yforms.git"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
@@ -84,7 +84,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@crazyair/yform": "^0.7.4",
     "rc-queue-anim": "^1.8.4"
   }
 }

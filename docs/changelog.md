@@ -5,9 +5,9 @@ nav:
   order: 5
 ---
 
-## [0.6.0](https://github.com/crazyair/yform/compare/v0.5.9...v0.6.0) (2020-05-16)
+## [0.6.0](https://github.com/crazyair/yforms/compare/v0.5.9...v0.6.0) (2020-05-16)
 
-- submitFormatValues 根据 name 长度排序 ([#13](https://github.com/crazyair/yform/issues/13)) ([fc1c411](https://github.com/crazyair/yform/commit/fc1c41107d10fa798e9298266f7144e2cc5697f8))
+- submitFormatValues 根据 name 长度排序 ([#13](https://github.com/crazyair/yforms/issues/13)) ([fc1c411](https://github.com/crazyair/yforms/commit/fc1c41107d10fa798e9298266f7144e2cc5697f8))
 
 ## 0.5.9
 

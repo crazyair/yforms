@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { Input } from 'antd';
-import { YForm } from '@crazyair/yform';
+import { YForm } from 'yforms';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

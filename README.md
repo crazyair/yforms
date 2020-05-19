@@ -1,8 +1,8 @@
-[![codecov](https://codecov.io/gh/crazyair/yform/branch/master/graph/badge.svg)](https://codecov.io/gh/crazyair/yform)
+[![codecov](https://codecov.io/gh/crazyair/yforms/branch/master/graph/badge.svg)](https://codecov.io/gh/crazyair/yforms)
 
 ## Usage & Guide
 
-To check out live examples and docs, visit [yform now](https://yform.now.sh/).
+To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
 
 ## Development
 
