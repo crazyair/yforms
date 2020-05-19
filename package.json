@@ -16,7 +16,7 @@
     "lint:es": "eslint --ext .js,jsx,ts,tsx packages/**/src",
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
     "changelog": "lerna-changelog",
-    "pub": "npm run changelog && npm run build && lerna publish"
+    "pub": "npm run build && lerna publish"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
