@@ -9,7 +9,6 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 const Demo = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-  const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
   const [form] = YForm.useForm();
 
   useEffect(() => {
@@ -19,13 +18,10 @@ const Demo = () => {
     }, 10);
   }, []);
 
-  onFormatFieldsValue([{ name: 'name', format: ({ name }) => `${name}_改变了` }]);
-
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
   const onFinishFailed = (errorInfo: any) => {
-    console.log('format fields value', form.getFormatFieldsValue());
     console.log('Failed:', errorInfo);
   };
   const onSave = (values: any) => {
@@ -36,13 +32,12 @@ const Demo = () => {
     <YForm
       {...layout}
       form={form}
-      loading={loading}
-      initialValues={data}
       name="basic"
+      initialValues={data}
       onFinish={onFinish}
+      loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      formatFieldsValue={formatFieldsValue}
       required
     >
       {[

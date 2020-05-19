@@ -168,9 +168,7 @@ const InternalForm = (props: YFormProps) => {
     } else {
       _value = getFieldsValue();
     }
-    return formatFieldsValue
-      ? submitFormatValues(_value, concat(formatFieldsValue, _formatFieldsValue))
-      : _value;
+    return submitFormatValues(_value, concat(formatFieldsValue, _formatFieldsValue));
   };
   form.getFormatFieldsValue = handleFormatFieldsValue;
 
