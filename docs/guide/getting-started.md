@@ -12,14 +12,14 @@ nav:
 在项目目录下执行以下命令进行安装：
 
 ```bash
-$ yarn add diy-form
+$ yarn add @crazyair/yform
 ```
 
 ## 示例
 
 ```jsx | pure
 import React from 'react';
-import { YForm } from 'yform';
+import { YForm } from '@crazyair/yform';
 
 const Demo = () => {
   return (

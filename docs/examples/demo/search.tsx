@@ -5,7 +5,7 @@
 
 /* eslint-disable no-console */
 import React from 'react';
-import { YForm } from 'yform';
+import { YForm } from '@crazyair/yform';
 import { Form, Button, Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';

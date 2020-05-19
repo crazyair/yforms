@@ -81,6 +81,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@crazyair/yform": "^0.7.4",
     "rc-queue-anim": "^1.8.4"
   }
 }

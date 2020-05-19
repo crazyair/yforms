@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import { YForm } from 'yform';
+import { YForm } from '@crazyair/yform';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

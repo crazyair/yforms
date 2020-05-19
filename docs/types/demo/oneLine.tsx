@@ -1,6 +1,6 @@
 import React from 'react';
-import { YForm } from 'yform';
-import { YFormOneLineProps } from 'yform/lib/YForm/component/OneLine';
+import { YForm } from '@crazyair/yform';
+import { YFormOneLineProps } from '@crazyair/yform/lib/YForm/component/OneLine';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

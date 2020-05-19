@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./packages",
-    "paths": { "yform": ["yform/src"] },
+    "paths": { "@crazyair/yform": ["yform/src"] },
     "jsx": "preserve",
     "declaration": true,
     "skipLibCheck": true,
