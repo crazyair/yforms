@@ -8,7 +8,6 @@ To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
 
 ```bash
 $ npm install
-$ npm run bootstrap
 $ npm run dev
 ```
 
