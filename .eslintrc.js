@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-hooks'],
-  extends: ['airbnb-typescript', 'prettier/@typescript-eslint'],
+  extends: ['airbnb-typescript'],
   rules: {
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
     'react-hooks/exhaustive-deps': 'error', // 检查 effect 的依赖
