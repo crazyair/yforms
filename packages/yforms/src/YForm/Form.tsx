@@ -68,7 +68,7 @@ export interface ParamsObjType {
 }
 
 export interface YFormInstance<T = any> extends FormInstance {
-  getFormatFieldsValue: (value?: T) => T;
+  getFormatFieldsValue?: (value?: T) => T;
 }
 
 export interface YFormProps<T = any> extends FormProps, YFormConfig {
