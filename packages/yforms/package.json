@@ -28,7 +28,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/runtime": "^7.8.4"
   },
   "license": "MIT"
