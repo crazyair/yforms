@@ -5,11 +5,11 @@ nav:
   order: 5
 ---
 
-## [0.8.2](https://github.com/crazyair/yforms/compare/v0.8.1...v0.8.2) (2020-05-20)
+## [0.8.3](https://github.com/crazyair/yforms/compare/v0.8.1...v0.8.3) (2020-05-20)
 
 ### Bug Fixes
 
-- 修复依赖问题 ([e693497](https://github.com/crazyair/yforms/commit/e69349760b38fb841e8d76e53b6333d285432bac))
+- 修复依赖问题 ([#15](https://github.com/crazyair/yforms/issues/15)) ([4772dc0](https://github.com/crazyair/yforms/commit/4772dc0b9f4a5f2fc4805e6bb86d4331f01c63df))
 
 ## [0.8.1](https://github.com/crazyair/yforms/compare/v0.6.0...v0.8.1) (2020-05-20)
 
