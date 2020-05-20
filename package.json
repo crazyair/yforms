@@ -78,11 +78,18 @@
     "react-test-renderer": "^16.7.0",
     "typescript": "^3.7.5",
     "umi": "^3.1.4",
+    "@babel/polyfill": "^7.8.3",
     "umi-test": "^1.9.3"
   },
   "license": "MIT",
   "dependencies": {
+    "warning": "^4.0.3",
     "antd": "^4.2.4",
+    "@ant-design/icons": "^4.0.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "numbro": "^2.2.0",
+    "nzh": "^1.0.4",
     "dayjs": "^1.8.27",
     "rc-queue-anim": "^1.8.4"
   }
