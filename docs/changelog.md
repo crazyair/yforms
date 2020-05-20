@@ -5,9 +5,7 @@ nav:
   order: 5
 ---
 
-# [0.8.0](https://github.com/crazyair/yforms/compare/v0.6.0...v0.8.0) (2020-05-20)
-
-### Features
+## [0.8.1](https://github.com/crazyair/yforms/compare/v0.6.0...v0.8.1) (2020-05-20)
 
 - 改名 yforms ([#14](https://github.com/crazyair/yforms/issues/14)) ([1c20a9f](https://github.com/crazyair/yforms/commit/1c20a9fb96aa532750a628a1befde8d6ef6bbf40))
 - 新增 `format` 功能
