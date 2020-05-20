@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [0.8.4](https://github.com/crazyair/yforms/compare/v0.8.3...v0.8.4) (2020-05-20)
+
+### Bug Fixes
+
+- `moment` value 为空直接 return ([#18](https://github.com/crazyair/yforms/issues/18)) ([9882bf3](https://github.com/crazyair/yforms/commit/9882bf3c103fc809b45f883c31d6e895c03d5d0b))
+
 ## [0.8.3](https://github.com/crazyair/yforms/compare/v0.8.1...v0.8.3) (2020-05-20)
 
 ### Bug Fixes
