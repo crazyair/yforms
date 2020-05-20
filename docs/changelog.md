@@ -5,6 +5,14 @@ nav:
   order: 5
 ---
 
+# [0.8.0](https://github.com/crazyair/yforms/compare/v0.6.0...v0.8.0) (2020-05-20)
+
+### Features
+
+- 改名 yforms ([#14](https://github.com/crazyair/yforms/issues/14)) ([1c20a9f](https://github.com/crazyair/yforms/commit/1c20a9fb96aa532750a628a1befde8d6ef6bbf40))
+- 新增 `format` 功能
+- `useForm` 添加 `getFormatFieldsValue`
+
 ## [0.6.0](https://github.com/crazyair/yforms/compare/v0.5.9...v0.6.0) (2020-05-16)
 
 - submitFormatValues 根据 name 长度排序 ([#13](https://github.com/crazyair/yforms/issues/13)) ([fc1c411](https://github.com/crazyair/yforms/commit/fc1c41107d10fa798e9298266f7144e2cc5697f8))
