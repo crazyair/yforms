@@ -6,8 +6,6 @@ To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
 
 ## Development
 
-1
-
 ```bash
 $ npm install
 $ npm run dev
