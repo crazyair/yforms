@@ -34,14 +34,13 @@ jobs:
         run: node ./scripts/getChangeLog.js
       - name: Create Release
         id: create_release
-        uses: ncipollo/release-action@v1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: ${{ github.ref }}
           # see https://github.com/marketplace/actions/autochangelog
           body: ${{ steps.changelog.outputs.changelog}}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
