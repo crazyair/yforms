@@ -9,7 +9,21 @@ on:
 name: Create Release
 
 jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+          registry-url: https://registry.npmjs.org/
+      - run: yarn
+      - run: yarn pub from-package --force-publish --yes
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
   build:
+    needs: publish-npm
     name: Create Release
     runs-on: ubuntu-latest
     steps:
@@ -31,17 +45,3 @@ jobs:
           draft: false
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10
-          registry-url: https://registry.npmjs.org/
-      - run: yarn
-      - run: yarn pub from-package --force-publish --yes
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-          NPM_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
