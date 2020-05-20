@@ -82,10 +82,10 @@ nav:
 - 自定义类型推荐添加前缀或后缀，方便与默认区分。
 
 ```tsx | pure
-import { YForm } from 'father-doc-yform';
-import { YFormItemsType } from 'father-doc-yform/lib/YForm/ItemsType';
+import { YForm } from 'yforms';
+import { YFormItemsType } from 'yforms/lib/YForm/ItemsType';
 
-declare module 'father-doc-yform/lib/YForm/ItemsType' {
+declare module 'yforms/lib/YForm/ItemsType' {
   export interface YFormItemsTypeDefine {
     my_demo: { componentProps?: { str?: string } };
   }

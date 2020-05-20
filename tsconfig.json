@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./packages",
-    "paths": { "yform": ["yform/src"] },
+    "paths": { "yforms": ["yforms/src"] },
     "jsx": "preserve",
     "declaration": true,
     "skipLibCheck": true,

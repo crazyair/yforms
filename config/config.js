@@ -1,6 +1,6 @@
 export default {
   mode: 'site',
-  title: 'yform',
+  title: 'yforms',
   favicon: '/favicon.ico',
   logo: '/logo.png',
   menus: {

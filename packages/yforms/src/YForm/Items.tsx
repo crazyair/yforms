@@ -15,12 +15,13 @@ export type YFormRenderChildren = (form: FormInstance) => YFormItemProps['childr
 
 type isShowFunc = (values: any) => boolean;
 
-export interface YFormItemProps extends Omit<FormItemProps, 'children'> {
+export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'> {
   isShow?: boolean | isShowFunc;
   required?: boolean;
   plugins?: YFormPluginsType | boolean;
   className?: string;
   addonAfter?: React.ReactElement;
+  format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   offset?: number;
   children?:
@@ -68,7 +69,7 @@ const Items = (props: YFormItemsProps) => {
   if ('isShow' in _props && !_props.isShow) return null;
 
   const { children = [], className, style, noStyle } = _props;
-  const { required: mergeRequired, disabled: mergeDisabled } = mergeProps;
+  const { required: mergeRequired, disabled: mergeDisabled, onFormatFieldsValue } = mergeProps;
 
   const list: React.ReactNode[] = [];
 
@@ -131,6 +132,7 @@ const Items = (props: YFormItemsProps) => {
           addonAfter,
           plugins,
           componentProps,
+          format,
           ...formItemProps
         } = _itemProps;
 
@@ -150,6 +152,10 @@ const Items = (props: YFormItemsProps) => {
           labelLayout = defaultPlugin,
           disabled = defaultPlugin,
         } = _plugins;
+
+        if (format) {
+          onFormatFieldsValue([{ name, format }]);
+        }
 
         if (disabled) {
           if (!('disabled' in _componentProps)) {
@@ -192,7 +198,7 @@ const Items = (props: YFormItemsProps) => {
               }
               if (required) {
                 let hasRequired = false;
-                forEach(_formItemProps.rules, item => {
+                forEach(_formItemProps.rules, (item) => {
                   hasRequired = 'required' in item;
                 });
                 // 没传 required 校验情况下追加默认校验

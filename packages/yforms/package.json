@@ -1,0 +1,32 @@
+{
+  "name": "yforms",
+  "version": "0.8.0",
+  "description": "自定义表单组件",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "authors": {
+    "name": "crazyair",
+    "email": "645381995@qq.com"
+  },
+  "files": [
+    "es",
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "lint:tsc": "tsc -p tsconfig.json --noEmit",
+    "build": "father-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/crazyair/yforms",
+    "directory": "yforms"
+  },
+  "homepage": "http://github.com/crazyair/yforms",
+  "bugs": "http://github.com/crazyair/yforms/issues",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
+}

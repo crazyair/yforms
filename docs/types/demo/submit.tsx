@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { YForm } from 'father-doc-yform';
+import { YForm } from 'yforms';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 

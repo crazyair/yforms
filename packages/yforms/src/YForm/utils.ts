@@ -1,5 +1,5 @@
 import { isValidElement } from 'react';
-import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy, isArray } from 'lodash';
+import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy, isArray, find } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
 import { stringAndFunc } from './ItemsType';
@@ -34,7 +34,7 @@ export const oneLineItemStyle = (list?: Array<number | string>) => {
   const _list: { display: string; width: string }[] = [];
   let width = 0;
   let count = 0;
-  list.forEach(item => {
+  list.forEach((item) => {
     if (typeof item === 'number') {
       width += item;
     } else {
@@ -42,7 +42,7 @@ export const oneLineItemStyle = (list?: Array<number | string>) => {
     }
   });
 
-  list.forEach(item => {
+  list.forEach((item) => {
     if (typeof item === 'number') {
       _list.push({ display: 'inline-block', width: `${item}px` });
     } else {
@@ -65,7 +65,7 @@ export const searchSelect = {
     const getValue = (dom: React.ReactNode): string => {
       const _value = get(dom, 'props.children');
       if (Array.isArray(_value)) {
-        const d = map(_value, item => {
+        const d = map(_value, (item) => {
           if (isValidElement(item)) {
             return getValue(item);
           } else {
@@ -92,7 +92,7 @@ export const calculateStrLength = (name?: string | number): number => {
   }
   let count = 0;
   const strArr = Array.from(name);
-  strArr.forEach(c => {
+  strArr.forEach((c) => {
     if (/[\x00-\xff]/.test(c)) {
       count++;
     } else {
@@ -141,15 +141,15 @@ export function submitFormatValues<T>(
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
   const _values = cloneDeep(values) as KeyValue;
-
-  const list: FormatFieldsValue[] = sortBy(formatFieldsValue, item => {
+  const list: FormatFieldsValue[] = sortBy(formatFieldsValue, (item) => {
+    if (!item) return;
     if (isArray(item.name)) {
       return -item.name.length;
     } else {
       return -`${item.name}`.length;
     }
   });
-  forEach(list, item => {
+  forEach(list, (item) => {
     if (item && item.name) {
       set(_values, item.name, item.format({ ...values }));
     }
@@ -160,8 +160,11 @@ export function submitFormatValues<T>(
 export const onFormatFieldsValue = <T>(formatFieldsValue: FormatFieldsValue<T>[]) => {
   return (list: FormatFieldsValue<T>[]) => {
     const _formatFields = formatFieldsValue;
-    forEach(list, item => {
-      _formatFields.push(item);
+    forEach(list, (item) => {
+      // 已存在不再注册
+      if (!find(_formatFields, { name: item.name })) {
+        _formatFields.push(item);
+      }
     });
     return _formatFields;
   };

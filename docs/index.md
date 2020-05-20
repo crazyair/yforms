@@ -1,9 +1,9 @@
 ---
-title: yform
+title: yforms
 order: 10
 hero:
-  title: yform
-  desc: 一个基于 antd v4 封装的可以 DIY 的 Form，起名叫 yform
+  title: yforms
+  desc: 一个基于 antd v4 封装的可以 DIY 的 Form，起名叫 yforms
 
   actions:
     - text: 快速上手
@@ -31,7 +31,7 @@ features:
 
 ## 参与贡献
 
-欢迎加入到 yform 的建设队伍中来，请访问 https://github.com/crazyair/father-doc-yform 。
+欢迎加入到 yforms 的建设队伍中来，请访问 https://github.com/crazyair/yforms 。
 
 ```jsx | inline
 import React from 'react';

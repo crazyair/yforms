@@ -7,7 +7,7 @@
       "pr(dependency)": ":deciduous_tree: Dependency",
       "pr(chore)": ":turtle: Chore"
     },
-    "repo": "crazyair/father-doc-yform",
+    "repo": "crazyair/yforms",
     "cacheDir": ".changelog"
   },
   "packages": ["packages/*"],
@@ -24,5 +24,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
+  "useWorkspaces": true,
   "version": "independent"
 }

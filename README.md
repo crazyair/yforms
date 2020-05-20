@@ -1,14 +1,13 @@
-[![codecov](https://codecov.io/gh/crazyair/father-doc-yform/branch/master/graph/badge.svg)](https://codecov.io/gh/crazyair/father-doc-yform)
+[![codecov](https://codecov.io/gh/crazyair/yforms/branch/master/graph/badge.svg)](https://codecov.io/gh/crazyair/yforms)
 
 ## Usage & Guide
 
-To check out live examples and docs, visit [yform now](https://father-doc-yform.now.sh/).
+To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
 
 ## Development
 
 ```bash
 $ npm install
-$ npm run bootstrap
 $ npm run dev
 ```
 
