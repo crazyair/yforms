@@ -1,0 +1,32 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    # tags:
+    #   - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    # branches:
+    #   - master
+
+name: Create Release
+
+jobs:
+  Release:
+    name: Create Actions Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: get changelog
+        id: changelog
+        run: node ./scripts/getChangeLog.js
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          # see https://github.com/marketplace/actions/autochangelog
+          body: ${{ steps.changelog.outputs.changelog}}
+          draft: true
+          prerelease: true
