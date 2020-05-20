@@ -1,6 +1,6 @@
 {
   "name": "yforms",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -29,7 +29,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.4"
+    "@babel/runtime": "^7.8.4",
+    "warning": "^4.0.3",
+    "antd": "^4.2.4",
+    "@ant-design/icons": "^4.0.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "numbro": "^2.2.0",
+    "nzh": "^1.0.4"
   },
   "license": "MIT"
 }
