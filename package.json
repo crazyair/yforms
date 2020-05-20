@@ -83,14 +83,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "warning": "^4.0.3",
     "antd": "^4.2.4",
-    "@ant-design/icons": "^4.0.3",
-    "lodash": "^4.17.15",
-    "moment": "^2.24.0",
-    "numbro": "^2.2.0",
-    "nzh": "^1.0.4",
-    "dayjs": "^1.8.27",
     "rc-queue-anim": "^1.8.4"
   }
 }
