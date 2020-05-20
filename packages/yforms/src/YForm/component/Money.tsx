@@ -13,6 +13,9 @@ class InputMoney extends React.PureComponent<YMoneyProps> {
     const { onChange } = this.props;
     if (onChange) {
       const { value } = e.target;
+      if (value === undefined || value === '') {
+        return value;
+      }
       const _number = parseFloat(value);
       if (Number.isNaN(_number)) {
         return onChange(0);
