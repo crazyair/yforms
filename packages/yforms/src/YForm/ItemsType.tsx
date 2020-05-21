@@ -25,15 +25,7 @@ import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
-import { YFormProps, YFormConfig } from './Form';
-
-export type modifyType<T = any> = {
-  formProps?: YFormProps;
-  itemsProps?: YFormItemsProps;
-  itemProps?: YFormItemProps;
-  componentProps?: T;
-  plugins?: YFormConfig['plugins'];
-};
+import { YFormProps } from './Form';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -46,6 +38,14 @@ export interface YFormFieldBaseProps<T = any> {
     props: Required<modifyType<T>>,
   ) => Pick<modifyType<T>, 'componentProps' | 'itemProps'>;
 }
+
+export type modifyType<T = any> = {
+  formProps?: YFormProps;
+  itemsProps?: YFormItemsProps;
+  itemProps?: YFormItemProps;
+  componentProps?: T;
+  typeProps?: YFormFieldBaseProps<T>;
+};
 
 export interface BaseComponentProps {
   className?: string;

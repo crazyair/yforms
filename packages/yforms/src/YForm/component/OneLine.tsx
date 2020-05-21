@@ -44,13 +44,12 @@ export default (props: YFormOneLineProps) => {
         return merge(
           {},
           {
-            plugins: { labelLayout: false, noLabelLayout: false },
             style: { display: 'inline-block', ..._style },
           },
           { ...item, className: classNames('dib', get(item, 'className')) },
         );
       }
-    }).filter(x => x);
+    }).filter((x) => x);
   }
 
   return (

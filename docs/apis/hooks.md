@@ -40,7 +40,7 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 export default () => {
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log('Success:', values);
   };
 
@@ -58,7 +58,6 @@ export default () => {
             {
               type: 'button',
               noStyle: true,
-              plugins: { disabled: false },
               componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
             },
           ],
@@ -97,7 +96,7 @@ export default () => {
     params: { typeName },
   } = YForm.useSubmit({ params: { type: 'create' } });
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log('Success:', values);
   };
 

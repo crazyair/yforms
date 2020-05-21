@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge, concat } from 'lodash';
+import { merge, concat, mapKeys } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps, FormInstance } from 'antd/lib/form';
@@ -12,40 +12,24 @@ import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
 
-type pluginsType = boolean;
-
-export type YFormPluginsType = {
-  placeholder?: pluginsType;
-  required?: pluginsType;
-  disabled?: pluginsType;
-  labelLayout?: pluginsType;
-  noLabelLayout?: pluginsType;
-  view?: pluginsType;
-};
+import defaultScene from './scenes';
 
 export type KeyValue = { [key: string]: any };
 export type FieldsType<T> = { [K in keyof T]: string };
 
+export type YFormScene = {
+  form?: (props: Required<Pick<modifyType, 'formProps'>>) => Pick<modifyType, 'formProps'>;
+  items?: (
+    props: Required<Pick<modifyType, 'formProps' | 'itemsProps'>>,
+  ) => Pick<modifyType, 'itemsProps'>;
+  item?: (props: Required<modifyType>) => Pick<modifyType, 'itemProps' | 'componentProps'>;
+};
+
 export interface YFormConfig {
   itemsType?: YFormItemsType;
-  plugins?: YFormPluginsType | boolean;
-  getScene?: {
-    [key: string]: {
-      form?: (
-        props: Required<Pick<modifyType, 'formProps'>>,
-      ) => Pick<modifyType, 'formProps' | 'plugins'>;
-      items?: (
-        props: Required<Pick<modifyType, 'formProps' | 'itemsProps'>>,
-      ) => Pick<modifyType, 'itemsProps' | 'plugins'>;
-      item?: (props: Required<modifyType>) => Pick<modifyType, 'itemProps' | 'componentProps'>;
-    };
-  };
+  getScene?: { [key: string]: YFormScene };
+  scenes?: { base?: boolean; [key: string]: boolean };
 }
-let globalConfig: YFormConfig = { plugins: true };
-
-export const Config = (options: YFormConfig) => {
-  globalConfig = merge({}, globalConfig, options);
-};
 
 export function useFormatFieldsValue<T = any>() {
   const formatFieldsValue = useRef([]);
@@ -87,17 +71,27 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   submitComponentProps?: YFormSubmitProps;
   onCancel?: (p: { type: 'onSave' | 'onSubmit' | 'onCancel' }) => void;
   params?: ParamsType;
-  scene?: string;
 }
 
+// 全局默认值
+let globalConfig: YFormConfig = { getScene: defaultScene.getScene, scenes: { base: true } };
+
+export const Config = (options: YFormConfig) => {
+  globalConfig = merge({}, globalConfig, options);
+};
+
 const InternalForm = (props: YFormProps) => {
-  const { scene, getScene = globalConfig.getScene } = props;
-  const _scene = (scene && getScene && getScene[scene]) || {};
+  const { scenes, getScene = globalConfig.getScene } = props;
+  const _scenes = merge({}, scenes, globalConfig.scenes);
   let _props = { ...props };
-  if (_scene.form) {
-    const data = _scene.form({ formProps: _props });
-    if ('formProps' in data) _props = data.formProps;
-  }
+  mapKeys(_scenes, (value: boolean, key: string) => {
+    if (value) {
+      const data = getScene[key].form({ formProps: props });
+      if (data) {
+        if ('formProps' in data) _props = data.formProps;
+      }
+    }
+  });
 
   const {
     disabled,
@@ -113,7 +107,6 @@ const InternalForm = (props: YFormProps) => {
     form: propsForm,
     className,
     submitComponentProps,
-    plugins,
     ...rest
   } = _props;
   const [form] = useForm(propsForm);
@@ -200,19 +193,10 @@ const InternalForm = (props: YFormProps) => {
     setDisabled((c) => !c);
   };
 
-  let _plugins;
-  if (typeof globalConfig.plugins === 'boolean') {
-    _plugins = globalConfig.plugins;
-  } else if (typeof plugins === 'boolean') {
-    _plugins = plugins;
-  } else {
-    _plugins = merge({}, plugins, globalConfig.plugins);
-  }
-
   const _providerProps = merge(
     {
       form,
-      plugins: _plugins,
+      scenes: _scenes,
       disabled: thisDisabled,
       getScene,
       onFormatFieldsValue: _onFormatFieldsValue,

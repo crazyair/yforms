@@ -38,16 +38,15 @@ const Demo = () => {
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      plugins={{ view: true }}
       required
     >
       {[
-        { type: 'custom', component: 1 },
+        { type: 'custom', component: 1, label: 'xx' },
+        { type: 'input', label: 'names', name: 'names' },
         {
           type: 'input',
           label: 'name',
           name: 'name',
-          // extra: 'aaa ',
           componentProps: { addonAfter: '元' },
           format: ({ name }) => `${name} 修改了`,
         },
@@ -55,7 +54,6 @@ const Demo = () => {
           type: 'datePicker',
           label: 'date',
           name: 'date',
-          // help: 'xxx',
           componentProps: { style: { width: '100%' } },
           format: ({ date }) => moment(date).format('YYYY-MM-DD'),
         },

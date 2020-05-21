@@ -25,10 +25,7 @@ YForm.Config({
         },
       }),
       items: ({ itemsProps }) => {
-        return {
-          itemsProps: { noStyle: true, ...itemsProps },
-          plugins: { required: false },
-        };
+        return { itemsProps: { noStyle: true, ...itemsProps } };
       },
       item: ({ itemProps, componentProps }) => {
         return {

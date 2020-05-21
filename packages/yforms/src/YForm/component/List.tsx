@@ -108,7 +108,6 @@ export default (props: YFormListProps) => {
                           showRightIcons && {
                             style: { ..._oneLineStyle[0] },
                           },
-                        plugins: { noLabelLayout: true },
                         label: index === 0 && _label,
                         addonAfter: showRightIcons && !disabled && index === 0 && (
                           <div

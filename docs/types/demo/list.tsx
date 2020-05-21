@@ -87,10 +87,9 @@ export default () => {
             {
               type: 'button',
               noStyle: true,
-              plugins: { disabled: false },
               componentProps: {
                 type: 'primary',
-                onClick: () => setDisabled(c => !c),
+                onClick: () => setDisabled((c) => !c),
                 children: '更改禁用状态',
               },
             },
