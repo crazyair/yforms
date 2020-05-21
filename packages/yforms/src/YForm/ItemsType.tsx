@@ -37,8 +37,10 @@ export type modifyType<T = any> = {
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
+  componentView?: React.ReactElement;
   formItemProps?: YFormItemProps;
   formatStr?: string;
+  noField?: boolean;
   hasFormItem?: boolean;
   modifyProps?: (
     props: Required<modifyType<T>>,
@@ -82,7 +84,7 @@ export interface YFormItemsTypeDefine {
   // 其它功能类型
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
   list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
-  custom: { componentProps?: any; component?: React.ReactElement };
+  custom: { componentProps?: any; component?: React.ReactNode };
   submit: { componentProps?: YFormSubmitProps };
   secureButton: { componentProps?: YFormSecureButtonProps };
 }
@@ -113,12 +115,16 @@ export const itemsType: YFormItemsType = {
   radio: { component: <Radio />, formatStr: '请选择${label}' },
   select: { component: <Select {...searchSelect} />, formatStr: '请选择${label}' },
   text: { component: <CustomTypography /> },
-  oneLine: { component: <OneLine />, modifyProps: oneLineModify },
-  list: { component: <List />, hasFormItem: false },
-  button: { component: <Button /> },
-  custom: { formatStr: '请输入${label}' },
-  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
-  secureButton: { component: <SecureButton /> },
+  oneLine: { component: <OneLine />, modifyProps: oneLineModify, noField: true },
+  list: { component: <List />, hasFormItem: false, noField: true },
+  button: { component: <Button />, noField: true },
+  custom: {
+    formatStr: '请输入${label}',
+    noField: true,
+    modifyProps: ({ itemProps }) => ({ itemProps: { className: 'mb0', ...itemProps } }),
+  },
+  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify, noField: true },
+  secureButton: { component: <SecureButton />, noField: true },
 };
 
 export default itemsType;

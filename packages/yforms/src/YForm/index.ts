@@ -1,5 +1,4 @@
 import { Form as AntForm } from 'antd';
-import { FormInstance } from 'antd/lib/form';
 
 import YForm, { Config, useFormatFieldsValue } from './Form';
 import Items from './Items';
@@ -7,10 +6,6 @@ import useSubmit from './useSubmit';
 import useForm from './useForm';
 
 import './index.less';
-
-interface Demo extends FormInstance {
-  getFormatFieldsValue?: any;
-}
 
 type InternalYForm = typeof YForm;
 interface RefYForm extends InternalYForm {

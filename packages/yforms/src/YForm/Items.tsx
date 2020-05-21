@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, set, merge, forEach, isObject, isArray } from 'lodash';
-import { FormInstance, FormItemProps } from 'antd/lib/form';
+import { find, omit, merge, forEach, isObject, isArray } from 'lodash';
+import { FormItemProps } from 'antd/lib/form';
 
 import { YFormContext, YFormItemsContext } from './Context';
 import { replaceMessage, getLabelLayout } from './utils';
-import { YFormPluginsType, YFormProps } from './Form';
+import { YFormPluginsType, YFormProps, YFormInstance } from './Form';
 import { YFormItemsTypeArray } from './ItemsType';
 import ItemChildren from './ItemChildren';
+import ComponentView from './component/ComponentView';
 
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
-export type YFormRenderChildren = (form: FormInstance) => YFormItemProps['children'];
+export type YFormRenderChildren = (form: YFormInstance) => YFormItemProps['children'];
 
 type isShowFunc = (values: any) => boolean;
 
@@ -21,6 +22,8 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   plugins?: YFormPluginsType | boolean;
   className?: string;
   addonAfter?: React.ReactElement;
+  componentView?: React.ReactNode;
+  noField?: boolean;
   format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   offset?: number;
@@ -61,7 +64,7 @@ const Items = (props: YFormItemsProps) => {
   let _props = { ...props };
   let mergeProps = merge({}, formProps, itemsProps, _props);
   if (_scene.items) {
-    const data = _scene.items({ itemsProps: _props });
+    const data = _scene.items({ formProps, itemsProps: _props });
     if ('itemsProps' in data) _props = data.itemsProps;
     mergeProps = merge({}, mergeProps, _props);
     if ('plugins' in data) mergeProps.plugins = data.plugins;
@@ -87,11 +90,29 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
+        const { modifyProps, noField } = (itemsType[item.type] && itemsType[item.type]) || {};
+
         const _basePlugins = merge({}, mergeProps, item).plugins;
+
+        let _plugins: YFormPluginsType = {};
+        if (typeof _basePlugins === 'boolean') {
+          defaultPlugin = _basePlugins;
+        } else if (isObject(_basePlugins)) {
+          _plugins = _basePlugins;
+        }
+        const {
+          placeholder = defaultPlugin,
+          required = defaultPlugin,
+          noLabelLayout = defaultPlugin,
+          labelLayout = defaultPlugin,
+          disabled = defaultPlugin,
+          view = false,
+        } = _plugins;
 
         let defaultProps;
         let _itemProps = { ...item };
         let _componentProps = { ...item.componentProps };
+
         const defaultData = {
           // 当前类型参数
           itemProps: _itemProps,
@@ -101,7 +122,6 @@ const Items = (props: YFormItemsProps) => {
           itemsProps: _props,
           plugins: mergeProps.plugins,
         };
-        const modifyProps = itemsType[item.type] && itemsType[item.type].modifyProps;
         // 参数修改
         if (_scene.item || modifyProps) {
           // 场景
@@ -139,52 +159,35 @@ const Items = (props: YFormItemsProps) => {
         let _formItemProps = formItemProps;
         const { label, name } = _formItemProps;
 
-        let _plugins: YFormPluginsType = {};
-        if (typeof _basePlugins === 'boolean') {
-          defaultPlugin = _basePlugins;
-        } else if (isObject(_basePlugins)) {
-          _plugins = _basePlugins;
-        }
-        const {
-          placeholder = defaultPlugin,
-          required = defaultPlugin,
-          noLabelLayout = defaultPlugin,
-          labelLayout = defaultPlugin,
-          disabled = defaultPlugin,
-        } = _plugins;
-
         if (format) {
           onFormatFieldsValue([{ name, format }]);
         }
 
-        if (disabled) {
-          if (!('disabled' in _componentProps)) {
-            set(_componentProps, 'disabled', mergeDisabled);
-          }
-        }
-
-        let _children = item.children;
-        // 默认只用 FormItem 包裹
-        let _hasFormItem = true;
         if (labelLayout) {
           _formItemProps = { ..._formItemProps, ...labelLayoutValue };
         }
-        let key: React.ReactText = _index;
-
         // 添加无 label 处理
         if (noLabelLayout && !label) {
-          _formItemProps = {
-            ..._formItemProps,
-            ...noLabelLayoutValue,
-            labelCol: undefined,
-          };
+          _formItemProps = { ..._formItemProps, ...noLabelLayoutValue, labelCol: undefined };
         }
+        if (disabled && !('disabled' in _componentProps)) {
+          _componentProps.disabled = mergeDisabled;
+        }
+        if (view && !noField && !dataSource) {
+          _formItemProps.className = classNames('mb0', item.className);
+        }
+
+        let _children = item.children;
+        // 默认用 FormItem 包裹
+        let _hasFormItem = true;
+
+        let key: React.ReactText = _index;
+
         if (item.type && itemsType) {
           const _fieldData = itemsType[item.type];
           if (_fieldData) {
-            const { component, formatStr, hasFormItem = _hasFormItem } = _fieldData;
-
-            _hasFormItem = hasFormItem;
+            const { component, componentView, formatStr } = _fieldData;
+            _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
 
             //  添加必填 placeholder 处理
             if ((placeholder || required) && name) {
@@ -217,14 +220,16 @@ const Items = (props: YFormItemsProps) => {
             if (items) {
               _componentProps = { ..._base, key };
             }
-
-            if (component) {
-              _children = React.cloneElement(component, { ...component.props, ..._componentProps });
-            } else if (item.component) {
-              _children = React.cloneElement(item.component, {
+            const _component = component || item.component;
+            const _componentView = componentView || <ComponentView />;
+            if (isValidElement(_component)) {
+              _children = React.cloneElement(!noField && view ? _componentView : _component, {
                 ..._componentProps,
-                ...item.component.props,
+                ...(_component.props as React.ReactElement),
+                _item_type: type,
               });
+            } else {
+              _children = _component;
             }
           } else {
             warning(false, `[YFom.Items] ${type} 类型未找到`);
@@ -241,7 +246,7 @@ const Items = (props: YFormItemsProps) => {
         }
         const domChildren =
           typeof _children === 'function'
-            ? (form: FormInstance) => {
+            ? (form: YFormInstance) => {
                 return (
                   <Items noStyle plugins={plugins}>
                     {(_children as YFormRenderChildren)(form)}
@@ -251,7 +256,11 @@ const Items = (props: YFormItemsProps) => {
             : _children;
         if (_hasFormItem) {
           list.push(
-            <ItemChildren key={key} addonAfter={addonAfter} {..._formItemProps}>
+            <ItemChildren
+              key={key}
+              addonAfter={addonAfter}
+              {...omit(_formItemProps, ['component'])}
+            >
               {domChildren}
             </ItemChildren>,
           );

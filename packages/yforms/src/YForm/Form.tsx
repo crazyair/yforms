@@ -4,7 +4,7 @@ import { merge, concat } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps, FormInstance } from 'antd/lib/form';
-import baseItemsType, { YFormItemsType, YFormFieldBaseProps, modifyType } from './ItemsType';
+import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
@@ -12,7 +12,7 @@ import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
 
-type pluginsType = boolean | YFormFieldBaseProps['modifyProps'];
+type pluginsType = boolean;
 
 export type YFormPluginsType = {
   placeholder?: pluginsType;
@@ -20,6 +20,7 @@ export type YFormPluginsType = {
   disabled?: pluginsType;
   labelLayout?: pluginsType;
   noLabelLayout?: pluginsType;
+  view?: pluginsType;
 };
 
 export type KeyValue = { [key: string]: any };
@@ -34,7 +35,7 @@ export interface YFormConfig {
         props: Required<Pick<modifyType, 'formProps'>>,
       ) => Pick<modifyType, 'formProps' | 'plugins'>;
       items?: (
-        props: Required<Pick<modifyType, 'itemsProps'>>,
+        props: Required<Pick<modifyType, 'formProps' | 'itemsProps'>>,
       ) => Pick<modifyType, 'itemsProps' | 'plugins'>;
       item?: (props: Required<modifyType>) => Pick<modifyType, 'itemProps' | 'componentProps'>;
     };

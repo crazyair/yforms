@@ -36,7 +36,7 @@ class InputMoney extends React.PureComponent<YMoneyProps> {
     const { value } = this.props;
     return (
       <div className="input-money">
-        <Input suffix="元" onBlur={this.handleNumberChange} {...this.props} />
+        <Input onBlur={this.handleNumberChange} {...this.props} />
         <div className="zh">{convertMoney(`${value || ''}`)}</div>
       </div>
     );

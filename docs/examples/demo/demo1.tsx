@@ -38,24 +38,46 @@ const Demo = () => {
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
+      plugins={{ view: true }}
       required
     >
       {[
-        { type: 'input', label: 'name', name: 'name', format: ({ name }) => `${name} 修改了` },
+        { type: 'custom', component: 1 },
+        {
+          type: 'input',
+          label: 'name',
+          name: 'name',
+          // extra: 'aaa ',
+          componentProps: { addonAfter: '元' },
+          format: ({ name }) => `${name} 修改了`,
+        },
         {
           type: 'datePicker',
           label: 'date',
           name: 'date',
+          // help: 'xxx',
           componentProps: { style: { width: '100%' } },
           format: ({ date }) => moment(date).format('YYYY-MM-DD'),
         },
-        { type: 'money', label: 'money', name: 'money' },
+        {
+          type: 'money',
+          label: 'money',
+          componentProps: { suffix: '元' },
+          name: 'money',
+        },
         { type: 'submit' },
         {
           type: 'button',
           componentProps: {
             onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
             children: '获取提交前数据',
+          },
+        },
+        {
+          type: 'button',
+          componentProps: {
+            onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
+            children: '查看表单',
           },
         },
       ]}
