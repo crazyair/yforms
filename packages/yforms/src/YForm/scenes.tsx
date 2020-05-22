@@ -23,7 +23,7 @@ const scenes: YFormConfig = {
         const { disabled, required } = formProps;
         const { label, rules } = itemProps;
         const { noField, formatStr } = typeProps;
-        const _base = merge(formProps, itemsProps, itemProps);
+        const _base = merge({}, formProps, itemsProps, itemProps);
 
         const { labelCol, wrapperCol, offset } = _base;
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
@@ -52,10 +52,25 @@ const scenes: YFormConfig = {
             }
           }
         }
-
         return {
           itemProps: { ..._itemProps, ...itemProps },
           componentProps: { ..._componentProps, ...componentProps },
+        };
+      },
+    },
+    noCol: {
+      item: ({ itemProps }) => {
+        return { itemProps: { ...itemProps, labelCol: {}, wrapperCol: {} } };
+      },
+    },
+    noLabelLayout: {
+      item: ({ formProps, itemsProps, itemProps }) => {
+        const { label } = itemProps;
+        const _base = merge({}, formProps, itemsProps, itemProps);
+        const { wrapperCol } = _base;
+        const _itemProps = label ? {} : { labelCol: {}, wrapperCol };
+        return {
+          itemProps: { ...itemProps, ..._itemProps },
         };
       },
     },

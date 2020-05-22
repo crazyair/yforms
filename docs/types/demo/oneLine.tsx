@@ -29,6 +29,7 @@ export default () => {
               {
                 noStyle: true,
                 shouldUpdate: true,
+                scenes: { noCol: true },
                 children: () => {
                   return [{ style: style[2], label: '年龄', type: 'input', name: 'age2' }];
                 },

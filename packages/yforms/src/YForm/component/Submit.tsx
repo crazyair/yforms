@@ -10,11 +10,13 @@ import { YFormFieldBaseProps } from '../ItemsType';
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
   componentProps,
+  itemProps,
   formProps,
 }) => {
+  const _scenes = merge({}, formProps.scenes, itemProps.scenes);
   const { form, onSave, submitComponentProps } = formProps;
   const mergeCProps = merge({}, submitComponentProps, componentProps);
-  const _cProps = { form, onSave, ...mergeCProps };
+  const _cProps = { form, onSave, scenes: _scenes, ...mergeCProps };
   return { componentProps: _cProps };
 };
 
@@ -31,13 +33,13 @@ type showBtns = {
 };
 
 export interface YFormSubmitProps
-  extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
+  extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled' | 'scenes'> {
   showBtns?: showBtns | boolean;
   reverseBtns?: boolean;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, showBtns = true, reverseBtns, disabled } = props;
+  const { form, onSave, showBtns = true, scenes, reverseBtns, disabled } = props;
   const { getFieldsValue, getFormatFieldsValue } = form || {};
 
   const handleOnSave = async (e) => {
@@ -111,7 +113,7 @@ export default (props: YFormSubmitProps) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items isShow={!!showBtns}>
+    <YForm.Items scenes={scenes} isShow={!!showBtns}>
       {[{ className: 'button-more-left', dataSource: btns }]}
     </YForm.Items>
   );

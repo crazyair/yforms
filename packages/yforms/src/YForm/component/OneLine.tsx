@@ -30,8 +30,8 @@ export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'
 };
 
 export default (props: YFormOneLineProps) => {
-  const { componentProps = {}, items, ...rest } = props;
-  const { oneLineStyle, ..._componentRest } = componentProps as YFormOneLineComponentProps;
+  const { items, componentProps = {} } = props;
+  const { oneLineStyle, className, style } = componentProps as YFormOneLineComponentProps;
 
   const styleObj = oneLineItemStyle(oneLineStyle || []);
   const _dataSource = items && items({ style: styleObj });
@@ -43,18 +43,15 @@ export default (props: YFormOneLineProps) => {
       if (isObject(item)) {
         return merge(
           {},
-          {
-            style: { display: 'inline-block', ..._style },
-          },
+          { style: { display: 'inline-block', ..._style } },
           { ...item, className: classNames('dib', get(item, 'className')) },
         );
       }
     }).filter((x) => x);
   }
-
   return (
-    <div className="one-line" {..._componentRest}>
-      <YForm.Items {...rest}>{_childrenDataSource}</YForm.Items>
+    <div className={classNames('one-line', className)} style={style}>
+      <YForm.Items scenes={{ noCol: true }}>{_childrenDataSource}</YForm.Items>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { find, omit, merge, forEach, isObject, isArray, mapKeys } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YFormContext, YFormItemsContext } from './Context';
-import { YFormProps, YFormInstance } from './Form';
+import { YFormProps, YFormInstance, YFormConfig } from './Form';
 import { YFormItemsTypeArray } from './ItemsType';
 import ItemChildren from './ItemChildren';
 
@@ -23,6 +23,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   noField?: boolean;
   format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
+  scenes?: YFormConfig['scenes'];
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
@@ -41,6 +42,7 @@ export interface FormatFieldsValue<T = any> {
 interface InternalYFormItemProps extends YFormItemProps {
   dataSource?: any;
   items?: any;
+  scenes?: any;
   component?: any;
   onSave?: any;
 }
@@ -56,21 +58,20 @@ const Items = (props: YFormItemsProps) => {
   const itemsProps = useContext(YFormItemsContext);
   const { itemsType } = formProps;
 
-  // const _scene = (scene && getScene && getScene[scene]) || {};
-  let _props = { ...props };
-  let mergeProps = merge({}, formProps, itemsProps, _props);
+  let mergeProps = merge({}, formProps, itemsProps, props);
   const { scenes, getScene, onFormatFieldsValue } = mergeProps;
 
+  const _defaultData = { formProps: props, itemsProps: props };
   mapKeys(scenes, (value: boolean, key: string) => {
-    if (value) {
-      const data = getScene[key].items({ formProps: props, itemsProps: _props });
+    if (value && getScene[key] && getScene[key].items) {
+      const data = getScene[key].items(_defaultData);
       if (data) {
-        if ('itemsProps' in data) _props = data.itemsProps;
-        mergeProps = merge({}, mergeProps, _props);
+        _defaultData.itemsProps = { ..._defaultData.itemsProps, ...data.itemsProps };
       }
     }
   });
-
+  mergeProps = merge({}, mergeProps, _defaultData.itemsProps);
+  const _props = _defaultData.itemsProps;
   if ('isShow' in _props && !_props.isShow) return null;
 
   const { children = [], className, style, noStyle } = _props;
@@ -84,7 +85,7 @@ const Items = (props: YFormItemsProps) => {
       const _index = pIndex ? `${pIndex}_${index}` : index;
       // 如果是 dom 直接渲染
       if (React.isValidElement(item)) {
-        const domProps = merge(item.props, { style: item.style, className: item.className });
+        const domProps = merge({}, item.props, { style: item.style, className: item.className });
         return list.push(
           <React.Fragment key={_index}>{React.cloneElement(item, { ...domProps })}</React.Fragment>,
         );
@@ -111,18 +112,22 @@ const Items = (props: YFormItemsProps) => {
         if (modifyProps) {
           _defaultData = merge({}, defaultData, modifyProps(defaultData));
         }
-        mapKeys(scenes, (value: boolean, key: string) => {
-          if (value) {
+        const _scenes = merge({}, scenes, item.scenes);
+        mapKeys(_scenes, (value: boolean, key: string) => {
+          if (value && getScene[key] && getScene[key].item) {
             const data = getScene[key].item(_defaultData);
             if (data) {
-              if ('itemProps' in data) _itemProps = data.itemProps;
-              if ('componentProps' in data) _componentProps = data.componentProps;
+              _defaultData.itemProps = { ..._defaultData.itemProps, ...data.itemProps };
+              _defaultData.componentProps = {
+                ..._defaultData.componentProps,
+                ...data.componentProps,
+              };
             }
           }
         });
-
+        _itemProps = _defaultData.itemProps;
+        _componentProps = _defaultData.componentProps;
         const _base = merge({}, formProps, itemsProps, _itemProps);
-
         const {
           type,
           dataSource,
@@ -163,7 +168,8 @@ const Items = (props: YFormItemsProps) => {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-              _children = React.cloneElement(_component, { ..._props, _item_type: type });
+              const _elementProps = { ..._props, _item_type: type };
+              _children = React.cloneElement(_component, _elementProps);
             } else {
               _children = _component;
             }
@@ -173,13 +179,21 @@ const Items = (props: YFormItemsProps) => {
         } else {
           // 没有 type 单独有 dataSource 情况
           if (dataSource) {
-            _children = <Items {..._componentProps}>{dataSource}</Items>;
+            _children = (
+              <Items scenes={_scenes} {..._componentProps}>
+                {dataSource}
+              </Items>
+            );
           }
         }
         const domChildren =
           typeof _children === 'function'
             ? (form: YFormInstance) => {
-                return <Items noStyle>{(_children as YFormRenderChildren)(form)}</Items>;
+                return (
+                  <Items noStyle scenes={_scenes}>
+                    {(_children as YFormRenderChildren)(form)}
+                  </Items>
+                );
               }
             : _children;
         if (_hasFormItem) {
@@ -206,9 +220,10 @@ const Items = (props: YFormItemsProps) => {
   } else {
     list.push(children);
   }
-
   const child = (
-    <YFormItemsContext.Provider value={{ ...mergeProps }}>{list}</YFormItemsContext.Provider>
+    <YFormItemsContext.Provider value={omit(mergeProps, ['scenes'])}>
+      {list}
+    </YFormItemsContext.Provider>
   );
   return noStyle ? (
     child

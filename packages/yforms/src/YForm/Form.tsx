@@ -82,16 +82,17 @@ export const Config = (options: YFormConfig) => {
 
 const InternalForm = (props: YFormProps) => {
   const { scenes, getScene = globalConfig.getScene } = props;
-  const _scenes = merge({}, scenes, globalConfig.scenes);
-  let _props = { ...props };
+  const _scenes = merge({}, globalConfig.scenes, scenes);
+  const _defaultData = { formProps: props };
   mapKeys(_scenes, (value: boolean, key: string) => {
-    if (value) {
-      const data = getScene[key].form({ formProps: props });
+    if (value && getScene[key] && getScene[key].form) {
+      const data = getScene[key].form(_defaultData);
       if (data) {
-        if ('formProps' in data) _props = data.formProps;
+        _defaultData.formProps = { ..._defaultData.formProps, ...data.formProps };
       }
     }
   });
+  const _props = _defaultData.formProps;
 
   const {
     disabled,
@@ -194,6 +195,7 @@ const InternalForm = (props: YFormProps) => {
   };
 
   const _providerProps = merge(
+    {},
     {
       form,
       scenes: _scenes,

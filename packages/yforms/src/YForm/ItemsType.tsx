@@ -25,7 +25,7 @@ import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
-import { YFormProps } from './Form';
+import { YFormProps, YFormConfig } from './Form';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -34,6 +34,7 @@ export interface YFormFieldBaseProps<T = any> {
   formatStr?: string;
   noField?: boolean;
   hasFormItem?: boolean;
+  scenes?: YFormConfig['scenes'];
   modifyProps?: (
     props: Required<modifyType<T>>,
   ) => Pick<modifyType<T>, 'componentProps' | 'itemProps'>;
@@ -118,11 +119,7 @@ export const itemsType: YFormItemsType = {
   oneLine: { component: <OneLine />, modifyProps: oneLineModify, noField: true },
   list: { component: <List />, hasFormItem: false, noField: true },
   button: { component: <Button />, noField: true },
-  custom: {
-    formatStr: '请输入${label}',
-    noField: true,
-    modifyProps: ({ itemProps }) => ({ itemProps: { className: 'mb0', ...itemProps } }),
-  },
+  custom: { formatStr: '请输入${label}', noField: true },
   submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify, noField: true },
   secureButton: { component: <SecureButton />, noField: true },
 };

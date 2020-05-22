@@ -19,7 +19,7 @@ export default () => {
       required
       {...layout}
       disabled={disabled}
-      initialValues={{ phones: [{}], card: [{}], users: [{}] }}
+      initialValues={{ phones: [{}, {}], card: [{}], users: [{}] }}
     >
       {[
         {

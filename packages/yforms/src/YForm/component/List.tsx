@@ -105,9 +105,7 @@ export default (props: YFormListProps) => {
                       {
                         offset,
                         componentProps: !disabled &&
-                          showRightIcons && {
-                            style: { ..._oneLineStyle[0] },
-                          },
+                          showRightIcons && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
                         addonAfter: showRightIcons && !disabled && index === 0 && (
                           <div
@@ -125,7 +123,7 @@ export default (props: YFormListProps) => {
                   });
                 }
                 return (
-                  <YForm.Items noStyle key={field.key}>
+                  <YForm.Items noStyle key={field.key} scenes={{ noLabelLayout: true }}>
                     {_children}
                   </YForm.Items>
                 );
