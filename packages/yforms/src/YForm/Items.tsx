@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, omit, merge, forEach, isObject, isArray, mapKeys } from 'lodash';
+import { find, omit, merge, forEach, isObject, isArray, mapKeys, get } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YFormContext, YFormItemsContext } from './Context';
@@ -92,26 +92,20 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
-        const typeProps = (itemsType[item.type] && itemsType[item.type]) || {};
-        const { modifyProps } = typeProps;
 
         let _itemProps = { ...item };
         let _componentProps = { ...item.componentProps };
 
         const defaultData = {
-          // 当前类型参数
-          itemProps: _itemProps,
-          // 当前类型组件参数
-          componentProps: _componentProps,
           formProps,
-          itemsProps: _props,
-          typeProps,
+          itemsProps: mergeProps,
+          typeProps: itemsType[item.type] || {},
+          itemProps: item,
+          componentProps: item.componentProps,
         };
         // 参数修改
         let _defaultData = defaultData;
-        if (modifyProps) {
-          _defaultData = merge({}, defaultData, modifyProps(defaultData));
-        }
+
         const _scenes = merge({}, scenes, item.scenes);
         mapKeys(_scenes, (value: boolean, key: string) => {
           if (value && getScene[key] && getScene[key].item) {
@@ -125,6 +119,11 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
+        const typeProps = get(itemsType, get(_defaultData, ['itemProps', 'type'])) || {};
+        const { modifyProps } = typeProps;
+        if (modifyProps) {
+          _defaultData = merge({}, defaultData, modifyProps(defaultData));
+        }
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
         const _base = merge({}, formProps, itemsProps, _itemProps);
@@ -151,8 +150,8 @@ const Items = (props: YFormItemsProps) => {
 
         let key: React.ReactText = _index;
 
-        if (item.type && itemsType) {
-          const _fieldData = itemsType[item.type];
+        if (type && itemsType) {
+          const _fieldData = itemsType[type];
           if (_fieldData) {
             const { component } = _fieldData;
             _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
@@ -168,7 +167,7 @@ const Items = (props: YFormItemsProps) => {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-              const _elementProps = { ..._props, _item_type: type };
+              const _elementProps = { ..._props, _item_type: item.type };
               _children = React.cloneElement(_component, _elementProps);
             } else {
               _children = _component;

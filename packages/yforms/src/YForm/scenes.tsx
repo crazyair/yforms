@@ -74,6 +74,21 @@ const scenes: YFormConfig = {
         };
       },
     },
+    view: {
+      item: ({ itemProps, typeProps }) => {
+        const { showType } = typeProps;
+        let _itemProps;
+        if (showType === 'input') {
+          _itemProps = {
+            className: 'mb0',
+            type: 'view',
+          };
+        }
+        return {
+          itemProps: { ...itemProps, ..._itemProps },
+        };
+      },
+    },
   },
 };
 

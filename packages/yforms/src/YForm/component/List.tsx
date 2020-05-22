@@ -128,13 +128,14 @@ export default (props: YFormListProps) => {
                   </YForm.Items>
                 );
               })}
-              {showBottomAdd && isMax && (
+              {showBottomAdd && isMax && !disabled && (
                 <YForm.Items>
                   {[
                     {
                       type: 'button',
                       offset,
                       componentProps: {
+                        disabled,
                         type: 'dashed',
                         onClick: () => add(),
                         style: { width: '100%' },

@@ -71,234 +71,6 @@ Object {
           class="ant-form ant-form-horizontal yforms"
         >
           <div
-            class="yform-items"
-          >
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="demo"
-                      placeholder="请输入"
-                      type="text"
-                      value=""
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-8 ant-form-item-label"
-              >
-                <label
-                  class=""
-                  title="money"
-                >
-                  money
-                </label>
-              </div>
-              <div
-                class="ant-col ant-col-16 ant-form-item-control"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <div
-                      class="input-money"
-                    >
-                      <span
-                        class="ant-input-affix-wrapper"
-                      >
-                        <input
-                          class="ant-input"
-                          id="money"
-                          placeholder="请输入money"
-                          type="text"
-                          value="1"
-                        />
-                        <span
-                          class="ant-input-suffix"
-                        >
-                          元
-                        </span>
-                      </span>
-                      <div
-                        class="zh"
-                      >
-                        壹
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <div
-                      class="yform-items"
-                    >
-                      <button
-                        class="ant-btn ant-btn-primary"
-                        type="submit"
-                      >
-                        <span>
-                          submit
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-        <form
-          class="ant-form ant-form-horizontal yforms"
-        >
-          <div
-            class="yform-items"
-          >
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-form-item-control ant-col-xs-24 ant-col-xs-offset-24 ant-col-sm-20 ant-col-sm-offset-4"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="demo"
-                      placeholder="请输入"
-                      type="text"
-                      value=""
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-form-item-label ant-col-xs-24 ant-col-sm-4"
-              >
-                <label
-                  class=""
-                  title="money"
-                >
-                  money
-                </label>
-              </div>
-              <div
-                class="ant-col ant-form-item-control ant-col-xs-24 ant-col-sm-20"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <div
-                      class="input-money"
-                    >
-                      <span
-                        class="ant-input-affix-wrapper"
-                      >
-                        <input
-                          class="ant-input"
-                          id="money"
-                          placeholder="请输入money"
-                          type="text"
-                          value="1"
-                        />
-                        <span
-                          class="ant-input-suffix"
-                        >
-                          元
-                        </span>
-                      </span>
-                      <div
-                        class="zh"
-                      >
-                        壹
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-form-item-control ant-col-xs-24 ant-col-xs-offset-24 ant-col-sm-20 ant-col-sm-offset-4"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <div
-                      class="yform-items"
-                    >
-                      <button
-                        class="ant-btn ant-btn-primary"
-                        type="submit"
-                      >
-                        <span>
-                          submit
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div>
-      <form
-        class="ant-form ant-form-horizontal yforms"
-      >
-        <div
-          class="yform-items"
-        >
-          <div
             class="ant-row ant-form-item"
           >
             <div
@@ -311,9 +83,10 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
+                    _item_type="input"
                     class="ant-input"
                     id="demo"
-                    placeholder="请输入"
+                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -346,22 +119,14 @@ Object {
                   <div
                     class="input-money"
                   >
-                    <span
-                      class="ant-input-affix-wrapper"
-                    >
-                      <input
-                        class="ant-input"
-                        id="money"
-                        placeholder="请输入money"
-                        type="text"
-                        value="1"
-                      />
-                      <span
-                        class="ant-input-suffix"
-                      >
-                        元
-                      </span>
-                    </span>
+                    <input
+                      _item_type="money"
+                      class="ant-input"
+                      id="money"
+                      placeholder="请输入money"
+                      type="text"
+                      value="1"
+                    />
                     <div
                       class="zh"
                     >
@@ -384,29 +149,22 @@ Object {
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <div
-                    class="yform-items"
+                  <button
+                    _item_type="button"
+                    class="ant-btn ant-btn-primary"
+                    type="submit"
                   >
-                    <button
-                      class="ant-btn ant-btn-primary"
-                      type="submit"
-                    >
-                      <span>
-                        submit
-                      </span>
-                    </button>
-                  </div>
+                    <span>
+                      submit
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
-      <form
-        class="ant-form ant-form-horizontal yforms"
-      >
-        <div
-          class="yform-items"
+        </form>
+        <form
+          class="ant-form ant-form-horizontal yforms"
         >
           <div
             class="ant-row ant-form-item"
@@ -421,9 +179,10 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
+                    _item_type="input"
                     class="ant-input"
                     id="demo"
-                    placeholder="请输入"
+                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -456,22 +215,14 @@ Object {
                   <div
                     class="input-money"
                   >
-                    <span
-                      class="ant-input-affix-wrapper"
-                    >
-                      <input
-                        class="ant-input"
-                        id="money"
-                        placeholder="请输入money"
-                        type="text"
-                        value="1"
-                      />
-                      <span
-                        class="ant-input-suffix"
-                      >
-                        元
-                      </span>
-                    </span>
+                    <input
+                      _item_type="money"
+                      class="ant-input"
+                      id="money"
+                      placeholder="请输入money"
+                      type="text"
+                      value="1"
+                    />
                     <div
                       class="zh"
                     >
@@ -494,19 +245,212 @@ Object {
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <div
-                    class="yform-items"
+                  <button
+                    _item_type="button"
+                    class="ant-btn ant-btn-primary"
+                    type="submit"
                   >
-                    <button
-                      class="ant-btn ant-btn-primary"
-                      type="submit"
-                    >
-                      <span>
-                        submit
-                      </span>
-                    </button>
+                    <span>
+                      submit
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <form
+        class="ant-form ant-form-horizontal yforms"
+      >
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <input
+                  _item_type="input"
+                  class="ant-input"
+                  id="demo"
+                  placeholder=""
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-col-8 ant-form-item-label"
+          >
+            <label
+              class=""
+              title="money"
+            >
+              money
+            </label>
+          </div>
+          <div
+            class="ant-col ant-col-16 ant-form-item-control"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <div
+                  class="input-money"
+                >
+                  <input
+                    _item_type="money"
+                    class="ant-input"
+                    id="money"
+                    placeholder="请输入money"
+                    type="text"
+                    value="1"
+                  />
+                  <div
+                    class="zh"
+                  >
+                    壹
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <button
+                  _item_type="button"
+                  class="ant-btn ant-btn-primary"
+                  type="submit"
+                >
+                  <span>
+                    submit
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form
+        class="ant-form ant-form-horizontal yforms"
+      >
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-form-item-control ant-col-xs-24 ant-col-xs-offset-24 ant-col-sm-20 ant-col-sm-offset-4"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <input
+                  _item_type="input"
+                  class="ant-input"
+                  id="demo"
+                  placeholder=""
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-form-item-label ant-col-xs-24 ant-col-sm-4"
+          >
+            <label
+              class=""
+              title="money"
+            >
+              money
+            </label>
+          </div>
+          <div
+            class="ant-col ant-form-item-control ant-col-xs-24 ant-col-sm-20"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <div
+                  class="input-money"
+                >
+                  <input
+                    _item_type="money"
+                    class="ant-input"
+                    id="money"
+                    placeholder="请输入money"
+                    type="text"
+                    value="1"
+                  />
+                  <div
+                    class="zh"
+                  >
+                    壹
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-row ant-form-item"
+        >
+          <div
+            class="ant-col ant-form-item-control ant-col-xs-24 ant-col-xs-offset-24 ant-col-sm-20 ant-col-sm-offset-4"
+          >
+            <div
+              class="ant-form-item-control-input"
+            >
+              <div
+                class="ant-form-item-control-input-content"
+              >
+                <button
+                  _item_type="button"
+                  class="ant-btn ant-btn-primary"
+                  type="submit"
+                >
+                  <span>
+                    submit
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -578,24 +522,23 @@ Object {
         id="basic"
       >
         <div
-          class="yform-items"
+          class="ant-row ant-form-item"
         >
           <div
-            class="ant-row ant-form-item"
+            class="ant-col ant-form-item-control"
           >
             <div
-              class="ant-col ant-form-item-control"
+              class="ant-form-item-control-input"
             >
               <div
-                class="ant-form-item-control-input"
+                class="ant-form-item-control-input-content"
               >
-                <div
-                  class="ant-form-item-control-input-content"
+                <p
+                  _item_type="demo"
+                  placeholder=""
                 >
-                  <p>
-                    123
-                  </p>
-                </div>
+                  123
+                </p>
               </div>
             </div>
           </div>
@@ -609,24 +552,23 @@ Object {
       id="basic"
     >
       <div
-        class="yform-items"
+        class="ant-row ant-form-item"
       >
         <div
-          class="ant-row ant-form-item"
+          class="ant-col ant-form-item-control"
         >
           <div
-            class="ant-col ant-form-item-control"
+            class="ant-form-item-control-input"
           >
             <div
-              class="ant-form-item-control-input"
+              class="ant-form-item-control-input-content"
             >
-              <div
-                class="ant-form-item-control-input-content"
+              <p
+                _item_type="demo"
+                placeholder=""
               >
-                <p>
-                  123
-                </p>
-              </div>
+                123
+              </p>
             </div>
           </div>
         </div>
@@ -807,122 +749,6 @@ Object {
         class="ant-form ant-form-horizontal yforms"
       >
         <div
-          class="yform-items"
-        >
-          <div
-            class="ant-row ant-form-item"
-          >
-            <div
-              class="ant-col ant-form-item-control"
-            >
-              <div
-                class="ant-form-item-control-input"
-              >
-                <div
-                  class="ant-form-item-control-input-content"
-                >
-                  <input
-                    class="ant-input"
-                    id="demo"
-                    placeholder="请输入"
-                    type="text"
-                    value=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-row ant-form-item"
-          >
-            <div
-              class="ant-col ant-form-item-label"
-            >
-              <label
-                class=""
-                title="money"
-              >
-                money
-              </label>
-            </div>
-            <div
-              class="ant-col ant-form-item-control"
-            >
-              <div
-                class="ant-form-item-control-input"
-              >
-                <div
-                  class="ant-form-item-control-input-content"
-                >
-                  <div
-                    class="input-money"
-                  >
-                    <span
-                      class="ant-input-affix-wrapper"
-                    >
-                      <input
-                        class="ant-input"
-                        id="money"
-                        placeholder="请输入money"
-                        type="text"
-                        value="1"
-                      />
-                      <span
-                        class="ant-input-suffix"
-                      >
-                        元
-                      </span>
-                    </span>
-                    <div
-                      class="zh"
-                    >
-                      壹
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-row ant-form-item"
-          >
-            <div
-              class="ant-col ant-form-item-control"
-            >
-              <div
-                class="ant-form-item-control-input"
-              >
-                <div
-                  class="ant-form-item-control-input-content"
-                >
-                  <div
-                    class="yform-items"
-                  >
-                    <button
-                      class="ant-btn ant-btn-primary"
-                      type="submit"
-                    >
-                      <span>
-                        submit
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </body>,
-  "container": <div>
-    <form
-      class="ant-form ant-form-horizontal yforms"
-    >
-      <div
-        class="yform-items"
-      >
-        <div
           class="ant-row ant-form-item"
         >
           <div
@@ -935,9 +761,10 @@ Object {
                 class="ant-form-item-control-input-content"
               >
                 <input
+                  _item_type="input"
                   class="ant-input"
                   id="demo"
-                  placeholder="请输入"
+                  placeholder=""
                   type="text"
                   value=""
                 />
@@ -970,22 +797,14 @@ Object {
                 <div
                   class="input-money"
                 >
-                  <span
-                    class="ant-input-affix-wrapper"
-                  >
-                    <input
-                      class="ant-input"
-                      id="money"
-                      placeholder="请输入money"
-                      type="text"
-                      value="1"
-                    />
-                    <span
-                      class="ant-input-suffix"
-                    >
-                      元
-                    </span>
-                  </span>
+                  <input
+                    _item_type="money"
+                    class="ant-input"
+                    id="money"
+                    placeholder="请输入money"
+                    type="text"
+                    value="1"
+                  />
                   <div
                     class="zh"
                   >
@@ -1008,19 +827,114 @@ Object {
               <div
                 class="ant-form-item-control-input-content"
               >
-                <div
-                  class="yform-items"
+                <button
+                  _item_type="button"
+                  class="ant-btn ant-btn-primary"
+                  type="submit"
                 >
-                  <button
-                    class="ant-btn ant-btn-primary"
-                    type="submit"
-                  >
-                    <span>
-                      submit
-                    </span>
-                  </button>
+                  <span>
+                    submit
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>,
+  "container": <div>
+    <form
+      class="ant-form ant-form-horizontal yforms"
+    >
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <input
+                _item_type="input"
+                class="ant-input"
+                id="demo"
+                placeholder=""
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-label"
+        >
+          <label
+            class=""
+            title="money"
+          >
+            money
+          </label>
+        </div>
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="input-money"
+              >
+                <input
+                  _item_type="money"
+                  class="ant-input"
+                  id="money"
+                  placeholder="请输入money"
+                  type="text"
+                  value="1"
+                />
+                <div
+                  class="zh"
+                >
+                  壹
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <button
+                _item_type="button"
+                class="ant-btn ant-btn-primary"
+                type="submit"
+              >
+                <span>
+                  submit
+                </span>
+              </button>
             </div>
           </div>
         </div>
