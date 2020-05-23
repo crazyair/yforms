@@ -68,7 +68,13 @@ export default () => {
   return (
     <div>
       <p>搜索场景</p>
-      <YForm scene="search" form={form} name="search" className="search-form" onFinish={onFinish}>
+      <YForm
+        scenes={{ search: true }}
+        form={form}
+        name="search"
+        className="search-form"
+        onFinish={onFinish}
+      >
         <Row style={{ marginBottom: 16 }}>
           <Col span={18}>
             <Row>{fieldDom}</Row>

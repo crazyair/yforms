@@ -8,9 +8,6 @@ import { replaceMessage, getLabelLayout } from './utils';
 const scenes: YFormConfig = {
   getScene: {
     base: {
-      form: ({ formProps }) => ({
-        formProps: { ...formProps },
-      }),
       items: ({ itemsProps }) => {
         return {
           itemsProps: { noStyle: true, ...itemsProps },

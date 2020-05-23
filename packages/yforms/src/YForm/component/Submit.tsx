@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { merge, reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
@@ -10,14 +10,8 @@ import { YFormFieldBaseProps } from '../ItemsType';
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
   componentProps,
-  itemProps,
-  formProps,
 }) => {
-  const _scenes = merge({}, formProps.scenes, itemProps.scenes);
-  const { form, onSave, submitComponentProps } = formProps;
-  const mergeCProps = merge({}, submitComponentProps, componentProps);
-  const _cProps = { form, onSave, scenes: _scenes, ...mergeCProps };
-  return { componentProps: _cProps };
+  return { componentProps: { showBtns: { showSave: false }, ...componentProps } };
 };
 
 export interface ShowBtns {
@@ -32,15 +26,18 @@ type showBtns = {
   [P in keyof ShowBtns]?: boolean | ShowBtns[P];
 };
 
-export interface YFormSubmitProps
-  extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled' | 'scenes'> {
+export interface YFormSubmitProps extends Pick<YFormProps, 'disabled'> {
   showBtns?: showBtns | boolean;
   reverseBtns?: boolean;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, showBtns = true, scenes, reverseBtns, disabled } = props;
+  const formProps = useContext(YForm.YFormContext);
+  const itemsProps = useContext(YForm.YFormItemsContext);
+  const { form, onSave, scenes, submitComponentProps, ...rest } = merge({}, formProps, itemsProps);
   const { getFieldsValue, getFormatFieldsValue } = form || {};
+
+  const { showBtns = true, reverseBtns, disabled } = merge({}, rest, props);
 
   const handleOnSave = async (e) => {
     e.preventDefault();
@@ -56,7 +53,7 @@ export default (props: YFormSubmitProps) => {
     showEdit: { children: '编辑' },
     showBack: { children: '返回', type: 'link' },
   };
-
+  merge(_showBtns, submitComponentProps.showBtns);
   const { showSubmit, showSave, showCancel, showEdit, showBack } = mergeWith(
     _showBtns,
     showBtns,

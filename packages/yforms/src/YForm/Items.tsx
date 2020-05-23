@@ -4,7 +4,7 @@ import warning from 'warning';
 import { find, omit, merge, forEach, isObject, isArray, mapKeys, get } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
-import { YFormContext, YFormItemsContext } from './Context';
+import { YForm } from '..';
 import { YFormProps, YFormInstance, YFormConfig } from './Form';
 import { YFormItemsTypeArray } from './ItemsType';
 import ItemChildren from './ItemChildren';
@@ -54,8 +54,8 @@ export interface YFormItemsProps
 }
 
 const Items = (props: YFormItemsProps) => {
-  const formProps = useContext(YFormContext);
-  const itemsProps = useContext(YFormItemsContext);
+  const formProps = useContext(YForm.YFormContext);
+  const itemsProps = useContext(YForm.YFormItemsContext);
   const { itemsType } = formProps;
 
   let mergeProps = merge({}, formProps, itemsProps, props);
@@ -220,9 +220,9 @@ const Items = (props: YFormItemsProps) => {
     list.push(children);
   }
   const child = (
-    <YFormItemsContext.Provider value={omit(mergeProps, ['scenes'])}>
+    <YForm.YFormItemsContext.Provider value={omit(mergeProps, ['scenes'])}>
       {list}
-    </YFormItemsContext.Provider>
+    </YForm.YFormItemsContext.Provider>
   );
   return noStyle ? (
     child

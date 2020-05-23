@@ -120,18 +120,27 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const { resetFields, getFieldsValue } = form;
   const _params = paramsType(params);
   const { create, edit, view } = _params;
-  const [thisDisabled, setDisabled] = useState(view);
+  const iParams = useImmutableValue(_params);
+  const initDisabled = view;
+  const [thisDisabled, setDisabled] = useState(initDisabled);
   const [submitLoading, setSubmitLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 
-  const iParams = useImmutableValue(_params);
+  // 改变状态
+  const handleChangeDisabled = useCallback(
+    (disabled: boolean) => {
+      setDisabled(disabled);
+      if (submit) {
+        submit.forceUpdate({ params: iParams, disabled });
+      }
+    },
+    [iParams, submit],
+  );
 
-  // 改变刷新
+  // 初始化状态
   useEffect(() => {
-    if (submit) {
-      submit.forceUpdate({ disabled: thisDisabled, params: iParams });
-    }
-  }, [iParams, submit, thisDisabled]);
+    handleChangeDisabled(initDisabled);
+  }, [handleChangeDisabled, initDisabled, submit]);
 
   useEffect(() => {
     return () => {
@@ -152,11 +161,11 @@ const InternalForm = React.memo<YFormProps>((props) => {
         if (create) {
           goBack();
         } else if (edit || view) {
-          setDisabled(true);
+          handleChangeDisabled(true);
         }
       }
     },
-    [create, edit, onCancel, resetFields, view],
+    [create, edit, handleChangeDisabled, onCancel, resetFields, view],
   );
   const _itemsTypeAll = {
     ...baseItemsType,
@@ -205,7 +214,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   const handleOnEdit = (e) => {
     e.preventDefault();
-    setDisabled((c) => !c);
+    handleChangeDisabled(!thisDisabled);
   };
 
   const _providerProps = merge(

@@ -45,8 +45,9 @@ const YFormSubmitDemo = (props: any) => {
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
+    submit,
     params: { typeName },
-  } = YForm.useSubmit({ params });
+  } = YForm.useSubmit();
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
@@ -57,6 +58,7 @@ const YFormSubmitDemo = (props: any) => {
     <YForm
       initialValues={{ age: '1' }}
       onFinish={onFinish}
+      submit={submit}
       formatFieldsValue={formatFieldsValue}
       onSave={onSave}
       params={params}

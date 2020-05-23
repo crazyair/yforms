@@ -93,8 +93,9 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 export default () => {
   const [form] = YForm.useForm();
   const {
+    submit,
     params: { typeName },
-  } = YForm.useSubmit({ params: { type: 'create' } });
+  } = YForm.useSubmit();
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -103,7 +104,7 @@ export default () => {
   return (
     <>
       <h4>{typeName}</h4>
-      <YForm {...layout} required onFinish={onFinish}>
+      <YForm {...layout} required onFinish={onFinish} submit={submit} params={{ type: 'create' }}>
         {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
       </YForm>
     </>
