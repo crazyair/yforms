@@ -25,6 +25,7 @@ const Demo = () => {
         custom: '这里是自定义文本',
         money: '999999999',
         单选: true,
+        开关: true,
         多选: ['1', '2'],
         下拉框多选: ['1', '2'],
         下拉框: '1',
@@ -62,16 +63,19 @@ const Demo = () => {
       onFinishFailed={onFinishFailed}
       onSave={onSave}
       scenes={{ view }}
-      disabled={view}
+      // disabled={view}
+      // disabled
+      params={{ type: 'edit' }}
       required
     >
       {[
         {
           type: 'button',
+          scenes: { disabled: false },
           componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
         },
         // { type: 'custom', component: 1, label: 'xx' },
-        { type: 'input', label: '空值', name: 'names' },
+        { type: 'input', label: '空值', name: 'names', scenes: { base: false } },
         {
           type: 'list',
           name: 'phones',

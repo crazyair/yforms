@@ -37,7 +37,6 @@ const scenes: YFormConfig = {
           typeof label === 'string' && replaceMessage(formatStr || '', { label });
 
         if (!noField) {
-          _componentProps.disabled = disabled;
           _componentProps.placeholder = _placeholder || '';
           if (required) {
             let hasRequired = false;
@@ -54,6 +53,17 @@ const scenes: YFormConfig = {
         }
         return {
           itemProps: { ..._itemProps, ...itemProps },
+          componentProps: { ..._componentProps, ...componentProps },
+        };
+      },
+    },
+    disabled: {
+      item: ({ formProps, componentProps, typeProps }) => {
+        const _componentProps: modifyType['componentProps'] = {};
+        const { disabled } = formProps;
+        const { noField } = typeProps;
+        _componentProps.disabled = disabled;
+        return {
           componentProps: { ..._componentProps, ...componentProps },
         };
       },

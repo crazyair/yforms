@@ -113,7 +113,7 @@ export default (props: YFormSubmitProps) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items scenes={scenes} isShow={!!showBtns}>
+    <YForm.Items scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
       {[{ className: 'button-more-left', dataSource: btns }]}
     </YForm.Items>
   );
