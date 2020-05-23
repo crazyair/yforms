@@ -1,5 +1,17 @@
-import { isValidElement } from 'react';
-import { get, map, join, set, mapKeys, forEach, cloneDeep, sortBy, isArray, find } from 'lodash';
+import { isValidElement, useRef } from 'react';
+import {
+  get,
+  map,
+  join,
+  set,
+  mapKeys,
+  forEach,
+  cloneDeep,
+  sortBy,
+  isArray,
+  find,
+  isEqual,
+} from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
 import { stringAndFunc } from './ItemsType';
@@ -184,4 +196,12 @@ export const paramsType = (params?: ParamsType) => {
   if (type.view) typeName = '查看';
 
   return { ...type, typeName };
+};
+
+export const useImmutableValue = (value: any) => {
+  const v = useRef(value);
+  if (!isEqual(value, v.current)) {
+    v.current = value;
+  }
+  return v.current;
 };

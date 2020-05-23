@@ -61,7 +61,7 @@ export default (props: YFormSubmitProps) => {
     _showBtns,
     showBtns,
     (objValue, srcValue) => {
-      // boolean 类型如果是 true 则用 objValue
+      // boolean 类型则用 objValue
       if (typeof srcValue === 'boolean') {
         return srcValue ? objValue : srcValue;
       }

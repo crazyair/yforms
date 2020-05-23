@@ -10,33 +10,37 @@ const options = [
   { id: '2', name: '数学' },
 ];
 
+const initialValues = {
+  name: '张三',
+  age: '10',
+  textarea: '这里是长文本',
+  text: '这里是文本',
+  custom: '这里是自定义文本',
+  money: '999999999',
+  单选: true,
+  开关: true,
+  多选: ['1', '2'],
+  下拉框多选: ['1', '2'],
+  下拉框: '1',
+  radio: '1',
+  users: [
+    { name: '张三', age: '10' },
+    { name: '李四', age: '20' },
+  ],
+  phones: [{ phone: '18888888888' }, { phone: '18888888888' }],
+  date: moment(),
+};
+
 const Demo = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [form] = YForm.useForm();
 
+  const { submit, disabled } = YForm.useSubmit();
+
   useEffect(() => {
     setTimeout(() => {
-      setData({
-        name: '张三',
-        age: '10',
-        textarea: '这里是长文本',
-        text: '这里是文本',
-        custom: '这里是自定义文本',
-        money: '999999999',
-        单选: true,
-        开关: true,
-        多选: ['1', '2'],
-        下拉框多选: ['1', '2'],
-        下拉框: '1',
-        radio: '1',
-        users: [
-          { name: '张三', age: '10' },
-          { name: '李四', age: '20' },
-        ],
-        phones: [{ phone: '18888888888' }, { phone: '18888888888' }],
-        date: moment(),
-      });
+      setData(initialValues);
       setLoading(false);
     }, 10);
   }, []);
@@ -50,30 +54,28 @@ const Demo = () => {
   const onSave = (values: any) => {
     console.log('values:', values);
   };
-  const [view, setView] = useState(true);
 
   return (
     <YForm
       {...layout}
       form={form}
+      submit={submit}
       name="basic"
       initialValues={data}
       onFinish={onFinish}
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      scenes={{ view }}
-      // disabled={view}
-      // disabled
-      params={{ type: 'edit' }}
+      scenes={{ view: disabled }}
+      params={{ type: 'view' }}
       required
     >
       {[
-        {
-          type: 'button',
-          scenes: { disabled: false },
-          componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
-        },
+        // {
+        //   type: 'button',
+        //   scenes: { disabled: false },
+        //   componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
+        // },
         // { type: 'custom', component: 1, label: 'xx' },
         { type: 'input', label: '空值', name: 'names', scenes: { base: false } },
         {
@@ -117,20 +119,20 @@ const Demo = () => {
         },
         {
           type: 'input',
-          label: 'name',
+          label: '姓名',
           name: 'name',
           format: ({ name }) => `${name} 修改了`,
         },
         {
           type: 'datePicker',
-          label: 'date',
+          label: '日期',
           name: 'date',
           componentProps: { style: { width: '100%' } },
           format: ({ date }) => moment(date).format('YYYY-MM-DD'),
         },
         {
           type: 'money',
-          label: 'money',
+          label: '金额',
           componentProps: { suffix: '元' },
           name: 'money',
         },
@@ -167,13 +169,9 @@ const Demo = () => {
         },
         {
           type: 'radio',
-          label: 'radio',
+          label: '单选按钮',
           name: 'radio',
-          componentProps: {
-            showField: (record) => `${record.id}-${record.name}`,
-            postField: 'id',
-            options,
-          },
+          componentProps: { showField: (record) => `${record.id + 1}-${record.name}`, options },
         },
         { label: '文本', name: 'text', type: 'text' },
         {

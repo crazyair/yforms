@@ -8,11 +8,12 @@ import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
-import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
+import { onFormatFieldsValue, submitFormatValues, paramsType, useImmutableValue } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
 
 import defaultScene from './scenes';
+import { YFormUseSubmitReturnProps } from './useSubmit';
 
 export type KeyValue = { [key: string]: any };
 export type FieldsType<T> = { [K in keyof T]: string };
@@ -62,6 +63,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   required?: boolean;
   loading?: boolean;
   form?: YFormInstance;
+  submit?: YFormUseSubmitReturnProps['submit'];
   formatFieldsValue?: FormatFieldsValue[];
   onFormatFieldsValue?: (
     f: FormatFieldsValue<T>[],
@@ -83,7 +85,7 @@ export const Config = (options: YFormConfig) => {
   globalConfig = merge({}, globalConfig, options);
 };
 
-const InternalForm = (props: YFormProps) => {
+const InternalForm = React.memo<YFormProps>((props) => {
   const { scenes, getScene = globalConfig.getScene } = props;
   const _scenes = merge({}, globalConfig.scenes, scenes);
   const _defaultData = { formProps: props };
@@ -111,6 +113,7 @@ const InternalForm = (props: YFormProps) => {
     form: propsForm,
     className,
     submitComponentProps,
+    submit,
     ...rest
   } = _props;
   const [form] = useForm(propsForm);
@@ -119,8 +122,16 @@ const InternalForm = (props: YFormProps) => {
   const { create, edit, view } = _params;
   const [thisDisabled, setDisabled] = useState(view);
   const [submitLoading, setSubmitLoading] = useState(false);
-
   const timeOut = useRef<number | null>(null);
+
+  const iParams = useImmutableValue(_params);
+
+  // 改变刷新
+  useEffect(() => {
+    if (submit) {
+      submit.forceUpdate({ disabled: thisDisabled, params: iParams });
+    }
+  }, [iParams, submit, thisDisabled]);
 
   useEffect(() => {
     return () => {
@@ -242,6 +253,6 @@ const InternalForm = (props: YFormProps) => {
       </YFormContext.Provider>
     </Form>
   );
-};
+});
 
 export default InternalForm;
