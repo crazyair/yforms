@@ -6,7 +6,7 @@ import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
 import { YFormProps, YFormInstance, YFormConfig } from './Form';
-import { YFormItemsTypeArray } from './ItemsType';
+import { YFormItemsTypeArray, YFormFieldBaseProps } from './ItemsType';
 import ItemChildren from './ItemChildren';
 
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
@@ -24,6 +24,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];
+  showType?: YFormFieldBaseProps['showType'];
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
@@ -204,7 +205,7 @@ const Items = (props: YFormItemsProps) => {
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
-              {...omit(_formItemProps, ['component', 'scenes'])}
+              {...omit(_formItemProps, ['component', 'scenes', 'showType'])}
             >
               {domChildren}
             </ItemChildren>,

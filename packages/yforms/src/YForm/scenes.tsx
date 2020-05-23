@@ -39,7 +39,7 @@ const scenes: YFormConfig = {
         const _itemProps: modifyType['itemProps'] = {};
         const { required } = formProps;
         const { label, rules } = itemProps;
-        const { formatStr, showType } = typeProps;
+        const { formatStr, showType } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
         if (showType === 'input') {
@@ -66,7 +66,7 @@ const scenes: YFormConfig = {
       item: ({ itemProps, componentProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { label } = itemProps;
-        const { formatStr, showType } = typeProps;
+        const { formatStr, showType } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
         if (showType === 'input') {
@@ -79,10 +79,10 @@ const scenes: YFormConfig = {
     },
     // 判断 disabled 给没个 item 添加 disabled
     disabled: {
-      item: ({ formProps, componentProps, typeProps }) => {
+      item: ({ formProps, componentProps, itemProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { disabled } = formProps;
-        const { showType } = typeProps;
+        const { showType } = merge({}, typeProps, itemProps);
         if (showType === 'input') {
           _componentProps.disabled = disabled;
         }
@@ -94,7 +94,7 @@ const scenes: YFormConfig = {
     // 查看情况下每个 item 并且 showType = input  使用 view 类型渲染
     view: {
       item: ({ itemProps, typeProps }) => {
-        const { showType } = typeProps;
+        const { showType } = merge({}, typeProps, itemProps);
         let _itemProps;
         if (showType === 'input') {
           _itemProps = { className: 'mb0', type: 'view' };

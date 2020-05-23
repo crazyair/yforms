@@ -176,7 +176,7 @@ const Demo = () => {
         { label: '文本', name: 'text', type: 'text' },
         {
           label: '自定义渲染',
-          // showType: 'input',
+          showType: 'input',
           type: 'custom',
           name: 'custom',
           component: <Input />,
