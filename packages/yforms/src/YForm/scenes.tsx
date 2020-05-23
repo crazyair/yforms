@@ -120,7 +120,7 @@ const scenes: YFormConfig = {
       item: ({ itemProps, componentProps }) => {
         return {
           itemProps: { ...itemProps, label: undefined },
-          componentProps: { placeholder: itemProps.label, ...componentProps },
+          componentProps: { ...componentProps, placeholder: itemProps.label },
         };
       },
     },
