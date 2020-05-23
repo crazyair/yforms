@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, omit, merge, forEach, isObject, isArray, mapKeys, get } from 'lodash';
+import { find, omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
@@ -85,7 +85,14 @@ const Items = (props: YFormItemsProps) => {
       const _index = pIndex ? `${pIndex}_${index}` : index;
       // 如果是 dom 直接渲染
       if (React.isValidElement(item)) {
-        return list.push(item);
+        const thisProps: { className?: string; style?: string } = item.props || {};
+        const domProps = {
+          ...pick(item, ['key']),
+          style: merge({}, item.style, thisProps.style),
+          className: classNames(item.className, thisProps.className),
+          key: `${_index}`,
+        };
+        return list.push(React.cloneElement(item, { ...domProps }));
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
@@ -197,7 +204,7 @@ const Items = (props: YFormItemsProps) => {
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
-              {...omit(_formItemProps, ['component'])}
+              {...omit(_formItemProps, ['component', 'scenes'])}
             >
               {domChildren}
             </ItemChildren>,
