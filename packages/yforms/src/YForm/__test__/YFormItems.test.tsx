@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
-import { Input } from 'antd';
 import { YForm } from '../../index';
 import { YFormItemsProps } from '../Items';
 import Submit from '../component/Submit';
+import { fields, initialValues } from './fields';
 
 export const delay = (timeout = 0) =>
   new Promise((resolve) => {
@@ -119,98 +119,7 @@ describe('YFormItems', () => {
     const wrapper = mount(
       <YForm required>
         <YForm.Items>
-          {[
-            { type: 'input', name: 'input' },
-            { type: 'input', name: 'input_isShow', isShow: false },
-            {
-              type: 'list',
-              name: 'list',
-              items: ({ index }) => [{ type: 'input', name: [index, 'd'] }],
-            },
-            {
-              type: 'textarea',
-              name: 'textarea',
-              label: '长文本',
-              componentProps: { inputMax: 9 },
-            },
-            {
-              type: 'radio',
-              name: '单选框',
-              componentProps: {
-                onAddProps: () => 'a',
-                options: [{ name: '真的', id: '1' }],
-              },
-            },
-            {
-              type: 'radio',
-              name: '单选框',
-              componentProps: {
-                renderOption: () => 'a',
-                options: [{ name: '真的', id: '1' }],
-              },
-            },
-            {
-              type: 'select',
-              label: '下拉框',
-              name: '下拉框',
-              componentProps: {
-                optionLabelProp: 'checkedValue',
-                onAddProps: (item) => ({ checkedValue: `(${item.name})` }),
-                showField: (record) => (
-                  <div>
-                    <div>{record.id}</div>-{record.name}
-                  </div>
-                ),
-                options: [
-                  { id: '1', name: '开' },
-                  { id: '2', name: '关' },
-                ],
-              },
-            },
-            {
-              type: 'select',
-              label: '下拉框',
-              name: '下拉框',
-              componentProps: {
-                optionLabelProp: 'checkedValue',
-                renderOption: () => 'a',
-                options: [{ id: '1', name: '开' }],
-              },
-            },
-            { shouldUpdate: true, children: () => [{ type: 'input', name: 'f' }] },
-            { type: 'checkbox', name: 'checkbox' },
-            {
-              type: 'checkboxGroup',
-              name: 'checkboxGroup',
-              componentProps: {
-                onAddProps: () => 'a',
-                options: [{ id: '1', name: 'a' }],
-              },
-            },
-            {
-              type: 'checkboxGroup',
-              name: 'checkboxGroup2',
-              componentProps: {
-                options: [{ id: '1', name: 'a' }],
-                renderOption: () => 'b',
-              },
-            },
-            {
-              type: 'list',
-              items: ({ index }) => [{ type: 'input', name: [index, 'd'] }],
-            },
-            { type: 'money', name: 'money' },
-            { label: 'text', name: 'text', type: 'text' },
-            { label: 'switch', name: 'switch', type: 'switch' },
-            { label: 'custom', type: 'custom', name: 'custom', component: <Input /> },
-            {
-              label: '精简使用',
-              type: 'input',
-              name: 'children_field2',
-              shouldUpdate: (prevValues, curValues) => prevValues.type !== curValues.type,
-              isShow: (values) => values.type === '2',
-            },
-          ]}
+          {fields}
           {[{ type: 'noType', name: 'a' }] as any}
           <div>1</div>
           123
@@ -396,5 +305,13 @@ describe('YFormItems', () => {
   });
   test('Form submit reverse', async () => {
     mount(<YFormSubmitDemo reverseBtns params={{ type: 'create' }} />);
+  });
+  test('view', async () => {
+    const wrapper = mount(
+      <YForm initialValues={initialValues} scenes={{ view: true }}>
+        <YForm.Items>{fields}</YForm.Items>
+      </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });
