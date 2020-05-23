@@ -171,7 +171,7 @@ const Demo = () => {
           type: 'radio',
           label: '单选按钮',
           name: 'radio',
-          componentProps: { showField: (record) => `${record.id + 1}-${record.name}`, options },
+          componentProps: { showField: (record) => `${record.id}-${record.name}`, options },
         },
         { label: '文本', name: 'text', type: 'text' },
         {

@@ -54,6 +54,25 @@ export default (props: YFormComponentView) => {
     });
     _value = map(list, (item) => <Tag key={item}>{item}</Tag>);
   }
+  if (_item_type === 'radio') {
+    const {
+      options,
+      showField = 'name',
+    } = props as YFormItemsTypeDefine['radio']['componentProps'];
+    if (value) {
+      const list = [];
+      _value = map(options, (item, index) => {
+        if (value === item.id) {
+          if (typeof showField === 'function') {
+            list.push(showField(item, index));
+          } else {
+            list.push(item[showField]);
+          }
+        }
+      });
+      _value = map(list, (item) => <Tag key={item}>{item}</Tag>);
+    }
+  }
   if (_item_type === 'checkboxGroup') {
     const { options } = props as YFormItemsTypeDefine['checkboxGroup']['componentProps'];
     if (value && isArray(value)) {
@@ -65,16 +84,7 @@ export default (props: YFormComponentView) => {
       _value = map(list, (item, index) => <Tag key={index}>{item}</Tag>);
     }
   }
-  if (_item_type === 'radio') {
-    const { options } = props as YFormItemsTypeDefine['radio']['componentProps'];
-    if (value) {
-      _value = map(options, (item) => {
-        if (value === item.id) {
-          return <Tag key={`${item.id}`}>{item.name}</Tag>;
-        }
-      });
-    }
-  }
+
   if (_item_type === 'switch') {
     const {
       checkedChildren = '开',
