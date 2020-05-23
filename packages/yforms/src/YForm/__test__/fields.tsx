@@ -98,6 +98,12 @@ const fields: YFormItemProps['children'] = [
     componentProps: { options },
   },
   {
+    type: 'checkboxGroup',
+    label: '多选2',
+    name: '多选2',
+    componentProps: { onAddProps: () => ({ disabled: true }), renderOption: () => '1', options },
+  },
+  {
     type: 'switch',
     label: '开关',
     name: '开关',
@@ -125,6 +131,18 @@ const fields: YFormItemProps['children'] = [
     label: '单选按钮',
     name: 'radio',
     componentProps: { showField: (record) => `${record.id}-${record.name}`, options },
+  },
+  {
+    type: 'radio',
+    label: '单选按钮2',
+    name: 'radio2',
+    componentProps: { onAddProps: () => ({ disabled: true }), options },
+  },
+  {
+    type: 'radio',
+    label: '单选按钮3',
+    name: 'radio3',
+    componentProps: { renderOption: () => '1', options },
   },
   { label: '文本', name: 'text', type: 'text' },
   {

@@ -35,13 +35,13 @@ export default (props: YFormSubmitProps) => {
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
   const { form, onSave, scenes, submitComponentProps, ...rest } = merge({}, formProps, itemsProps);
-  const { getFieldsValue, getFormatFieldsValue } = form || {};
+  const { getFieldsValue, getFormatFieldsValue } = form;
 
   const { showBtns = true, reverseBtns, disabled } = merge({}, rest, props);
 
   const handleOnSave = async (e) => {
     e.preventDefault();
-    if (onSave && getFieldsValue) {
+    if (onSave) {
       await onSave(getFormatFieldsValue(getFieldsValue()));
     }
   };
