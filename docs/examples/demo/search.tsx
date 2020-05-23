@@ -13,30 +13,6 @@ import './index.less';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-YForm.Config({
-  getScene: {
-    search: {
-      form: ({ formProps }) => ({
-        formProps: {
-          ...formProps,
-          required: false,
-          // 搜索成功后不重置表单
-          onCancel: () => {},
-        },
-      }),
-      items: ({ itemsProps }) => {
-        return { itemsProps: { noStyle: true, ...itemsProps } };
-      },
-      item: ({ itemProps, componentProps }) => {
-        return {
-          itemProps: { ...itemProps, label: undefined },
-          componentProps: { placeholder: itemProps.label, ...componentProps },
-        };
-      },
-    },
-  },
-});
-
 export default () => {
   const [expand, setExpand] = React.useState(false);
   const [form] = Form.useForm();
@@ -68,14 +44,8 @@ export default () => {
   return (
     <div>
       <p>搜索场景</p>
-      <YForm
-        scenes={{ search: true }}
-        form={form}
-        name="search"
-        className="search-form"
-        onFinish={onFinish}
-      >
-        <Row style={{ marginBottom: 16 }}>
+      <YForm scenes={{ search: true }} form={form} name="search" onFinish={onFinish}>
+        <Row>
           <Col span={18}>
             <Row>{fieldDom}</Row>
           </Col>

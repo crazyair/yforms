@@ -85,10 +85,7 @@ const Items = (props: YFormItemsProps) => {
       const _index = pIndex ? `${pIndex}_${index}` : index;
       // 如果是 dom 直接渲染
       if (React.isValidElement(item)) {
-        const domProps = merge({}, item.props, { style: item.style, className: item.className });
-        return list.push(
-          <React.Fragment key={_index}>{React.cloneElement(item, { ...domProps })}</React.Fragment>,
-        );
+        return list.push(item);
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;

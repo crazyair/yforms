@@ -78,7 +78,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
 // 全局默认值
 let globalConfig: YFormConfig = {
   getScene: defaultScene.getScene,
-  scenes: { base: true, disabled: true },
+  scenes: { labelLayout: true, disabled: true, placeholder: true, required: true },
 };
 
 export const Config = (options: YFormConfig) => {

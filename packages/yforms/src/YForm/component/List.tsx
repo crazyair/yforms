@@ -123,7 +123,7 @@ export default (props: YFormListProps) => {
                   });
                 }
                 return (
-                  <YForm.Items noStyle key={field.key} scenes={{ noLabelLayout: true }}>
+                  <YForm.Items noStyle key={field.key}>
                     {_children}
                   </YForm.Items>
                 );
