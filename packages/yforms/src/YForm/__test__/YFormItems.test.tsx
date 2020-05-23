@@ -341,15 +341,15 @@ describe('YFormItems', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
-  test('useSubmit', async () => {
+  test('useSubmit no save btn', async () => {
     const wrapperCreate = mount(<YFormSubmitDemo params={{ type: 'create' }} />);
-    await wrapperCreate.find('.ant-btn').at(2).simulate('click');
+    await wrapperCreate.find('.ant-btn').at(1).simulate('click');
     const wrapperView = mount(<YFormSubmitDemo params={{ type: 'view' }} />);
     await wrapperView.find('.ant-btn').at(0).simulate('click');
-    await wrapperView.find('.ant-btn').at(2).simulate('click');
+    await wrapperView.find('.ant-btn').at(1).simulate('click');
     const onCancel = jest.fn();
     const wrapperCancel = mount(<YFormSubmitDemo onCancel={onCancel} params={{ type: 'edit' }} />);
-    await wrapperCancel.find('.ant-btn').at(2).simulate('click');
+    await wrapperCancel.find('.ant-btn').at(1).simulate('click');
     expect(onCancel).toHaveBeenCalled();
   });
   test('Form submit', async () => {
