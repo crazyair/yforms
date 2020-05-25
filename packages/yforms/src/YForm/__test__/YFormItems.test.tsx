@@ -41,7 +41,7 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
 };
 
 const YFormSubmitDemo = (props: any) => {
-  const { params, onCancel, onFinish, onSave, reverseBtns } = props;
+  const { params, onCancel, onFinish, onSave, reverseBtns, showSave = false } = props;
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
@@ -67,7 +67,9 @@ const YFormSubmitDemo = (props: any) => {
       {typeName}
       {[
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-        { type: 'submit', componentProps: { reverseBtns } },
+        // { type: 'submit', componentProps: { reverseBtns, ...submitProps } },
+        // { type: 'submit', componentProps: { reverseBtns, showBtns: { showSave: true } } },
+        { type: 'submit', componentProps: { reverseBtns, showBtns: { showSave } } },
       ]}
     </YForm>
   );
@@ -249,6 +251,19 @@ describe('YFormItems', () => {
       </YForm>,
     );
     expect(wrapper).toMatchSnapshot();
+  });
+  test('useSubmit', async () => {
+    const wrapperCreate = mount(<YFormSubmitDemo showSave params={{ type: 'create' }} />);
+    await wrapperCreate.find('.ant-btn').at(2).simulate('click');
+    const wrapperView = mount(<YFormSubmitDemo showSave params={{ type: 'view' }} />);
+    await wrapperView.find('.ant-btn').at(0).simulate('click');
+    await wrapperView.find('.ant-btn').at(2).simulate('click');
+    const onCancel = jest.fn();
+    const wrapperCancel = mount(
+      <YFormSubmitDemo showSave onCancel={onCancel} params={{ type: 'edit' }} />,
+    );
+    await wrapperCancel.find('.ant-btn').at(2).simulate('click');
+    expect(onCancel).toHaveBeenCalled();
   });
   test('useSubmit no save btn', async () => {
     const wrapperCreate = mount(<YFormSubmitDemo params={{ type: 'create' }} />);
