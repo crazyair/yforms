@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
-import { Input } from 'antd';
 import { YForm } from '../../index';
 import { YFormItemsProps } from '../Items';
 import Submit from '../component/Submit';
+import { fields, initialValues } from './fields';
 
 export const delay = (timeout = 0) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
 
@@ -26,7 +26,6 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
               {
                 type: 'button',
                 noStyle: true,
-                plugins: { disabled: false },
                 componentProps: {
                   type: 'primary',
                   htmlType: 'submit',
@@ -42,12 +41,13 @@ const YFormItemsDemo = (props: YFormItemsProps) => {
 };
 
 const YFormSubmitDemo = (props: any) => {
-  const { params, onCancel, onFinish, onSave, reverseBtns } = props;
+  const { params, onCancel, onFinish, onSave, reverseBtns, showSave = false } = props;
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
+    submit,
     params: { typeName },
-  } = YForm.useSubmit({ params });
+  } = YForm.useSubmit();
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
@@ -58,6 +58,7 @@ const YFormSubmitDemo = (props: any) => {
     <YForm
       initialValues={{ age: '1' }}
       onFinish={onFinish}
+      submit={submit}
       formatFieldsValue={formatFieldsValue}
       onSave={onSave}
       params={params}
@@ -66,7 +67,9 @@ const YFormSubmitDemo = (props: any) => {
       {typeName}
       {[
         { type: 'input', label: 'age', name: 'age', componentProps: { suffix: '岁' } },
-        { type: 'submit', componentProps: { reverseBtns } },
+        // { type: 'submit', componentProps: { reverseBtns, ...submitProps } },
+        // { type: 'submit', componentProps: { reverseBtns, showBtns: { showSave: true } } },
+        { type: 'submit', componentProps: { reverseBtns, showBtns: { showSave } } },
       ]}
     </YForm>
   );
@@ -79,10 +82,7 @@ describe('YFormItems', () => {
   beforeEach(() => {
     container = document.createElement('div');
     const wrapper = mount(<YFormSubmitDemo params={{ type: 'create' }} />, { attachTo: container });
-    wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
+    wrapper.find('.ant-btn').at(0).simulate('submit');
     jest.useRealTimers();
   });
 
@@ -96,10 +96,7 @@ describe('YFormItems', () => {
   });
 
   async function operate(wrapper: any, className: string) {
-    wrapper
-      .find(className)
-      .last()
-      .simulate('click');
+    wrapper.find(className).last().simulate('click');
     await delay();
     wrapper.update();
   }
@@ -123,99 +120,8 @@ describe('YFormItems', () => {
   test('more children', () => {
     const wrapper = mount(
       <YForm required>
-        <YForm.Items plugins={{ required: true }}>
-          {[
-            { type: 'input', name: 'input' },
-            { type: 'input', name: 'input_isShow', isShow: false },
-            {
-              type: 'list',
-              name: 'list',
-              items: ({ index }) => [{ type: 'input', name: [index, 'd'] }],
-            },
-            {
-              type: 'textarea',
-              name: 'textarea',
-              label: '长文本',
-              componentProps: { inputMax: 9 },
-            },
-            {
-              type: 'radio',
-              name: '单选框',
-              componentProps: {
-                onAddProps: () => 'a',
-                options: [{ name: '真的', id: '1' }],
-              },
-            },
-            {
-              type: 'radio',
-              name: '单选框',
-              componentProps: {
-                renderOption: () => 'a',
-                options: [{ name: '真的', id: '1' }],
-              },
-            },
-            {
-              type: 'select',
-              label: '下拉框',
-              name: '下拉框',
-              componentProps: {
-                optionLabelProp: 'checkedValue',
-                onAddProps: item => ({ checkedValue: `(${item.name})` }),
-                showField: record => (
-                  <div>
-                    <div>{record.id}</div>-{record.name}
-                  </div>
-                ),
-                options: [
-                  { id: '1', name: '开' },
-                  { id: '2', name: '关' },
-                ],
-              },
-            },
-            {
-              type: 'select',
-              label: '下拉框',
-              name: '下拉框',
-              componentProps: {
-                optionLabelProp: 'checkedValue',
-                renderOption: () => 'a',
-                options: [{ id: '1', name: '开' }],
-              },
-            },
-            { shouldUpdate: true, children: () => [{ type: 'input', name: 'f' }] },
-            { type: 'checkbox', name: 'checkbox' },
-            {
-              type: 'checkboxGroup',
-              name: 'checkboxGroup',
-              componentProps: {
-                onAddProps: () => 'a',
-                options: [{ id: '1', name: 'a' }],
-              },
-            },
-            {
-              type: 'checkboxGroup',
-              name: 'checkboxGroup2',
-              componentProps: {
-                options: [{ id: '1', name: 'a' }],
-                renderOption: () => 'b',
-              },
-            },
-            {
-              type: 'list',
-              items: ({ index }) => [{ type: 'input', name: [index, 'd'] }],
-            },
-            { type: 'money', name: 'money' },
-            { label: 'text', name: 'text', type: 'text' },
-            { label: 'switch', name: 'switch', type: 'switch' },
-            { label: 'custom', type: 'custom', name: 'custom', component: <Input /> },
-            {
-              label: '精简使用',
-              type: 'input',
-              name: 'children_field2',
-              shouldUpdate: (prevValues, curValues) => prevValues.type !== curValues.type,
-              isShow: values => values.type === '2',
-            },
-          ]}
+        <YForm.Items>
+          {fields}
           {[{ type: 'noType', name: 'a' }] as any}
           <div>1</div>
           123
@@ -303,10 +209,7 @@ describe('YFormItems', () => {
         ]}
       </YForm>,
     );
-    wrapper
-      .find('.ant-typography-edit')
-      .first()
-      .simulate('click');
+    wrapper.find('.ant-typography-edit').first().simulate('click');
     wrapper.find('.ant-input').simulate('change', { target: { value: 'Bamboo' } });
     await wrapper.find('.ant-input').simulate('keyDown', { keyCode: KeyCode.ENTER });
     await wrapper.find('.ant-input').simulate('keyUp', { keyCode: KeyCode.ENTER });
@@ -318,7 +221,6 @@ describe('YFormItems', () => {
           {
             type: 'textarea',
             name: 'textarea',
-            plugins: { required: false },
             label: '长文本',
             componentProps: { inputMax: 9 },
           },
@@ -338,7 +240,6 @@ describe('YFormItems', () => {
             label: '多字段',
             type: 'oneLine',
             componentProps: { oneLineStyle: ['50%', 8, '50%'] },
-            plugins: { noLabelLayout: false },
             items: () => [
               { label: '姓名', type: 'input', name: 'name' },
               <span key="center" />,
@@ -352,26 +253,27 @@ describe('YFormItems', () => {
     expect(wrapper).toMatchSnapshot();
   });
   test('useSubmit', async () => {
+    const wrapperCreate = mount(<YFormSubmitDemo showSave params={{ type: 'create' }} />);
+    await wrapperCreate.find('.ant-btn').at(2).simulate('click');
+    const wrapperView = mount(<YFormSubmitDemo showSave params={{ type: 'view' }} />);
+    await wrapperView.find('.ant-btn').at(0).simulate('click');
+    await wrapperView.find('.ant-btn').at(2).simulate('click');
+    const onCancel = jest.fn();
+    const wrapperCancel = mount(
+      <YFormSubmitDemo showSave onCancel={onCancel} params={{ type: 'edit' }} />,
+    );
+    await wrapperCancel.find('.ant-btn').at(2).simulate('click');
+    expect(onCancel).toHaveBeenCalled();
+  });
+  test('useSubmit no save btn', async () => {
     const wrapperCreate = mount(<YFormSubmitDemo params={{ type: 'create' }} />);
-    await wrapperCreate
-      .find('.ant-btn')
-      .at(2)
-      .simulate('click');
+    await wrapperCreate.find('.ant-btn').at(1).simulate('click');
     const wrapperView = mount(<YFormSubmitDemo params={{ type: 'view' }} />);
-    await wrapperView
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
-    await wrapperView
-      .find('.ant-btn')
-      .at(2)
-      .simulate('click');
+    await wrapperView.find('.ant-btn').at(0).simulate('click');
+    await wrapperView.find('.ant-btn').at(1).simulate('click');
     const onCancel = jest.fn();
     const wrapperCancel = mount(<YFormSubmitDemo onCancel={onCancel} params={{ type: 'edit' }} />);
-    await wrapperCancel
-      .find('.ant-btn')
-      .at(2)
-      .simulate('click');
+    await wrapperCancel.find('.ant-btn').at(1).simulate('click');
     expect(onCancel).toHaveBeenCalled();
   });
   test('Form submit', async () => {
@@ -382,23 +284,14 @@ describe('YFormItems', () => {
       await Promise.reject('err');
     };
     const wrapper = mount(<YFormSubmitDemo onFinish={onFinish} params={{ type: 'create' }} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
-    await new Promise(resolve => setTimeout(resolve, 500 + 100));
+    await wrapper.find('.ant-btn').at(0).simulate('submit');
+    await wrapper.find('.ant-btn').at(0).simulate('submit');
+    await new Promise((resolve) => setTimeout(resolve, 500 + 100));
 
     const wrapperError = mount(
       <YFormSubmitDemo onFinish={onFinishError} params={{ type: 'create' }} />,
     );
-    await wrapperError
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
+    await wrapperError.find('.ant-btn').at(0).simulate('submit');
     await delay(600);
   });
   test('Form submit onSave', async () => {
@@ -406,10 +299,7 @@ describe('YFormItems', () => {
       await delay(501);
     };
     const wrapper = mount(<YFormSubmitDemo onSave={onSave} params={{ type: 'create' }} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(1)
-      .simulate('click');
+    await wrapper.find('.ant-btn').at(1).simulate('click');
   });
   test('Submit', async () => {
     const wrapper = mount(
@@ -417,27 +307,26 @@ describe('YFormItems', () => {
         <Submit />
       </YForm>,
     );
-    await wrapper
-      .find('.ant-btn')
-      .at(1)
-      .simulate('click');
+    await wrapper.find('.ant-btn').at(1).simulate('click');
   });
   test('Form submit two', async () => {
     const onFinish = jest.fn();
 
     const wrapper = mount(<YFormSubmitDemo onFinish={onFinish} params={{ type: 'create' }} />);
-    wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
+    wrapper.find('.ant-btn').at(0).simulate('submit');
     await delay();
-    wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('submit');
+    wrapper.find('.ant-btn').at(0).simulate('submit');
     expect(onFinish).toHaveBeenCalled();
   });
   test('Form submit reverse', async () => {
     mount(<YFormSubmitDemo reverseBtns params={{ type: 'create' }} />);
+  });
+  test('view', async () => {
+    const wrapper = mount(
+      <YForm initialValues={initialValues} scenes={{ view: true }}>
+        <YForm.Items>{fields}</YForm.Items>
+      </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });

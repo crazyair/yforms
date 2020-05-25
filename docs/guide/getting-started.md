@@ -32,7 +32,6 @@ const Demo = () => {
             {
               type: 'button',
               noStyle: true,
-              plugins: { disabled: false },
               componentProps: { type: 'primary', htmlType: 'submit', children: 'submit' },
             },
           ],

@@ -13,13 +13,12 @@ nav:
 
 - 以下 API 为 `YForm`、`YForm.Items`、`type` 共享的 API。
 
-| 参数     | 说明                           | 类型                        | 默认值 |
-| -------- | ------------------------------ | --------------------------- | ------ |
-| isShow   | 是否渲染                       | boolean                     | -      |
-| disabled | 字段是否全部禁用               | boolean                     | -      |
-| required | 字段是否全部必填               | boolean                     | -      |
-| plugins  | 插件开关，说明[见下](#plugins) | YFormPluginsType \| boolean | -      |
-| children | 数据源                         | YFormItemProps['children']  | -      |
+| 参数     | 说明             | 类型                       | 默认值 |
+| -------- | ---------------- | -------------------------- | ------ |
+| isShow   | 是否渲染         | boolean                    | -      |
+| disabled | 字段是否全部禁用 | boolean                    | -      |
+| required | 字段是否全部必填 | boolean                    | -      |
+| children | 数据源           | YFormItemProps['children'] | -      |
 
 ## YForm
 
@@ -46,14 +45,6 @@ nav:
 | --- | --- | --- | --- |
 | isShow | 是否隐藏， `isShow` 为 `function` 情况下实现该功能 <a href="/examples#依赖使用">查看</a> | boolean \|(values: any) => boolean | - |
 | componentProps | 当前类型下组件的参数 | - | - |
-
-### plugins
-
-| 参数          | 说明                             | 类型    | 默认值 |
-| ------------- | -------------------------------- | ------- | ------ |
-| placeholder   | 是否追加占位符                   | boolean | true   |
-| disabled      | 是否禁用                         | boolean | true   |
-| noLabelLayout | 是否无 `label` 添加 `label` 位移 | boolean | true   |
 
 ## 字段 dataSource
 

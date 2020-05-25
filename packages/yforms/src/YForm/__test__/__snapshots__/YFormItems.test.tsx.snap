@@ -195,9 +195,10 @@ Object {
                     class="ant-form-item-control-input-content"
                   >
                     <input
+                      _item_type="input"
                       class="ant-input"
                       id="demo"
-                      placeholder="请输入"
+                      placeholder=""
                       type="text"
                       value=""
                     />
@@ -230,22 +231,14 @@ Object {
                     <div
                       class="input-money"
                     >
-                      <span
-                        class="ant-input-affix-wrapper"
-                      >
-                        <input
-                          class="ant-input"
-                          id="money"
-                          placeholder="请输入money"
-                          type="text"
-                          value=""
-                        />
-                        <span
-                          class="ant-input-suffix"
-                        >
-                          元
-                        </span>
-                      </span>
+                      <input
+                        _item_type="money"
+                        class="ant-input"
+                        id="money"
+                        placeholder="请输入money"
+                        type="text"
+                        value=""
+                      />
                       <div
                         class="zh"
                       />
@@ -270,6 +263,7 @@ Object {
                       class="yform-items"
                     >
                       <button
+                        _item_type="button"
                         class="ant-btn ant-btn-primary"
                         type="submit"
                       >
@@ -310,9 +304,10 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
+                    _item_type="input"
                     class="ant-input"
                     id="demo"
-                    placeholder="请输入"
+                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -345,22 +340,14 @@ Object {
                   <div
                     class="input-money"
                   >
-                    <span
-                      class="ant-input-affix-wrapper"
-                    >
-                      <input
-                        class="ant-input"
-                        id="money"
-                        placeholder="请输入money"
-                        type="text"
-                        value=""
-                      />
-                      <span
-                        class="ant-input-suffix"
-                      >
-                        元
-                      </span>
-                    </span>
+                    <input
+                      _item_type="money"
+                      class="ant-input"
+                      id="money"
+                      placeholder="请输入money"
+                      type="text"
+                      value=""
+                    />
                     <div
                       class="zh"
                     />
@@ -385,6 +372,7 @@ Object {
                     class="yform-items"
                   >
                     <button
+                      _item_type="button"
                       class="ant-btn ant-btn-primary"
                       type="submit"
                     >
@@ -454,3 +442,5 @@ Object {
   "unmount": [Function],
 }
 `;
+
+exports[`YFormItems view 1`] = `ReactWrapper {}`;

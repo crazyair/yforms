@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { merge, reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
@@ -10,12 +10,8 @@ import { YFormFieldBaseProps } from '../ItemsType';
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
   componentProps,
-  formProps,
 }) => {
-  const { form, onSave, submitComponentProps } = formProps;
-  const mergeCProps = merge({}, submitComponentProps, componentProps);
-  const _cProps = { form, onSave, ...mergeCProps };
-  return { componentProps: _cProps };
+  return { componentProps: { showBtns: { showSave: false }, ...componentProps } };
 };
 
 export interface ShowBtns {
@@ -30,19 +26,22 @@ type showBtns = {
   [P in keyof ShowBtns]?: boolean | ShowBtns[P];
 };
 
-export interface YFormSubmitProps
-  extends Pick<YFormProps, 'form' | 'onSave' | 'formatFieldsValue' | 'disabled'> {
+export interface YFormSubmitProps extends Pick<YFormProps, 'disabled'> {
   showBtns?: showBtns | boolean;
   reverseBtns?: boolean;
 }
 
 export default (props: YFormSubmitProps) => {
-  const { form, onSave, showBtns = true, reverseBtns, disabled } = props;
-  const { getFieldsValue, getFormatFieldsValue } = form || {};
+  const formProps = useContext(YForm.YFormContext);
+  const itemsProps = useContext(YForm.YFormItemsContext);
+  const { form, onSave, scenes, submitComponentProps, ...rest } = merge({}, formProps, itemsProps);
+  const { getFieldsValue, getFormatFieldsValue } = form;
+
+  const { showBtns = true, reverseBtns, disabled } = merge({}, rest, props);
 
   const handleOnSave = async (e) => {
     e.preventDefault();
-    if (onSave && getFieldsValue) {
+    if (onSave) {
       await onSave(getFormatFieldsValue(getFieldsValue()));
     }
   };
@@ -54,12 +53,12 @@ export default (props: YFormSubmitProps) => {
     showEdit: { children: '编辑' },
     showBack: { children: '返回', type: 'link' },
   };
-
+  merge(_showBtns, submitComponentProps.showBtns);
   const { showSubmit, showSave, showCancel, showEdit, showBack } = mergeWith(
     _showBtns,
     showBtns,
     (objValue, srcValue) => {
-      // boolean 类型如果是 true 则用 objValue
+      // boolean 类型则用 objValue
       if (typeof srcValue === 'boolean') {
         return srcValue ? objValue : srcValue;
       }
@@ -73,35 +72,30 @@ export default (props: YFormSubmitProps) => {
       type: 'button',
       noStyle: true,
       isShow: !!showSubmit,
-      plugins: { disabled: false },
       componentProps: showSubmit,
     },
     save: {
       type: 'secureButton',
       noStyle: true,
       isShow: !!showSave,
-      plugins: { disabled: false },
       componentProps: showSave,
     },
     cancel: {
       type: 'button',
       noStyle: true,
       isShow: !!showCancel,
-      plugins: { disabled: false },
       componentProps: showCancel,
     },
     edit: {
       type: 'button',
       noStyle: true,
       isShow: !!showEdit,
-      plugins: { disabled: false },
       componentProps: showEdit,
     },
     back: {
       type: 'button',
       noStyle: true,
       isShow: !!showBack,
-      plugins: { disabled: false },
       componentProps: showBack,
     },
   };
@@ -116,7 +110,7 @@ export default (props: YFormSubmitProps) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items isShow={!!showBtns}>
+    <YForm.Items scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
       {[{ className: 'button-more-left', dataSource: btns }]}
     </YForm.Items>
   );

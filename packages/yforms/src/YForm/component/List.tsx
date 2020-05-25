@@ -105,10 +105,7 @@ export default (props: YFormListProps) => {
                       {
                         offset,
                         componentProps: !disabled &&
-                          showRightIcons && {
-                            style: { ..._oneLineStyle[0] },
-                          },
-                        plugins: { noLabelLayout: true },
+                          showRightIcons && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
                         addonAfter: showRightIcons && !disabled && index === 0 && (
                           <div
@@ -131,13 +128,14 @@ export default (props: YFormListProps) => {
                   </YForm.Items>
                 );
               })}
-              {showBottomAdd && isMax && (
+              {showBottomAdd && isMax && !disabled && (
                 <YForm.Items>
                   {[
                     {
                       type: 'button',
                       offset,
                       componentProps: {
+                        disabled,
                         type: 'dashed',
                         onClick: () => add(),
                         style: { width: '100%' },

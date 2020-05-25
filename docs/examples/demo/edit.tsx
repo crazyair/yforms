@@ -11,7 +11,7 @@ import { YForm } from 'yforms';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
-const Demo: React.FC<RouteComponentProps> = props => {
+const Demo: React.FC<RouteComponentProps> = (props) => {
   const { match = {} as RouteComponentProps['match'] } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -20,8 +20,9 @@ const Demo: React.FC<RouteComponentProps> = props => {
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
   const {
+    submit,
     params: { typeName },
-  } = YForm.useSubmit({ params: match.params });
+  } = YForm.useSubmit();
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,7 +38,7 @@ const Demo: React.FC<RouteComponentProps> = props => {
 
   const onFinish = async (values: any) => {
     console.log('Success:', values);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     await new Promise((resolve, reject) => {
       // 请求随机成功或者失败
       if (Math.round(Math.random()) === 0) {
@@ -52,7 +53,7 @@ const Demo: React.FC<RouteComponentProps> = props => {
 
   const onSave = async (values: any) => {
     console.log('values:', values);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     await message.success('保存成功', 0.5);
   };
 
@@ -66,6 +67,7 @@ const Demo: React.FC<RouteComponentProps> = props => {
       <YForm
         {...layout}
         form={form}
+        submit={submit}
         initialValues={data}
         name="basic"
         onFinish={onFinish}
