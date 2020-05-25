@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge, concat, mapKeys } from 'lodash';
+import { merge, concat, mapKeys, omit } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps, FormInstance } from 'antd/lib/form';
@@ -86,7 +86,7 @@ export const Config = (options: YFormConfig) => {
 };
 
 const InternalForm = React.memo<YFormProps>((props) => {
-  const { scenes, getScene = globalConfig.getScene, ...restProps } = props;
+  const { scenes, getScene = globalConfig.getScene } = props;
   const _scenes = merge({}, globalConfig.scenes, scenes);
   const _defaultData = { formProps: props };
   mapKeys(_scenes, (value: boolean, key: string) => {
@@ -115,7 +115,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
     submitComponentProps,
     submit,
     ...rest
-  } = restProps;
+  } = _props;
   const [form] = useForm(propsForm);
   const { resetFields, getFieldsValue } = form;
   const _params = paramsType(params);
@@ -252,7 +252,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   return (
     <Form
-      {...rest}
+      {...omit(rest, ['scenes'])}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
