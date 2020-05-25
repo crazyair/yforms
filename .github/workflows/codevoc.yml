@@ -19,6 +19,6 @@ jobs:
         with:
           flags: unittests # optional
           name: codecov-umbrella # optional
-          # file: ./coverage.xml # optional
+          file: ./coverage.yml # optional
           fail_ci_if_error: true # optional (default = false)
           token: ${{ secrets.CODECOV_TOKEN }}
