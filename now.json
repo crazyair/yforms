@@ -1,6 +1,4 @@
 {
-  "name": "yforms",
-  "scope": "crazyair",
   "version": 2,
   "builds": [{ "src": "dist/**/*", "use": "@now/static" }],
   "routes": [
@@ -15,6 +13,5 @@
   ],
   "github": {
     "enable": false
-  },
-  "alias": ["yforms.now.sh"]
+  }
 }
