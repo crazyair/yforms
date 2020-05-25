@@ -16,4 +16,4 @@ jobs:
         run: |
           yarn
           yarn doc:build
-          now --token=$ZEIT_TOKEN --prod --confirm --force --scope crazyair
+          now --token=$ZEIT_TOKEN --prod --confirm --force
