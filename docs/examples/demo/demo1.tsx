@@ -4,6 +4,8 @@ import { YForm } from 'yforms';
 import { message, Input } from 'antd';
 import moment from 'moment';
 
+moment.locale('zh-cn');
+
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 const options = [
   { id: '1', name: '语文' },
@@ -27,8 +29,9 @@ const initialValues = {
     { name: '张三', age: '10' },
     { name: '李四', age: '20' },
   ],
-  phones: [{ phone: '18888888888' }, { phone: '18888888888' }],
+  phones: [{ phone: '177777777777' }, { phone: '18888888888' }],
   date: moment(),
+  range: [moment(), moment()],
 };
 
 const Demo = () => {
@@ -77,7 +80,7 @@ const Demo = () => {
         //   componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
         // },
         // { type: 'custom', component: 1, label: 'xx' },
-        { type: 'input', label: '空值', name: 'names', scenes: { base: false } },
+        { type: 'input', label: '空值', name: 'names' },
         {
           type: 'list',
           name: 'phones',
@@ -127,7 +130,14 @@ const Demo = () => {
           type: 'datePicker',
           label: '日期',
           name: 'date',
-          componentProps: { style: { width: '100%' } },
+          componentProps: { showTime: true },
+          viewProps: { format: (value) => moment(value).format('YYYY-MM-DD') },
+          format: ({ date }) => moment(date).format('YYYY-MM-DD'),
+        },
+        {
+          type: 'rangePicker',
+          label: '日期区间',
+          name: 'range',
           format: ({ date }) => moment(date).format('YYYY-MM-DD'),
         },
         {

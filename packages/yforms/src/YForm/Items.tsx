@@ -19,8 +19,6 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   required?: boolean;
   className?: string;
   addonAfter?: React.ReactElement;
-  componentView?: React.ReactNode;
-  noField?: boolean;
   format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];
@@ -32,6 +30,9 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
     | YFormRenderChildren
     | boolean;
   dataSource?: YFormItemProps['children'];
+  componentView?: React.ReactNode;
+  viewProps?: YFormFieldBaseProps['viewProps'];
+  diffProps?: any;
 }
 
 export interface FormatFieldsValue<T = any> {
@@ -100,11 +101,11 @@ const Items = (props: YFormItemsProps) => {
 
         let _itemProps = { ...item };
         let _componentProps = { ...item.componentProps };
-
+        const typeProps = get(itemsType, item.type) || {};
         const defaultData = {
           formProps,
           itemsProps: mergeProps,
-          typeProps: itemsType[item.type] || {},
+          typeProps,
           itemProps: item,
           componentProps: item.componentProps,
         };
@@ -124,7 +125,7 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
-        const typeProps = get(itemsType, get(_defaultData, ['itemProps', 'type'])) || {};
+        const showType = get(_defaultData, ['itemProps', 'type']);
         const { modifyProps } = typeProps;
         if (modifyProps) {
           _defaultData = merge({}, defaultData, modifyProps(defaultData));
@@ -172,7 +173,13 @@ const Items = (props: YFormItemsProps) => {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-              const _elementProps = { ..._props, _item_type: item.type };
+              const _elementProps = { ..._props };
+
+              // 当前渲染为 view 类型才传下面参数
+              if (showType === 'view') {
+                _elementProps._item_type = item.type;
+                _elementProps.viewProps = _base.viewProps;
+              }
               _children = React.cloneElement(_component, _elementProps);
             } else {
               _children = _component;
@@ -205,7 +212,7 @@ const Items = (props: YFormItemsProps) => {
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
-              {...omit(_formItemProps, ['component', 'scenes', 'showType'])}
+              {...omit(_formItemProps, ['component', 'scenes', 'showType', 'viewProps'])}
             >
               {domChildren}
             </ItemChildren>,
