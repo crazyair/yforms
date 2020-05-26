@@ -86,7 +86,6 @@ Object {
                     class="ant-form-item-control-input-content"
                   >
                     <input
-                      _item_type="input"
                       class="ant-input"
                       id="demo"
                       placeholder=""
@@ -123,7 +122,6 @@ Object {
                       class="input-money"
                     >
                       <input
-                        _item_type="money"
                         class="ant-input"
                         id="money"
                         placeholder="请输入money"
@@ -156,7 +154,6 @@ Object {
                       class="yform-items"
                     >
                       <button
-                        _item_type="button"
                         class="ant-btn ant-btn-primary"
                         type="submit"
                       >
@@ -190,7 +187,6 @@ Object {
                     class="ant-form-item-control-input-content"
                   >
                     <input
-                      _item_type="input"
                       class="ant-input"
                       id="demo"
                       placeholder=""
@@ -227,7 +223,6 @@ Object {
                       class="input-money"
                     >
                       <input
-                        _item_type="money"
                         class="ant-input"
                         id="money"
                         placeholder="请输入money"
@@ -260,7 +255,6 @@ Object {
                       class="yform-items"
                     >
                       <button
-                        _item_type="button"
                         class="ant-btn ant-btn-primary"
                         type="submit"
                       >
@@ -299,7 +293,6 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
-                    _item_type="input"
                     class="ant-input"
                     id="demo"
                     placeholder=""
@@ -336,7 +329,6 @@ Object {
                     class="input-money"
                   >
                     <input
-                      _item_type="money"
                       class="ant-input"
                       id="money"
                       placeholder="请输入money"
@@ -369,7 +361,6 @@ Object {
                     class="yform-items"
                   >
                     <button
-                      _item_type="button"
                       class="ant-btn ant-btn-primary"
                       type="submit"
                     >
@@ -403,7 +394,6 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
-                    _item_type="input"
                     class="ant-input"
                     id="demo"
                     placeholder=""
@@ -440,7 +430,6 @@ Object {
                     class="input-money"
                   >
                     <input
-                      _item_type="money"
                       class="ant-input"
                       id="money"
                       placeholder="请输入money"
@@ -473,7 +462,6 @@ Object {
                     class="yform-items"
                   >
                     <button
-                      _item_type="button"
                       class="ant-btn ant-btn-primary"
                       type="submit"
                     >
@@ -568,9 +556,7 @@ Object {
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <p
-                    _item_type="demo"
-                  >
+                  <p>
                     123
                   </p>
                 </div>
@@ -601,9 +587,7 @@ Object {
               <div
                 class="ant-form-item-control-input-content"
               >
-                <p
-                  _item_type="demo"
-                >
+                <p>
                   123
                 </p>
               </div>
@@ -802,7 +786,6 @@ Object {
                   class="ant-form-item-control-input-content"
                 >
                   <input
-                    _item_type="input"
                     class="ant-input"
                     id="demo"
                     placeholder=""
@@ -839,7 +822,6 @@ Object {
                     class="input-money"
                   >
                     <input
-                      _item_type="money"
                       class="ant-input"
                       id="money"
                       placeholder="请输入money"
@@ -872,7 +854,6 @@ Object {
                     class="yform-items"
                   >
                     <button
-                      _item_type="button"
                       class="ant-btn ant-btn-primary"
                       type="submit"
                     >
@@ -909,7 +890,6 @@ Object {
                 class="ant-form-item-control-input-content"
               >
                 <input
-                  _item_type="input"
                   class="ant-input"
                   id="demo"
                   placeholder=""
@@ -946,7 +926,6 @@ Object {
                   class="input-money"
                 >
                   <input
-                    _item_type="money"
                     class="ant-input"
                     id="money"
                     placeholder="请输入money"
@@ -979,7 +958,6 @@ Object {
                   class="yform-items"
                 >
                   <button
-                    _item_type="button"
                     class="ant-btn ant-btn-primary"
                     type="submit"
                   >
