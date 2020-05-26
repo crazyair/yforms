@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge, concat, mapKeys } from 'lodash';
+import { merge, concat, mapKeys, omit } from 'lodash';
 import classNames from 'classnames';
 
 import { FormProps, FormInstance } from 'antd/lib/form';
@@ -252,7 +252,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   return (
     <Form
-      {...rest}
+      {...omit(rest, ['scenes'])}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
