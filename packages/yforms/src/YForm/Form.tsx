@@ -29,14 +29,16 @@ export type YFormScene = {
 export interface YFormConfig {
   itemsType?: YFormItemsType;
   getScene?: { [key: string]: YFormScene };
-  scenes?: { base?: boolean; [key: string]: boolean };
-}
-
-export function useFormatFieldsValue<T = any>() {
-  const formatFieldsValue = useRef([]);
-  return {
-    onFormatFieldsValue: onFormatFieldsValue<T>(formatFieldsValue.current),
-    formatFieldsValue: formatFieldsValue.current,
+  scenes?: {
+    labelLayout?: boolean;
+    noCol?: boolean;
+    disabled?: boolean;
+    placeholder?: boolean;
+    required?: boolean;
+    view?: boolean;
+    diff?: boolean;
+    search?: boolean;
+    [key: string]: boolean;
   };
 }
 
@@ -57,6 +59,8 @@ export interface YFormInstance<T = any> extends FormInstance {
   getFormatFieldsValue?: (value?: T) => T;
 }
 
+type CancelType = 'onSave' | 'onSubmit' | 'onCancel';
+
 export interface YFormProps<T = any> extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
@@ -71,8 +75,17 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
-  onCancel?: (p: { type: 'onSave' | 'onSubmit' | 'onCancel' }) => void;
+  onCancel?: (p: { type: CancelType; changeDisabled: (disabled: boolean) => void }) => void;
   params?: ParamsType;
+  diffProps?: any;
+}
+
+export function useFormatFieldsValue<T = any>() {
+  const formatFieldsValue = useRef([]);
+  return {
+    onFormatFieldsValue: onFormatFieldsValue<T>(formatFieldsValue.current),
+    formatFieldsValue: formatFieldsValue.current,
+  };
 }
 
 // 全局默认值
@@ -152,10 +165,10 @@ const InternalForm = React.memo<YFormProps>((props) => {
     window.history.back();
   };
 
-  const handleReset: YFormProps['onCancel'] = useCallback(
+  const handleReset: (p: { type: CancelType }) => void = useCallback(
     ({ type }) => {
       if (typeof onCancel === 'function') {
-        onCancel({ type });
+        onCancel({ type, changeDisabled: handleChangeDisabled });
       } else {
         resetFields();
         if (create) {
@@ -252,7 +265,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   return (
     <Form
-      {...omit(rest, ['scenes'])}
+      {...omit(rest, ['scenes', 'diffProps'])}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}

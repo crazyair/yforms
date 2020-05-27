@@ -1,5 +1,8 @@
-import { merge, forEach } from 'lodash';
+import React from 'react';
+import { merge, forEach, get } from 'lodash';
 import classNames from 'classnames';
+
+import { YForm } from 'yforms';
 
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
@@ -102,6 +105,48 @@ const scenes: YFormConfig = {
         return {
           itemProps: { ...itemProps, ..._itemProps },
         };
+      },
+    },
+    diff: {
+      item: ({ formProps, itemProps, typeProps }) => {
+        const { diffProps: { oldFieldsValues } = {} } = formProps;
+        const { name, showType } = merge({}, typeProps, itemProps);
+        let _itemProps;
+        if (showType === 'input') {
+          _itemProps = {
+            addonAfter: (
+              <YForm.Items noStyle>
+                {[
+                  {
+                    noStyle: true,
+                    shouldUpdate: (prevValues, curValues) =>
+                      get(prevValues, name) !== get(curValues, name),
+                    children: ({ getFieldValue }) => {
+                      const value = getFieldValue(name);
+                      const oldValue = get(oldFieldsValues, name);
+                      return (
+                        value !== oldValue && (
+                          <div style={{ padding: '5px 0' }}>
+                            <div
+                              style={{
+                                background: '#fbe9eb',
+                                wordBreak: 'break-word',
+                                padding: '1px 0',
+                              }}
+                            >
+                              {oldValue || '-/-'}
+                            </div>
+                          </div>
+                        )
+                      );
+                    },
+                  },
+                ]}
+              </YForm.Items>
+            ),
+          };
+        }
+        return { itemProps: { ...itemProps, ..._itemProps, shouldUpdate: true } };
       },
     },
     // 搜索场景

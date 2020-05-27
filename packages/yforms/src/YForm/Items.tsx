@@ -18,7 +18,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   isShow?: boolean | isShowFunc;
   required?: boolean;
   className?: string;
-  addonAfter?: React.ReactElement;
+  addonAfter?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];

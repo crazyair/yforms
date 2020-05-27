@@ -69,8 +69,10 @@ const Demo = () => {
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      scenes={{ view: disabled }}
+      onCancel={({ changeDisabled }) => changeDisabled(!disabled)}
+      scenes={{ view: disabled, diff: true }}
       params={{ type: 'view' }}
+      diffProps={{ oldFieldsValues: { name: '张三1' } }}
       required
     >
       {[
