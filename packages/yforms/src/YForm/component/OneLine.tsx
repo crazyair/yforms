@@ -18,6 +18,7 @@ export interface YFormOneLineProps {
   componentProps?: YFormOneLineComponentProps;
   className?: string;
   style?: React.CSSProperties;
+  scenes?: YFormItemProps['scenes'];
   items?: (p: YFormOneLineItems) => YFormItemProps['children'];
 }
 
@@ -30,7 +31,7 @@ export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'
 };
 
 export default (props: YFormOneLineProps) => {
-  const { items, componentProps = {} } = props;
+  const { items, componentProps = {}, scenes } = props;
   const { oneLineStyle, className, style } = componentProps as YFormOneLineComponentProps;
 
   const styleObj = oneLineItemStyle(oneLineStyle || []);
@@ -41,11 +42,9 @@ export default (props: YFormOneLineProps) => {
       if (!item) return;
       const _style = get(styleObj, index, {});
       if (isObject(item)) {
-        return merge(
-          {},
-          { style: { display: 'inline-block', ..._style } },
-          { ...item, className: classNames('dib', get(item, 'className')) },
-        );
+        return merge({}, { style: { display: 'inline-block', ..._style } }, { scenes }, item, {
+          className: classNames('dib', get(item, 'className')),
+        });
       }
     }).filter((x) => x);
   }

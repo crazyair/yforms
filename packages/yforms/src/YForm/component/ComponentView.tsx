@@ -156,21 +156,14 @@ export default React.memo<YFormComponentView>((props) => {
   if (format) {
     _value = format(value);
   }
-  // return (
-  //   <span className={classNames('ant-form-text', className)}>
-  //     {_addonBefore && <span style={{ color: '#999' }}>{_addonBefore} </span>}
-  //     {_value === undefined || _value === '' ? noData : _value}
-  //     {_addonAfter && <span style={{ color: '#999' }}> {_addonAfter}</span>}
-  //   </span>
-  // );
-
   return (
-    <div className={classNames('', className)}>
+    <span className={classNames('ant-form-text', className)}>
       {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}
       {prefix && <span style={{ color: '#999' }}>{prefix} </span>}
       {_value === undefined || _value === '' ? noData : _value}
       {suffix && <span style={{ color: '#999' }}> {suffix}</span>}
       {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
-    </div>
+      {itemProps.addonAfter && <span style={{ color: '#999' }}> {itemProps.addonAfter}</span>}
+    </span>
   );
 });

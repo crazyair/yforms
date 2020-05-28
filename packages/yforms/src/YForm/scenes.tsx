@@ -120,18 +120,6 @@ const scenes: YFormConfig = {
           _itemProps = {
             addonAfter: [
               itemProps.addonAfter,
-              // <YForm.Items key="diff-dom" className="diff">
-              //   {[
-              //     {
-              //       ...itemProps,
-              //       className: 'old-value',
-              //       label: undefined,
-              //       componentProps: { _item_type: 'datePicker' },
-              //       scenes: { noCol: true },
-              //       type: 'view',
-              //     },
-              //   ]}
-              // </YForm.Items>,
               <DiffDom
                 key="diff-dom"
                 itemProps={itemProps}

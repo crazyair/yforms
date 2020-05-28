@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { map, merge, isArray, concat } from 'lodash';
+import { map, merge, isArray, concat, get } from 'lodash';
 import classNames from 'classnames';
 
 import YForm from '../index';
@@ -114,18 +114,23 @@ export default (props: YFormListProps) => {
                           componentProps: !disabled &&
                             showRightIcons && { style: { ..._oneLineStyle[0] } },
                           label: index === 0 && _label,
-                          addonAfter: showRightIcons && !disabled && index === 0 && (
-                            <div
-                              key="icons"
-                              className={classNames('padding-icons', 'inline-icons')}
-                              style={_oneLineStyle[1]}
-                            >
-                              {icons}
-                            </div>
-                          ),
                         },
                         item,
-                        { key: index },
+                        {
+                          key: index,
+                          addonAfter: [
+                            get(item, 'addonAfter'),
+                            showRightIcons && !disabled && index === 0 && (
+                              <div
+                                key="icons"
+                                className={classNames('padding-icons', 'inline-icons')}
+                                style={_oneLineStyle[1]}
+                              >
+                                {icons}
+                              </div>
+                            ),
+                          ].filter((x) => x),
+                        },
                       );
                       return _item;
                     });

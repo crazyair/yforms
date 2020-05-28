@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { get, concat, omit, isArray, forEach, isEqual } from 'lodash';
+import { get, concat, omit, isArray, forEach, isEqual, map } from 'lodash';
 import moment from 'moment';
 import ComponentView from './ComponentView';
 import { YForm } from '../..';
@@ -55,16 +55,18 @@ const DiffDom = React.memo<any>((props) => {
           children: ({ getFieldValue }) => {
             const value = getFieldValue(_name);
             const oldValue = get(oldFieldsValues, _name);
-            // return (
-            //   value !== oldValue && (
-            //     <div style={{ padding: '5px 0' }}>
-            //       <div className="old-value">{oldValue || noData}</div>
-            //     </div>
-            //   )
-            // );
-            // list 会用 addonAfter 注入 icons，这里判断如果是 List 子元素则删除 itemProps.addonAfter
+
+            // List 下级字段
             if (context.prefixName) {
-              itemProps.addonAfter = undefined;
+              if (isArray(itemProps.addonAfter)) {
+                itemProps.addonAfter = map(itemProps.addonAfter, (item) => {
+                  // list 会用 addonAfter 注入 icons，这里判断如果是 List 子元素则删除 icons
+                  if (item && item.key === 'icons') {
+                    return null;
+                  }
+                  return item;
+                });
+              }
             }
             if (equalFunc(value, oldValue)) {
               return null;
