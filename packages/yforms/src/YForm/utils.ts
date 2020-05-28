@@ -163,7 +163,10 @@ export function submitFormatValues<T>(
   });
   forEach(list, (item) => {
     if (item && item.name) {
-      set(_values, item.name, item.format({ ...values }));
+      // 如果字段是 undefined 则不需要执行 set 了
+      if (get(_values, item.name) !== undefined) {
+        set(_values, item.name, item.format({ ...values }));
+      }
     }
   });
   return _values;
