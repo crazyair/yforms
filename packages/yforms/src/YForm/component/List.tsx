@@ -35,18 +35,16 @@ export interface YFormListItems {
 }
 
 export interface YFormListProps
-  extends Pick<YFormItemProps, 'label'>,
+  extends Pick<YFormItemProps, 'label' | 'name' | 'addonAfter' | 'scenes'>,
     Pick<YFormProps, 'children' | 'disabled'> {
-  name?: YFormItemProps['name'];
   prefixName?: YFormItemProps['name'];
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
-  addonAfter?: YFormItemProps['addonAfter'];
   offset?: number;
 }
 
 export default (props: YFormListProps) => {
-  const { label, items, disabled, componentProps = {}, name, offset, addonAfter } = props;
+  const { label, items, disabled, componentProps = {}, name, offset, addonAfter, scenes } = props;
   const {
     maxNum,
     minNum,
@@ -110,6 +108,7 @@ export default (props: YFormListProps) => {
                       const _item = merge(
                         {},
                         {
+                          scenes,
                           offset,
                           componentProps: !disabled &&
                             showRightIcons && { style: { ..._oneLineStyle[0] } },
@@ -117,7 +116,6 @@ export default (props: YFormListProps) => {
                         },
                         item,
                         {
-                          key: index,
                           addonAfter: [
                             get(item, 'addonAfter'),
                             showRightIcons && !disabled && index === 0 && (

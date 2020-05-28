@@ -42,7 +42,7 @@ const equalFunc = (value: any, oldValue: any): boolean => {
 };
 
 const DiffDom = React.memo<any>((props) => {
-  const { oldFieldsValues, initialValues, name, itemProps, type } = props;
+  const { oldValues, initialValues, name, itemProps, type } = props;
   const context = React.useContext(YForm.ListContent);
 
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
@@ -54,7 +54,7 @@ const DiffDom = React.memo<any>((props) => {
           shouldUpdate: (prevValues, curValues) => get(prevValues, _name) !== get(curValues, _name),
           children: ({ getFieldValue }) => {
             const value = getFieldValue(_name);
-            const oldValue = get(oldFieldsValues, _name);
+            const oldValue = get(oldValues, _name);
 
             // List 下级字段
             if (context.prefixName) {

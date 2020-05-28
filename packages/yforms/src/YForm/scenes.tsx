@@ -111,7 +111,7 @@ const scenes: YFormConfig = {
     },
     diff: {
       item: ({ formProps, itemProps, typeProps }) => {
-        const { diffProps: { oldFieldsValues } = {}, initialValues } = formProps;
+        const { diffProps: { oldValues } = {}, initialValues } = formProps;
         const { name, showType } = merge({}, typeProps, itemProps);
 
         let _itemProps;
@@ -124,7 +124,7 @@ const scenes: YFormConfig = {
                 key="diff-dom"
                 itemProps={itemProps}
                 type={typeProps.type}
-                oldFieldsValues={oldFieldsValues}
+                oldValues={oldValues}
                 initialValues={initialValues}
                 name={name}
               />,
