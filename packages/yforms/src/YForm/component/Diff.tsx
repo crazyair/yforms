@@ -4,7 +4,7 @@ import React from 'react';
 import { YForm } from 'yforms';
 import { get, concat, omit, isArray, forEach, isEqual } from 'lodash';
 import moment from 'moment';
-import ComponentView from './component/ComponentView';
+import ComponentView from './ComponentView';
 
 const equalFunc = (value: any, oldValue: any): boolean => {
   let equal = false;
@@ -87,4 +87,4 @@ const DiffDom = React.memo<any>((props) => {
   );
 });
 
-export { DiffDom };
+export default DiffDom;

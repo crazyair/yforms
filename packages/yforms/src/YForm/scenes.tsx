@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
-import { DiffDom } from './scenesComp';
+import DiffDom from './component/Diff';
 
 const scenes: YFormConfig = {
   getScene: {
