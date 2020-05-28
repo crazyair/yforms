@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 
-import { YForm } from '../../index';
+import { YForm } from '../..';
 import { layout, layoutMore } from '../utils';
 import { YFormProps } from '../Form';
 

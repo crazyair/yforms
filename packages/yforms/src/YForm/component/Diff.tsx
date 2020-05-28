@@ -1,10 +1,10 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { YForm } from 'yforms';
 import { get, concat, omit, isArray, forEach, isEqual } from 'lodash';
 import moment from 'moment';
 import ComponentView from './ComponentView';
+import { YForm } from '../..';
 
 const equalFunc = (value: any, oldValue: any): boolean => {
   let equal = false;

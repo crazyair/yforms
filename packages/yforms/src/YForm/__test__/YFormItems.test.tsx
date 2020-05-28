@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
-import { YForm } from '../../index';
+import { YForm } from '../..';
 import { YFormItemsProps } from '../Items';
 import Submit from '../component/Submit';
 import { fields, initialValues } from './fields';
