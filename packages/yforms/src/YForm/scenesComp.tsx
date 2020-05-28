@@ -41,7 +41,7 @@ const equalFunc = (value: any, oldValue: any): boolean => {
   return equal;
 };
 
-const DiffDom = (props: any) => {
+const DiffDom = React.memo<any>((props) => {
   const { oldFieldsValues, initialValues, name, itemProps, type } = props;
   const context = React.useContext(YForm.ListContent);
 
@@ -85,6 +85,6 @@ const DiffDom = (props: any) => {
       ]}
     </YForm.Items>
   );
-};
+});
 
 export { DiffDom };

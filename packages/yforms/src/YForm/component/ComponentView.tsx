@@ -23,7 +23,7 @@ export interface YFormComponentView {
   itemProps?: any;
 }
 
-export default (props: YFormComponentView) => {
+export default React.memo<YFormComponentView>((props) => {
   const {
     _item_type,
     children,
@@ -170,4 +170,4 @@ export default (props: YFormComponentView) => {
       {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
     </div>
   );
-};
+});

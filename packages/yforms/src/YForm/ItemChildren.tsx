@@ -4,12 +4,11 @@ import { forEach, omit } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 import { YFormItemProps } from './Items';
 
-export default (props: YFormItemProps) => {
+export default React.memo<YFormItemProps>((props) => {
   const { children, addonAfter, isShow, ...rest } = props;
-  const { shouldUpdate } = rest;
   let _required: boolean | undefined = false;
   // 根据 rules required 判断外部 Form.Item 是否必填
-  forEach(props.rules, item => {
+  forEach(props.rules, (item) => {
     if ('required' in item) _required = item.required;
   });
 
@@ -25,15 +24,5 @@ export default (props: YFormItemProps) => {
     </Form.Item>
   ) : null;
 
-  if (typeof isShow === 'function') {
-    return (
-      <Form.Item noStyle shouldUpdate={shouldUpdate}>
-        {form => {
-          return isShow(form.getFieldsValue()) && ItemDom;
-        }}
-      </Form.Item>
-    );
-  } else {
-    return ItemDom;
-  }
-};
+  return ItemDom;
+});

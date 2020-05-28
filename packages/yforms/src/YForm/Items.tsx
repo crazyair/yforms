@@ -51,7 +51,9 @@ interface InternalYFormItemProps extends YFormItemProps {
 }
 
 export interface YFormItemsProps
-  extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue'> {
+  extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue' | 'isShow'> {
+  isShow?: YFormItemProps['isShow'];
+  shouldUpdate?: YFormItemProps['shouldUpdate'];
   offset?: number;
   noStyle?: boolean;
 }
@@ -62,9 +64,9 @@ const Items = (props: YFormItemsProps) => {
   const { itemsType } = formProps;
 
   let mergeProps = merge({}, formProps, itemsProps, props);
-  const { scenes, getScene, onFormatFieldsValue } = mergeProps;
+  const { scenes, getScene, onFormatFieldsValue, shouldUpdate = true } = mergeProps;
 
-  const _defaultData = { formProps: props, itemsProps: props };
+  const _defaultData = { formProps, itemsProps: props };
   mapKeys(scenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].items) {
       const data = getScene[key].items(_defaultData);
@@ -77,7 +79,7 @@ const Items = (props: YFormItemsProps) => {
   const _props = _defaultData.itemsProps;
   if ('isShow' in _props && !_props.isShow) return null;
 
-  const { children = [], className, style, noStyle } = _props;
+  const { isShow, children = [], className, style, noStyle } = _props;
 
   const list: React.ReactNode[] = [];
 
@@ -145,7 +147,7 @@ const Items = (props: YFormItemsProps) => {
         } = _itemProps;
 
         const _formItemProps = formItemProps;
-        const { name } = _formItemProps;
+        const { name, isShow, shouldUpdate = true } = _formItemProps;
 
         if (format) {
           onFormatFieldsValue([{ name, format }]);
@@ -202,8 +204,9 @@ const Items = (props: YFormItemsProps) => {
                 );
               }
             : _children;
+        let dom;
         if (_hasFormItem) {
-          list.push(
+          dom = (
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
@@ -216,10 +219,21 @@ const Items = (props: YFormItemsProps) => {
               ])}
             >
               {domChildren}
-            </ItemChildren>,
+            </ItemChildren>
           );
         } else {
-          list.push(<React.Fragment key={key}>{domChildren}</React.Fragment>);
+          dom = <React.Fragment key={key}>{domChildren}</React.Fragment>;
+        }
+        if (typeof isShow === 'function') {
+          list.push(
+            <YForm.Item key={key} noStyle shouldUpdate={shouldUpdate}>
+              {(form) => {
+                return isShow(form.getFieldsValue()) && dom;
+              }}
+            </YForm.Item>,
+          );
+        } else {
+          list.push(dom);
         }
       } else {
         return list.push(item);
@@ -233,17 +247,26 @@ const Items = (props: YFormItemsProps) => {
     list.push(children);
   }
   const child = (
-    <YForm.YFormItemsContext.Provider value={omit(mergeProps, ['scenes'])}>
-      {list}
-    </YForm.YFormItemsContext.Provider>
+    <YForm.YFormItemsContext.Provider value={mergeProps}>{list}</YForm.YFormItemsContext.Provider>
   );
-  return noStyle ? (
+  const dom = noStyle ? (
     child
   ) : (
     <div className={classNames('yform-items', className)} style={style}>
       {child}
     </div>
   );
+  if (typeof isShow === 'function') {
+    return (
+      <YForm.Item noStyle shouldUpdate={shouldUpdate}>
+        {(form) => {
+          return isShow(form.getFieldsValue()) && dom;
+        }}
+      </YForm.Item>
+    );
+  } else {
+    return dom;
+  }
 };
 
-export default Items;
+export default React.memo(Items);
