@@ -2,10 +2,12 @@ import React from 'react';
 import moment, { isMoment } from 'moment';
 import Numbro from 'numbro';
 import { Tag } from 'antd';
+import classNames from 'classnames';
 import { includes, isArray, map } from 'lodash';
 import SwapRightOutlined from '@ant-design/icons/SwapRightOutlined';
+import { PickerPanelDateProps } from 'antd/lib/calendar/generateCalendar';
 
-import { YFormItemsTypeDefine, YFormFieldBaseProps } from '../ItemsType';
+import { YFormItemsTypeDefine } from '../ItemsType';
 
 const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
@@ -14,19 +16,28 @@ export interface YFormComponentView {
   value?: React.ReactNode;
   addonBefore?: React.ReactNode;
   addonAfter?: React.ReactNode;
-  viewProps?: YFormFieldBaseProps['viewProps'];
   suffix?: React.ReactNode;
-  [key: string]: any;
+  prefix?: React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
+  itemProps?: any;
 }
 
 export default (props: YFormComponentView) => {
-  const { _item_type, children, viewProps, addonBefore, addonAfter, suffix, value } = props;
-  const { format } = viewProps || {};
+  const {
+    _item_type,
+    children,
+    // viewProps,
+    addonBefore,
+    addonAfter,
+    suffix,
+    prefix,
+    value,
+    className,
+    itemProps = {},
+  } = props;
+  const { format } = itemProps.viewProps || {};
   let _value = value;
-
-  const _addonAfter = addonAfter || suffix;
-  const _addonBefore = addonBefore;
-
   // 金额格式化
   if (_item_type === 'money') {
     _value = Numbro(_value).format('0,0.00');
@@ -42,9 +53,10 @@ export default (props: YFormComponentView) => {
     if (thisFormat) {
       _format = thisFormat;
     } else if (picker === 'date') {
+      const { showTime } = props as PickerPanelDateProps<'date'>;
       let timeFormat = '';
-      if (props.showTime) {
-        timeFormat = typeof props.showTime === 'boolean' ? 'HH:mm:ss' : props.showTime.format;
+      if (showTime) {
+        timeFormat = typeof showTime === 'boolean' ? 'HH:mm:ss' : showTime.format;
       }
       _format = `YYYY-MM-DD ${timeFormat}`;
     } else if (picker === 'year') {
@@ -66,10 +78,11 @@ export default (props: YFormComponentView) => {
         _value = moment(_value).format(dateFormat);
       }
     } else if (_item_type === 'rangePicker') {
+      const { separator } = props as any;
       _value = (
         <>
           {_value[0] ? moment(_value[0]).format(dateFormat) : noData}
-          &nbsp;{props.separator || <SwapRightOutlined />}&nbsp;
+          &nbsp;{separator || <SwapRightOutlined />}&nbsp;
           {_value[1] ? moment(_value[1]).format(dateFormat) : noData}
         </>
       );
@@ -141,11 +154,20 @@ export default (props: YFormComponentView) => {
   if (format) {
     _value = format(value);
   }
+  // return (
+  //   <span className={classNames('ant-form-text', className)}>
+  //     {_addonBefore && <span style={{ color: '#999' }}>{_addonBefore} </span>}
+  //     {_value === undefined || _value === '' ? noData : _value}
+  //     {_addonAfter && <span style={{ color: '#999' }}> {_addonAfter}</span>}
+  //   </span>
+  // );
   return (
-    <span className="ant-form-text">
-      {_addonBefore && <span style={{ color: '#999' }}>{_addonBefore} </span>}
+    <div className={classNames('', className)}>
+      {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}
+      {prefix && <span style={{ color: '#999' }}>{prefix} </span>}
       {_value === undefined || _value === '' ? noData : _value}
-      {_addonAfter && <span style={{ color: '#999' }}> {_addonAfter}</span>}
-    </span>
+      {suffix && <span style={{ color: '#999' }}> {suffix}</span>}
+      {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
+    </div>
   );
 };

@@ -30,7 +30,7 @@ import ComponentView from './component/ComponentView';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
-
+  type?: string;
   formItemProps?: YFormItemProps;
   formatStr?: string;
   showType?: 'input' | 'layout' | 'utils' | 'action';

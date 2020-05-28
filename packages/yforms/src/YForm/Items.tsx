@@ -20,6 +20,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   className?: string;
   addonAfter?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];
+  unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];
   showType?: YFormFieldBaseProps['showType'];
@@ -102,6 +103,7 @@ const Items = (props: YFormItemsProps) => {
         let _itemProps = { ...item };
         let _componentProps = { ...item.componentProps };
         const typeProps = get(itemsType, item.type) || {};
+        typeProps.type = item.type;
         const defaultData = {
           formProps,
           itemsProps: mergeProps,
@@ -125,7 +127,6 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
-        const showType = get(_defaultData, ['itemProps', 'type']);
         const { modifyProps } = typeProps;
         if (modifyProps) {
           _defaultData = merge({}, defaultData, modifyProps(defaultData));
@@ -173,14 +174,8 @@ const Items = (props: YFormItemsProps) => {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-              const _elementProps = { ..._props };
 
-              // 当前渲染为 view 类型才传下面参数
-              if (showType === 'view') {
-                _elementProps._item_type = item.type;
-                _elementProps.viewProps = _base.viewProps;
-              }
-              _children = React.cloneElement(_component, _elementProps);
+              _children = React.cloneElement(_component, _props);
             } else {
               _children = _component;
             }
@@ -212,7 +207,13 @@ const Items = (props: YFormItemsProps) => {
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
-              {...omit(_formItemProps, ['component', 'scenes', 'showType', 'viewProps'])}
+              {...omit(_formItemProps, [
+                'component',
+                'scenes',
+                'showType',
+                'viewProps',
+                'unFormat',
+              ])}
             >
               {domChildren}
             </ItemChildren>,

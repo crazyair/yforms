@@ -1,12 +1,11 @@
 import React from 'react';
-import { merge, forEach, get } from 'lodash';
+import { merge, forEach } from 'lodash';
 import classNames from 'classnames';
-
-import { YForm } from 'yforms';
 
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
+import { DiffDom } from './scenesComp';
 
 const scenes: YFormConfig = {
   getScene: {
@@ -99,54 +98,52 @@ const scenes: YFormConfig = {
       item: ({ itemProps, typeProps }) => {
         const { showType } = merge({}, typeProps, itemProps);
         let _itemProps;
+        let _componentProps;
         if (showType === 'input') {
           _itemProps = { className: 'mb0', type: 'view' };
+          _componentProps = { itemProps };
         }
         return {
           itemProps: { ...itemProps, ..._itemProps },
+          componentProps: { _item_type: typeProps.type, ..._componentProps },
         };
       },
     },
     diff: {
       item: ({ formProps, itemProps, typeProps }) => {
-        const { diffProps: { oldFieldsValues } = {} } = formProps;
+        const { diffProps: { oldFieldsValues } = {}, initialValues } = formProps;
         const { name, showType } = merge({}, typeProps, itemProps);
+
         let _itemProps;
+
         if (showType === 'input') {
           _itemProps = {
-            addonAfter: (
-              <YForm.Items noStyle>
-                {[
-                  {
-                    noStyle: true,
-                    shouldUpdate: (prevValues, curValues) =>
-                      get(prevValues, name) !== get(curValues, name),
-                    children: ({ getFieldValue }) => {
-                      const value = getFieldValue(name);
-                      const oldValue = get(oldFieldsValues, name);
-                      return (
-                        value !== oldValue && (
-                          <div style={{ padding: '5px 0' }}>
-                            <div
-                              style={{
-                                background: '#fbe9eb',
-                                wordBreak: 'break-word',
-                                padding: '1px 0',
-                              }}
-                            >
-                              {oldValue || '-/-'}
-                            </div>
-                          </div>
-                        )
-                      );
-                    },
-                  },
-                ]}
-              </YForm.Items>
-            ),
+            addonAfter: [
+              itemProps.addonAfter,
+              // <YForm.Items key="diff-dom" className="diff">
+              //   {[
+              //     {
+              //       ...itemProps,
+              //       className: 'old-value',
+              //       label: undefined,
+              //       componentProps: { _item_type: 'datePicker' },
+              //       scenes: { noCol: true },
+              //       type: 'view',
+              //     },
+              //   ]}
+              // </YForm.Items>,
+              <DiffDom
+                key="diff-dom"
+                itemProps={itemProps}
+                type={typeProps.type}
+                oldFieldsValues={oldFieldsValues}
+                initialValues={initialValues}
+                name={name}
+              />,
+            ],
           };
         }
-        return { itemProps: { ...itemProps, ..._itemProps, shouldUpdate: true } };
+        return { itemProps: { ...itemProps, ..._itemProps } };
       },
     },
     // 搜索场景

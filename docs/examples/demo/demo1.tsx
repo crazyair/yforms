@@ -29,9 +29,16 @@ const initialValues = {
     { name: '张三', age: '10' },
     { name: '李四', age: '20' },
   ],
-  phones: [{ phone: '177777777777' }, { phone: '18888888888' }],
+  phones: [{ phone: '177777777777' }, { phone: '18888888888' }, {}],
   date: moment(),
   range: [moment(), moment()],
+};
+const oldFieldsValues = {
+  name: '张三1',
+  phones: [{ phone: '177777777777' }, { phone: '18888888881' }, { phone: '18888888888' }],
+  users: [{ name: '李四2', age: '30' }],
+  money: '999999998',
+  date: moment('2020-01-01 12:00:00'),
 };
 
 const Demo = () => {
@@ -72,7 +79,7 @@ const Demo = () => {
       onCancel={({ changeDisabled }) => changeDisabled(!disabled)}
       scenes={{ view: disabled, diff: true }}
       params={{ type: 'view' }}
-      diffProps={{ oldFieldsValues: { name: '张三1' } }}
+      diffProps={{ oldFieldsValues }}
       required
     >
       {[
@@ -88,10 +95,7 @@ const Demo = () => {
           name: 'phones',
           componentProps: {
             showIcons: { showBottomAdd: { text: '添加手机号' }, showAdd: true, showRemove: false },
-            onShowIcons: () => ({
-              showAdd: true,
-              showRemove: true,
-            }),
+            onShowIcons: () => ({ showAdd: true, showRemove: true }),
           },
           items: ({ index }) => {
             return [

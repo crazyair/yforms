@@ -6,7 +6,7 @@ import useSubmit from './useSubmit';
 import useForm from './useForm';
 
 import './index.less';
-import { YFormItemsContext, YFormContext } from './Context';
+import { YFormItemsContext, YFormContext, YFormTypeList } from './Context';
 
 type InternalYForm = typeof YForm;
 interface RefYForm extends InternalYForm {
@@ -18,6 +18,7 @@ interface RefYForm extends InternalYForm {
   useSubmit: typeof useSubmit;
   YFormContext: typeof YFormContext;
   YFormItemsContext: typeof YFormItemsContext;
+  ListContent: typeof YFormTypeList;
 }
 
 const Form: RefYForm = YForm as RefYForm;
@@ -30,5 +31,6 @@ Form.useFormatFieldsValue = useFormatFieldsValue;
 Form.useSubmit = useSubmit;
 Form.YFormContext = YFormContext;
 Form.YFormItemsContext = YFormItemsContext;
+Form.ListContent = YFormTypeList;
 
 export default Form;
