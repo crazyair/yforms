@@ -79,12 +79,14 @@ export default React.memo<YFormComponentView>((props) => {
       }
     } else if (_item_type === 'rangePicker') {
       const { separator } = props as any;
-      _value = (
+      _value = _value ? (
         <>
-          {_value[0] ? moment(_value[0]).format(dateFormat) : noData}
+          {_value && _value[0] ? moment(_value[0]).format(dateFormat) : noData}
           &nbsp;{separator || <SwapRightOutlined />}&nbsp;
-          {_value[1] ? moment(_value[1]).format(dateFormat) : noData}
+          {_value && _value[1] ? moment(_value[1]).format(dateFormat) : noData}
         </>
+      ) : (
+        noData
       );
     }
   }
@@ -110,7 +112,7 @@ export default React.memo<YFormComponentView>((props) => {
         }
       }
     });
-    _value = map(list, (item) => <Tag key={item}>{item}</Tag>);
+    _value = list.length > 0 ? map(list, (item) => <Tag key={item}>{item}</Tag>) : noData;
   }
   if (_item_type === 'radio') {
     const {
@@ -128,7 +130,7 @@ export default React.memo<YFormComponentView>((props) => {
           }
         }
       });
-      _value = map(list, (item) => <Tag key={item}>{item}</Tag>);
+      _value = list.length > 0 ? map(list, (item) => <Tag key={item}>{item}</Tag>) : noData;
     }
   }
   if (_item_type === 'checkboxGroup') {
@@ -139,7 +141,7 @@ export default React.memo<YFormComponentView>((props) => {
           return item.name;
         }
       });
-      _value = map(list, (item, index) => <Tag key={index}>{item}</Tag>);
+      _value = list.length > 0 ? map(list, (item, index) => <Tag key={index}>{item}</Tag>) : noData;
     }
   }
 
@@ -161,6 +163,7 @@ export default React.memo<YFormComponentView>((props) => {
   //     {_addonAfter && <span style={{ color: '#999' }}> {_addonAfter}</span>}
   //   </span>
   // );
+
   return (
     <div className={classNames('', className)}>
       {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}
