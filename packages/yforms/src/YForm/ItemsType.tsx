@@ -33,7 +33,6 @@ export interface YFormFieldBaseProps<T = any> {
   type?: string;
   formItemProps?: YFormItemProps;
   formatStr?: string;
-  showType?: 'input' | 'layout' | 'utils' | 'action';
   hasFormItem?: boolean;
   scenes?: YFormConfig['scenes'];
   modifyProps?: (
@@ -110,101 +109,26 @@ const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({ itemProp
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
 export const itemsType: YFormItemsType = {
-  input: {
-    component: <Input />,
-    showType: 'input',
-    formatStr: '请输入${label}',
-    // viewProps: { valueType: 'string' },
-  },
-  datePicker: {
-    component: <DatePicker />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-  },
-  rangePicker: {
-    component: <DatePicker.RangePicker />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-  },
-  password: {
-    component: <Input.Password />,
-    showType: 'input',
-    formatStr: '请输入${label}',
-  },
-  textarea: {
-    component: <TextArea />,
-    showType: 'input',
-    formatStr: '请输入${label}',
-    modifyProps: textModify,
-  },
-  money: {
-    component: <Money />,
-    showType: 'input',
-    formatStr: '请输入${label}',
-  },
-  checkbox: {
-    component: <Checkbox />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-    modifyProps: checkboxProps,
-  },
-  switch: {
-    component: <Switch />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-    modifyProps: switchProps,
-  },
-  checkboxGroup: {
-    component: <CheckboxGroup />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-  },
-  radio: {
-    component: <Radio />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-  },
-  select: {
-    component: <Select {...searchSelect} />,
-    showType: 'input',
-    formatStr: '请选择${label}',
-  },
-  text: {
-    component: <CustomTypography />,
-    showType: 'input',
-    formatStr: '请输入${label}',
-  },
-  oneLine: {
-    component: <OneLine />,
-    showType: 'layout',
-    modifyProps: oneLineModify,
-  },
-  list: {
-    component: <List />,
-    showType: 'layout',
-    hasFormItem: false,
-  },
-  button: {
-    component: <Button />,
-    showType: 'action',
-  },
-  secureButton: {
-    component: <SecureButton />,
-    showType: 'action',
-  },
-  custom: {
-    showType: 'layout',
-  },
-  submit: {
-    component: <Submit />,
-    showType: 'utils',
-    hasFormItem: false,
-    modifyProps: submitModify,
-  },
-  view: {
-    component: <ComponentView />,
-    showType: 'layout',
-  },
+  // viewProps: { valueType: 'string' },
+  input: { component: <Input />, formatStr: '请输入${label}' },
+  datePicker: { component: <DatePicker />, formatStr: '请选择${label}' },
+  rangePicker: { component: <DatePicker.RangePicker />, formatStr: '请选择${label}' },
+  password: { component: <Input.Password />, formatStr: '请输入${label}' },
+  textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
+  money: { component: <Money />, formatStr: '请输入${label}' },
+  checkbox: { component: <Checkbox />, formatStr: '请选择${label}', modifyProps: checkboxProps },
+  switch: { component: <Switch />, formatStr: '请选择${label}', modifyProps: switchProps },
+  checkboxGroup: { component: <CheckboxGroup />, formatStr: '请选择${label}' },
+  radio: { component: <Radio />, formatStr: '请选择${label}' },
+  select: { component: <Select {...searchSelect} />, formatStr: '请选择${label}' },
+  text: { component: <CustomTypography />, formatStr: '请输入${label}' },
+  oneLine: { component: <OneLine />, modifyProps: oneLineModify },
+  list: { component: <List />, hasFormItem: false },
+  button: { component: <Button /> },
+  secureButton: { component: <SecureButton /> },
+  custom: {},
+  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
+  view: { component: <ComponentView /> },
 };
 
 export default itemsType;

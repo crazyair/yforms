@@ -23,7 +23,6 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];
-  showType?: YFormFieldBaseProps['showType'];
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
@@ -210,13 +209,7 @@ const Items = (props: YFormItemsProps) => {
             <ItemChildren
               key={key}
               addonAfter={addonAfter}
-              {...omit(_formItemProps, [
-                'component',
-                'scenes',
-                'showType',
-                'viewProps',
-                'unFormat',
-              ])}
+              {...omit(_formItemProps, ['component', 'scenes', 'viewProps', 'unFormat'])}
             >
               {domChildren}
             </ItemChildren>

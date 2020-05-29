@@ -7,6 +7,9 @@ import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
 import DiffDom from './component/Diff';
 
+// TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
+// itemProps.name && typeProps.type !== 'list'
+
 const scenes: YFormConfig = {
   getScene: {
     // 没有 label 也和有 label 对齐
@@ -41,10 +44,10 @@ const scenes: YFormConfig = {
         const _itemProps: modifyType['itemProps'] = {};
         const { required } = formProps;
         const { label, rules } = itemProps;
-        const { formatStr, showType } = merge({}, typeProps, itemProps);
+        const { formatStr } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           if (required) {
             let hasRequired = false;
             forEach(rules, (item) => {
@@ -68,10 +71,10 @@ const scenes: YFormConfig = {
       item: ({ itemProps, componentProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { label } = itemProps;
-        const { formatStr, showType } = merge({}, typeProps, itemProps);
+        const { formatStr } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           _componentProps.placeholder = _message || '';
         }
         return {
@@ -84,8 +87,7 @@ const scenes: YFormConfig = {
       item: ({ formProps, componentProps, itemProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { disabled } = formProps;
-        const { showType } = merge({}, typeProps, itemProps);
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           _componentProps.disabled = disabled;
         }
         return {
@@ -93,13 +95,12 @@ const scenes: YFormConfig = {
         };
       },
     },
-    // 查看情况下每个 item 并且 showType = input  使用 view 类型渲染
+    // 查看情况下每个 item 使用 view 类型渲染
     view: {
       item: ({ itemProps, typeProps }) => {
-        const { showType } = merge({}, typeProps, itemProps);
         let _itemProps;
         let _componentProps;
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           _itemProps = { className: 'mb0', type: 'view' };
           _componentProps = { itemProps };
         }
@@ -112,11 +113,11 @@ const scenes: YFormConfig = {
     diff: {
       item: ({ formProps, itemProps, typeProps }) => {
         const { diffProps: { oldValues } = {}, initialValues } = formProps;
-        const { name, showType } = merge({}, typeProps, itemProps);
+        const { name } = merge({}, typeProps, itemProps);
 
         let _itemProps;
 
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           _itemProps = {
             addonAfter: [
               itemProps.addonAfter,

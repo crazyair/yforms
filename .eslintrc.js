@@ -43,5 +43,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'arrow-parens': 0,
     '@typescript-eslint/camelcase': 0,
+    'react/no-array-index-key': 0,
   },
 };
