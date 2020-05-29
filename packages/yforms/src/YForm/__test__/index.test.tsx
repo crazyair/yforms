@@ -13,7 +13,9 @@ const YFormDemo = (props: YFormProps) => {
 
   const { onFormatFieldsValue, formatFieldsValue } = YForm.useFormatFieldsValue();
 
-  onFormatFieldsValue([{ name: ['demo', 'aa'], format: (value: { users: any }) => value.users }]);
+  onFormatFieldsValue([
+    { name: ['demo', 'aa'], format: (_, values: { users: any }) => values.users },
+  ]);
 
   return (
     <YForm

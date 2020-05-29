@@ -38,7 +38,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
 
 export interface FormatFieldsValue<T = any> {
   name: FormItemProps['name'];
-  format: (values: T) => any;
+  format: (value: any, values: T) => any;
 }
 
 // 内部使用，类型不重要

@@ -33,7 +33,7 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
-    { name: 'name', format: ({ name }) => `${name}_改变了` },
+    { name: 'name', format: (value) => `${value}_改变了` },
   ]);
 
   const onFinish = async (values: any) => {

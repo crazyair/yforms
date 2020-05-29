@@ -3,7 +3,7 @@ import moment, { isMoment } from 'moment';
 import Numbro from 'numbro';
 import { Tag } from 'antd';
 import classNames from 'classnames';
-import { includes, isArray, map } from 'lodash';
+import { includes, isArray, map, get } from 'lodash';
 import SwapRightOutlined from '@ant-design/icons/SwapRightOutlined';
 import { PickerPanelDateProps } from 'antd/lib/calendar/generateCalendar';
 
@@ -36,6 +36,7 @@ export default React.memo<YFormComponentView>((props) => {
     className,
     itemProps = {},
   } = props;
+  const { valuePropName } = itemProps;
   const { format } = itemProps.viewProps || {};
   let _value = value;
   // 金额格式化
@@ -91,7 +92,7 @@ export default React.memo<YFormComponentView>((props) => {
     }
   }
   if (_item_type === 'checkbox') {
-    if (value) _value = <Tag>{children}</Tag>;
+    if (get(props, valuePropName || 'checked')) _value = <Tag>{children}</Tag>;
   }
   if (_item_type === 'select') {
     const {
@@ -150,7 +151,9 @@ export default React.memo<YFormComponentView>((props) => {
       checkedChildren = '开',
       unCheckedChildren = '关',
     } = props as YFormItemsTypeDefine['switch']['componentProps'];
-    _value = <Tag>{value ? checkedChildren : unCheckedChildren}</Tag>;
+    _value = (
+      <Tag>{get(props, valuePropName || 'checked') ? checkedChildren : unCheckedChildren}</Tag>
+    );
   }
 
   if (format) {

@@ -165,7 +165,7 @@ export function submitFormatValues<T>(
     if (item && item.name) {
       // 如果字段是 undefined 则不需要执行 set 了
       if (get(_values, item.name) !== undefined) {
-        set(_values, item.name, item.format({ ...values }));
+        set(_values, item.name, item.format(get(values, item.name), { ...values }));
       }
     }
   });

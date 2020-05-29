@@ -46,7 +46,7 @@ export default () => {
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '追加字段' },
-    { name: 'name', format: ({ name }) => `${name}_改变字段值` },
+    { name: 'name', format: (value) => `${value}_改变字段值` },
   ]);
 
   return (
