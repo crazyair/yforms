@@ -1,18 +1,22 @@
 import React from 'react';
+import { Tag } from 'antd';
 import moment, { isMoment } from 'moment';
 import { CheckboxProps } from 'antd/lib/checkbox';
-import { DatePickerProps } from 'antd/lib/date-picker';
+import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { PickerPanelDateProps } from 'antd/lib/calendar/generateCalendar';
+import { PickerMode } from 'rc-picker/lib/interface';
 // import { isArray } from 'lodash';
 import { SwapRightOutlined } from '@ant-design/icons';
-import { YFormFieldBaseProps, YFormItemsTypeDefine } from './ItemsType';
+import { SwitchProps } from 'antd/lib/switch';
+import { YFormFieldBaseProps } from './ItemsType';
 
 const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
 const dateFormat = (
   value?: any,
-  props?: YFormItemsTypeDefine['datePicker']['componentProps'],
+  props?: { picker?: PickerMode; format?: string | string[] },
   type?: string,
+  pureValue?: boolean,
 ) => {
   const { picker = 'date', format } = props;
   let _format;
@@ -24,7 +28,7 @@ const dateFormat = (
     if (showTime) {
       timeFormat = typeof showTime === 'boolean' ? 'HH:mm:ss' : showTime.format;
     }
-    _format = `YYYY-MM-DD ${timeFormat}`;
+    _format = timeFormat ? `YYYY-MM-DD ${timeFormat}` : 'YYYY-MM-DD';
   } else if (picker === 'year') {
     _format = 'YYYY';
   } else if (picker === 'quarter') {
@@ -44,6 +48,10 @@ const dateFormat = (
     }
   } else if (type === 'rangePicker') {
     const { separator } = props as any;
+    const [start, end] = value || [];
+    if (pureValue) {
+      return `${start && moment(start).format(dateFormat)}${end && moment(end).format(dateFormat)}`;
+    }
     return (
       value && (
         <>
@@ -54,10 +62,9 @@ const dateFormat = (
       )
     );
   }
-  // rangePicker
 };
 
-const datePicker: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
+const modifyDatePicker: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
   itemProps,
   componentProps,
   typeProps,
@@ -69,9 +76,42 @@ const datePicker: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
     },
   };
 };
+const modifyRangePicker: YFormFieldBaseProps<RangePickerProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+  typeProps,
+}) => {
+  return {
+    itemProps: {
+      viewProps: {
+        format: (value, pureValue) => dateFormat(value, componentProps, typeProps.type, pureValue),
+      },
+      ...itemProps,
+    },
+  };
+};
 
-const checkbox: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ itemProps }) => {
+const modifyCheckbox: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ itemProps }) => {
   return { itemProps: { valuePropName: 'checked', ...itemProps } };
 };
 
-export { checkbox, datePicker };
+const modifySwitch: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const { checkedChildren = '开', unCheckedChildren = '关' } = componentProps;
+  return {
+    itemProps: {
+      valuePropName: 'checked',
+      viewProps: {
+        format: (value, pureValue) => {
+          // !!value 解释：undefined 设置为 false 来对比
+          return pureValue ? !!value : <Tag>{value ? checkedChildren : unCheckedChildren}</Tag>;
+        },
+      },
+      ...itemProps,
+    },
+  };
+};
+
+export { modifyCheckbox, modifyDatePicker, modifyRangePicker, modifySwitch };

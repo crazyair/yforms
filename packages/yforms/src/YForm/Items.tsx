@@ -110,7 +110,7 @@ const Items = (props: YFormItemsProps) => {
           itemsProps: mergeProps,
           typeProps,
           itemProps: item,
-          componentProps: item.componentProps,
+          componentProps: _componentProps,
         };
         // 参数修改
         let _defaultData = defaultData;

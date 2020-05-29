@@ -20,6 +20,8 @@ const equalFunc = (value: any, oldValue: any): boolean => {
       if (moment.isMoment(item)) {
         // 对比数据到秒级，忽略毫秒
         equal = item.isSame(oldValue[index], 'seconds');
+      } else if (moment.isMoment(oldValue[index])) {
+        equal = oldValue[index].isSame(item, 'seconds');
       } else {
         equal = isEqual(item, oldValue[index]);
       }
@@ -55,6 +57,14 @@ const DiffDom = React.memo<any>((props) => {
           children: ({ getFieldValue }) => {
             const value = getFieldValue(_name);
             const oldValue = get(oldValues, _name);
+            let equal = equalFunc(value, oldValue);
+            // 如果有渲染方法，就按照次来对比
+            if (itemProps.viewProps) {
+              // 这里用的 pureValue = true（纯值），直接 === 判断就可以。
+              equal =
+                itemProps.viewProps.format(value, true) ===
+                itemProps.viewProps.format(oldValue, true);
+            }
 
             // List 下级字段
             if (context.prefixName) {
@@ -68,7 +78,7 @@ const DiffDom = React.memo<any>((props) => {
                 });
               }
             }
-            if (equalFunc(value, oldValue)) {
+            if (equal) {
               return null;
             }
             return (

@@ -33,7 +33,7 @@ export default React.memo<YFormComponentView>((props) => {
     className,
     itemProps = {},
   } = props;
-  const { valuePropName } = itemProps;
+  const { valuePropName = 'value' } = itemProps;
   const { format } = itemProps.viewProps || {};
   let _value = value;
   // 金额格式化
@@ -96,19 +96,10 @@ export default React.memo<YFormComponentView>((props) => {
     }
   }
 
-  if (_item_type === 'switch') {
-    const {
-      checkedChildren = '开',
-      unCheckedChildren = '关',
-    } = props as YFormItemsTypeDefine['switch']['componentProps'];
-    _value = (
-      <Tag>{get(props, valuePropName || 'checked') ? checkedChildren : unCheckedChildren}</Tag>
-    );
+  if (format) {
+    _value = format(get(props, valuePropName));
   }
 
-  if (format) {
-    _value = format(value);
-  }
   return (
     <span className={classNames('ant-form-text', className)}>
       {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}

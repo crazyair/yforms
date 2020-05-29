@@ -75,7 +75,10 @@ const scenes: YFormConfig = {
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
         if (itemProps.name && typeProps.type !== 'list') {
-          _componentProps.placeholder = _message || '';
+          // rangePicker 不需要设置 placeholder
+          if (typeProps.type !== 'rangePicker') {
+            _componentProps.placeholder = _message || '';
+          }
         }
         return {
           componentProps: { ..._componentProps, ...componentProps },
@@ -114,11 +117,9 @@ const scenes: YFormConfig = {
     },
     diff: {
       item: ({ formProps, itemProps, typeProps }) => {
+        // TODO 后面使用 initialValue 这里需要修改
         const { diffProps: { oldValues } = {}, initialValues } = formProps;
-        const { name } = merge({}, typeProps, itemProps);
-
         let _itemProps;
-
         if (itemProps.name && typeProps.type !== 'list') {
           _itemProps = {
             addonAfter: [
@@ -129,7 +130,7 @@ const scenes: YFormConfig = {
                 type={typeProps.type}
                 oldValues={oldValues}
                 initialValues={initialValues}
-                name={name}
+                name={itemProps.name}
               />,
             ],
           };
