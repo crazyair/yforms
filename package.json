@@ -78,7 +78,7 @@
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.2.0",
     "react-test-renderer": "^16.7.0",
-    "typescript": "^3.7.5",
+    "typescript": "^3.9.3",
     "umi": "^3.2.2",
     "umi-test": "^1.9.3"
   },

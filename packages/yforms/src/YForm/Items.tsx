@@ -63,7 +63,7 @@ const Items = (props: YFormItemsProps) => {
   const { itemsType } = formProps;
 
   let mergeProps = merge({}, formProps, itemsProps, props);
-  const { scenes, getScene, onFormatFieldsValue, shouldUpdate = true } = mergeProps;
+  const { scenes, getScene, onFormatFieldsValue, shouldUpdate } = mergeProps;
 
   const _defaultData = { formProps, itemsProps: props };
   mapKeys(scenes, (value: boolean, key: string) => {
@@ -114,6 +114,10 @@ const Items = (props: YFormItemsProps) => {
         };
         // 参数修改
         let _defaultData = defaultData;
+        const { modifyProps } = typeProps;
+        if (modifyProps) {
+          _defaultData = merge({}, defaultData, modifyProps(defaultData));
+        }
 
         const _scenes = merge({}, scenes, item.scenes);
         mapKeys(_scenes, (value: boolean, key: string) => {
@@ -128,10 +132,7 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
-        const { modifyProps } = typeProps;
-        if (modifyProps) {
-          _defaultData = merge({}, defaultData, modifyProps(defaultData));
-        }
+
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
         const _base = merge({}, formProps, itemsProps, _itemProps);
@@ -146,7 +147,7 @@ const Items = (props: YFormItemsProps) => {
         } = _itemProps;
 
         const _formItemProps = formItemProps;
-        const { name, isShow, shouldUpdate = true } = _formItemProps;
+        const { name, isShow, shouldUpdate } = _formItemProps;
 
         if (format) {
           onFormatFieldsValue([{ name, format }]);

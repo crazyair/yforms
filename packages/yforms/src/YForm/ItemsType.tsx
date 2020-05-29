@@ -109,7 +109,6 @@ const switchProps: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({ itemProp
 export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 
 export const itemsType: YFormItemsType = {
-  // viewProps: { valueType: 'string' },
   input: { component: <Input />, formatStr: '请输入${label}' },
   datePicker: { component: <DatePicker />, formatStr: '请选择${label}', modifyProps: datePicker },
   rangePicker: { component: <DatePicker.RangePicker />, formatStr: '请选择${label}' },
