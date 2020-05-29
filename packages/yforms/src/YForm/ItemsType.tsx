@@ -6,11 +6,10 @@ import { SwitchProps } from 'antd/lib/switch';
 import { ButtonProps } from 'antd/lib/button';
 import { CheckboxProps } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
-
 import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
+
 import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
-
 import CustomTypography from './component/Typography';
 import OneLine, {
   YFormOneLineComponentProps,
@@ -27,6 +26,7 @@ import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 import { YFormProps, YFormConfig } from './Form';
 import ComponentView from './component/ComponentView';
+import { datePicker } from './ItemsTypeModify';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -39,7 +39,7 @@ export interface YFormFieldBaseProps<T = any> {
     props: Required<modifyType<T>>,
   ) => Pick<modifyType<T>, 'itemProps' | 'componentProps'>;
   componentView?: React.ReactElement;
-  viewProps?: { format: (value: any) => React.ReactNode };
+  viewProps?: { format?: (value: any) => React.ReactNode };
   diffProps?: any;
 }
 
@@ -111,7 +111,7 @@ export type YFormItemsTypeArray<T> = YFormItemsType<T>[keyof YFormItemsType];
 export const itemsType: YFormItemsType = {
   // viewProps: { valueType: 'string' },
   input: { component: <Input />, formatStr: '请输入${label}' },
-  datePicker: { component: <DatePicker />, formatStr: '请选择${label}' },
+  datePicker: { component: <DatePicker />, formatStr: '请选择${label}', modifyProps: datePicker },
   rangePicker: { component: <DatePicker.RangePicker />, formatStr: '请选择${label}' },
   password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },

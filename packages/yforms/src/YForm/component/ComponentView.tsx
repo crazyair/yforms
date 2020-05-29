@@ -8,6 +8,7 @@ import SwapRightOutlined from '@ant-design/icons/SwapRightOutlined';
 import { PickerPanelDateProps } from 'antd/lib/calendar/generateCalendar';
 
 import { YFormItemsTypeDefine } from '../ItemsType';
+import { YFormItemProps } from '../Items';
 
 const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
@@ -20,7 +21,7 @@ export interface YFormComponentView {
   prefix?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
-  itemProps?: any;
+  itemProps?: YFormItemProps;
 }
 
 export default React.memo<YFormComponentView>((props) => {

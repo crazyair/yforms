@@ -74,6 +74,7 @@ const DiffDom = React.memo<any>((props) => {
             return (
               <div style={{ padding: '5px 0' }}>
                 <ComponentView
+                  _show_type="diff"
                   {...itemProps.componentProps}
                   itemProps={itemProps}
                   className="old-value"
