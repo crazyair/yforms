@@ -14,6 +14,7 @@ import {
 } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
+import warning from 'warning';
 import { stringAndFunc } from './ItemsType';
 import { FieldsType, KeyValue, ParamsType } from './Form';
 import { FormatFieldsValue } from './Items';
@@ -165,7 +166,14 @@ export function submitFormatValues<T>(
     if (item && item.name) {
       // 如果字段是 undefined 则不需要执行 set 了
       if (get(_values, item.name) !== undefined) {
-        set(_values, item.name, item.format(get(values, item.name), { ...values }));
+        try {
+          set(_values, item.name, item.format(get(values, item.name), { ...values }));
+        } catch (error) {
+          // 如果 format 代码报错这里抛出异常
+          // eslint-disable-next-line no-console
+          console.error(error);
+          warning(false, error);
+        }
       }
     }
   });

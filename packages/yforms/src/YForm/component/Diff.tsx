@@ -89,7 +89,7 @@ const DiffDom = React.memo<any>((props) => {
                   itemProps={itemProps}
                   className="old-value"
                   _item_type={type}
-                  value={oldValue}
+                  oldValue={oldValue}
                 />
               </div>
             );

@@ -11,26 +11,29 @@ import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
 import CustomTypography from './component/Typography';
-import OneLine, {
-  YFormOneLineComponentProps,
-  YFormOneLineProps,
-  oneLineModify,
-} from './component/OneLine';
+import OneLine, { YFormOneLineComponentProps, YFormOneLineProps } from './component/OneLine';
 import Radio, { YRadioProps } from './component/Radio';
 import List, { YFormListComponentProps, YFormListProps } from './component/List';
 import CheckboxGroup, { YCheckGroupProps } from './component/CheckboxGroup';
 import Select, { YSelectProps } from './component/Select';
-import TextArea, { YTextAreaProps, textModify } from './component/TextArea';
+import TextArea, { YTextAreaProps } from './component/TextArea';
 import Money, { YMoneyProps } from './component/Money';
-import Submit, { YFormSubmitProps, submitModify } from './component/Submit';
+import Submit, { YFormSubmitProps } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 import { YFormProps, YFormConfig } from './Form';
 import ComponentView from './component/ComponentView';
 import {
-  modifyDatePicker,
-  modifyRangePicker,
-  modifySwitch,
-  modifyCheckbox,
+  datePickerModify,
+  rangePickerModify,
+  checkboxModify,
+  switchModify,
+  textModify,
+  oneLineModify,
+  submitModify,
+  checkboxGroupModify,
+  selectModify,
+  moneyModify,
+  radioModify,
 } from './ItemsTypeModify';
 
 export interface YFormFieldBaseProps<T = any> {
@@ -111,25 +114,33 @@ export const itemsType: YFormItemsType = {
   input: { component: <Input />, formatStr: '请输入${label}' },
   password: { component: <Input.Password />, formatStr: '请输入${label}' },
   textarea: { component: <TextArea />, formatStr: '请输入${label}', modifyProps: textModify },
-  money: { component: <Money />, formatStr: '请输入${label}' },
+  money: { component: <Money />, formatStr: '请输入${label}', modifyProps: moneyModify },
   text: { component: <CustomTypography />, formatStr: '请输入${label}' },
   // 日期类
   datePicker: {
     component: <DatePicker />,
     formatStr: '请选择${label}',
-    modifyProps: modifyDatePicker,
+    modifyProps: datePickerModify,
   },
   rangePicker: {
     component: <DatePicker.RangePicker />,
     formatStr: '请选择${label}',
-    modifyProps: modifyRangePicker,
+    modifyProps: rangePickerModify,
   },
   // 单选复选类
-  checkbox: { component: <Checkbox />, formatStr: '请选择${label}', modifyProps: modifyCheckbox },
-  switch: { component: <Switch />, formatStr: '请选择${label}', modifyProps: modifySwitch },
-  checkboxGroup: { component: <CheckboxGroup />, formatStr: '请选择${label}' },
-  radio: { component: <Radio />, formatStr: '请选择${label}' },
-  select: { component: <Select {...searchSelect} />, formatStr: '请选择${label}' },
+  checkbox: { component: <Checkbox />, formatStr: '请选择${label}', modifyProps: checkboxModify },
+  switch: { component: <Switch />, formatStr: '请选择${label}', modifyProps: switchModify },
+  checkboxGroup: {
+    component: <CheckboxGroup />,
+    formatStr: '请选择${label}',
+    modifyProps: checkboxGroupModify,
+  },
+  radio: { component: <Radio />, modifyProps: radioModify },
+  select: {
+    component: <Select {...searchSelect} />,
+    formatStr: '请选择${label}',
+    modifyProps: selectModify,
+  },
   // 工具类
   oneLine: { component: <OneLine />, modifyProps: oneLineModify },
   list: { component: <List />, hasFormItem: false },

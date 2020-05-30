@@ -3,7 +3,7 @@ import { map, merge, get, isArray, isObject } from 'lodash';
 import classNames from 'classnames';
 
 import { oneLineItemStyle } from '../utils';
-import { BaseComponentProps, YFormFieldBaseProps } from '../ItemsType';
+import { BaseComponentProps } from '../ItemsType';
 import YForm from '..';
 import { YFormItemProps } from '../Items';
 
@@ -21,14 +21,6 @@ export interface YFormOneLineProps {
   scenes?: YFormItemProps['scenes'];
   items?: (p: YFormOneLineItems) => YFormItemProps['children'];
 }
-
-export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
-  itemProps = {},
-}) => {
-  return {
-    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
-  };
-};
 
 export default (props: YFormOneLineProps) => {
   const { items, componentProps = {}, scenes } = props;

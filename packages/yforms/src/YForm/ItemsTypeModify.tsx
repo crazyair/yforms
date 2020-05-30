@@ -5,10 +5,20 @@ import { CheckboxProps } from 'antd/lib/checkbox';
 import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { PickerPanelDateProps } from 'antd/lib/calendar/generateCalendar';
 import { PickerMode } from 'rc-picker/lib/interface';
-// import { isArray } from 'lodash';
 import { SwapRightOutlined } from '@ant-design/icons';
 import { SwitchProps } from 'antd/lib/switch';
+import Numbro from 'numbro';
+import classNames from 'classnames';
+import { isArray, map, includes } from 'lodash';
 import { YFormFieldBaseProps } from './ItemsType';
+import { YTextAreaProps } from './component/TextArea';
+import { calculateStrLength } from './utils';
+import { YFormOneLineProps } from './component/OneLine';
+import { YFormSubmitProps } from './component/Submit';
+import { YCheckGroupProps } from './component/CheckboxGroup';
+import { YSelectProps } from './component/Select';
+import { YMoneyProps } from './component/Money';
+import { YRadioProps } from './component/Radio';
 
 const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
@@ -64,7 +74,7 @@ const dateFormat = (
   }
 };
 
-const modifyDatePicker: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
+export const datePickerModify: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
   itemProps,
   componentProps,
   typeProps,
@@ -76,7 +86,7 @@ const modifyDatePicker: YFormFieldBaseProps<DatePickerProps>['modifyProps'] = ({
     },
   };
 };
-const modifyRangePicker: YFormFieldBaseProps<RangePickerProps>['modifyProps'] = ({
+export const rangePickerModify: YFormFieldBaseProps<RangePickerProps>['modifyProps'] = ({
   itemProps,
   componentProps,
   typeProps,
@@ -91,11 +101,28 @@ const modifyRangePicker: YFormFieldBaseProps<RangePickerProps>['modifyProps'] = 
   };
 };
 
-const modifyCheckbox: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({ itemProps }) => {
-  return { itemProps: { valuePropName: 'checked', ...itemProps } };
+export const checkboxModify: YFormFieldBaseProps<CheckboxProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const { children } = componentProps;
+  return {
+    itemProps: {
+      valuePropName: 'checked',
+      viewProps: {
+        format: (value, pureValue) => {
+          if (pureValue) {
+            return !!value;
+          }
+          return value ? <Tag>{children}</Tag> : noData;
+        },
+      },
+      ...itemProps,
+    },
+  };
 };
 
-const modifySwitch: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({
+export const switchModify: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({
   itemProps,
   componentProps,
 }) => {
@@ -114,4 +141,153 @@ const modifySwitch: YFormFieldBaseProps<SwitchProps>['modifyProps'] = ({
   };
 };
 
-export { modifyCheckbox, modifyDatePicker, modifyRangePicker, modifySwitch };
+export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const _fProps = { ...itemProps };
+  if (componentProps.inputMax) {
+    _fProps.rules = [
+      ...(_fProps.rules || []),
+      () => ({
+        validator(_, value) {
+          if (value && calculateStrLength(value) > Number(componentProps.inputMax)) {
+            return Promise.reject('数量超长');
+          }
+          return Promise.resolve();
+        },
+      }),
+    ];
+  }
+
+  return { itemProps: _fProps };
+};
+
+export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
+  itemProps = {},
+}) => {
+  return {
+    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
+  };
+};
+
+export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
+  componentProps,
+}) => {
+  return { componentProps: { showBtns: { showSave: false }, ...componentProps } };
+};
+
+export const checkboxGroupModify: YFormFieldBaseProps<YCheckGroupProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const { options } = componentProps;
+  return {
+    itemProps: {
+      viewProps: {
+        format: (value, pureValue) => {
+          if (value && isArray(value)) {
+            const list = map(options, (item) => {
+              if (includes(value, item.id)) {
+                return item.name;
+              }
+            });
+            if (pureValue) {
+              if (isArray(value)) {
+                return map(value, (item) => item).join('-');
+              }
+              return value;
+            }
+            return map(list, (item, index) => <Tag key={index}>{item}</Tag>);
+          }
+        },
+      },
+      ...itemProps,
+    },
+  };
+};
+
+export const selectModify: YFormFieldBaseProps<YSelectProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const { options, optionLabelProp, onAddProps, showField = 'name' } = componentProps;
+  return {
+    itemProps: {
+      viewProps: {
+        format: (value, pureValue) => {
+          const list = [];
+          map(options, (item, index) => {
+            if (includes(isArray ? value : [value], item.id)) {
+              if (optionLabelProp && onAddProps) {
+                list.push(onAddProps(item, index)[optionLabelProp]);
+              } else if (typeof showField === 'function') {
+                list.push(showField(item, index));
+              } else {
+                list.push(item[showField]);
+              }
+            }
+          });
+          if (pureValue) {
+            if (isArray(value)) {
+              return map(value, (item) => item).join('-');
+            }
+            return value;
+          }
+          return map(list, (item) => <Tag key={item}>{item}</Tag>);
+        },
+      },
+      ...itemProps,
+    },
+  };
+};
+
+export const moneyModify: YFormFieldBaseProps<YMoneyProps>['modifyProps'] = ({ itemProps }) => {
+  return {
+    itemProps: {
+      viewProps: {
+        format: (value) => {
+          try {
+            return Numbro(value).format('0,0.00');
+          } catch (error) {
+            return value;
+          }
+        },
+      },
+      ...itemProps,
+    },
+  };
+};
+
+export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
+  itemProps,
+  componentProps,
+}) => {
+  const { options, showField = 'name' } = componentProps;
+  return {
+    itemProps: {
+      viewProps: {
+        format: (value, pureValue) => {
+          const list = [];
+          map(options, (item, index) => {
+            if (value === item.id) {
+              if (typeof showField === 'function') {
+                list.push(showField(item, index));
+              } else {
+                list.push(item[showField]);
+              }
+            }
+          });
+          if (pureValue) {
+            if (isArray(value)) {
+              return map(value, (item) => item).join('-');
+            }
+            return value;
+          }
+          return map(list, (item) => <Tag key={item}>{item}</Tag>);
+        },
+      },
+      ...itemProps,
+    },
+  };
+};

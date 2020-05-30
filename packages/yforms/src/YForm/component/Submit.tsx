@@ -6,13 +6,6 @@ import { YForm } from '../..';
 import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
 import { YFormSecureButtonProps } from './SecureButton';
-import { YFormFieldBaseProps } from '../ItemsType';
-
-export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
-  componentProps,
-}) => {
-  return { componentProps: { showBtns: { showSave: false }, ...componentProps } };
-};
 
 export interface ShowBtns {
   showSubmit?: ButtonProps;

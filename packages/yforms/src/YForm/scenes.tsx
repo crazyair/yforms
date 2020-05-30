@@ -100,7 +100,7 @@ const scenes: YFormConfig = {
     },
     // 查看情况下每个 item 使用 view 类型渲染
     view: {
-      item: ({ itemProps, typeProps }) => {
+      item: ({ itemProps, typeProps, componentProps }) => {
         let _itemProps;
         let _componentProps;
         if (itemProps.name && typeProps.type !== 'list') {
@@ -111,7 +111,7 @@ const scenes: YFormConfig = {
         }
         return {
           itemProps: { ...itemProps, ..._itemProps },
-          componentProps: { _item_type: typeProps.type, ..._componentProps },
+          componentProps: { ...componentProps, ..._componentProps },
         };
       },
     },
