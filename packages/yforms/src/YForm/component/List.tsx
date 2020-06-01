@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { map, merge, isArray, concat, get } from 'lodash';
@@ -35,8 +35,8 @@ export interface YFormListItems {
 }
 
 export interface YFormListProps
-  extends Pick<YFormItemProps, 'label' | 'name' | 'addonAfter' | 'scenes'>,
-    Pick<YFormProps, 'children' | 'disabled'> {
+  extends Pick<YFormItemProps, 'label' | 'name' | 'addonAfter' | 'scenes' | 'initialValue'>,
+    Pick<YFormProps, 'form' | 'children' | 'disabled'> {
   prefixName?: YFormItemProps['name'];
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
@@ -44,7 +44,19 @@ export interface YFormListProps
 }
 
 export default (props: YFormListProps) => {
-  const { label, items, disabled, componentProps = {}, name, offset, addonAfter, scenes } = props;
+  const {
+    form,
+    initialValue,
+    label,
+    items,
+    disabled,
+    componentProps = {},
+    name,
+    offset,
+    addonAfter,
+    scenes,
+  } = props;
+
   const {
     maxNum,
     minNum,
@@ -55,6 +67,11 @@ export default (props: YFormListProps) => {
   const context = React.useContext(YForm.ListContent);
   // 支持多级 List name 拼接
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
+
+  useEffect(() => {
+    form.setFields([{ name: _name, value: initialValue }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     // 把 name 传递到字段上
     <YForm.ListContent.Provider value={{ prefixName: _name }}>
