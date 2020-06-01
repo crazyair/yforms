@@ -20,7 +20,7 @@ export default React.memo<YFormItemProps>((props) => {
 
   let itemProps = {};
   if (isList) {
-    const _name = isArray(name) ? name : [name];
+    const _name = [...(isArray(name) ? name : [name])];
     if (isArray(name) && typeof name[0] === 'number') {
       _name[0] = 'keep';
     }
