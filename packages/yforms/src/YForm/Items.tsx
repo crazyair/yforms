@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
+import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
@@ -157,19 +157,15 @@ const Items = (props: YFormItemsProps) => {
         // 默认用 FormItem 包裹
         let _hasFormItem = true;
 
-        let key: React.ReactText = _index;
-
         if (type && itemsType) {
           const _fieldData = itemsType[type];
           if (_fieldData) {
             const { component } = _fieldData;
             _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
 
-            const _key = name ? `${name}` : key;
-            key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去
             if (items) {
-              _componentProps = { ..._base, key };
+              _componentProps = { ..._base };
             }
             const _component = component || item.component;
             if (isValidElement(_component)) {
@@ -208,7 +204,7 @@ const Items = (props: YFormItemsProps) => {
         if (_hasFormItem) {
           dom = (
             <ItemChildren
-              key={key}
+              key={_index}
               addonAfter={addonAfter}
               {...omit(_formItemProps, ['component', 'scenes', 'viewProps', 'unFormat'])}
             >
@@ -216,11 +212,11 @@ const Items = (props: YFormItemsProps) => {
             </ItemChildren>
           );
         } else {
-          dom = <React.Fragment key={key}>{domChildren}</React.Fragment>;
+          dom = <React.Fragment key={_index}>{domChildren}</React.Fragment>;
         }
         if (typeof isShow === 'function') {
           list.push(
-            <YForm.Item key={key} noStyle shouldUpdate={shouldUpdate}>
+            <YForm.Item key={_index} noStyle shouldUpdate={shouldUpdate}>
               {(form) => {
                 return isShow(form.getFieldsValue()) && dom;
               }}

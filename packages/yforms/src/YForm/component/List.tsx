@@ -151,9 +151,12 @@ export default (props: YFormListProps) => {
                     });
                   }
                   return (
-                    <YForm.Items noStyle key={field.key}>
-                      {_children}
-                    </YForm.Items>
+                    <YForm.ListItemsContent.Provider
+                      key={field.key}
+                      value={{ isList: true, field }}
+                    >
+                      <YForm.Items noStyle>{_children}</YForm.Items>
+                    </YForm.ListItemsContent.Provider>
                   );
                 })}
                 {showBottomAdd && isMax && !disabled && (

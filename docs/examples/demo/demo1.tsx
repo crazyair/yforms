@@ -107,11 +107,12 @@ const Demo = () => {
           items: ({ index, field }) => {
             return [
               {
-                isListField: true,
                 label: index === 0 && '手机号',
                 type: 'input',
-                fieldKey: [field.fieldKey, 'phone'],
+                // key: [field.fieldKey, 'phone'],
+                // fieldKey: [field.fieldKey],
                 name: [field.name, 'phone'],
+                rules: [{ required: true, message: '请输入手机号' }],
                 componentProps: { placeholder: '请输入手机号' },
               },
               {
@@ -120,27 +121,23 @@ const Demo = () => {
                 initialValue: [{}, {}],
                 name: [field.name, 'users'],
                 items: ({ field }) => {
-                  // console.log('field', field);
-                  // name: 0, key: 0, isListField: true, fieldKey
                   return [
                     {
                       type: 'oneLine',
-                      isListField: true,
                       componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                       items: () => [
                         {
                           label: '姓名',
-                          // ...field,
-                          // fieldKey: [field.fieldKey, 'name'],
-                          isListField: true,
+                          // key: [field.fieldKey, 'name'],
+                          // fieldKey: [field.fieldKey],
                           type: 'input',
                           name: [field.name, 'name'],
                         },
                         <span key="center" />,
                         {
                           label: '年龄',
-                          // ...field,
-                          isListField: true,
+                          // fieldKey: [field.fieldKey],
+                          // key: [field.fieldKey, 'age'],
                           type: 'input',
                           name: [field.name, 'age'],
                         },
