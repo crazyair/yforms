@@ -6,7 +6,7 @@ import { YFormItemProps } from './Items';
 import { YForm } from '..';
 
 export default React.memo<YFormItemProps>((props) => {
-  const context = React.useContext(YForm.ListItemsContent);
+  const context = React.useContext(YForm.ListContent);
   const { isList, field } = context;
 
   const { children, addonAfter, isShow, ...rest } = props;

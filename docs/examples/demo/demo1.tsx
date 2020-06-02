@@ -104,14 +104,12 @@ const Demo = () => {
           type: 'list',
           name: 'phones',
           initialValue: [{}, {}],
-          items: ({ index, field }) => {
+          items: ({ index }) => {
             return [
               {
                 label: index === 0 && '手机号',
                 type: 'input',
-                // key: [field.fieldKey, 'phone'],
-                // fieldKey: [field.fieldKey],
-                name: [field.name, 'phone'],
+                name: [index, 'phone'],
                 rules: [{ required: true, message: '请输入手机号' }],
                 componentProps: { placeholder: '请输入手机号' },
               },
@@ -119,28 +117,17 @@ const Demo = () => {
                 label: '用户',
                 type: 'list',
                 initialValue: [{}, {}],
-                name: [field.name, 'users'],
-                items: ({ field }) => {
+                offset: 2,
+                name: [index, 'users'],
+                items: ({ index }) => {
                   return [
                     {
                       type: 'oneLine',
                       componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                       items: () => [
-                        {
-                          label: '姓名',
-                          // key: [field.fieldKey, 'name'],
-                          // fieldKey: [field.fieldKey],
-                          type: 'input',
-                          name: [field.name, 'name'],
-                        },
+                        { label: '姓名', type: 'input', name: [index, 'name'] },
                         <span key="center" />,
-                        {
-                          label: '年龄',
-                          // fieldKey: [field.fieldKey],
-                          // key: [field.fieldKey, 'age'],
-                          type: 'input',
-                          name: [field.name, 'age'],
-                        },
+                        { label: '年龄', type: 'input', name: [index, 'age'] },
                       ],
                     },
                   ];
