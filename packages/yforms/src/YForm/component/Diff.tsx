@@ -29,15 +29,13 @@ const equalFunc = (value: any, oldValue: any): boolean => {
         return false;
       }
     });
+  } else if (moment.isMoment(value)) {
+    // 对比数据到秒级，忽略毫秒
+    equal = value.isSame(oldValue, 'seconds');
+  } else if (moment.isMoment(oldValue)) {
+    equal = oldValue.isSame(value, 'seconds');
   } else {
-    if (moment.isMoment(value)) {
-      // 对比数据到秒级，忽略毫秒
-      equal = value.isSame(oldValue, 'seconds');
-    } else if (moment.isMoment(oldValue)) {
-      equal = oldValue.isSame(value, 'seconds');
-    } else {
-      equal = isEqual(value, oldValue);
-    }
+    equal = isEqual(value, oldValue);
   }
 
   return equal;

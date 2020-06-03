@@ -138,7 +138,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   // 改变状态
   const handleChangeDisabled = useCallback(
-    (disabled: boolean) => {
+    (disabled) => {
       setDisabled(disabled);
       if (submit) {
         submit.forceUpdate({ params: iParams, disabled });

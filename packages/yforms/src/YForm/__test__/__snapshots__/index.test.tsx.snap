@@ -103,7 +103,7 @@ Object {
                 class="ant-col ant-col-8 ant-form-item-label"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required"
                   title="money"
                 >
                   money
@@ -204,7 +204,7 @@ Object {
                 class="ant-col ant-form-item-label ant-col-xs-24 ant-col-sm-4"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required"
                   title="money"
                 >
                   money
@@ -310,7 +310,7 @@ Object {
               class="ant-col ant-col-8 ant-form-item-label"
             >
               <label
-                class=""
+                class="ant-form-item-required"
                 title="money"
               >
                 money
@@ -411,7 +411,7 @@ Object {
               class="ant-col ant-form-item-label ant-col-xs-24 ant-col-sm-4"
             >
               <label
-                class=""
+                class="ant-form-item-required"
                 title="money"
               >
                 money
@@ -803,7 +803,7 @@ Object {
               class="ant-col ant-form-item-label"
             >
               <label
-                class=""
+                class="ant-form-item-required"
                 title="money"
               >
                 money
@@ -907,7 +907,7 @@ Object {
             class="ant-col ant-form-item-label"
           >
             <label
-              class=""
+              class="ant-form-item-required"
               title="money"
             >
               money

@@ -118,19 +118,17 @@ const Demo = () => {
                 initialValue: [{}, {}],
                 offset: 2,
                 name: [index, 'users'],
-                items: ({ index }) => {
-                  return [
-                    {
-                      type: 'oneLine',
-                      componentProps: { oneLineStyle: ['50%', 8, '50%'] },
-                      items: () => [
-                        { label: '姓名', type: 'input', name: [index, 'name'] },
-                        <span key="center" />,
-                        { label: '年龄', type: 'input', name: [index, 'age'] },
-                      ],
-                    },
-                  ];
-                },
+                items: ({ index }) => [
+                  {
+                    type: 'oneLine',
+                    componentProps: { oneLineStyle: ['50%', 8, '50%'] },
+                    items: () => [
+                      { label: '姓名', type: 'input', name: [index, 'name'] },
+                      <span key="center" />,
+                      { label: '年龄', type: 'input', name: [index, 'age'] },
+                    ],
+                  },
+                ],
               },
             ];
           },

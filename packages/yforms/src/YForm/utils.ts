@@ -81,12 +81,12 @@ export const searchSelect = {
         const d = map(_value, (item) => {
           if (isValidElement(item)) {
             return getValue(item);
-          } else {
-            return item;
           }
+          return item;
         });
         return join(d, '');
-      } else if (isValidElement(_value)) {
+      }
+      if (isValidElement(_value)) {
         return getValue(_value);
       }
       return join(_value, '');
@@ -158,9 +158,8 @@ export function submitFormatValues<T>(
     if (!item) return;
     if (isArray(item.name)) {
       return -item.name.length;
-    } else {
-      return -`${item.name}`.length;
     }
+    return -`${item.name}`.length;
   });
   forEach(list, (item) => {
     if (item && item.name) {

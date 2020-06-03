@@ -253,9 +253,8 @@ const Items = (props: YFormItemsProps) => {
         }}
       </YForm.Item>
     );
-  } else {
-    return dom;
   }
+  return dom;
 };
 
 export default React.memo(Items);
