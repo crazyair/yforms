@@ -9,7 +9,7 @@ export default () => {
     console.log('Success:', values);
   };
   return (
-    <YForm {...layout} required onFinish={onFinish}>
+    <YForm {...layout} onFinish={onFinish}>
       {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
     </YForm>
   );

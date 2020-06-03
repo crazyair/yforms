@@ -90,7 +90,6 @@ const Demo = () => {
       scenes={{ view: disabled, diff: false }}
       params={{ type: 'create' }}
       diffProps={{ oldValues }}
-      required
     >
       {[
         // {

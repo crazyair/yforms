@@ -40,25 +40,22 @@ const scenes: YFormConfig = {
     },
     // 判断如果是 required 则每个 item 添加 rules
     required: {
-      item: ({ formProps, itemProps, typeProps }) => {
+      item: ({ itemProps, typeProps }) => {
         const _itemProps: modifyType['itemProps'] = {};
-        const { required } = formProps;
         const { label, rules } = itemProps;
         const { formatStr } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
         if (itemProps.name && typeProps.type !== 'list') {
-          if (required) {
-            let hasRequired = false;
-            forEach(rules, (item) => {
-              hasRequired = 'required' in item;
-            });
-            if (!hasRequired) {
-              _itemProps.rules = [
-                { required, message: _message || '此处不能为空' },
-                ...(itemProps.rules || []),
-              ];
-            }
+          let hasRequired = false;
+          forEach(rules, (item) => {
+            hasRequired = 'required' in item;
+          });
+          if (!hasRequired) {
+            _itemProps.rules = [
+              { required: true, message: _message || '此处不能为空' },
+              ...(itemProps.rules || []),
+            ];
           }
         }
         return {
@@ -142,13 +139,16 @@ const scenes: YFormConfig = {
     search: {
       form: ({ formProps }) => ({
         formProps: {
-          ...formProps,
-          className: classNames('yforms-search-form', formProps.className),
           // 搜索成功后不重置表单
           onCancel: () => {},
+          ...formProps,
+          // 搜索场景表单不必填
+          scenes: merge({}, { required: false }, formProps.scenes),
+          className: classNames('yforms-search-form', formProps.className),
         },
       }),
       items: ({ itemsProps }) => {
+        // 字段样式去掉
         return { itemsProps: { noStyle: true, ...itemsProps } };
       },
       item: ({ itemProps, componentProps }) => {

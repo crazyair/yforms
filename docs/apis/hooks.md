@@ -104,7 +104,7 @@ export default () => {
   return (
     <>
       <h4>{typeName}</h4>
-      <YForm {...layout} required onFinish={onFinish} submit={submit} params={{ type: 'create' }}>
+      <YForm {...layout} onFinish={onFinish} submit={submit} params={{ type: 'create' }}>
         {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
       </YForm>
     </>

@@ -72,7 +72,6 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        required
         formatFieldsValue={formatFieldsValue}
         loading={loading}
         onSave={onSave}

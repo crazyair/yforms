@@ -37,7 +37,6 @@ const Demo: React.FC<RouteComponentProps> = () => {
       >
         <YForm
           {...layout}
-          required
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           onCancel={handleCancel}

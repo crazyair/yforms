@@ -119,7 +119,7 @@ describe('YFormItems', () => {
   });
   test('more children', () => {
     const wrapper = mount(
-      <YForm required>
+      <YForm>
         <YForm.Items>
           {fields}
           {[{ type: 'noType', name: 'a' }] as any}

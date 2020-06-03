@@ -16,7 +16,6 @@ type isShowFunc = (values: any) => boolean;
 
 export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'> {
   isShow?: boolean | isShowFunc;
-  required?: boolean;
   className?: string;
   addonAfter?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];

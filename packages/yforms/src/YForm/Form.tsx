@@ -34,7 +34,6 @@ export interface YFormConfig {
     noCol?: boolean;
     disabled?: boolean;
     placeholder?: boolean;
-    required?: boolean;
     view?: boolean;
     diff?: boolean;
     search?: boolean;
@@ -64,7 +63,6 @@ type CancelType = 'onSave' | 'onSubmit' | 'onCancel';
 export interface YFormProps<T = any> extends FormProps, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
-  required?: boolean;
   loading?: boolean;
   form?: YFormInstance;
   submit?: YFormUseSubmitReturnProps['submit'];
@@ -114,7 +112,6 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   const {
     disabled,
-    required,
     loading,
     itemsType,
     children,

@@ -17,7 +17,6 @@ nav:
 | -------- | ---------------- | -------------------------- | ------ |
 | isShow   | 是否渲染         | boolean                    | -      |
 | disabled | 字段是否全部禁用 | boolean                    | -      |
-| required | 字段是否全部必填 | boolean                    | -      |
 | children | 数据源           | YFormItemProps['children'] | -      |
 
 ## YForm
