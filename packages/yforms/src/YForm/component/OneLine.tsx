@@ -1,6 +1,7 @@
 import React from 'react';
 import { map, merge, get, isArray, isObject } from 'lodash';
 import classNames from 'classnames';
+import warning from 'warning';
 
 import { oneLineItemStyle } from '../utils';
 import { BaseComponentProps } from '../ItemsType';
@@ -25,6 +26,10 @@ export interface YFormOneLineProps {
 export default (props: YFormOneLineProps) => {
   const { items, componentProps = {}, scenes } = props;
   const { oneLineStyle, className, style } = componentProps as YFormOneLineComponentProps;
+  if (get(props, 'name')) {
+    warning(false, 'oneLine 不支持 name');
+    return null;
+  }
 
   const styleObj = oneLineItemStyle(oneLineStyle || []);
   const _dataSource = items && items({ style: styleObj });
