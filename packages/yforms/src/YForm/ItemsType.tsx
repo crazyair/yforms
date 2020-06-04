@@ -34,7 +34,9 @@ import {
   selectModify,
   moneyModify,
   radioModify,
+  SpaceModify,
 } from './ItemsTypeModify';
+import Space, { YFormSpaceComponentProps, YFormSpaceProps } from './component/Space';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -97,6 +99,7 @@ export interface YFormItemsTypeDefine {
   button: { componentProps?: ButtonProps };
   // 其它功能类型
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
+  space: { componentProps?: YFormSpaceComponentProps; items?: YFormSpaceProps['items'] };
   list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
   custom: { componentProps?: any; component?: React.ReactNode };
   submit: { componentProps?: YFormSubmitProps };
@@ -150,6 +153,7 @@ export const itemsType: YFormItemsType = {
   // 展示类
   custom: {},
   view: { component: <ComponentView /> },
+  space: { component: <Space />, modifyProps: SpaceModify },
 };
 
 export default itemsType;

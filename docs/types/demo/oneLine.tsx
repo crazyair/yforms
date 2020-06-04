@@ -11,6 +11,7 @@ export default () => {
         {
           label: '用户 1',
           type: 'oneLine',
+          // name: 'xxx',
           componentProps: { oneLineStyle: ['50%', 8, '50%'] },
           items: (): ReturnType<Required<YFormOneLineProps>['items']> => [
             { label: '姓名', type: 'input', name: 'name' },

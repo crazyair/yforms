@@ -19,6 +19,7 @@ import { YCheckGroupProps } from './component/CheckboxGroup';
 import { YSelectProps } from './component/Select';
 import { YMoneyProps } from './component/Money';
 import { YRadioProps } from './component/Radio';
+import { YFormSpaceProps } from './component/Space';
 
 const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
@@ -289,5 +290,13 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
       },
       ...itemProps,
     },
+  };
+};
+
+export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = ({
+  itemProps = {},
+}) => {
+  return {
+    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
   };
 };
