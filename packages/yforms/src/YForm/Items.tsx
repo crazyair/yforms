@@ -63,7 +63,6 @@ const Items = (props: YFormItemsProps) => {
 
   let mergeProps = merge({}, formProps, itemsProps, props);
   const { scenes, getScene, onFormatFieldsValue, shouldUpdate } = mergeProps;
-
   const _defaultData = { formProps, itemsProps: props };
   mapKeys(scenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].items) {
@@ -80,6 +79,7 @@ const Items = (props: YFormItemsProps) => {
   const { isShow, children = [], className, style, noStyle } = _props;
 
   const list: React.ReactNode[] = [];
+  let offset = 0;
 
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index: number) => {
@@ -134,7 +134,12 @@ const Items = (props: YFormItemsProps) => {
 
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
-        const _base = merge({}, formProps, itemsProps, _itemProps);
+        const _base = merge({}, mergeProps, _itemProps);
+        if (typeof _base.offset === 'number') {
+          offset += _base.offset;
+          _base.offset = offset;
+        }
+
         const {
           type,
           dataSource,
@@ -148,6 +153,7 @@ const Items = (props: YFormItemsProps) => {
         const _formItemProps = formItemProps;
         const { name, isShow, shouldUpdate } = _formItemProps;
 
+        // 提交前格式化
         if (format) {
           onFormatFieldsValue([{ name, format }]);
         }
@@ -171,7 +177,6 @@ const Items = (props: YFormItemsProps) => {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-
               _children = React.cloneElement(_component, _props);
             } else {
               _children = _component;

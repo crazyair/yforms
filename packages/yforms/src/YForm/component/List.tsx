@@ -43,19 +43,7 @@ export interface YFormListProps
 }
 
 export default (props: YFormListProps) => {
-  const {
-    form,
-    initialValue,
-    label,
-    items,
-    disabled,
-    componentProps = {},
-    name,
-    offset,
-    addonAfter,
-    scenes,
-  } = props;
-
+  const { label, items, disabled, componentProps = {}, name, offset, addonAfter, scenes } = props;
   const {
     maxNum,
     minNum,
@@ -68,7 +56,7 @@ export default (props: YFormListProps) => {
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
 
   useEffect(() => {
-    form.setFields([{ name: _name, value: initialValue }]);
+    // form.setFields([{ name: _name, value: initialValue }]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -97,7 +85,7 @@ export default (props: YFormListProps) => {
                           // 先增加一位
                           add();
                           // 再把最后一位移动到当前
-                          move(fields.length, index + 1);
+                          move(fields.length, index);
                         }}
                       />,
                     );

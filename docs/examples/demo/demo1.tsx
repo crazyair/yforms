@@ -6,6 +6,7 @@ import { message, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { omit } from 'lodash';
+import { YFormItemProps } from 'yforms/lib/YForm/Items';
 
 moment.locale('zh-cn');
 
@@ -32,13 +33,18 @@ const initialValues = {
     { name: '张三', age: '10' },
     { name: '李四', age: '20' },
   ],
-  phones: [{ phone: '17777777777' }, { phone: '18888888888' }, {}],
+  // phones: [{ phone: '17777777777', users: [{ name: 'aaa' }] }, { phone: '18888888888' }],
+  phones: [{ phone: '17777777777', users: [{ name: 'aaa' }] }],
   date: moment(),
   range: [moment(), moment()],
 };
 const oldValues = {
   name: '张三1',
-  phones: [{ phone: '17777777777' }, { phone: '18888888881' }, { phone: '18888888888' }],
+  phones: [
+    { phone: '17777777777', users: [{ name: 'aaa' }, { name: 'bbb' }] },
+    { phone: '18888888881' },
+    { phone: '18888888888', users: [{ name: '被删掉的' }] },
+  ],
   users: [{ name: '李四2', age: '30' }],
   多选: ['1'],
   money: '999999998',
@@ -81,13 +87,16 @@ const Demo = () => {
       form={form}
       submit={submit}
       name="basic"
-      // initialValues={data}
+      initialValues={{
+        ...data,
+        // _old_fields: oldValues
+      }}
       onFinish={onFinish}
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
       onCancel={({ changeDisabled }) => changeDisabled(!disabled)}
-      scenes={{ view: disabled, diff: false }}
+      scenes={{ view: disabled, diff: true }}
       params={{ type: 'create' }}
       diffProps={{ oldValues }}
     >
@@ -99,11 +108,12 @@ const Demo = () => {
         // },
         // { type: 'custom', component: 1, label: 'xx' },
         // { type: 'input', label: '空值', name: 'names' },
+        { type: 'input', label: '姓名', name: 'name' },
         {
           type: 'list',
           name: 'phones',
-          initialValue: [{}, {}],
-          items: ({ index }) => {
+          componentProps: { showIcons: { showBottomAdd: { text: '添加手机号' } } },
+          items: ({ index }): YFormItemProps['children'] => {
             return [
               {
                 label: index === 0 && '手机号',
@@ -115,14 +125,13 @@ const Demo = () => {
               {
                 label: '用户',
                 type: 'list',
-                initialValue: [{}, {}],
                 offset: 2,
                 name: [index, 'users'],
-                items: ({ index }) => [
+                items: ({ index }): YFormItemProps['children'] => [
                   {
                     type: 'oneLine',
                     componentProps: { oneLineStyle: ['50%', 8, '50%'] },
-                    items: () => [
+                    items: (): YFormItemProps['children'] => [
                       { label: '姓名', type: 'input', name: [index, 'name'] },
                       <span key="center" />,
                       { label: '年龄', type: 'input', name: [index, 'age'] },

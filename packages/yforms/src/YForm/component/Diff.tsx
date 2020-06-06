@@ -42,7 +42,7 @@ const equalFunc = (value: any, oldValue: any): boolean => {
 };
 
 const DiffDom = React.memo<any>((props) => {
-  const { oldValues, initialValues, name, itemProps, type } = props;
+  const { oldValues, name, itemProps, type } = props;
   const context = React.useContext(YForm.ListContent);
 
   const _name = context.prefixName ? concat(context.prefixName, name) : name;

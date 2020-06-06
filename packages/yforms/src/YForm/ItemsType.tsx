@@ -100,7 +100,11 @@ export interface YFormItemsTypeDefine {
   // 其它功能类型
   oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
   space: { componentProps?: YFormSpaceComponentProps; items?: YFormSpaceProps['items'] };
-  list: { componentProps?: YFormListComponentProps; items?: YFormListProps['items'] };
+  list: {
+    componentProps?: YFormListComponentProps;
+    disabled?: boolean;
+    items?: YFormListProps['items'];
+  };
   custom: { componentProps?: any; component?: React.ReactNode };
   submit: { componentProps?: YFormSubmitProps };
   secureButton: { componentProps?: YFormSecureButtonProps };

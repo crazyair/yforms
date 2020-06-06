@@ -1,14 +1,73 @@
-import React from 'react';
-import { merge, forEach } from 'lodash';
+import React, { useEffect } from 'react';
+import { merge, forEach, concat, get, isArray, takeRight } from 'lodash';
 import classNames from 'classnames';
 
+import { YForm } from '..';
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
 import DiffDom from './component/Diff';
 
+// eslint-disable-next-line no-console
+console.clear();
+
 // TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
 // itemProps.name && typeProps.type !== 'list'
+
+const Demo = (props?: modifyType & { allName: any; form: any }) => {
+  const {
+    allName,
+    itemProps,
+    formProps,
+    form: { getFieldValue, setFields },
+  } = props;
+  const { diffProps: { oldValues } = {} } = formProps;
+  const value = getFieldValue(allName) || [];
+  const oldValue = get(oldValues, allName, []);
+
+  const le = oldValue.length - value.length;
+  const showOldValue = takeRight(oldValue, le);
+  useEffect(() => {
+    if (isArray(allName)) {
+      setFields([{ name: concat(allName[0], '_old_fields', allName), value: showOldValue }]);
+    } else {
+      setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
+    }
+  }, [allName, setFields, showOldValue]);
+
+  if (value.length < oldValue.length) {
+    const nnn = concat('_old_fields', allName);
+    return (
+      <YForm.Items disabled>
+        {[
+          { type: 'custom', component: '以下为被删数据', className: 'mb0' },
+          { ...itemProps, name: nnn, scenes: { view: true, diff: false } },
+        ]}
+      </YForm.Items>
+    );
+  }
+  return null;
+};
+
+const Demo1 = (props: modifyType) => {
+  const { itemProps, formProps } = props;
+  const context = React.useContext(YForm.ListContent);
+  const { name } = itemProps;
+  const _name = context.prefixName ? concat(context.prefixName, name) : name;
+  return (
+    <YForm.Items>
+      {[
+        {
+          noStyle: true,
+          shouldUpdate: (prevValues, curValues) => get(prevValues, _name) !== get(curValues, _name),
+          children: (form) => (
+            <Demo form={form} itemProps={itemProps} formProps={formProps} allName={_name} />
+          ),
+        },
+      ]}
+    </YForm.Items>
+  );
+};
 
 const scenes: YFormConfig = {
   getScene: {
@@ -106,17 +165,33 @@ const scenes: YFormConfig = {
           // ComponentView 组件需要 itemProps 参数
           _componentProps = { itemProps };
         }
+        let hasRequired = false;
+        forEach(itemProps.rules, (item) => {
+          if ('required' in item) {
+            hasRequired = item.required;
+          }
+        });
         return {
-          itemProps: { ...itemProps, ..._itemProps },
+          // 清空 rules ，避免提交会校验
+          // 如果之前是必填的，这里则保留红色 *
+          itemProps: { ...itemProps, ..._itemProps, rules: [], required: hasRequired },
           componentProps: { ...componentProps, ..._componentProps },
         };
       },
     },
     diff: {
       item: ({ formProps, itemProps, typeProps }) => {
-        // TODO 后面使用 initialValue 这里需要修改
-        const { diffProps: { oldValues } = {}, initialValues } = formProps;
+        const { diffProps: { oldValues } = {} } = formProps;
+
         let _itemProps;
+        if (typeProps.type === 'list') {
+          _itemProps = {
+            addonAfter: [
+              itemProps.addonAfter,
+              <Demo1 key="append" itemProps={itemProps} formProps={formProps} />,
+            ],
+          };
+        }
         if (itemProps.name && typeProps.type !== 'list') {
           _itemProps = {
             addonAfter: [
@@ -126,7 +201,6 @@ const scenes: YFormConfig = {
                 itemProps={itemProps}
                 type={typeProps.type}
                 oldValues={oldValues}
-                initialValues={initialValues}
                 name={itemProps.name}
               />,
             ],
