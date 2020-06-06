@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { merge, forEach, concat, get, isArray, takeRight } from 'lodash';
+import { merge, forEach, concat, get, takeRight } from 'lodash';
 import classNames from 'classnames';
 
 import { YForm } from '..';
@@ -28,11 +28,12 @@ const Demo = (props?: modifyType & { allName: any; form: any }) => {
   const le = oldValue.length - value.length;
   const showOldValue = takeRight(oldValue, le);
   useEffect(() => {
-    if (isArray(allName)) {
-      setFields([{ name: concat(allName[0], '_old_fields', allName), value: showOldValue }]);
-    } else {
-      setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
-    }
+    // if (isArray(allName)) {
+    //   setFields([{ name: concat(allName[0], '_old_fields', allName), value: showOldValue }]);
+    // } else {
+    //   setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
+    // }
+    setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
   }, [allName, setFields, showOldValue]);
 
   // if (value.length < oldValue.length) {
