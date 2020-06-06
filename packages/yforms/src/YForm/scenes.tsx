@@ -35,7 +35,8 @@ const Demo = (props?: modifyType & { allName: any; form: any }) => {
     }
   }, [allName, setFields, showOldValue]);
 
-  if (value.length < oldValue.length) {
+  // if (value.length < oldValue.length) {
+  if (showOldValue.length > 0) {
     const nnn = concat('_old_fields', allName);
     return (
       <YForm.Items disabled>

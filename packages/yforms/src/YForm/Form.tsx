@@ -108,7 +108,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
       }
     }
   });
-  const _props = omit(_defaultData.formProps, ['name']);
+  const _props = _defaultData.formProps;
 
   const {
     disabled,
@@ -246,7 +246,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
         },
       },
     },
-    { ..._props, itemsType: _itemsTypeAll },
+    { ...omit(_props, ['name']), itemsType: _itemsTypeAll },
   );
   if ('isShow' in _props && !_props.isShow) {
     return null;

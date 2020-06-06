@@ -34,7 +34,12 @@ const initialValues = {
     { name: '李四', age: '20' },
   ],
   // phones: [{ phone: '17777777777', users: [{ name: 'aaa' }] }, { phone: '18888888888' }],
-  phones: [{ phone: '17777777777', users: [{ name: 'aaa' }] }],
+  phones: [
+    { phone: '17777777777', users: [{ name: 'aaa' }] },
+    { phone: '18888888888' },
+    { phone: '18888888888' },
+    {},
+  ],
   date: moment(),
   range: [moment(), moment()],
 };
