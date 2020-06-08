@@ -16,4 +16,4 @@ jobs:
         run: |
           yarn
           yarn doc:build
-          vercel --token=$ZEIT_TOKEN --prod --confirm --force
+          now --token=$ZEIT_TOKEN --prod --confirm --force
