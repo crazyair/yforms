@@ -48,7 +48,6 @@ export default React.memo<YFormComponentView>((props) => {
         : _value}
       {suffix && <span style={{ color: '#999' }}> {suffix}</span>}
       {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
-      {itemProps.addonAfter && <span style={{ color: '#999' }}> {itemProps.addonAfter}</span>}
     </span>
   );
 });

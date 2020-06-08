@@ -18,3 +18,7 @@ nav:
 ## 依赖使用
 
 <code src="./demo/shouldUpdate.tsx" />
+
+## 新旧数据对比使用
+
+<code src="./demo/diff.tsx" />

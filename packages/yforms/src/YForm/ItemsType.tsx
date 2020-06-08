@@ -104,6 +104,8 @@ export interface YFormItemsTypeDefine {
     componentProps?: YFormListComponentProps;
     disabled?: boolean;
     items?: YFormListProps['items'];
+    // 用于 diff 状态下处理数据
+    addonBefore?: React.ReactNode;
   };
   custom: { componentProps?: any; component?: React.ReactNode };
   submit: { componentProps?: YFormSubmitProps };

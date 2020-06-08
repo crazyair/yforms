@@ -18,6 +18,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
   isShow?: boolean | isShowFunc;
   className?: string;
   addonAfter?: React.ReactNode;
+  addonBefore?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];
   unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
@@ -46,6 +47,7 @@ interface InternalYFormItemProps extends YFormItemProps {
   scenes?: any;
   component?: any;
   onSave?: any;
+  _addonAfter?: React.ReactNode;
 }
 
 export interface YFormItemsProps
@@ -140,15 +142,7 @@ const Items = (props: YFormItemsProps) => {
           _base.offset = offset;
         }
 
-        const {
-          type,
-          dataSource,
-          items,
-          addonAfter,
-          componentProps,
-          format,
-          ...formItemProps
-        } = _itemProps;
+        const { type, dataSource, items, componentProps, format, ...formItemProps } = _itemProps;
 
         const _formItemProps = formItemProps;
         const { name, isShow, shouldUpdate } = _formItemProps;
@@ -209,7 +203,6 @@ const Items = (props: YFormItemsProps) => {
           dom = (
             <ItemChildren
               key={_index}
-              addonAfter={addonAfter}
               {...omit(_formItemProps, ['component', 'scenes', 'viewProps', 'unFormat'])}
             >
               {domChildren}

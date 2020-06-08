@@ -1,7 +1,5 @@
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { get, concat, omit, isArray, forEach, isEqual, map } from 'lodash';
+import { get, concat, isArray, forEach, isEqual } from 'lodash';
 import moment from 'moment';
 import ComponentView from './ComponentView';
 import { YForm } from '../..';
@@ -53,29 +51,17 @@ const DiffDom = React.memo<any>((props) => {
           noStyle: true,
           shouldUpdate: (prevValues, curValues) => get(prevValues, _name) !== get(curValues, _name),
           children: ({ getFieldValue }) => {
-            const value = getFieldValue(_name);
-            const oldValue = get(oldValues, _name);
+            // 如果字段为 undefined 则改为 ''，为了字段输入值再删除一样的道理
+            const value = getFieldValue(_name) === undefined ? '' : getFieldValue(_name);
+            const oldValue = get(oldValues, _name) === undefined ? '' : get(oldValues, _name);
             let equal = equalFunc(value, oldValue);
             // 如果有渲染方法，就按照次来对比
             if (itemProps.viewProps) {
+              const { format } = itemProps.viewProps;
               // 这里用的 pureValue = true（纯值），直接 === 判断就可以。
-              equal =
-                itemProps.viewProps.format(value, true) ===
-                itemProps.viewProps.format(oldValue, true);
+              equal = format(value, true) === format(oldValue, true);
             }
 
-            // List 下级字段
-            if (context.prefixName) {
-              if (isArray(itemProps.addonAfter)) {
-                itemProps.addonAfter = map(itemProps.addonAfter, (item) => {
-                  // list 会用 addonAfter 注入 icons，这里判断如果是 List 子元素则删除 icons
-                  if (item && item.key === 'icons') {
-                    return null;
-                  }
-                  return item;
-                });
-              }
-            }
             if (equal) {
               return null;
             }

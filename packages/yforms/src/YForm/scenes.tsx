@@ -1,75 +1,15 @@
-import React, { useEffect } from 'react';
-import { merge, forEach, concat, get, takeRight } from 'lodash';
+import React from 'react';
+import { merge, forEach } from 'lodash';
 import classNames from 'classnames';
 
-import { YForm } from '..';
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
 import DiffDom from './component/Diff';
-
-// eslint-disable-next-line no-console
-console.clear();
+import { DiffSetFields } from './scenesComps';
 
 // TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
 // itemProps.name && typeProps.type !== 'list'
-
-const Demo = (props?: modifyType & { allName: any; form: any }) => {
-  const {
-    allName,
-    itemProps,
-    formProps,
-    form: { getFieldValue, setFields },
-  } = props;
-  const { diffProps: { oldValues } = {} } = formProps;
-  const value = getFieldValue(allName) || [];
-  const oldValue = get(oldValues, allName, []);
-
-  const le = oldValue.length - value.length;
-  const showOldValue = takeRight(oldValue, le);
-  useEffect(() => {
-    // if (isArray(allName)) {
-    //   setFields([{ name: concat(allName[0], '_old_fields', allName), value: showOldValue }]);
-    // } else {
-    //   setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
-    // }
-    setFields([{ name: concat('_old_fields', allName), value: showOldValue }]);
-  }, [allName, setFields, showOldValue]);
-
-  // if (value.length < oldValue.length) {
-  if (showOldValue.length > 0) {
-    const nnn = concat('_old_fields', allName);
-    return (
-      <YForm.Items disabled>
-        {[
-          { type: 'custom', component: '以下为被删数据', className: 'mb0' },
-          { ...itemProps, name: nnn, scenes: { view: true, diff: false } },
-        ]}
-      </YForm.Items>
-    );
-  }
-  return null;
-};
-
-const Demo1 = (props: modifyType) => {
-  const { itemProps, formProps } = props;
-  const context = React.useContext(YForm.ListContent);
-  const { name } = itemProps;
-  const _name = context.prefixName ? concat(context.prefixName, name) : name;
-  return (
-    <YForm.Items>
-      {[
-        {
-          noStyle: true,
-          shouldUpdate: (prevValues, curValues) => get(prevValues, _name) !== get(curValues, _name),
-          children: (form) => (
-            <Demo form={form} itemProps={itemProps} formProps={formProps} allName={_name} />
-          ),
-        },
-      ]}
-    </YForm.Items>
-  );
-};
 
 const scenes: YFormConfig = {
   getScene: {
@@ -182,16 +122,14 @@ const scenes: YFormConfig = {
       },
     },
     diff: {
-      item: ({ formProps, itemProps, typeProps }) => {
+      item: (props) => {
+        const { formProps, itemProps, typeProps } = props;
         const { diffProps: { oldValues } = {} } = formProps;
 
         let _itemProps;
         if (typeProps.type === 'list') {
           _itemProps = {
-            addonAfter: [
-              itemProps.addonAfter,
-              <Demo1 key="append" itemProps={itemProps} formProps={formProps} />,
-            ],
+            addonBefore: [itemProps.addonBefore, <DiffSetFields key="append" {...props} />],
           };
         }
         if (itemProps.name && typeProps.type !== 'list') {
@@ -200,10 +138,10 @@ const scenes: YFormConfig = {
               itemProps.addonAfter,
               <DiffDom
                 key="diff-dom"
-                itemProps={itemProps}
                 type={typeProps.type}
                 oldValues={oldValues}
                 name={itemProps.name}
+                {...props}
               />,
             ],
           };

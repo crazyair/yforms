@@ -5,11 +5,11 @@ import { FormItemProps } from 'antd/lib/form';
 import { YFormItemProps } from './Items';
 import { YForm } from '..';
 
-export default React.memo<YFormItemProps>((props) => {
+export default React.memo<YFormItemProps & { _addonAfter?: React.ReactNode }>((props) => {
   const context = React.useContext(YForm.ListContent);
   const { isList, field } = context;
 
-  const { children, addonAfter, isShow, ...rest } = props;
+  const { children, addonAfter, _addonAfter, addonBefore, isShow, ...rest } = props;
   const { name } = rest;
 
   let _required: boolean | undefined = false;
@@ -34,9 +34,11 @@ export default React.memo<YFormItemProps>((props) => {
       required={_required}
       {...omit(rest, ['name', 'rules', 'dependencies', 'shouldUpdate'])}
     >
+      <>{addonBefore}</>
       <Form.Item noStyle {...itemProps} {...rest}>
         {children as FormItemProps['children']}
       </Form.Item>
+      <>{_addonAfter}</>
       <>{addonAfter}</>
     </Form.Item>
   ) : null;

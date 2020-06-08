@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { map, merge, isArray, concat, get } from 'lodash';
+import { map, merge, isArray, concat } from 'lodash';
 import classNames from 'classnames';
 
 import YForm from '../index';
@@ -35,15 +35,16 @@ export interface YFormListItems {
 }
 
 export interface YFormListProps
-  extends Pick<YFormItemProps, 'label' | 'name' | 'addonAfter' | 'scenes' | 'initialValue'>,
+  extends Pick<YFormItemProps, 'label' | 'name' | 'scenes' | 'initialValue'>,
     Pick<YFormProps, 'form' | 'children' | 'disabled'> {
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
   offset?: number;
+  addonBefore?: React.ReactNode;
 }
 
 export default (props: YFormListProps) => {
-  const { label, items, disabled, componentProps = {}, name, offset, addonAfter, scenes } = props;
+  const { label, items, disabled, componentProps = {}, name, offset, addonBefore, scenes } = props;
   const {
     maxNum,
     minNum,
@@ -55,12 +56,9 @@ export default (props: YFormListProps) => {
   // 支持多级 List name 拼接
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
 
-  useEffect(() => {
-    // form.setFields([{ name: _name, value: initialValue }]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div className="list">
+      {addonBefore}
       <Form.List name={name}>
         {(fields, { add, remove, move }) => {
           const isMax = maxNum ? fields.length < maxNum : true;
@@ -118,11 +116,11 @@ export default (props: YFormListProps) => {
                       },
                       item,
                       {
-                        addonAfter: [
-                          get(item, 'addonAfter'),
+                        // 内部使用
+                        _addonAfter: [
                           showRightIcons && !disabled && index === 0 && (
                             <div
-                              key="icons"
+                              key="yform-list-icons"
                               className={classNames('padding-icons', 'inline-icons')}
                               style={_oneLineStyle[1]}
                             >
@@ -172,7 +170,6 @@ export default (props: YFormListProps) => {
           );
         }}
       </Form.List>
-      {addonAfter}
     </div>
   );
 };
