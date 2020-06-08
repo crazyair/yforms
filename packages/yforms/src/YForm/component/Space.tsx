@@ -8,9 +8,6 @@ import { YFormItemProps } from '../Items';
 
 export interface YFormSpaceComponentProps extends SpaceProps {}
 
-export interface YFormOneLineItems {
-  style: React.CSSProperties[];
-}
 export interface YFormSpaceProps {
   componentProps?: YFormSpaceComponentProps;
   items?: YFormItemProps['children'];
