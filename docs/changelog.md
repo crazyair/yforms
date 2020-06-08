@@ -5,6 +5,13 @@ nav:
   order: 5
 ---
 
+## [1.0.1](https://github.com/crazyair/yforms/compare/v1.0.0...v1.0.1) (2020-06-08)
+
+### Bug Fixes
+
+- submit typescript ([#25](https://github.com/crazyair/yforms/issues/25)) ([96462f7](https://github.com/crazyair/yforms/commit/96462f7d42e9d78496d761be8c14094691a06cda))
+- 修复 now ([75259f7](https://github.com/crazyair/yforms/commit/75259f714196aa07f7773f42e8a59089edc2496a))
+
 ## [1.0.0](https://github.com/crazyair/yforms/compare/v0.8.7...v1.0.0) (2020-06-08)
 
 ### Features
