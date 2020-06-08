@@ -64,7 +64,7 @@ export default () => {
         <QueueAnim type={['top', 'top']}>{expand && <Row key="必须">{fieldDom2}</Row>}</QueueAnim>
       </YForm>
       <p>普通场景</p>
-      <YForm required {...layout} name="base_form" onFinish={onFinish}>
+      <YForm {...layout} name="base_form" onFinish={onFinish}>
         {fieldDom}
         {fieldDom2}
         {[{ type: 'submit' }]}

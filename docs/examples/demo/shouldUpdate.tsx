@@ -10,7 +10,7 @@ const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 
 const Demo = () => {
   return (
-    <YForm {...layout} name="basic" required initialValues={{ type: '1' }}>
+    <YForm {...layout} name="basic" initialValues={{ type: '1' }}>
       {[
         {
           label: '开关',
@@ -59,7 +59,7 @@ const Demo = () => {
           type: 'input',
           name: 'children_field2',
           shouldUpdate: (prevValues, curValues) => prevValues.type !== curValues.type,
-          isShow: values => values.type === '2',
+          isShow: (values) => values.type === '2',
         },
       ]}
     </YForm>

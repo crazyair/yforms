@@ -21,9 +21,6 @@ const Demo: React.FC<RouteComponentProps> = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const onSave = async (values: any) => {
-    console.log('values:', values);
-  };
   return (
     <>
       <Button type="link" onClick={() => setVisible(true)}>
@@ -40,9 +37,7 @@ const Demo: React.FC<RouteComponentProps> = () => {
       >
         <YForm
           {...layout}
-          required
           onFinish={onFinish}
-          onSave={onSave}
           onFinishFailed={onFinishFailed}
           onCancel={handleCancel}
           params={{ type: 'create' }}
@@ -51,12 +46,7 @@ const Demo: React.FC<RouteComponentProps> = () => {
             {[{ type: 'input', name: 'age', label: '姓名' }]}
           </YForm.Items>
           <YForm.Items className="ant-modal-footer">
-            {[
-              {
-                type: 'submit',
-                componentProps: { reverseBtns: true, showBtns: { showSave: false } },
-              },
-            ]}
+            {[{ type: 'submit', className: 'mb0', componentProps: { reverseBtns: true } }]}
           </YForm.Items>
         </YForm>
       </Modal>

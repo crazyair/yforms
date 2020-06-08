@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { find, omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
+import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
@@ -16,15 +16,13 @@ type isShowFunc = (values: any) => boolean;
 
 export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'> {
   isShow?: boolean | isShowFunc;
-  required?: boolean;
   className?: string;
-  addonAfter?: React.ReactElement;
-  componentView?: React.ReactNode;
-  noField?: boolean;
+  addonAfter?: React.ReactNode;
+  addonBefore?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];
+  unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   scenes?: YFormConfig['scenes'];
-  showType?: YFormFieldBaseProps['showType'];
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
@@ -32,11 +30,14 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
     | YFormRenderChildren
     | boolean;
   dataSource?: YFormItemProps['children'];
+  componentView?: React.ReactNode;
+  viewProps?: YFormFieldBaseProps['viewProps'];
+  diffProps?: any;
 }
 
 export interface FormatFieldsValue<T = any> {
   name: FormItemProps['name'];
-  format: (values: T) => any;
+  format: (value: any, values: T) => any;
 }
 
 // 内部使用，类型不重要
@@ -46,10 +47,13 @@ interface InternalYFormItemProps extends YFormItemProps {
   scenes?: any;
   component?: any;
   onSave?: any;
+  _addonAfter?: React.ReactNode;
 }
 
 export interface YFormItemsProps
-  extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue'> {
+  extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue' | 'isShow'> {
+  isShow?: YFormItemProps['isShow'];
+  shouldUpdate?: YFormItemProps['shouldUpdate'];
   offset?: number;
   noStyle?: boolean;
 }
@@ -60,9 +64,8 @@ const Items = (props: YFormItemsProps) => {
   const { itemsType } = formProps;
 
   let mergeProps = merge({}, formProps, itemsProps, props);
-  const { scenes, getScene, onFormatFieldsValue } = mergeProps;
-
-  const _defaultData = { formProps: props, itemsProps: props };
+  const { scenes, getScene, onFormatFieldsValue, shouldUpdate } = mergeProps;
+  const _defaultData = { formProps, itemsProps: props };
   mapKeys(scenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].items) {
       const data = getScene[key].items(_defaultData);
@@ -75,9 +78,10 @@ const Items = (props: YFormItemsProps) => {
   const _props = _defaultData.itemsProps;
   if ('isShow' in _props && !_props.isShow) return null;
 
-  const { children = [], className, style, noStyle } = _props;
+  const { isShow, children = [], className, style, noStyle } = _props;
 
   const list: React.ReactNode[] = [];
+  let offset = 0;
 
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index: number) => {
@@ -100,16 +104,21 @@ const Items = (props: YFormItemsProps) => {
 
         let _itemProps = { ...item };
         let _componentProps = { ...item.componentProps };
-
+        const typeProps = get(itemsType, item.type) || {};
+        typeProps.type = item.type;
         const defaultData = {
           formProps,
           itemsProps: mergeProps,
-          typeProps: itemsType[item.type] || {},
+          typeProps,
           itemProps: item,
-          componentProps: item.componentProps,
+          componentProps: _componentProps,
         };
         // 参数修改
         let _defaultData = defaultData;
+        const { modifyProps } = typeProps;
+        if (modifyProps) {
+          _defaultData = merge({}, defaultData, modifyProps(defaultData));
+        }
 
         const _scenes = merge({}, scenes, item.scenes);
         mapKeys(_scenes, (value: boolean, key: string) => {
@@ -124,27 +133,21 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
-        const typeProps = get(itemsType, get(_defaultData, ['itemProps', 'type'])) || {};
-        const { modifyProps } = typeProps;
-        if (modifyProps) {
-          _defaultData = merge({}, defaultData, modifyProps(defaultData));
-        }
+
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
-        const _base = merge({}, formProps, itemsProps, _itemProps);
-        const {
-          type,
-          dataSource,
-          items,
-          addonAfter,
-          componentProps,
-          format,
-          ...formItemProps
-        } = _itemProps;
+        const _base = merge({}, mergeProps, _itemProps);
+        if (typeof _base.offset === 'number') {
+          offset += _base.offset;
+          _base.offset = offset;
+        }
+
+        const { type, dataSource, items, componentProps, format, ...formItemProps } = _itemProps;
 
         const _formItemProps = formItemProps;
-        const { name } = _formItemProps;
+        const { name, isShow, shouldUpdate } = _formItemProps;
 
+        // 提交前格式化
         if (format) {
           onFormatFieldsValue([{ name, format }]);
         }
@@ -153,27 +156,22 @@ const Items = (props: YFormItemsProps) => {
         // 默认用 FormItem 包裹
         let _hasFormItem = true;
 
-        let key: React.ReactText = _index;
-
         if (type && itemsType) {
           const _fieldData = itemsType[type];
           if (_fieldData) {
             const { component } = _fieldData;
             _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
 
-            const _key = name ? `${name}` : key;
-            key = find(list, { key: _key }) ? key : _key;
             // 包含 items 类型把当前 item 属性全部透传过去
             if (items) {
-              _componentProps = { ..._base, key };
+              _componentProps = { ..._base };
             }
             const _component = component || item.component;
             if (isValidElement(_component)) {
               const _props = component
                 ? { ...component.props, ..._componentProps } // 内置组件 componentProps 在后面
                 : { ..._componentProps, ...item.component.props }; // 自定义组件 componentProps 在前面
-              const _elementProps = { ..._props, _item_type: item.type };
-              _children = React.cloneElement(_component, _elementProps);
+              _children = React.cloneElement(_component, _props);
             } else {
               _children = _component;
             }
@@ -200,18 +198,29 @@ const Items = (props: YFormItemsProps) => {
                 );
               }
             : _children;
+        let dom;
         if (_hasFormItem) {
-          list.push(
+          dom = (
             <ItemChildren
-              key={key}
-              addonAfter={addonAfter}
-              {...omit(_formItemProps, ['component', 'scenes', 'showType'])}
+              key={_index}
+              {...omit(_formItemProps, ['component', 'scenes', 'viewProps', 'unFormat'])}
             >
               {domChildren}
-            </ItemChildren>,
+            </ItemChildren>
           );
         } else {
-          list.push(<React.Fragment key={key}>{domChildren}</React.Fragment>);
+          dom = <React.Fragment key={_index}>{domChildren}</React.Fragment>;
+        }
+        if (typeof isShow === 'function') {
+          list.push(
+            <YForm.Item key={_index} noStyle shouldUpdate={shouldUpdate}>
+              {(form) => {
+                return isShow(form.getFieldsValue()) && dom;
+              }}
+            </YForm.Item>,
+          );
+        } else {
+          list.push(dom);
         }
       } else {
         return list.push(item);
@@ -225,17 +234,25 @@ const Items = (props: YFormItemsProps) => {
     list.push(children);
   }
   const child = (
-    <YForm.YFormItemsContext.Provider value={omit(mergeProps, ['scenes'])}>
-      {list}
-    </YForm.YFormItemsContext.Provider>
+    <YForm.YFormItemsContext.Provider value={mergeProps}>{list}</YForm.YFormItemsContext.Provider>
   );
-  return noStyle ? (
+  const dom = noStyle ? (
     child
   ) : (
     <div className={classNames('yform-items', className)} style={style}>
       {child}
     </div>
   );
+  if (typeof isShow === 'function') {
+    return (
+      <YForm.Item noStyle shouldUpdate={shouldUpdate}>
+        {(form) => {
+          return isShow(form.getFieldsValue()) && dom;
+        }}
+      </YForm.Item>
+    );
+  }
+  return dom;
 };
 
-export default Items;
+export default React.memo(Items);

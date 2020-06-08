@@ -14,7 +14,7 @@ export default () => {
     console.log('ok');
   };
   return (
-    <YForm {...layout} required onFinish={onFinish}>
+    <YForm {...layout} onFinish={onFinish}>
       {[{ type: 'secureButton', componentProps: { children: '测试', onClick } }]}
     </YForm>
   );

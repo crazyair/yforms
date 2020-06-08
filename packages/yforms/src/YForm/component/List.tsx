@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { map, merge, isArray } from 'lodash';
+import { map, merge, isArray, concat } from 'lodash';
 import classNames from 'classnames';
 
 import YForm from '../index';
@@ -22,11 +22,12 @@ export interface YFormListComponentProps extends BaseComponentProps {
   showRightIcons?: boolean;
   showIcons?: ShowIconsType;
   onShowIcons?: (p: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
+  parentName?: YFormItemProps['name'];
 }
 
 export interface YFormListItems {
   index: number;
-  field: { name: number; key: number; fieldKey: number };
+  field: { name: number; key: number; fieldKey: number; isListField?: boolean };
   add: () => void;
   remove: (index: number) => void;
   move: (from: number, to: number) => void;
@@ -34,17 +35,16 @@ export interface YFormListItems {
 }
 
 export interface YFormListProps
-  extends Pick<YFormItemProps, 'label'>,
-    Pick<YFormProps, 'children' | 'disabled'> {
-  // TODO  field-form 和 antd 的 name 类型不一致
-  name?: string | number | (string | number)[];
+  extends Pick<YFormItemProps, 'label' | 'name' | 'scenes' | 'initialValue'>,
+    Pick<YFormProps, 'form' | 'children' | 'disabled'> {
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
   offset?: number;
+  addonBefore?: React.ReactNode;
 }
 
 export default (props: YFormListProps) => {
-  const { label, items, disabled, componentProps = {}, name, offset } = props;
+  const { label, items, disabled, componentProps = {}, name, offset, addonBefore, scenes } = props;
   const {
     maxNum,
     minNum,
@@ -52,9 +52,14 @@ export default (props: YFormListProps) => {
     showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {} as ShowIconsType,
     onShowIcons,
   } = componentProps;
+  const context = React.useContext(YForm.ListContent);
+  // 支持多级 List name 拼接
+  const _name = context.prefixName ? concat(context.prefixName, name) : name;
+
   return (
     <div className="list">
-      <Form.List name={name || ''}>
+      {addonBefore}
+      <Form.List name={name}>
         {(fields, { add, remove, move }) => {
           const isMax = maxNum ? fields.length < maxNum : true;
           const isMin = minNum ? fields.length > minNum : true;
@@ -78,7 +83,7 @@ export default (props: YFormListProps) => {
                           // 先增加一位
                           add();
                           // 再把最后一位移动到当前
-                          move(fields.length, index + 1);
+                          move(fields.length, index);
                         }}
                       />,
                     );
@@ -103,29 +108,38 @@ export default (props: YFormListProps) => {
                     const _item = merge(
                       {},
                       {
+                        scenes,
                         offset,
                         componentProps: !disabled &&
                           showRightIcons && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
-                        addonAfter: showRightIcons && !disabled && index === 0 && (
-                          <div
-                            className={classNames('padding-icons', 'inline-icons')}
-                            style={_oneLineStyle[1]}
-                          >
-                            {icons}
-                          </div>
-                        ),
                       },
                       item,
-                      { key: index },
+                      {
+                        // 内部使用
+                        _addonAfter: [
+                          showRightIcons && !disabled && index === 0 && (
+                            <div
+                              key="yform-list-icons"
+                              className={classNames('padding-icons', 'inline-icons')}
+                              style={_oneLineStyle[1]}
+                            >
+                              {icons}
+                            </div>
+                          ),
+                        ].filter((x) => x),
+                      },
                     );
                     return _item;
                   });
                 }
                 return (
-                  <YForm.Items noStyle key={field.key}>
-                    {_children}
-                  </YForm.Items>
+                  <YForm.ListContent.Provider
+                    key={field.key}
+                    value={{ isList: true, field, prefixName: _name }}
+                  >
+                    <YForm.Items noStyle>{_children}</YForm.Items>
+                  </YForm.ListContent.Provider>
                 );
               })}
               {showBottomAdd && isMax && !disabled && (

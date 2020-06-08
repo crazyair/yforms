@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
-import { YForm } from '../../index';
+import { YForm } from '../..';
 import { YFormItemsProps } from '../Items';
 import Submit from '../component/Submit';
 import { fields, initialValues } from './fields';
@@ -51,7 +51,7 @@ const YFormSubmitDemo = (props: any) => {
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
-    { name: 'name', format: ({ name }) => `${name}_改变了` },
+    { name: 'name', format: (value) => `${value}_改变了` },
   ]);
 
   return (
@@ -119,7 +119,7 @@ describe('YFormItems', () => {
   });
   test('more children', () => {
     const wrapper = mount(
-      <YForm required>
+      <YForm>
         <YForm.Items>
           {fields}
           {[{ type: 'noType', name: 'a' }] as any}

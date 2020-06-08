@@ -1,9 +1,15 @@
+import React from 'react';
 import { merge, forEach } from 'lodash';
 import classNames from 'classnames';
 
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
 import { replaceMessage, getLabelLayout } from './utils';
+import DiffDom from './component/Diff';
+import { DiffSetFields } from './scenesComps';
+
+// TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
+// itemProps.name && typeProps.type !== 'list'
 
 const scenes: YFormConfig = {
   getScene: {
@@ -35,25 +41,22 @@ const scenes: YFormConfig = {
     },
     // 判断如果是 required 则每个 item 添加 rules
     required: {
-      item: ({ formProps, itemProps, typeProps }) => {
+      item: ({ itemProps, typeProps }) => {
         const _itemProps: modifyType['itemProps'] = {};
-        const { required } = formProps;
         const { label, rules } = itemProps;
-        const { formatStr, showType } = merge({}, typeProps, itemProps);
+        const { formatStr } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
-        if (showType === 'input') {
-          if (required) {
-            let hasRequired = false;
-            forEach(rules, (item) => {
-              hasRequired = 'required' in item;
-            });
-            if (!hasRequired) {
-              _itemProps.rules = [
-                { required, message: _message || '此处不能为空' },
-                ...(itemProps.rules || []),
-              ];
-            }
+        if (itemProps.name && typeProps.type !== 'list') {
+          let hasRequired = false;
+          forEach(rules, (item) => {
+            hasRequired = 'required' in item;
+          });
+          if (!hasRequired) {
+            _itemProps.rules = [
+              { required: true, message: _message || '此处不能为空' },
+              ...(itemProps.rules || []),
+            ];
           }
         }
         return {
@@ -66,11 +69,14 @@ const scenes: YFormConfig = {
       item: ({ itemProps, componentProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { label } = itemProps;
-        const { formatStr, showType } = merge({}, typeProps, itemProps);
+        const { formatStr } = merge({}, typeProps, itemProps);
 
         const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
-        if (showType === 'input') {
-          _componentProps.placeholder = _message || '';
+        if (itemProps.name && typeProps.type !== 'list') {
+          // rangePicker 不需要设置 placeholder
+          if (typeProps.type !== 'rangePicker') {
+            _componentProps.placeholder = _message || '';
+          }
         }
         return {
           componentProps: { ..._componentProps, ...componentProps },
@@ -82,8 +88,7 @@ const scenes: YFormConfig = {
       item: ({ formProps, componentProps, itemProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { disabled } = formProps;
-        const { showType } = merge({}, typeProps, itemProps);
-        if (showType === 'input') {
+        if (itemProps.name && typeProps.type !== 'list') {
           _componentProps.disabled = disabled;
         }
         return {
@@ -91,30 +96,73 @@ const scenes: YFormConfig = {
         };
       },
     },
-    // 查看情况下每个 item 并且 showType = input  使用 view 类型渲染
+    // 查看情况下每个 item 使用 view 类型渲染
     view: {
-      item: ({ itemProps, typeProps }) => {
-        const { showType } = merge({}, typeProps, itemProps);
+      item: ({ itemProps, typeProps, componentProps }) => {
         let _itemProps;
-        if (showType === 'input') {
+        let _componentProps;
+        if (itemProps.name && typeProps.type !== 'list') {
+          // 使用 ComponentView 组件渲染
           _itemProps = { className: 'mb0', type: 'view' };
+          // ComponentView 组件需要 itemProps 参数
+          _componentProps = { itemProps };
         }
+        let hasRequired = false;
+        forEach(itemProps.rules, (item) => {
+          if ('required' in item) {
+            hasRequired = item.required;
+          }
+        });
         return {
-          itemProps: { ...itemProps, ..._itemProps },
+          // 清空 rules ，避免提交会校验
+          // 如果之前是必填的，这里则保留红色 *
+          itemProps: { ...itemProps, ..._itemProps, rules: [], required: hasRequired },
+          componentProps: { ...componentProps, ..._componentProps },
         };
+      },
+    },
+    diff: {
+      item: (props) => {
+        const { formProps, itemProps, typeProps } = props;
+        const { diffProps: { oldValues } = {} } = formProps;
+
+        let _itemProps;
+        if (typeProps.type === 'list') {
+          _itemProps = {
+            addonBefore: [itemProps.addonBefore, <DiffSetFields key="append" {...props} />],
+          };
+        }
+        if (itemProps.name && typeProps.type !== 'list') {
+          _itemProps = {
+            addonAfter: [
+              itemProps.addonAfter,
+              <DiffDom
+                key="diff-dom"
+                type={typeProps.type}
+                oldValues={oldValues}
+                name={itemProps.name}
+                {...props}
+              />,
+            ],
+          };
+        }
+        return { itemProps: { ...itemProps, ..._itemProps } };
       },
     },
     // 搜索场景
     search: {
       form: ({ formProps }) => ({
         formProps: {
-          ...formProps,
-          className: classNames('yforms-search-form', formProps.className),
           // 搜索成功后不重置表单
           onCancel: () => {},
+          ...formProps,
+          // 搜索场景表单不必填
+          scenes: merge({}, { required: false }, formProps.scenes),
+          className: classNames('yforms-search-form', formProps.className),
         },
       }),
       items: ({ itemsProps }) => {
+        // 字段样式去掉
         return { itemsProps: { noStyle: true, ...itemsProps } };
       },
       item: ({ itemProps, componentProps }) => {

@@ -14,6 +14,7 @@ import {
 } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
+import warning from 'warning';
 import { stringAndFunc } from './ItemsType';
 import { FieldsType, KeyValue, ParamsType } from './Form';
 import { FormatFieldsValue } from './Items';
@@ -80,12 +81,12 @@ export const searchSelect = {
         const d = map(_value, (item) => {
           if (isValidElement(item)) {
             return getValue(item);
-          } else {
-            return item;
           }
+          return item;
         });
         return join(d, '');
-      } else if (isValidElement(_value)) {
+      }
+      if (isValidElement(_value)) {
         return getValue(_value);
       }
       return join(_value, '');
@@ -157,13 +158,22 @@ export function submitFormatValues<T>(
     if (!item) return;
     if (isArray(item.name)) {
       return -item.name.length;
-    } else {
-      return -`${item.name}`.length;
     }
+    return -`${item.name}`.length;
   });
   forEach(list, (item) => {
     if (item && item.name) {
-      set(_values, item.name, item.format({ ...values }));
+      // 如果字段是 undefined 则不需要执行 set 了
+      if (get(_values, item.name) !== undefined) {
+        try {
+          set(_values, item.name, item.format(get(values, item.name), { ...values }));
+        } catch (error) {
+          // 如果 format 代码报错这里抛出异常
+          // eslint-disable-next-line no-console
+          console.error(error);
+          warning(false, error);
+        }
+      }
     }
   });
   return _values;

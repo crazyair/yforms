@@ -16,7 +16,6 @@ export default () => {
   return (
     <YForm
       onFinish={onFinish}
-      required
       {...layout}
       disabled={disabled}
       initialValues={{ phones: [{}, {}], card: [{}], users: [{}] }}

@@ -68,7 +68,6 @@ const Demo = () => {
       onSave={onSave}
       scenes={{ view: disabled }}
       params={{ type: 'view' }}
-      required
     >
       {[
         // {
@@ -176,18 +175,23 @@ const Demo = () => {
         { label: '文本', name: 'text', type: 'text' },
         {
           label: '自定义渲染',
-          showType: 'input',
           type: 'custom',
           name: 'custom',
           component: <Input />,
         },
-        { type: 'submit' },
         {
-          type: 'button',
-          componentProps: {
-            onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
-            children: '获取提交前数据',
-          },
+          type: 'space',
+          items: [
+            { type: 'submit' },
+            {
+              type: 'button',
+              noStyle: true,
+              componentProps: {
+                onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
+                children: '获取提交前数据',
+              },
+            },
+          ],
         },
       ]}
     </YForm>

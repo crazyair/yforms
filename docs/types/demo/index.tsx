@@ -17,7 +17,7 @@ export default () => {
   };
 
   return (
-    <YForm {...layout} required onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
+    <YForm {...layout} onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
       {[
         { type: 'input', label: '文本', name: 'input' },
         { type: 'money', label: '金额', name: 'money' },
@@ -52,8 +52,8 @@ export default () => {
           name: '下拉框',
           componentProps: {
             optionLabelProp: 'checkedValue',
-            onAddProps: item => ({ checkedValue: `(${item.name})` }),
-            showField: record => (
+            onAddProps: (item) => ({ checkedValue: `(${item.name})` }),
+            showField: (record) => (
               <div>
                 <div>{record.id}</div>-{record.name}
               </div>
@@ -69,7 +69,7 @@ export default () => {
           label: '开关',
           name: '开关',
           componentProps: {
-            showField: record => `${record.id}-${record.name}`,
+            showField: (record) => `${record.id}-${record.name}`,
             postField: 'id',
             options: [
               { id: '1', name: '开' },
