@@ -1,7 +1,7 @@
 import { Form } from 'antd';
-import { YFormProps } from './Form';
+import { YFormInstance } from './Form';
 
-const useForm = (propForm?: YFormProps['form']): [YFormProps['form']] => {
+const useForm = (propForm?: YFormInstance): [YFormInstance] => {
   const [form] = Form.useForm(propForm);
   return [form];
 };
