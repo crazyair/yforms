@@ -5,6 +5,13 @@ nav:
   order: 5
 ---
 
+## [1.0.0](https://github.com/crazyair/yforms/compare/v0.8.7...v1.0.0) (2020-06-08)
+
+### Features
+
+- add view ([#23](https://github.com/crazyair/yforms/issues/23)) ([0643144](https://github.com/crazyair/yforms/commit/06431449e6b6ab7b5b8d95143f39bfb97cf01845))
+- now ([#22](https://github.com/crazyair/yforms/issues/22)) ([7e1939a](https://github.com/crazyair/yforms/commit/7e1939a8bc84bbcdaee87fd909fb360aedc70db2))
+
 ## [0.8.7](https://github.com/crazyair/yforms/compare/v0.8.5...v0.8.7) (2020-05-25)
 
 ### Bug Fixes
