@@ -123,27 +123,17 @@ const scenes: YFormConfig = {
     },
     diff: {
       item: (props) => {
-        const { formProps, itemProps, typeProps } = props;
-        const { diffProps: { oldValues } = {} } = formProps;
+        const { itemProps, typeProps } = props;
 
         let _itemProps;
         if (typeProps.type === 'list') {
           _itemProps = {
-            addonBefore: [itemProps.addonBefore, <DiffSetFields key="append" {...props} />],
+            addonBefore: [itemProps.addonBefore, <DiffSetFields key="list-fields" {...props} />],
           };
         }
         if (itemProps.name && typeProps.type !== 'list') {
           _itemProps = {
-            addonAfter: [
-              itemProps.addonAfter,
-              <DiffDom
-                key="diff-dom"
-                type={typeProps.type}
-                oldValues={oldValues}
-                name={itemProps.name}
-                {...props}
-              />,
-            ],
+            addonAfter: [itemProps.addonAfter, <DiffDom key="diff-dom" {...props} />],
           };
         }
         return { itemProps: { ...itemProps, ..._itemProps } };

@@ -8,7 +8,7 @@ import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 
-import { onFormatFieldsValue, submitFormatValues, paramsType, useImmutableValue } from './utils';
+import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
 
@@ -128,11 +128,10 @@ const InternalForm = React.memo<YFormProps>((props) => {
   } = _props;
   const [form] = useForm(propsForm);
   const { resetFields, getFieldsValue } = form;
-  const _params = paramsType(params);
+  const _params = submit ? submit.params : paramsType(params);
   const { create, edit, view } = _params;
-  const iParams = useImmutableValue(_params);
-  const initDisabled = view;
-  const [thisDisabled, setDisabled] = useState(initDisabled);
+  // 用 view 判断 disabled 默认值（同 useSubmit）
+  const [thisDisabled, setDisabled] = useState(view);
   const [submitLoading, setSubmitLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 
@@ -141,16 +140,11 @@ const InternalForm = React.memo<YFormProps>((props) => {
     (disabled) => {
       setDisabled(disabled);
       if (submit) {
-        submit.forceUpdate({ params: iParams, disabled });
+        submit.forceUpdate({ disabled });
       }
     },
-    [iParams, submit],
+    [submit],
   );
-
-  // 初始化状态
-  useEffect(() => {
-    handleChangeDisabled(initDisabled);
-  }, [handleChangeDisabled, initDisabled, submit]);
 
   useEffect(() => {
     return () => {

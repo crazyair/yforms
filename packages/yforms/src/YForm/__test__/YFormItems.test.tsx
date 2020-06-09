@@ -47,7 +47,7 @@ const YFormSubmitDemo = (props: any) => {
   const {
     submit,
     params: { typeName },
-  } = YForm.useSubmit();
+  } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },

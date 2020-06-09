@@ -30,7 +30,6 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
     | YFormRenderChildren
     | boolean;
   dataSource?: YFormItemProps['children'];
-  componentView?: React.ReactNode;
   viewProps?: YFormFieldBaseProps['viewProps'];
   diffProps?: any;
 }
