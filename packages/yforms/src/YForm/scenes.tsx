@@ -103,7 +103,7 @@ const scenes: YFormConfig = {
         let _componentProps;
         if (itemProps.name && typeProps.type !== 'list') {
           // 使用 ComponentView 组件渲染
-          _itemProps = { className: 'mb0', type: 'view' };
+          _itemProps = { className: 'mb5', type: 'view' };
           // ComponentView 组件需要 itemProps 参数
           _componentProps = { itemProps };
         }
