@@ -1,8 +1,8 @@
-name: CI
+name: codecov
 
 on:
  push:
-  branches-ignore:
+  branches:
     - master
 
 jobs:
@@ -23,5 +23,5 @@ jobs:
           flags: unittests # optional
           name: codecov-umbrella # optional
           # file: ./codecov.yml # optional
-          # fail_ci_if_error: true # optional (default = false)
           token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true # optional (default = false)

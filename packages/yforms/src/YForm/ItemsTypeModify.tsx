@@ -8,8 +8,7 @@ import { PickerMode } from 'rc-picker/lib/interface';
 import { SwapRightOutlined } from '@ant-design/icons';
 import { SwitchProps } from 'antd/lib/switch';
 import Numbro from 'numbro';
-import classNames from 'classnames';
-import { isArray, map, includes } from 'lodash';
+import { isArray, map, includes, get, forEach } from 'lodash';
 import { YFormFieldBaseProps } from './ItemsType';
 import { YTextAreaProps } from './component/TextArea';
 import { calculateStrLength } from './utils';
@@ -82,7 +81,9 @@ export const datePickerModify: YFormFieldBaseProps<DatePickerProps>['modifyProps
 }) => {
   return {
     itemProps: {
-      viewProps: { format: (value) => dateFormat(value, componentProps, typeProps.type) },
+      viewProps: {
+        format: (value, pureValue) => dateFormat(value, componentProps, typeProps.type, pureValue),
+      },
       ...itemProps,
     },
   };
@@ -167,9 +168,7 @@ export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
 export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
-  return {
-    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
-  };
+  return { itemProps: { className: 'mb0', ...itemProps } };
 };
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
@@ -188,9 +187,10 @@ export const checkboxGroupModify: YFormFieldBaseProps<YCheckGroupProps>['modifyP
       viewProps: {
         format: (value, pureValue) => {
           if (value && isArray(value)) {
-            const list = map(options, (item) => {
+            const list = [];
+            forEach(options, (item) => {
               if (includes(value, item.id)) {
-                return item.name;
+                list.push(item.name);
               }
             });
             if (pureValue) {
@@ -218,7 +218,7 @@ export const selectModify: YFormFieldBaseProps<YSelectProps>['modifyProps'] = ({
       viewProps: {
         format: (value, pureValue) => {
           const list = [];
-          map(options, (item, index) => {
+          forEach(options, (item, index) => {
             if (includes(isArray ? value : [value], item.id)) {
               if (optionLabelProp && onAddProps) {
                 list.push(onAddProps(item, index)[optionLabelProp]);
@@ -270,7 +270,7 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
       viewProps: {
         format: (value, pureValue) => {
           const list = [];
-          map(options, (item, index) => {
+          forEach(options, (item, index) => {
             if (value === item.id) {
               if (typeof showField === 'function') {
                 list.push(showField(item, index));
@@ -296,7 +296,23 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
 export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
+  return { itemProps: { className: 'mb0', ...itemProps } };
+};
+
+export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => {
+  const { itemProps = {} } = props;
+  const component = get(itemProps, 'component');
   return {
-    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
+    itemProps: {
+      viewProps: {
+        format: (value, pureValue) => {
+          if (pureValue) {
+            return value;
+          }
+          return <component.type disabled value={value} {...component.props} />;
+        },
+      },
+      ...itemProps,
+    },
   };
 };

@@ -35,6 +35,7 @@ import {
   moneyModify,
   radioModify,
   SpaceModify,
+  CustomModify,
 } from './ItemsTypeModify';
 import Space, { YFormSpaceComponentProps, YFormSpaceProps } from './component/Space';
 
@@ -48,9 +49,8 @@ export interface YFormFieldBaseProps<T = any> {
   modifyProps?: (
     props: Required<modifyType<T>>,
   ) => Pick<modifyType<T>, 'itemProps' | 'componentProps'>;
-  componentView?: React.ReactElement;
   viewProps?: { format?: (value: any, pureValue?: boolean) => React.ReactNode };
-  diffProps?: any;
+  diffProps?: { onEqual?: (value: any, oldValue?: any) => boolean };
 }
 
 export type modifyType<T = any> = {
@@ -157,7 +157,7 @@ export const itemsType: YFormItemsType = {
   secureButton: { component: <SecureButton /> },
   submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
   // 展示类
-  custom: {},
+  custom: { modifyProps: CustomModify },
   view: { component: <ComponentView /> },
   space: { component: <Space />, modifyProps: SpaceModify },
 };

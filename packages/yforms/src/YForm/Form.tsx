@@ -2,16 +2,15 @@ import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { merge, concat, mapKeys, omit } from 'lodash';
 import classNames from 'classnames';
-
 import { FormProps, FormInstance } from 'antd/lib/form';
+import warning from 'warning';
+
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
-
-import { onFormatFieldsValue, submitFormatValues, paramsType, useImmutableValue } from './utils';
+import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
-
 import defaultScene from './scenes';
 import { YFormUseSubmitReturnProps } from './useSubmit';
 
@@ -73,9 +72,9 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
-  onCancel?: (p: { type: CancelType; changeDisabled: (disabled: boolean) => void }) => void;
+  onCancel?: (p: { type: CancelType; onDisabled: (disabled: boolean) => void }) => void;
   params?: ParamsType;
-  diffProps?: any;
+  oldValues?: T;
 }
 
 export function useFormatFieldsValue<T = any>() {
@@ -128,29 +127,23 @@ const InternalForm = React.memo<YFormProps>((props) => {
   } = _props;
   const [form] = useForm(propsForm);
   const { resetFields, getFieldsValue } = form;
-  const _params = paramsType(params);
+  const _params = submit ? submit.params : paramsType(params);
   const { create, edit, view } = _params;
-  const iParams = useImmutableValue(_params);
-  const initDisabled = view;
-  const [thisDisabled, setDisabled] = useState(initDisabled);
+  // 用 view 判断 disabled 默认值（同 useSubmit）
+  const [thisDisabled, setDisabled] = useState(view);
   const [submitLoading, setSubmitLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 
   // 改变状态
-  const handleChangeDisabled = useCallback(
+  const handleOnDisabled = useCallback(
     (disabled) => {
       setDisabled(disabled);
       if (submit) {
-        submit.forceUpdate({ params: iParams, disabled });
+        submit.forceUpdate({ disabled });
       }
     },
-    [iParams, submit],
+    [submit],
   );
-
-  // 初始化状态
-  useEffect(() => {
-    handleChangeDisabled(initDisabled);
-  }, [handleChangeDisabled, initDisabled, submit]);
 
   useEffect(() => {
     return () => {
@@ -165,17 +158,17 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const handleReset: (p: { type: CancelType }) => void = useCallback(
     ({ type }) => {
       if (typeof onCancel === 'function') {
-        onCancel({ type, changeDisabled: handleChangeDisabled });
+        onCancel({ type, onDisabled: handleOnDisabled });
       } else {
         resetFields();
         if (create) {
           goBack();
         } else if (edit || view) {
-          handleChangeDisabled(true);
+          handleOnDisabled(true);
         }
       }
     },
-    [create, edit, handleChangeDisabled, onCancel, resetFields, view],
+    [create, edit, handleOnDisabled, onCancel, resetFields, view],
   );
   const _itemsTypeAll = {
     ...baseItemsType,
@@ -217,6 +210,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
           end - begin > 500 ? 0 : 500,
         );
       } catch (error) {
+        warning(false, error);
         setSubmitLoading(false);
       }
     }
@@ -224,7 +218,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   const handleOnEdit = (e) => {
     e.preventDefault();
-    handleChangeDisabled(!thisDisabled);
+    handleOnDisabled(!thisDisabled);
   };
 
   const _providerProps = merge(
@@ -260,7 +254,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
   }
   return (
     <Form
-      {...omit(rest, ['scenes', 'diffProps'])}
+      {...omit(rest, ['scenes', 'oldValues'])}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}

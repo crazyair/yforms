@@ -22,7 +22,7 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
   const {
     submit,
     params: { typeName },
-  } = YForm.useSubmit();
+  } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
 
   useEffect(() => {
     setTimeout(() => {

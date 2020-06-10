@@ -61,36 +61,11 @@ export default (props: YFormSubmitProps) => {
   );
 
   const actionBtns: { [key: string]: YFormDataSource } = {
-    submit: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showSubmit,
-      componentProps: showSubmit,
-    },
-    save: {
-      type: 'secureButton',
-      noStyle: true,
-      isShow: !!showSave,
-      componentProps: showSave,
-    },
-    cancel: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showCancel,
-      componentProps: showCancel,
-    },
-    edit: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showEdit,
-      componentProps: showEdit,
-    },
-    back: {
-      type: 'button',
-      noStyle: true,
-      isShow: !!showBack,
-      componentProps: showBack,
-    },
+    submit: { type: 'button', noStyle: true, isShow: !!showSubmit, componentProps: showSubmit },
+    save: { type: 'secureButton', noStyle: true, isShow: !!showSave, componentProps: showSave },
+    cancel: { type: 'button', noStyle: true, isShow: !!showCancel, componentProps: showCancel },
+    edit: { type: 'button', noStyle: true, isShow: !!showEdit, componentProps: showEdit },
+    back: { type: 'button', noStyle: true, isShow: !!showBack, componentProps: showBack },
   };
 
   let btns: YFormItemProps['children'];
@@ -104,7 +79,7 @@ export default (props: YFormSubmitProps) => {
   }
   return (
     <YForm.Items scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
-      {[{ className: 'button-more-left', dataSource: btns }]}
+      {[{ type: 'space', items: btns }]}
     </YForm.Items>
   );
 };

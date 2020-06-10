@@ -30,9 +30,8 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
     | YFormRenderChildren
     | boolean;
   dataSource?: YFormItemProps['children'];
-  componentView?: React.ReactNode;
   viewProps?: YFormFieldBaseProps['viewProps'];
-  diffProps?: any;
+  diffProps?: YFormFieldBaseProps['diffProps'];
 }
 
 export interface FormatFieldsValue<T = any> {
@@ -95,7 +94,7 @@ const Items = (props: YFormItemsProps) => {
           ...pick(item, ['key']),
           style: merge({}, item.style, thisProps.style),
           className: classNames(item.className, thisProps.className),
-          key: `${_index}`,
+          key: `dom_${_index}`,
         };
         return list.push(React.cloneElement(item, { ...domProps }));
       }

@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { mount } from 'enzyme';
 import { YForm } from '../..';
-import { YFormItemsProps } from '../Items';
+import { YFormItemsProps, YFormItemProps } from '../Items';
 import Submit from '../component/Submit';
 import { fields, initialValues } from './fields';
 
@@ -47,7 +47,7 @@ const YFormSubmitDemo = (props: any) => {
   const {
     submit,
     params: { typeName },
-  } = YForm.useSubmit();
+  } = YForm.useSubmit({ params });
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },
@@ -61,7 +61,6 @@ const YFormSubmitDemo = (props: any) => {
       submit={submit}
       formatFieldsValue={formatFieldsValue}
       onSave={onSave}
-      params={params}
       onCancel={onCancel}
     >
       {typeName}
@@ -326,6 +325,78 @@ describe('YFormItems', () => {
       <YForm initialValues={initialValues} scenes={{ view: true }}>
         <YForm.Items>{fields}</YForm.Items>
       </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  test('diff no data', () => {
+    const wrapper = render(
+      <YForm scenes={{ diff: true }}>
+        <YForm.Items>{[{ type: 'input', name: 'demo' }]}</YForm.Items>
+      </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  test('diff', () => {
+    const init = {
+      phones: [{ phone: '17777777777', users: [{ name: 'aaa' }] }, { phone: '18888888888' }],
+    };
+    const oldValues = {
+      phones: [
+        { phone: '17777777777', users: [{ name: 'aaa' }, { name: 'aaa' }] },
+        { phone: '18888888888' },
+        { phone: '18888888888' },
+      ],
+    };
+    const wrapper = render(
+      <YForm scenes={{ diff: true }} initialValues={init} oldValues={oldValues}>
+        <YForm.Items>{fields}</YForm.Items>
+        <YForm.Items>
+          {[
+            { type: 'input', name: 'xx', diffProps: { onEqual: () => false } },
+            {
+              type: 'list',
+              name: 'phones',
+              componentProps: { showIcons: { showBottomAdd: { text: '添加手机号' } } },
+              items: ({ index }): YFormItemProps['children'] => {
+                return [
+                  {
+                    label: index === 0 && '手机号',
+                    type: 'input',
+                    name: [index, 'phone'],
+                    rules: [{ required: true, message: '请输入手机号' }],
+                    componentProps: { placeholder: '请输入手机号' },
+                  },
+                  {
+                    label: '用户',
+                    type: 'list',
+                    offset: 2,
+                    name: [index, 'users'],
+                    items: ({ index }): YFormItemProps['children'] => [
+                      {
+                        type: 'oneLine',
+                        componentProps: { oneLineStyle: ['50%', 8, '50%'] },
+                        items: (): YFormItemProps['children'] => [
+                          { label: '姓名', type: 'input', name: [index, 'name'] },
+                          <span key="center" />,
+                          { label: '年龄', type: 'input', name: [index, 'age'] },
+                        ],
+                      },
+                    ],
+                  },
+                ];
+              },
+            },
+          ]}
+        </YForm.Items>
+      </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  test('modal form', () => {
+    const wrapper = render(
+      <YForm.FormModal visible destroyOnClose title="表单弹窗">
+        {[{ type: 'input', name: 'age', label: '姓名' }]}
+      </YForm.FormModal>,
     );
     expect(wrapper).toMatchSnapshot();
   });

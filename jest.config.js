@@ -3,9 +3,9 @@
 module.exports = {
   verbose: true,
   setupFiles: ['./setupTests.js'],
-  modulePathIgnorePatterns: ['/docs/', '/__snapshots__/'],
+  modulePathIgnorePatterns: ['/docs/', '/__snapshots__/', 'lib'],
   // coveragePathIgnorePatterns: ['/src/JackBox/'],
-  coveragePathIgnorePatterns: ['/__test__/'],
+  coveragePathIgnorePatterns: ['/__test__/', 'lib'],
   // testPathIgnorePatterns: ['/packages/yforms'],
   collectCoverage: true,
 };

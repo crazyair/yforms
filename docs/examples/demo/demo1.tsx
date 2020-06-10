@@ -36,8 +36,7 @@ const Demo = () => {
   const [loading, setLoading] = useState(true);
   const [form] = YForm.useForm();
 
-  const { submit, disabled } = YForm.useSubmit();
-
+  const { submit, disabled } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
   useEffect(() => {
     setTimeout(() => {
       setData(initialValues);
@@ -67,7 +66,6 @@ const Demo = () => {
       onFinishFailed={onFinishFailed}
       onSave={onSave}
       scenes={{ view: disabled }}
-      params={{ type: 'view' }}
     >
       {[
         // {
