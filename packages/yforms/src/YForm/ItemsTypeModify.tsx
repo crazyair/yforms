@@ -296,7 +296,7 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
 export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
-  return { itemProps: { className: 'mb0', ...itemProps } };
+  return { itemProps: { className: 'mb5', ...itemProps } };
 };
 
 export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => {

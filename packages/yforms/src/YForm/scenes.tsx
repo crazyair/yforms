@@ -83,16 +83,12 @@ const scenes: YFormConfig = {
         };
       },
     },
-    // 判断 disabled 给没个 item 添加 disabled
+    // 判断 disabled 给每个 item componentProps 添加 disabled
     disabled: {
-      item: ({ formProps, componentProps, itemProps, typeProps }) => {
-        const _componentProps: modifyType['componentProps'] = {};
-        const { disabled } = formProps;
-        if (itemProps.name && typeProps.type !== 'list') {
-          _componentProps.disabled = disabled;
-        }
+      item: ({ componentProps, itemsProps }) => {
+        const { disabled } = itemsProps;
         return {
-          componentProps: { ..._componentProps, ...componentProps },
+          componentProps: { disabled, ...componentProps },
         };
       },
     },

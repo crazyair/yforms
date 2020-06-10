@@ -72,7 +72,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
-  onCancel?: (p: { type: CancelType; onDisabled: (disabled: boolean) => void }) => void;
+  onCancel?: (p: { type: CancelType }) => void;
   params?: ParamsType;
   oldValues?: T;
 }
@@ -129,17 +129,17 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const { resetFields, getFieldsValue } = form;
   const _params = submit ? submit.params : paramsType(params);
   const { create, edit, view } = _params;
-  // 用 view 判断 disabled 默认值（同 useSubmit）
+  // 同 useSubmit 使用 view 当默认值
   const [thisDisabled, setDisabled] = useState(view);
   const [submitLoading, setSubmitLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
-
   // 改变状态
   const handleOnDisabled = useCallback(
     (disabled) => {
-      setDisabled(disabled);
       if (submit) {
-        submit.forceUpdate({ disabled });
+        submit.onDisabled(disabled);
+      } else {
+        setDisabled(disabled);
       }
     },
     [submit],
@@ -158,7 +158,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const handleReset: (p: { type: CancelType }) => void = useCallback(
     ({ type }) => {
       if (typeof onCancel === 'function') {
-        onCancel({ type, onDisabled: handleOnDisabled });
+        onCancel({ type });
       } else {
         resetFields();
         if (create) {
@@ -221,12 +221,16 @@ const InternalForm = React.memo<YFormProps>((props) => {
     handleOnDisabled(!thisDisabled);
   };
 
+  let _thisDisabled = thisDisabled;
+  if (submit) {
+    _thisDisabled = submit.disabled;
+  }
   const _providerProps = merge(
     {},
     {
       form,
       scenes: _scenes,
-      disabled: thisDisabled,
+      disabled: _thisDisabled,
       getScene,
       onFormatFieldsValue: _onFormatFieldsValue,
       submitComponentProps: {

@@ -46,7 +46,9 @@ const YFormSubmitDemo = (props: any) => {
 
   const {
     submit,
-    params: { typeName },
+    submit: {
+      params: { typeName },
+    },
   } = YForm.useSubmit({ params });
 
   onFormatFieldsValue([

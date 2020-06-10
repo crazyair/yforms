@@ -19,7 +19,7 @@ const Demo = () => {
         onCancel={() => setVisible(false)}
         destroyOnClose
         title="表单弹窗"
-        formProps={{ onFinish, onCancel: () => setVisible(false) }}
+        formProps={{ onFinish }}
       >
         {[{ type: 'input', name: 'age', label: '姓名' }]}
       </YForm.FormModal>

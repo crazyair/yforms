@@ -21,15 +21,19 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
 
   const {
     submit,
-    params: { typeName },
-  } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
+    submit: {
+      params: { id, typeName },
+    },
+  } = YForm.useSubmit({ params: match.params });
 
   useEffect(() => {
     setTimeout(() => {
-      setData({ name: '张三', age: '10' });
+      if (id) {
+        setData({ name: '张三', age: '10' });
+      }
       setLoading(false);
     }, 10);
-  }, []);
+  }, [id]);
 
   onFormatFieldsValue([
     { name: 'append_field', format: () => '提交前追加字段' },

@@ -78,7 +78,7 @@ export default (props: YFormSubmitProps) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
+    <YForm.Items noStyle scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
       {[{ type: 'space', items: btns }]}
     </YForm.Items>
   );

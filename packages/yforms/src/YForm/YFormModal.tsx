@@ -20,9 +20,12 @@ const YFormModal = (props: YFormModalProps) => {
     ...rest
   } = props;
 
+  const { onCancel } = rest;
+
   return (
     <Modal {...rest} footer={null} bodyStyle={{ padding: 0 }}>
-      <YForm {...formProps}>
+      {/* YForm onCancel 无 e ，所以这里给 null */}
+      <YForm onCancel={() => onCancel(null)} {...formProps}>
         <div className="ant-modal-body">
           <YForm.Items>{children}</YForm.Items>
         </div>

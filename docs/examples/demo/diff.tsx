@@ -59,6 +59,7 @@ const oldValues = {
   下拉框多选: ['2'],
   date: moment('2020-01-01 12:00:00'),
   range: [moment('2020-01-01 12:00:00'), moment('2020-01-01 12:00:00')],
+  custom: 'xxx',
 };
 
 const Demo = () => {
@@ -66,7 +67,7 @@ const Demo = () => {
   const [loading, setLoading] = useState(true);
   const [form] = YForm.useForm();
 
-  const { submit, disabled } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
+  const { submit } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
 
   useEffect(() => {
     setTimeout(() => {
@@ -84,7 +85,6 @@ const Demo = () => {
   const onSave = (values: any) => {
     console.log('values:', values);
   };
-
   return (
     <YForm
       {...layout}
@@ -97,21 +97,10 @@ const Demo = () => {
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      onCancel={({ onDisabled }) => onDisabled(!disabled)}
-      scenes={{ view: disabled, diff: true }}
-      params={{ type: 'create' }}
+      onCancel={() => submit.onDisabled(!submit.disabled)}
+      scenes={{ view: submit.disabled, diff: true }}
     >
       {[
-        // {
-        //   type: 'button',
-        //   scenes: { disabled: false },
-        //   componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
-        // },
-        {
-          type: 'button',
-          scenes: { disabled: false },
-          componentProps: { onClick: () => form.resetFields(), children: '重置表单' },
-        },
         // { type: 'input', label: '空值', name: 'names' },
         { type: 'input', label: '姓名', name: 'name' },
         {
@@ -266,6 +255,26 @@ const Demo = () => {
           component: <Input />,
         },
         { type: 'submit' },
+        {
+          type: 'space',
+          items: [
+            {
+              type: 'button',
+              noStyle: true,
+              scenes: { disabled: false },
+              componentProps: {
+                onClick: () => submit.onDisabled(!submit.disabled),
+                children: `${submit.disabled ? '启用' : '禁用'}表单`,
+              },
+            },
+            {
+              type: 'button',
+              noStyle: true,
+              scenes: { disabled: false },
+              componentProps: { onClick: () => form.resetFields(), children: '重置表单' },
+            },
+          ],
+        },
         // {
         //   type: 'button',
         //   componentProps: {
