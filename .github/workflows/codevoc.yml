@@ -1,8 +1,8 @@
-name: test
+name: codecov
 
 on:
  push:
-  branches-ignore:
+  branches:
     - master
 
 jobs:
@@ -20,8 +20,8 @@ jobs:
       - run: yarn test
       - uses: codecov/codecov-action@v1.0.6
         with:
-          # flags: unittests # optional
-          # name: codecov-umbrella # optional
+          flags: unittests # optional
+          name: codecov-umbrella # optional
           # file: ./codecov.yml # optional
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true # optional (default = false)
