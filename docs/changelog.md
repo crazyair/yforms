@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.0.2](https://github.com/crazyair/yforms/compare/v1.0.1...v1.0.2) (2020-06-10)
+
+### Features
+
+- 添加 FormModal ([#26](https://github.com/crazyair/yforms/issues/26)) ([12a7816](https://github.com/crazyair/yforms/commit/12a7816219a3d25bc1cd44221e9e75f59c806b5b))
+
 ## [1.0.1](https://github.com/crazyair/yforms/compare/v1.0.0...v1.0.1) (2020-06-08)
 
 ### Bug Fixes
