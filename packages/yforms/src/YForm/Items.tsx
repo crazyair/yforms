@@ -94,7 +94,7 @@ const Items = (props: YFormItemsProps) => {
           ...pick(item, ['key']),
           style: merge({}, item.style, thisProps.style),
           className: classNames(item.className, thisProps.className),
-          key: `${_index}`,
+          key: `dom_${_index}`,
         };
         return list.push(React.cloneElement(item, { ...domProps }));
       }

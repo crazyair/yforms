@@ -8,7 +8,6 @@ import { PickerMode } from 'rc-picker/lib/interface';
 import { SwapRightOutlined } from '@ant-design/icons';
 import { SwitchProps } from 'antd/lib/switch';
 import Numbro from 'numbro';
-import classNames from 'classnames';
 import { isArray, map, includes, get, forEach } from 'lodash';
 import { YFormFieldBaseProps } from './ItemsType';
 import { YTextAreaProps } from './component/TextArea';
@@ -169,9 +168,7 @@ export const textModify: YFormFieldBaseProps<YTextAreaProps>['modifyProps'] = ({
 export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
-  return {
-    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
-  };
+  return { itemProps: { className: 'mb0', ...itemProps } };
 };
 
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
@@ -299,9 +296,7 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
 export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
-  return {
-    itemProps: { ...itemProps, className: classNames(itemProps.className, 'mb0') },
-  };
+  return { itemProps: { className: 'mb0', ...itemProps } };
 };
 
 export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => {

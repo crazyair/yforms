@@ -99,7 +99,7 @@ const Demo = () => {
       loading={loading}
       onFinishFailed={onFinishFailed}
       onSave={onSave}
-      onCancel={({ changeDisabled }) => changeDisabled(!disabled)}
+      onCancel={({ onDisabled }) => onDisabled(!disabled)}
       scenes={{ view: disabled, diff: true }}
       params={{ type: 'create' }}
       diffProps={{ oldValues }}

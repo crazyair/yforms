@@ -2,16 +2,15 @@ import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { merge, concat, mapKeys, omit } from 'lodash';
 import classNames from 'classnames';
-
 import { FormProps, FormInstance } from 'antd/lib/form';
+import warning from 'warning';
+
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
-
 import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
 import { YFormSubmitProps } from './component/Submit';
 import useForm from './useForm';
-
 import defaultScene from './scenes';
 import { YFormUseSubmitReturnProps } from './useSubmit';
 
@@ -73,7 +72,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitProps;
-  onCancel?: (p: { type: CancelType; changeDisabled: (disabled: boolean) => void }) => void;
+  onCancel?: (p: { type: CancelType; onDisabled: (disabled: boolean) => void }) => void;
   params?: ParamsType;
   diffProps?: any;
 }
@@ -136,7 +135,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const timeOut = useRef<number | null>(null);
 
   // 改变状态
-  const handleChangeDisabled = useCallback(
+  const handleOnDisabled = useCallback(
     (disabled) => {
       setDisabled(disabled);
       if (submit) {
@@ -159,17 +158,17 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const handleReset: (p: { type: CancelType }) => void = useCallback(
     ({ type }) => {
       if (typeof onCancel === 'function') {
-        onCancel({ type, changeDisabled: handleChangeDisabled });
+        onCancel({ type, onDisabled: handleOnDisabled });
       } else {
         resetFields();
         if (create) {
           goBack();
         } else if (edit || view) {
-          handleChangeDisabled(true);
+          handleOnDisabled(true);
         }
       }
     },
-    [create, edit, handleChangeDisabled, onCancel, resetFields, view],
+    [create, edit, handleOnDisabled, onCancel, resetFields, view],
   );
   const _itemsTypeAll = {
     ...baseItemsType,
@@ -211,6 +210,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
           end - begin > 500 ? 0 : 500,
         );
       } catch (error) {
+        warning(false, error);
         setSubmitLoading(false);
       }
     }
@@ -218,7 +218,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   const handleOnEdit = (e) => {
     e.preventDefault();
-    handleChangeDisabled(!thisDisabled);
+    handleOnDisabled(!thisDisabled);
   };
 
   const _providerProps = merge(

@@ -29,10 +29,7 @@ const SecureButton: React.FC<YFormSecureButtonProps> = (props) => {
   const handleSetFalseLoading = useCallback(
     (end: number, begin: number, err?: any) => {
       if (err) {
-        timeOut.current = window.setTimeout(() => {
-          setLoading(false);
-          if (onLoaded) onLoaded();
-        }, 500);
+        setLoading(false);
       } else if (end - begin > 500) {
         // 如果 onClick 执行时间大于 0.5s，就立刻取消 loading
         setLoading(false);

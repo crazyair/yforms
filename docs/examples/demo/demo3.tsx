@@ -46,7 +46,7 @@ const Demo: React.FC<RouteComponentProps> = () => {
             {[{ type: 'input', name: 'age', label: '姓名' }]}
           </YForm.Items>
           <YForm.Items className="ant-modal-footer">
-            {[{ type: 'submit', className: 'mb0', componentProps: { reverseBtns: true } }]}
+            {[{ type: 'submit', componentProps: { reverseBtns: true } }]}
           </YForm.Items>
         </YForm>
       </Modal>
