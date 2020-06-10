@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { YForm } from 'yforms';
 import { ModalProps } from 'antd/lib/modal';
 
+import { YForm } from '..';
 import { YFormItemProps } from './Items';
 import { YFormProps } from './Form';
 

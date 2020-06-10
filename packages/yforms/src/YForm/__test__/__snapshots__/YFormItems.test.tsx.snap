@@ -5036,7 +5036,7 @@ Object {
                           class="yform-items"
                         >
                           <div
-                            class="ant-row ant-form-item button-more-left"
+                            class="ant-row ant-form-item mb0"
                           >
                             <div
                               class="ant-col ant-form-item-control"
@@ -5048,24 +5048,37 @@ Object {
                                   class="ant-form-item-control-input-content"
                                 >
                                   <div
-                                    class="yform-items"
+                                    class="ant-space ant-space-horizontal ant-space-align-center"
                                   >
-                                    <button
-                                      class="ant-btn"
-                                      type="button"
+                                    <div
+                                      class="ant-space-item"
+                                      style="margin-right: 8px;"
                                     >
-                                      <span>
-                                        取 消
-                                      </span>
-                                    </button>
-                                    <button
-                                      class="ant-btn ant-btn-primary"
-                                      type="submit"
+                                      <button
+                                        class="ant-btn"
+                                        type="button"
+                                      >
+                                        <span>
+                                          取 消
+                                        </span>
+                                      </button>
+                                    </div>
+                                    <div
+                                      class="ant-space-item"
+                                      style="margin-right: 8px;"
+                                    />
+                                    <div
+                                      class="ant-space-item"
                                     >
-                                      <span>
-                                        提 交
-                                      </span>
-                                    </button>
+                                      <button
+                                        class="ant-btn ant-btn-primary"
+                                        type="submit"
+                                      >
+                                        <span>
+                                          提 交
+                                        </span>
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
