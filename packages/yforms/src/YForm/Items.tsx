@@ -31,7 +31,7 @@ export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'>
     | boolean;
   dataSource?: YFormItemProps['children'];
   viewProps?: YFormFieldBaseProps['viewProps'];
-  diffProps?: any;
+  diffProps?: YFormFieldBaseProps['diffProps'];
 }
 
 export interface FormatFieldsValue<T = any> {

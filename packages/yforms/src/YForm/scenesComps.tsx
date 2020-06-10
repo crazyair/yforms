@@ -27,7 +27,7 @@ const DiffSetFieldsChildren = (props: {
 };
 const DiffSetFields = (props: modifyType) => {
   const { itemProps, formProps } = props;
-  const { initialValues, diffProps: { oldValues } = {} } = formProps;
+  const { initialValues, oldValues = {} } = formProps;
   const context = React.useContext(YForm.ListContent);
   const { name } = itemProps;
   const _name = context.prefixName ? concat(context.prefixName, name) : name;

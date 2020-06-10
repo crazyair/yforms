@@ -74,7 +74,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   submitComponentProps?: YFormSubmitProps;
   onCancel?: (p: { type: CancelType; onDisabled: (disabled: boolean) => void }) => void;
   params?: ParamsType;
-  diffProps?: any;
+  oldValues?: T;
 }
 
 export function useFormatFieldsValue<T = any>() {
@@ -254,7 +254,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
   }
   return (
     <Form
-      {...omit(rest, ['scenes', 'diffProps'])}
+      {...omit(rest, ['scenes', 'oldValues'])}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}

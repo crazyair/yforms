@@ -91,10 +91,8 @@ const Demo = () => {
       form={form}
       submit={submit}
       name="basic"
-      initialValues={{
-        ...data,
-        // _old_fields: oldValues
-      }}
+      initialValues={data}
+      oldValues={oldValues}
       onFinish={onFinish}
       loading={loading}
       onFinishFailed={onFinishFailed}
@@ -102,7 +100,6 @@ const Demo = () => {
       onCancel={({ onDisabled }) => onDisabled(!disabled)}
       scenes={{ view: disabled, diff: true }}
       params={{ type: 'create' }}
-      diffProps={{ oldValues }}
     >
       {[
         // {

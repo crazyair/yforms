@@ -6,7 +6,7 @@ import { modifyType } from '../ItemsType';
 
 const DiffDom = (props: modifyType) => {
   const { formProps, itemProps, componentProps, typeProps } = props;
-  const { diffProps: { oldValues } = {} } = formProps;
+  const { oldValues = {} } = formProps;
   const { name } = itemProps;
 
   const context = React.useContext(YForm.ListContent);

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import SecureButton from '../component/SecureButton';
-import { delay } from './YFormItems.test';
+import { delay, waitForComponentToPaint } from './utils';
 
 describe('SecureButton', () => {
   // 组件卸载
@@ -20,19 +20,13 @@ describe('SecureButton', () => {
   test('click', async () => {
     const onClick = () => {};
     const wrapper = mount(<SecureButton onClick={onClick} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
+    await wrapper.find('.ant-btn').at(0).simulate('click');
   });
 
   test('click loading', async () => {
     const onClick = jest.fn();
     const wrapper = mount(<SecureButton loading onClick={onClick} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
+    await wrapper.find('.ant-btn').at(0).simulate('click');
     expect(onClick).not.toHaveBeenCalled();
   });
 
@@ -41,30 +35,23 @@ describe('SecureButton', () => {
       await Promise.reject();
     };
     const wrapper = mount(<SecureButton onClick={onClick} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
+    waitForComponentToPaint(wrapper);
+    await wrapper.find('.ant-btn').at(0).simulate('click');
   });
   test('click delay', async () => {
     const onClick = async () => {
       await delay(600);
     };
     const wrapper = mount(<SecureButton onClick={onClick} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
-    await delay(600);
+    waitForComponentToPaint(wrapper);
+    await wrapper.find('.ant-btn').at(0).simulate('click');
   });
   test('click 500', async () => {
     const onClick = async () => {};
     const onLoaded = jest.fn();
     const wrapper = mount(<SecureButton onClick={onClick} onLoaded={onLoaded} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
+    waitForComponentToPaint(wrapper);
+    await wrapper.find('.ant-btn').at(0).simulate('click');
     await delay(500);
     expect(onLoaded).toHaveBeenCalled();
   });
@@ -74,10 +61,8 @@ describe('SecureButton', () => {
     };
     const onLoaded = jest.fn();
     const wrapper = mount(<SecureButton onClick={onClick} onLoaded={onLoaded} />);
-    await wrapper
-      .find('.ant-btn')
-      .at(0)
-      .simulate('click');
+    waitForComponentToPaint(wrapper);
+    await wrapper.find('.ant-btn').at(0).simulate('click');
     await delay(700);
     expect(onLoaded).toHaveBeenCalled();
   });
