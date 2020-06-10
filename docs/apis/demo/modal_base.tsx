@@ -16,6 +16,7 @@ const Demo = () => {
       </Button>
       <YForm.FormModal
         visible={visible}
+        onCancel={() => setVisible(false)}
         destroyOnClose
         title="表单弹窗"
         formProps={{ onFinish, onCancel: () => setVisible(false) }}
