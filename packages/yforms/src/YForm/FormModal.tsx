@@ -12,10 +12,20 @@ interface YFormModalProps extends ModalProps {
   formProps?: YFormProps;
 }
 
-const YFormModal = (props: YFormModalProps) => {
+const FormModal = (props: YFormModalProps) => {
   const {
     children,
-    formFooter = [{ type: 'submit', componentProps: { reverseBtns: true } }],
+    formFooter = [
+      // { type: 'submit', componentProps: { reverseBtns: true, spaceProps: { noStyle: true } } },
+      {
+        type: 'submit',
+        componentProps: {
+          reverseBtns: true,
+          showBtns: { showSave: true },
+          spaceProps: { noStyle: true },
+        },
+      },
+    ],
     formProps,
     ...rest
   } = props;
@@ -36,4 +46,4 @@ const YFormModal = (props: YFormModalProps) => {
     </Modal>
   );
 };
-export default YFormModal;
+export default FormModal;

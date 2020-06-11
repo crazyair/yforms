@@ -3,13 +3,13 @@ import { merge, reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
 import { YForm } from '../..';
-import { YFormProps } from '../Form';
 import { YFormItemProps, YFormDataSource } from '../Items';
 import { YFormSecureButtonProps } from './SecureButton';
+import { YFormSpaceProps } from './Space';
 
 export interface ShowBtns {
   showSubmit?: ButtonProps;
-  showSave?: YFormSecureButtonProps;
+  showSave?: YFormSecureButtonProps['componentProps'];
   showCancel?: ButtonProps;
   showEdit?: ButtonProps;
   showBack?: ButtonProps;
@@ -19,18 +19,22 @@ type showBtns = {
   [P in keyof ShowBtns]?: boolean | ShowBtns[P];
 };
 
-export interface YFormSubmitProps extends Pick<YFormProps, 'disabled'> {
+export interface YFormSubmitComponentProps {
   showBtns?: showBtns | boolean;
   reverseBtns?: boolean;
+  spaceProps?: YFormSpaceProps;
+}
+export interface YFormSubmitProps {
+  componentProps?: YFormSubmitComponentProps;
 }
 
 export default (props: YFormSubmitProps) => {
+  const { componentProps = {} } = props;
+  const { showBtns = true, reverseBtns, spaceProps } = componentProps;
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
-  const { form, onSave, scenes, submitComponentProps, ...rest } = merge({}, formProps, itemsProps);
+  const { form, onSave, submitComponentProps, disabled } = merge({}, formProps, itemsProps);
   const { getFieldsValue, getFormatFieldsValue } = form;
-
-  const { showBtns = true, reverseBtns, disabled } = merge({}, rest, props);
 
   const handleOnSave = async (e) => {
     e.preventDefault();
@@ -78,8 +82,8 @@ export default (props: YFormSubmitProps) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items noStyle scenes={{ ...scenes, disabled: false }} isShow={!!showBtns}>
-      {[{ type: 'space', items: btns }]}
+    <YForm.Items noStyle isShow={!!showBtns}>
+      {[{ type: 'space', ...spaceProps, items: btns }]}
     </YForm.Items>
   );
 };

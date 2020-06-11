@@ -11,9 +11,9 @@ import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { YFormItemProps, YFormItemsProps } from './Items';
 import { searchSelect } from './utils';
 import CustomTypography from './component/Typography';
-import OneLine, { YFormOneLineComponentProps, YFormOneLineProps } from './component/OneLine';
+import OneLine, { YFormOneLineProps } from './component/OneLine';
 import Radio, { YRadioProps } from './component/Radio';
-import List, { YFormListComponentProps, YFormListProps } from './component/List';
+import List, { YFormListProps } from './component/List';
 import CheckboxGroup, { YCheckGroupProps } from './component/CheckboxGroup';
 import Select, { YSelectProps } from './component/Select';
 import TextArea, { YTextAreaProps } from './component/TextArea';
@@ -21,7 +21,7 @@ import Money, { YMoneyProps } from './component/Money';
 import Submit, { YFormSubmitProps } from './component/Submit';
 import SecureButton, { YFormSecureButtonProps } from './component/SecureButton';
 import { YFormProps, YFormConfig } from './Form';
-import ComponentView from './component/ComponentView';
+import ComponentView, { YFormComponentViewProps } from './component/ComponentView';
 import {
   datePickerModify,
   rangePickerModify,
@@ -37,7 +37,7 @@ import {
   SpaceModify,
   CustomModify,
 } from './ItemsTypeModify';
-import Space, { YFormSpaceComponentProps, YFormSpaceProps } from './component/Space';
+import Space, { YFormSpaceProps } from './component/Space';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -45,6 +45,7 @@ export interface YFormFieldBaseProps<T = any> {
   formItemProps?: YFormItemProps;
   formatStr?: string;
   hasFormItem?: boolean;
+  needItemProps?: boolean; // 组件需要用到 itemProps 参数
   scenes?: YFormConfig['scenes'];
   modifyProps?: (
     props: Required<modifyType<T>>,
@@ -83,7 +84,7 @@ export interface OptionsProps<T = any> {
 export interface YFormItemsTypeDefine {
   // 字段类型
   input: { componentProps?: InputProps };
-  view: { componentProps?: any };
+  view: YFormComponentViewProps;
   datePicker: { componentProps?: DatePickerProps };
   rangePicker: { componentProps?: RangePickerProps };
   password: { componentProps?: PasswordProps };
@@ -98,18 +99,12 @@ export interface YFormItemsTypeDefine {
   // 展示类型
   button: { componentProps?: ButtonProps };
   // 其它功能类型
-  oneLine: { componentProps?: YFormOneLineComponentProps; items?: YFormOneLineProps['items'] };
-  space: { componentProps?: YFormSpaceComponentProps; items?: YFormSpaceProps['items'] };
-  list: {
-    componentProps?: YFormListComponentProps;
-    disabled?: boolean;
-    items?: YFormListProps['items'];
-    // 用于 diff 状态下处理数据
-    addonBefore?: React.ReactNode;
-  };
+  oneLine: YFormOneLineProps;
+  space: YFormSpaceProps;
+  list: YFormListProps;
+  submit: YFormSubmitProps;
+  secureButton: YFormSecureButtonProps;
   custom: { componentProps?: any; component?: React.ReactNode };
-  submit: { componentProps?: YFormSubmitProps };
-  secureButton: { componentProps?: YFormSecureButtonProps };
 }
 
 export type YFormItemsType<T = YFormFieldBaseProps> = {
@@ -151,15 +146,20 @@ export const itemsType: YFormItemsType = {
     modifyProps: selectModify,
   },
   // 工具类
-  oneLine: { component: <OneLine />, modifyProps: oneLineModify },
-  list: { component: <List />, hasFormItem: false },
+  oneLine: { component: <OneLine />, modifyProps: oneLineModify, needItemProps: true },
+  list: { component: <List />, hasFormItem: false, needItemProps: true },
   button: { component: <Button /> },
-  secureButton: { component: <SecureButton /> },
-  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
+  secureButton: { component: <SecureButton />, needItemProps: true },
+  submit: {
+    component: <Submit />,
+    hasFormItem: false,
+    needItemProps: true,
+    modifyProps: submitModify,
+  },
   // 展示类
   custom: { modifyProps: CustomModify },
-  view: { component: <ComponentView /> },
-  space: { component: <Space />, modifyProps: SpaceModify },
+  view: { component: <ComponentView />, needItemProps: true },
+  space: { component: <Space />, modifyProps: SpaceModify, needItemProps: true },
 };
 
 export default itemsType;

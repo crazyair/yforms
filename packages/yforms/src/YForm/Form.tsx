@@ -9,7 +9,7 @@ import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
 import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
-import { YFormSubmitProps } from './component/Submit';
+import { YFormSubmitComponentProps } from './component/Submit';
 import useForm from './useForm';
 import defaultScene from './scenes';
 import { YFormUseSubmitReturnProps } from './useSubmit';
@@ -71,7 +71,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   ) => (f: FormatFieldsValue<T>[]) => FormatFieldsValue<T>[];
   children?: YFormItemProps['children'];
   onSave?: (values: { [key: string]: any }) => void;
-  submitComponentProps?: YFormSubmitProps;
+  submitComponentProps?: YFormSubmitComponentProps;
   onCancel?: (p: { type: CancelType }) => void;
   params?: ParamsType;
   oldValues?: T;

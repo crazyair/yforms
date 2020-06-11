@@ -19,8 +19,7 @@ import { YSelectProps } from './component/Select';
 import { YMoneyProps } from './component/Money';
 import { YRadioProps } from './component/Radio';
 import { YFormSpaceProps } from './component/Space';
-
-const noData = <span style={{ color: '#ccc' }}>-/-</span>;
+import { noData } from './component/ComponentView';
 
 const dateFormat = (
   value?: any,
@@ -296,7 +295,7 @@ export const radioModify: YFormFieldBaseProps<YRadioProps>['modifyProps'] = ({
 export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = ({
   itemProps = {},
 }) => {
-  return { itemProps: { className: 'mb5', ...itemProps } };
+  return { itemProps: { ...itemProps } };
 };
 
 export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => {

@@ -6,17 +6,15 @@ import { SpaceProps } from 'antd/lib/space';
 import YForm from '..';
 import { YFormItemProps } from '../Items';
 
-export interface YFormSpaceComponentProps extends SpaceProps {}
-
-export interface YFormSpaceProps {
-  componentProps?: YFormSpaceComponentProps;
+export interface YFormSpaceProps extends YFormItemProps {
+  componentProps?: SpaceProps;
   items?: YFormItemProps['children'];
 }
 
 export default (props: YFormSpaceProps) => {
-  const { items } = props;
+  const { items, componentProps } = props;
   return (
-    <Space>
+    <Space {...componentProps}>
       {isArray(items)
         ? map(items, (item, index) => {
             return (

@@ -83,7 +83,7 @@ const Items = (props: YFormItemsProps) => {
   let offset = 0;
 
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
-    forEach(lists, (item, index: number) => {
+    forEach(lists, (item, index) => {
       // 如果是数组就回调该方法
       if (isArray(item)) return each(item, index);
       const _index = pIndex ? `${pIndex}_${index}` : index;
@@ -158,12 +158,11 @@ const Items = (props: YFormItemsProps) => {
         if (type && itemsType) {
           const _fieldData = itemsType[type];
           if (_fieldData) {
-            const { component } = _fieldData;
+            const { component, needItemProps } = _fieldData;
             _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
-
             // 包含 items 类型把当前 item 属性全部透传过去
-            if (items) {
-              _componentProps = { ..._base };
+            if (needItemProps) {
+              _componentProps = { ..._itemProps, componentProps: _componentProps };
             }
             const _component = component || item.component;
             if (isValidElement(_component)) {

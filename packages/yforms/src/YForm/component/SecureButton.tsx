@@ -1,29 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from 'antd';
 import { ButtonProps } from 'antd/lib/button';
 
-export interface YFormSecureButtonProps extends ButtonProps {
-  onLoaded?: () => void;
+export interface YFormSecureButtonProps {
+  componentProps?: ButtonProps & { onLoaded?: () => void };
 }
 
-const { useState, useEffect, useRef, useCallback } = React;
-
 const SecureButton: React.FC<YFormSecureButtonProps> = (props) => {
-  const { onClick, children, className, onLoaded, ...rest } = props;
+  const { componentProps = {} } = props;
+  const { onClick, onLoaded, ...rest } = componentProps;
   const [loading, setLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 
   useEffect(() => {
-    if ('loading' in props) {
-      // 强制使用props的loading
-      setLoading(!!props.loading);
-    }
-  }, [props, props.loading]);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeOut.current);
-    };
+    return () => clearTimeout(timeOut.current);
   }, []);
 
   const handleSetFalseLoading = useCallback(
@@ -60,11 +50,7 @@ const SecureButton: React.FC<YFormSecureButtonProps> = (props) => {
     }
   };
 
-  return (
-    <Button className={className} onClick={handleClick} loading={loading} {...rest}>
-      {children}
-    </Button>
-  );
+  return <Button onClick={handleClick} loading={loading} {...rest} />;
 };
 
 export default SecureButton;

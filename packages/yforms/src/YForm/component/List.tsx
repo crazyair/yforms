@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { map, merge, isArray, concat } from 'lodash';
@@ -6,8 +6,6 @@ import classNames from 'classnames';
 
 import YForm from '../index';
 import { oneLineItemStyle } from '../utils';
-import { YFormProps } from '../Form';
-import { BaseComponentProps } from '../ItemsType';
 import { YFormItemProps } from '../Items';
 
 export type ShowIconsType = {
@@ -16,13 +14,12 @@ export type ShowIconsType = {
   showRemove?: boolean;
 };
 
-export interface YFormListComponentProps extends BaseComponentProps {
+export interface YFormListComponentProps {
   maxNum?: number;
   minNum?: number;
   showRightIcons?: boolean;
   showIcons?: ShowIconsType;
   onShowIcons?: (p: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
-  parentName?: YFormItemProps['name'];
 }
 
 export interface YFormListItems {
@@ -34,22 +31,25 @@ export interface YFormListItems {
   icons: React.ReactNode;
 }
 
-export interface YFormListProps
-  extends Pick<YFormItemProps, 'label' | 'name' | 'scenes' | 'initialValue'>,
-    Pick<YFormProps, 'form' | 'children' | 'disabled'> {
+export interface YFormListProps extends Pick<YFormItemProps, 'label' | 'name'> {
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
-  offset?: number;
+  // 用于 diff 状态下处理数据
   addonBefore?: React.ReactNode;
 }
 
 export default (props: YFormListProps) => {
-  const { label, items, disabled, componentProps = {}, name, offset, addonBefore, scenes } = props;
+  // const formProps = useContext(YForm.YFormContext);
+  // const { scenes, offset, disabled } = merge({}, formProps, itemsProps);
+  const itemsProps = useContext(YForm.YFormItemsContext);
+  const { scenes, offset, disabled } = itemsProps;
+  const { label, items, componentProps = {}, name, addonBefore } = props;
+
   const {
     maxNum,
     minNum,
     showRightIcons = true,
-    showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {} as ShowIconsType,
+    showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {},
     onShowIcons,
   } = componentProps;
   const context = React.useContext(YForm.ListContent);

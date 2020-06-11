@@ -7,7 +7,7 @@ import useForm from './useForm';
 
 import './index.less';
 import { YFormItemsContext, YFormContext, YFormListContent } from './Context';
-import FormModal from './YFormModal';
+import FormModal from './FormModal';
 
 type InternalYForm = typeof YForm;
 interface RefYForm extends InternalYForm {

@@ -261,7 +261,6 @@ const Demo = () => {
             {
               type: 'button',
               noStyle: true,
-              scenes: { disabled: false },
               componentProps: {
                 onClick: () => submit.onDisabled(!submit.disabled),
                 children: `${submit.disabled ? '启用' : '禁用'}表单`,
@@ -270,7 +269,6 @@ const Demo = () => {
             {
               type: 'button',
               noStyle: true,
-              scenes: { disabled: false },
               componentProps: { onClick: () => form.resetFields(), children: '重置表单' },
             },
           ],

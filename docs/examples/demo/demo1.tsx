@@ -186,7 +186,6 @@ const Demo = () => {
             { type: 'submit' },
             {
               type: 'button',
-              noStyle: true,
               componentProps: {
                 onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
                 children: '获取提交前数据',
