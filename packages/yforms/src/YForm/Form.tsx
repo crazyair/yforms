@@ -133,6 +133,11 @@ const InternalForm = React.memo<YFormProps>((props) => {
   const [thisDisabled, setDisabled] = useState(view);
   const [submitLoading, setSubmitLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
+  // 下面地方请使用 _thisDisabled
+  let _thisDisabled = thisDisabled;
+  if (submit) {
+    _thisDisabled = submit.disabled;
+  }
   // 改变状态
   const handleOnDisabled = useCallback(
     (disabled) => {
@@ -218,13 +223,9 @@ const InternalForm = React.memo<YFormProps>((props) => {
 
   const handleOnEdit = (e) => {
     e.preventDefault();
-    handleOnDisabled(!thisDisabled);
+    handleOnDisabled(false);
   };
 
-  let _thisDisabled = thisDisabled;
-  if (submit) {
-    _thisDisabled = submit.disabled;
-  }
   const _providerProps = merge(
     {},
     {

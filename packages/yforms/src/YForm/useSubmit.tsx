@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { ParamsObjType } from './Form';
+import { ParamsObjType, ParamsType } from './Form';
 import { paramsType } from './utils';
 
 export interface YFormUseSubmitProps {
   disabled?: boolean;
-  params?: { [key: string]: string };
+  params?: ParamsType;
 }
 
 export interface YFormUseSubmitReturnProps {
