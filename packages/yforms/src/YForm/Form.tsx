@@ -215,7 +215,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
           end - begin > 500 ? 0 : 500,
         );
       } catch (error) {
-        warning(false, error);
+        warning(false, error || 'onSubmit error');
         setSubmitLoading(false);
       }
     }
@@ -245,7 +245,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
         },
       },
     },
-    { ...omit(_props, ['name']), itemsType: _itemsTypeAll },
+    { ...omit(_props, ['name']) },
   );
   if ('isShow' in _props && !_props.isShow) {
     return null;
@@ -264,7 +264,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
     >
-      <YFormContext.Provider value={_providerProps}>
+      <YFormContext.Provider value={{ ..._providerProps, itemsType: _itemsTypeAll }}>
         <Items>{children}</Items>
       </YFormContext.Provider>
     </Form>
