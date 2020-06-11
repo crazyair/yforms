@@ -36,7 +36,10 @@ const Demo = () => {
   const [loading, setLoading] = useState(true);
   const [form] = YForm.useForm();
 
-  const { submit, disabled } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
+  const {
+    submit,
+    submit: { disabled },
+  } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
   useEffect(() => {
     setTimeout(() => {
       setData(initialValues);
@@ -183,7 +186,6 @@ const Demo = () => {
             { type: 'submit' },
             {
               type: 'button',
-              noStyle: true,
               componentProps: {
                 onClick: () => message.success(JSON.stringify(form.getFormatFieldsValue())),
                 children: '获取提交前数据',

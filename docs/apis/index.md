@@ -29,7 +29,7 @@ nav:
 | onSave | 保存方法，不校验表单数据（需用到 `submit` 类型） | (values: { [key: string]: any }) => void | - |
 | onCancel | 点击取消、返回调用的方法（需用到 `submit` 类型） | () => void | - |
 | params | 当前表单状态（需用到 `submit` 类型） | <a href="/apis/hooks#paramsobjtype">ParamsObjType</a> | - |
-| submitComponentProps | 与 `submit` 类型参数结合使用（用户无需传） | <a href="/types/submit#api">YFormSubmitProps</a> | - |
+| submitComponentProps | 与 `submit` 类型参数结合使用（用户无需传） | <a href="/types/submit#api">YFormSubmitComponentProps</a> | - |
 
 ## YForm.Items
 

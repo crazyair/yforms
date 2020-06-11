@@ -94,7 +94,9 @@ export default () => {
   const [form] = YForm.useForm();
   const {
     submit,
-    params: { typeName },
+    submit: {
+      params: { typeName },
+    },
   } = YForm.useSubmit({ params: { type: 'view', id: '1' } });
 
   const onFinish = (values) => {

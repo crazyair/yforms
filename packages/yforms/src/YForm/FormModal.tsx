@@ -12,17 +12,22 @@ interface YFormModalProps extends ModalProps {
   formProps?: YFormProps;
 }
 
-const YFormModal = (props: YFormModalProps) => {
+const FormModal = (props: YFormModalProps) => {
   const {
     children,
-    formFooter = [{ type: 'submit', componentProps: { reverseBtns: true } }],
+    formFooter = [
+      { type: 'submit', componentProps: { reverseBtns: true, spaceProps: { noStyle: true } } },
+    ],
     formProps,
     ...rest
   } = props;
 
+  const { onCancel } = rest;
+
   return (
     <Modal {...rest} footer={null} bodyStyle={{ padding: 0 }}>
-      <YForm {...formProps}>
+      {/* YForm onCancel 无 e ，所以这里给 null */}
+      <YForm onCancel={() => onCancel(null)} {...formProps}>
         <div className="ant-modal-body">
           <YForm.Items>{children}</YForm.Items>
         </div>
@@ -33,4 +38,4 @@ const YFormModal = (props: YFormModalProps) => {
     </Modal>
   );
 };
-export default YFormModal;
+export default FormModal;

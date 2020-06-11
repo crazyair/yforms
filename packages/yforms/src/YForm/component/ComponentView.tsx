@@ -4,37 +4,26 @@ import { get, isArray } from 'lodash';
 
 import { YFormItemProps } from '../Items';
 
-const noData = <span style={{ color: '#ccc' }}>-/-</span>;
+export const noData = <span style={{ color: '#ccc' }}>-/-</span>;
 
-export interface YFormComponentView {
-  value?: React.ReactNode;
+export interface YFormComponentViewComponentProps {
   addonBefore?: React.ReactNode;
   addonAfter?: React.ReactNode;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;
-  children?: React.ReactNode;
   className?: string;
-  _show_type?: string;
   oldValue?: any;
-  itemProps?: YFormItemProps;
 }
 
-export default React.memo<YFormComponentView>((props) => {
-  const {
-    _show_type,
-    addonBefore,
-    addonAfter,
-    suffix,
-    prefix,
-    className,
-    oldValue,
-    itemProps = {},
-  } = props;
-  const { valuePropName = 'value' } = itemProps;
-  const { format } = itemProps.viewProps || {};
-  // diff 渲染使用 oldValue
-  let _value = _show_type === 'diff' ? oldValue : get(props, valuePropName);
+export interface YFormComponentViewProps extends YFormItemProps {
+  componentProps?: YFormComponentViewComponentProps;
+}
 
+export default (props: YFormComponentViewProps) => {
+  const { viewProps: { format } = {}, componentProps = {}, valuePropName = 'value' } = props;
+  const { addonBefore, addonAfter, suffix, prefix, className, oldValue } = componentProps;
+  // diff 渲染使用 oldValue
+  let _value = 'oldValue' in componentProps ? oldValue : get(props, valuePropName);
   if (format) {
     _value = format(_value);
   }
@@ -50,4 +39,4 @@ export default React.memo<YFormComponentView>((props) => {
       {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
     </span>
   );
-});
+};

@@ -1,11 +1,13 @@
 import React from 'react';
 import { get, concat } from 'lodash';
+import classNames from 'classnames';
+
 import ComponentView from './ComponentView';
 import { YForm } from '../..';
 import { modifyType } from '../ItemsType';
 
 const DiffDom = (props: modifyType) => {
-  const { formProps, itemProps, componentProps, typeProps } = props;
+  const { formProps, itemProps, componentProps } = props;
   const { oldValues = {} } = formProps;
   const { name } = itemProps;
 
@@ -45,12 +47,12 @@ const DiffDom = (props: modifyType) => {
             return (
               <div style={{ padding: '5px 0' }}>
                 <ComponentView
-                  _show_type="diff"
-                  {...componentProps}
-                  itemProps={itemProps}
-                  className="old-value"
-                  _item_type={typeProps.type}
-                  oldValue={oldValue}
+                  {...itemProps}
+                  componentProps={{
+                    oldValue,
+                    ...componentProps,
+                    className: classNames('old-value', componentProps.className),
+                  }}
                 />
               </div>
             );

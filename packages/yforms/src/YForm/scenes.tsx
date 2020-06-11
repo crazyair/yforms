@@ -10,7 +10,6 @@ import { DiffSetFields } from './scenesComps';
 
 // TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
 // itemProps.name && typeProps.type !== 'list'
-
 const scenes: YFormConfig = {
   getScene: {
     // 没有 label 也和有 label 对齐
@@ -27,7 +26,6 @@ const scenes: YFormConfig = {
           offset,
         });
         _itemProps = label ? labelLayoutValue : noLabelLayoutValue;
-
         return {
           itemProps: { ..._itemProps, ...itemProps },
         };
@@ -83,13 +81,13 @@ const scenes: YFormConfig = {
         };
       },
     },
-    // 判断 disabled 给没个 item 添加 disabled
+    // 判断 disabled 给每个 item componentProps 添加 disabled
     disabled: {
-      item: ({ formProps, componentProps, itemProps, typeProps }) => {
-        const _componentProps: modifyType['componentProps'] = {};
-        const { disabled } = formProps;
+      item: ({ componentProps, itemsProps, itemProps, typeProps }) => {
+        const { disabled } = itemsProps;
+        let _componentProps = {};
         if (itemProps.name && typeProps.type !== 'list') {
-          _componentProps.disabled = disabled;
+          _componentProps = { disabled };
         }
         return {
           componentProps: { ..._componentProps, ...componentProps },
