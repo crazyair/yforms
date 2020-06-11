@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.0.5](https://github.com/crazyair/yforms/compare/v1.0.4...v1.0.5) (2020-06-11)
+
+### Bug Fixes
+
+- 修复提交按钮 loading 状态闪一下 ([13bf16c](https://github.com/crazyair/yforms/commit/13bf16c844f9f8d1b1d69fcf6b83832e347e1b07))
+
 ## [1.0.4](https://github.com/crazyair/yforms/compare/v1.0.3...v1.0.4) (2020-06-11)
 
 ### Bug Fixes
