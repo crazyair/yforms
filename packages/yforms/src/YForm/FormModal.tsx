@@ -16,15 +16,7 @@ const FormModal = (props: YFormModalProps) => {
   const {
     children,
     formFooter = [
-      // { type: 'submit', componentProps: { reverseBtns: true, spaceProps: { noStyle: true } } },
-      {
-        type: 'submit',
-        componentProps: {
-          reverseBtns: true,
-          showBtns: { showSave: true },
-          spaceProps: { noStyle: true },
-        },
-      },
+      { type: 'submit', componentProps: { reverseBtns: true, spaceProps: { noStyle: true } } },
     ],
     formProps,
     ...rest
