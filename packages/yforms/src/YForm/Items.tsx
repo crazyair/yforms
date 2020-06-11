@@ -135,10 +135,10 @@ const Items = (props: YFormItemsProps) => {
 
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
-        const _base = merge({}, mergeProps, _itemProps);
-        if (typeof _base.offset === 'number') {
-          offset += _base.offset;
-          _base.offset = offset;
+        // offset 需要自增
+        if (typeof _itemProps.offset === 'number') {
+          offset += _itemProps.offset;
+          _itemProps.offset = offset;
         }
 
         const { type, dataSource, items, componentProps, format, ...formItemProps } = _itemProps;

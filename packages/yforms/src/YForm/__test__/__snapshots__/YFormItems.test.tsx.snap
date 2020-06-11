@@ -1367,7 +1367,7 @@ Object {
               </div>
             </div>
             <div
-              class="ant-row ant-form-item mb5"
+              class="ant-row ant-form-item"
             >
               <div
                 class="ant-col ant-form-item-control"
@@ -3654,7 +3654,7 @@ Object {
             </div>
           </div>
           <div
-            class="ant-row ant-form-item mb5"
+            class="ant-row ant-form-item"
           >
             <div
               class="ant-col ant-form-item-control"
@@ -5025,52 +5025,36 @@ Object {
                         class="yform-items"
                       >
                         <div
-                          class="ant-row ant-form-item mb5"
+                          class="ant-space ant-space-horizontal ant-space-align-center"
                         >
                           <div
-                            class="ant-col ant-form-item-control"
+                            class="ant-space-item"
+                            style="margin-right: 8px;"
                           >
-                            <div
-                              class="ant-form-item-control-input"
+                            <button
+                              class="ant-btn"
+                              type="button"
                             >
-                              <div
-                                class="ant-form-item-control-input-content"
-                              >
-                                <div
-                                  class="ant-space ant-space-horizontal ant-space-align-center"
-                                >
-                                  <div
-                                    class="ant-space-item"
-                                    style="margin-right: 8px;"
-                                  >
-                                    <button
-                                      class="ant-btn"
-                                      type="button"
-                                    >
-                                      <span>
-                                        取 消
-                                      </span>
-                                    </button>
-                                  </div>
-                                  <div
-                                    class="ant-space-item"
-                                    style="margin-right: 8px;"
-                                  />
-                                  <div
-                                    class="ant-space-item"
-                                  >
-                                    <button
-                                      class="ant-btn ant-btn-primary"
-                                      type="submit"
-                                    >
-                                      <span>
-                                        提 交
-                                      </span>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                              <span>
+                                取 消
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            class="ant-space-item"
+                            style="margin-right: 8px;"
+                          />
+                          <div
+                            class="ant-space-item"
+                          >
+                            <button
+                              class="ant-btn ant-btn-primary"
+                              type="submit"
+                            >
+                              <span>
+                                提 交
+                              </span>
+                            </button>
                           </div>
                         </div>
                       </div>

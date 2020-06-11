@@ -6,9 +6,8 @@ export interface YFormSecureButtonProps {
   componentProps?: ButtonProps & { onLoaded?: () => void };
 }
 
-const SecureButton: React.FC<YFormSecureButtonProps> = (props) => {
-  const { componentProps = {} } = props;
-  const { onClick, onLoaded, ...rest } = componentProps;
+const SecureButton: React.FC<YFormSecureButtonProps['componentProps']> = (props) => {
+  const { onClick, onLoaded, ...rest } = props;
   const [loading, setLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 

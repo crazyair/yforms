@@ -10,7 +10,6 @@ import { DiffSetFields } from './scenesComps';
 
 // TODO 以下判断是如果有 name 并且不是 list 类型才当做为表单字段从而注入 view diff 等功能
 // itemProps.name && typeProps.type !== 'list'
-
 const scenes: YFormConfig = {
   getScene: {
     // 没有 label 也和有 label 对齐
@@ -27,7 +26,6 @@ const scenes: YFormConfig = {
           offset,
         });
         _itemProps = label ? labelLayoutValue : noLabelLayoutValue;
-
         return {
           itemProps: { ..._itemProps, ...itemProps },
         };

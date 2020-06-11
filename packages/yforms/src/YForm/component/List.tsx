@@ -31,7 +31,7 @@ export interface YFormListItems {
   icons: React.ReactNode;
 }
 
-export interface YFormListProps extends Pick<YFormItemProps, 'label' | 'name'> {
+export interface YFormListProps extends YFormItemProps {
   items?: (p: YFormListItems) => YFormItemProps['children'];
   componentProps?: YFormListComponentProps;
   // 用于 diff 状态下处理数据
@@ -42,8 +42,8 @@ export default (props: YFormListProps) => {
   // const formProps = useContext(YForm.YFormContext);
   // const { scenes, offset, disabled } = merge({}, formProps, itemsProps);
   const itemsProps = useContext(YForm.YFormItemsContext);
-  const { scenes, offset, disabled } = itemsProps;
-  const { label, items, componentProps = {}, name, addonBefore } = props;
+  const { scenes, disabled } = itemsProps;
+  const { label, items, componentProps = {}, name, addonBefore, offset } = props;
 
   const {
     maxNum,

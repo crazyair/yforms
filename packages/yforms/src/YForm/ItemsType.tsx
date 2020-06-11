@@ -149,7 +149,7 @@ export const itemsType: YFormItemsType = {
   oneLine: { component: <OneLine />, modifyProps: oneLineModify, needItemProps: true },
   list: { component: <List />, hasFormItem: false, needItemProps: true },
   button: { component: <Button /> },
-  secureButton: { component: <SecureButton />, needItemProps: true },
+  secureButton: { component: <SecureButton /> },
   submit: {
     component: <Submit />,
     hasFormItem: false,
