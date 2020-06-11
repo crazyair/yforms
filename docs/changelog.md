@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.0.3](https://github.com/crazyair/yforms/compare/v1.0.2...v1.0.3) (2020-06-11)
+
+### Features
+
+- 重新整理 useSubmit 逻辑、优化组件 TypeScript 定义 ([#27](https://github.com/crazyair/yforms/issues/27)) ([2ca1a06](https://github.com/crazyair/yforms/commit/2ca1a06762835e2d3c0a9c898c0b3747885664aa))
+
 ## [1.0.2](https://github.com/crazyair/yforms/compare/v1.0.1...v1.0.2) (2020-06-10)
 
 ### Features
