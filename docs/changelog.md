@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.0.6](https://github.com/crazyair/yforms/compare/v1.0.5...v1.0.6) (2020-06-12)
+
+### Features
+
+- 添加 format unFormat ([#28](https://github.com/crazyair/yforms/issues/28)) ([a866a14](https://github.com/crazyair/yforms/commit/a866a1468615cf911c8b2ee56b0525e7568a5df3))
+
 ## [1.0.5](https://github.com/crazyair/yforms/compare/v1.0.4...v1.0.5) (2020-06-11)
 
 ### Bug Fixes
