@@ -1,11 +1,11 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick } from 'lodash';
+import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick, concat } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
-import { YFormProps, YFormInstance, YFormConfig } from './Form';
+import { YFormProps, YFormInstance } from './Form';
 import { YFormItemsTypeArray, YFormFieldBaseProps } from './ItemsType';
 import ItemChildren from './ItemChildren';
 
@@ -14,15 +14,17 @@ export type YFormRenderChildren = (form: YFormInstance) => YFormItemProps['child
 
 type isShowFunc = (values: any) => boolean;
 
-export interface YFormItemProps<T = any> extends Omit<FormItemProps, 'children'> {
+export interface YFormItemProps<T = any>
+  extends Omit<FormItemProps, 'children'>,
+    Pick<YFormProps, 'scenes'> {
   isShow?: boolean | isShowFunc;
   className?: string;
+  oldValue?: T;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
   format?: FormatFieldsValue<T>['format'];
   unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
-  scenes?: YFormConfig['scenes'];
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
@@ -60,7 +62,8 @@ export interface YFormItemsProps
 const Items = (props: YFormItemsProps) => {
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
-  const { itemsType } = formProps;
+  const context = React.useContext(YForm.ListContent);
+  const { itemsType, onUnFormatFieldsValue, oldValues } = formProps;
 
   let mergeProps = merge({}, formProps, itemsProps, props);
   const { scenes, getScene, onFormatFieldsValue, shouldUpdate } = mergeProps;
@@ -80,7 +83,7 @@ const Items = (props: YFormItemsProps) => {
   const { isShow, children = [], className, style, noStyle } = _props;
 
   const list: React.ReactNode[] = [];
-  let offset = 0;
+  let _offset = 0;
 
   const each = (lists: YFormItemsTypeArray<InternalYFormItemProps>[], pIndex?: number) => {
     forEach(lists, (item, index) => {
@@ -100,8 +103,31 @@ const Items = (props: YFormItemsProps) => {
       }
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
-
+        // 这里解析出来的参数最好不要在 scenes 中更改
+        const { name, format, unFormat } = item;
         let _itemProps = { ...item };
+        // List 会有拼接 name ，这里获取 all name path
+        const allName = context.prefixName ? concat(context.prefixName, name) : name;
+
+        // 提交前格式化
+        if (format) {
+          onFormatFieldsValue([{ name: allName, format }]);
+        }
+        // 获取前格式化
+        if (unFormat) {
+          onUnFormatFieldsValue({ name: allName, format: unFormat });
+          _itemProps = {
+            oldValue: unFormat(get(oldValues, allName), oldValues),
+            ..._itemProps,
+          };
+        }
+
+        // offset 需要自增
+        if (typeof _itemProps.offset === 'number') {
+          _offset += _itemProps.offset;
+          _itemProps.offset = _offset;
+        }
+
         let _componentProps = { ...item.componentProps };
         const typeProps = get(itemsType, item.type) || {};
         typeProps.type = item.type;
@@ -109,9 +135,10 @@ const Items = (props: YFormItemsProps) => {
           formProps,
           itemsProps: mergeProps,
           typeProps,
-          itemProps: item,
+          itemProps: _itemProps,
           componentProps: _componentProps,
         };
+
         // 参数修改
         let _defaultData = defaultData;
         const { modifyProps } = typeProps;
@@ -135,21 +162,11 @@ const Items = (props: YFormItemsProps) => {
 
         _itemProps = _defaultData.itemProps;
         _componentProps = _defaultData.componentProps;
-        // offset 需要自增
-        if (typeof _itemProps.offset === 'number') {
-          offset += _itemProps.offset;
-          _itemProps.offset = offset;
-        }
 
-        const { type, dataSource, items, componentProps, format, ...formItemProps } = _itemProps;
+        const { type, dataSource, items, componentProps, ...formItemProps } = _itemProps;
 
         const _formItemProps = formItemProps;
-        const { name, isShow, shouldUpdate } = _formItemProps;
-
-        // 提交前格式化
-        if (format) {
-          onFormatFieldsValue([{ name, format }]);
-        }
+        const { isShow, shouldUpdate } = _formItemProps;
 
         let _children = item.children;
         // 默认用 FormItem 包裹
@@ -201,7 +218,14 @@ const Items = (props: YFormItemsProps) => {
           dom = (
             <ItemChildren
               key={_index}
-              {...omit(_formItemProps, ['component', 'scenes', 'viewProps', 'unFormat'])}
+              {...omit(_formItemProps, [
+                'component',
+                'scenes',
+                'viewProps',
+                'unFormat',
+                'format',
+                'oldValue',
+              ])}
             >
               {domChildren}
             </ItemChildren>

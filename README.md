@@ -7,8 +7,8 @@ To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
 ## Development
 
 ```bash
-$ npm install
-$ npm run dev
+$ yarn
+$ yarn start
 ```
 
 ## LICENSE
