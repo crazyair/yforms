@@ -22,3 +22,7 @@ nav:
 ## 新旧数据对比使用
 
 <code src="./demo/diff.tsx" />
+
+## format unFormat 使用
+
+<code src="./demo/demo2.tsx" />

@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge, concat, mapKeys, omit } from 'lodash';
+import { merge, concat, mapKeys, omit, find, get, set } from 'lodash';
 import classNames from 'classnames';
 import { FormProps, FormInstance } from 'antd/lib/form';
 import warning from 'warning';
@@ -70,6 +70,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
     f: FormatFieldsValue<T>[],
   ) => (f: FormatFieldsValue<T>[]) => FormatFieldsValue<T>[];
   children?: YFormItemProps['children'];
+  onUnFormatFieldsValue?: (p?: FormatFieldsValue) => void;
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitComponentProps;
   onCancel?: (p: { type: CancelType }) => void;
@@ -116,16 +117,18 @@ const InternalForm = React.memo<YFormProps>((props) => {
     children,
     onFinish,
     onSave,
-    formatFieldsValue,
+    formatFieldsValue: formFormatFieldsValue,
     onCancel,
     params,
     form: propsForm,
     className,
     submitComponentProps,
     submit,
+    initialValues,
     ...rest
   } = _props;
   const [form] = useForm(propsForm);
+  const formatRef = useRef([]);
   const { resetFields, getFieldsValue } = form;
   const _params = submit ? submit.params : paramsType(params);
   const { create, edit, view } = _params;
@@ -175,17 +178,10 @@ const InternalForm = React.memo<YFormProps>((props) => {
     },
     [create, edit, handleOnDisabled, onCancel, resetFields, view],
   );
-  const _itemsTypeAll = {
-    ...baseItemsType,
-    ...itemsType,
-    ...globalConfig.itemsType,
-  } as YFormItemsType;
+  const itemsTypeAll = { ...baseItemsType, ...globalConfig.itemsType, ...itemsType };
 
   // 内部格式化功能
-  const {
-    formatFieldsValue: _formatFieldsValue,
-    onFormatFieldsValue: _onFormatFieldsValue,
-  } = useFormatFieldsValue();
+  const { formatFieldsValue, onFormatFieldsValue } = useFormatFieldsValue();
 
   const handleFormatFieldsValue = (value) => {
     let _value;
@@ -194,7 +190,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
     } else {
       _value = getFieldsValue();
     }
-    return submitFormatValues(_value, concat(formatFieldsValue, _formatFieldsValue));
+    return submitFormatValues(_value, concat(formFormatFieldsValue, formatFieldsValue));
   };
   form.getFormatFieldsValue = handleFormatFieldsValue;
 
@@ -226,14 +222,38 @@ const InternalForm = React.memo<YFormProps>((props) => {
     handleOnDisabled(false);
   };
 
-  const _providerProps = merge(
+  // 处理初始化前数据
+  const {
+    formatFieldsValue: unFormatFieldsValue,
+    onFormatFieldsValue: onUnFormatFieldsValue,
+  } = useFormatFieldsValue();
+
+  const unFormatValues = submitFormatValues(initialValues, unFormatFieldsValue);
+
+  const handleUnFormatFieldsValue = useCallback(
+    (data: FormatFieldsValue) => {
+      const { name, format } = data;
+      if (!find(formatRef.current, { name })) {
+        const value = format(get(initialValues, name), initialValues);
+        form.setFields([{ name, value }]);
+        formatRef.current.push({ name, value });
+        // 用来重置表单后的 initialValues 为 unFormat 后的数据
+        onUnFormatFieldsValue([data]);
+        // 点击重置后使用 unFormat 后的数据
+        set(unFormatValues, name, value);
+      }
+    },
+    [initialValues, form, onUnFormatFieldsValue, unFormatValues],
+  );
+  const providerProps = merge(
     {},
     {
       form,
       scenes: _scenes,
       disabled: _thisDisabled,
       getScene,
-      onFormatFieldsValue: _onFormatFieldsValue,
+      onFormatFieldsValue,
+      onUnFormatFieldsValue: handleUnFormatFieldsValue,
       submitComponentProps: {
         showBtns: {
           // form submit 触发后设置 loading = true
@@ -246,6 +266,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
       },
     },
     { ...omit(_props, ['name']) },
+    { initialValues: unFormatValues },
   );
   if ('isShow' in _props && !_props.isShow) {
     return null;
@@ -260,11 +281,12 @@ const InternalForm = React.memo<YFormProps>((props) => {
   return (
     <Form
       {...omit(rest, ['scenes', 'oldValues'])}
+      initialValues={unFormatValues}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
     >
-      <YFormContext.Provider value={{ ..._providerProps, itemsType: _itemsTypeAll }}>
+      <YFormContext.Provider value={{ ...providerProps, itemsType: itemsTypeAll }}>
         <Items>{children}</Items>
       </YFormContext.Provider>
     </Form>

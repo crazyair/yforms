@@ -12,18 +12,20 @@ const DiffDom = (props: modifyType) => {
   const { name } = itemProps;
 
   const context = React.useContext(YForm.ListContent);
-
-  const _name = context.prefixName ? concat(context.prefixName, name) : name;
+  const allName = context.prefixName ? concat(context.prefixName, name) : name;
+  const _oldValue = 'oldValue' in itemProps ? itemProps.oldValue : get(oldValues, allName);
   return (
     <YForm.Items className="diff">
       {[
         {
           noStyle: true,
-          shouldUpdate: (prevValues, curValues) => get(prevValues, _name) !== get(curValues, _name),
+          shouldUpdate: (prevValues, curValues) => {
+            return get(prevValues, allName) !== get(curValues, allName);
+          },
           children: ({ getFieldValue }) => {
             // 如果字段为 undefined 则改为 ''，为了字段输入值再删除一样的道理
-            const value = getFieldValue(_name) === undefined ? '' : getFieldValue(_name);
-            const oldValue = get(oldValues, _name) === undefined ? '' : get(oldValues, _name);
+            const value = getFieldValue(allName) === undefined ? '' : getFieldValue(allName);
+            const oldValue = _oldValue === undefined ? '' : _oldValue;
             let equal = value === oldValue;
             // 如果有渲染方法，就按照次来对比
             if (itemProps.viewProps) {

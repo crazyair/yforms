@@ -17,6 +17,7 @@ export default (props: YFormSpaceProps) => {
     <Space {...componentProps}>
       {isArray(items)
         ? map(items, (item, index) => {
+            // TODO 这里没有做 isShow 判断
             return (
               <YForm.Items scenes={{ noCol: true }} key={index} noStyle>
                 {[item]}

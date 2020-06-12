@@ -13,9 +13,9 @@ const DiffSetFieldsChildren = (props: {
 }) => {
   const {
     name,
-    value,
+    value = [],
     form: { setFields },
-    oldValue,
+    oldValue = [],
   } = props;
   const diffLength = oldValue.length - value.length;
   useEffect(() => {
@@ -30,20 +30,20 @@ const DiffSetFields = (props: modifyType) => {
   const { initialValues, oldValues = {} } = formProps;
   const context = React.useContext(YForm.ListContent);
   const { name } = itemProps;
-  const _name = context.prefixName ? concat(context.prefixName, name) : name;
-  const value = get(initialValues, _name, []);
+  const allName = context.prefixName ? concat(context.prefixName, name) : name;
 
-  const oldValue = get(oldValues, _name, []);
+  const value = get(initialValues, allName, []);
+  const oldValue = 'oldValue' in itemProps ? itemProps.oldValue : get(oldValues, allName);
   return (
     <YForm.Items>
       {[
         {
           noStyle: true,
           shouldUpdate: (prevValues, curValues) => {
-            return get(prevValues, _name, []).length !== get(curValues, _name, []).length;
+            return get(prevValues, allName, []).length !== get(curValues, allName, []).length;
           },
           children: (form) => (
-            <DiffSetFieldsChildren form={form} name={_name} value={value} oldValue={oldValue} />
+            <DiffSetFieldsChildren form={form} name={allName} value={value} oldValue={oldValue} />
           ),
         },
       ]}
