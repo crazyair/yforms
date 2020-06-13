@@ -10,7 +10,6 @@ import { YFormItemProps } from 'yforms/lib/YForm/Items';
 
 moment.locale('zh-cn');
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
 const options = [
   { id: '1', name: '语文' },
   { id: '2', name: '数学' },
@@ -87,7 +86,6 @@ const Demo = () => {
   };
   return (
     <YForm
-      {...layout}
       form={form}
       submit={submit}
       name="basic"

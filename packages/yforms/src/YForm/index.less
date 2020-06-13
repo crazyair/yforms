@@ -1,8 +1,10 @@
+@import '~antd/lib/style/themes/default.less';
+
 .yforms {
   .one-line {
     display: inline-block;
     width: 100%;
-    .ant-form-item-label {
+    .@{ant-prefix}-form-item-label {
       float: left;
     }
     transition: all 0.3s;
@@ -58,7 +60,7 @@
     margin-bottom: 5px;
   }
 
-  div.ant-typography-edit-content {
+  div.@{ant-prefix}-typography-edit-content {
     left: 0px;
     margin-top: 0px;
     margin-bottom: 0;
@@ -74,7 +76,7 @@
 }
 
 .yforms-search-form {
-  .ant-form-item + .ant-form-item {
+  .@{ant-prefix}-form-item + .@{ant-prefix}-form-item {
     margin-left: 10px;
   }
 }

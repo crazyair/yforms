@@ -6,11 +6,9 @@
 import React from 'react';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 const Demo = () => {
   return (
-    <YForm {...layout} name="basic" initialValues={{ type: '1' }}>
+    <YForm name="basic" initialValues={{ type: '1' }}>
       {[
         {
           label: '开关',

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 
 import { YForm } from '../..';
-import { layout, layoutMore } from '../utils';
+import { layoutMore } from '../utils';
 import { YFormProps } from '../Form';
 
 const YFormDemo = (props: YFormProps) => {
@@ -61,7 +61,7 @@ describe('YForm', () => {
   test('layout', () => {
     const wrapper = render(
       <div>
-        <YFormDemo {...layout} />
+        <YFormDemo />
         <YFormDemo {...layoutMore} />
       </div>,
     );

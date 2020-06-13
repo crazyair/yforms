@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { get, isArray } from 'lodash';
+import { ConfigContext } from 'antd/lib/config-provider';
 
 import { YFormItemProps } from '../Items';
 
@@ -20,6 +21,7 @@ export interface YFormComponentViewProps extends YFormItemProps {
 }
 
 export default (props: YFormComponentViewProps) => {
+  const AntdConfig = React.useContext(ConfigContext);
   const { viewProps: { format } = {}, componentProps = {}, valuePropName = 'value' } = props;
   const { addonBefore, addonAfter, suffix, prefix, className, oldValue } = componentProps;
   // diff 渲染使用 oldValue
@@ -27,9 +29,10 @@ export default (props: YFormComponentViewProps) => {
   if (format) {
     _value = format(_value);
   }
+  const prefixCls = AntdConfig.getPrefixCls('');
 
   return (
-    <span className={classNames('ant-form-text', className)}>
+    <span className={classNames(`${prefixCls}-form-text`, className)}>
       {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}
       {prefix && <span style={{ color: '#999' }}>{prefix} </span>}
       {_value === undefined || _value === '' || (isArray(_value) && _value.length === 0)

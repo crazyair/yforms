@@ -21,16 +21,9 @@ import { FormatFieldsValue } from './Items';
 
 const nzhcn = require('nzh/cn');
 
-export const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
 export const layoutMore = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 20 },
-  },
+  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 20 } },
 };
 export const tailLayout = { wrapperCol: { offset: 8, span: 16 } };
 

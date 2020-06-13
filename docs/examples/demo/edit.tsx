@@ -9,8 +9,6 @@ import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 const Demo: React.FC<RouteComponentProps> = (props) => {
   const { match = {} as RouteComponentProps['match'] } = props;
   const [data, setData] = useState({});
@@ -69,7 +67,6 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
     <>
       <h2>{typeName}</h2>
       <YForm
-        {...layout}
         form={form}
         submit={submit}
         initialValues={data}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from 'antd';
 import { ModalProps } from 'antd/lib/modal';
+import { ConfigContext } from 'antd/lib/config-provider';
 
 import { YForm } from '..';
 import { YFormItemProps } from './Items';
@@ -13,6 +14,8 @@ interface YFormModalProps extends ModalProps {
 }
 
 const FormModal = (props: YFormModalProps) => {
+  const AntdConfig = React.useContext(ConfigContext);
+
   const {
     children,
     formFooter = [
@@ -24,14 +27,16 @@ const FormModal = (props: YFormModalProps) => {
 
   const { onCancel } = rest;
 
+  const prefixCls = AntdConfig.getPrefixCls('');
+
   return (
     <Modal {...rest} footer={null} bodyStyle={{ padding: 0 }}>
-      {/* YForm onCancel 无 e ，所以这里给 null */}
+      {/* YForm onCancel 无 e ，这里暂时给 null */}
       <YForm onCancel={() => onCancel(null)} {...formProps}>
-        <div className="ant-modal-body">
+        <div className={`${prefixCls}-modal-body`}>
           <YForm.Items>{children}</YForm.Items>
         </div>
-        <div className="ant-modal-footer">
+        <div className={`${prefixCls}-modal-footer`}>
           <YForm.Items>{formFooter}</YForm.Items>
         </div>
       </YForm>
