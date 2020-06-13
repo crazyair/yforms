@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.0.7](https://github.com/crazyair/yforms/compare/v1.0.6...v1.0.7) (2020-06-13)
+
+### Features
+
+- 优化 Space 对于空内容显示、YForm 添加默认 layout ([#29](https://github.com/crazyair/yforms/issues/29)) ([8b6a86d](https://github.com/crazyair/yforms/commit/8b6a86dd51fce5d94d51b56a907c91093ce05518))
+
 ## [1.0.6](https://github.com/crazyair/yforms/compare/v1.0.5...v1.0.6) (2020-06-12)
 
 ### Features
