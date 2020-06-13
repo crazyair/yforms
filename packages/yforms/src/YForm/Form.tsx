@@ -77,7 +77,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   onCancel?: (p: { type: CancelType }) => void;
   params?: ParamsType;
   oldValues?: T;
-  offset?: number;
+  offset?: YFormItemProps['offset'];
 }
 
 export function useFormatFieldsValue<T = any>() {
