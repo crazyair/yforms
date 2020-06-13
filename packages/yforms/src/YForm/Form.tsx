@@ -28,6 +28,7 @@ export type YFormScene = {
 export interface YFormConfig {
   itemsType?: YFormItemsType;
   getScene?: { [key: string]: YFormScene };
+  defaultFormProps?: YFormProps;
   scenes?: {
     labelLayout?: boolean;
     noCol?: boolean;
@@ -76,6 +77,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   onCancel?: (p: { type: CancelType }) => void;
   params?: ParamsType;
   oldValues?: T;
+  offset?: number;
 }
 
 export function useFormatFieldsValue<T = any>() {
@@ -90,14 +92,17 @@ export function useFormatFieldsValue<T = any>() {
 let globalConfig: YFormConfig = {
   getScene: defaultScene.getScene,
   scenes: { labelLayout: true, disabled: true, placeholder: true, required: true },
+  // 如果 4 不够，推荐使用 offset
+  defaultFormProps: { labelCol: { span: 4 }, wrapperCol: { span: 20 } },
 };
 
 export const Config = (options: YFormConfig) => {
   globalConfig = merge({}, globalConfig, options);
 };
 
-const InternalForm = React.memo<YFormProps>((props) => {
-  const { scenes, getScene = globalConfig.getScene } = props;
+const InternalForm = React.memo<YFormProps>((thisProps) => {
+  const props = { ...globalConfig.defaultFormProps, ...thisProps };
+  const { scenes, getScene = globalConfig.getScene, offset } = props;
   const _scenes = merge({}, globalConfig.scenes, scenes);
   const _defaultData = { formProps: props };
   mapKeys(_scenes, (value: boolean, key: string) => {
@@ -287,7 +292,7 @@ const InternalForm = React.memo<YFormProps>((props) => {
       onFinish={handleOnFinish}
     >
       <YFormContext.Provider value={{ ...providerProps, itemsType: itemsTypeAll }}>
-        <Items>{children}</Items>
+        <Items offset={offset}>{children}</Items>
       </YFormContext.Provider>
     </Form>
   );

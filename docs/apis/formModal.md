@@ -19,4 +19,4 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | formFooter | 用来渲染到 `footer` 下面的按钮 | - | `[{ type: 'submit', componentProps: { reverseBtns: true, spaceProps: { noStyle: true } } }]` |
-| formProps | `YForm` 类型 | - | - |
+| formProps | `YForm` 所属参数 | `YFormProps` | - |

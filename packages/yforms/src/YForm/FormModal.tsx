@@ -31,7 +31,7 @@ const FormModal = (props: YFormModalProps) => {
 
   return (
     <Modal {...rest} footer={null} bodyStyle={{ padding: 0 }}>
-      {/* YForm onCancel 无 e ，所以这里给 null */}
+      {/* YForm onCancel 无 e ，这里暂时给 null */}
       <YForm onCancel={() => onCancel(null)} {...formProps}>
         <div className={`${prefixCls}-modal-body`}>
           <YForm.Items>{children}</YForm.Items>
