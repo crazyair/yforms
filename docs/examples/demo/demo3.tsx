@@ -4,8 +4,6 @@ import { Button, Modal } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 const Demo: React.FC<RouteComponentProps> = () => {
   const [visible, setVisible] = useState(false);
 
@@ -36,7 +34,6 @@ const Demo: React.FC<RouteComponentProps> = () => {
         title="弹窗表单"
       >
         <YForm
-          {...layout}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           onCancel={handleCancel}

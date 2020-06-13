@@ -35,8 +35,6 @@ import React from 'react';
 import { Input } from 'antd';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const { formatFieldsValue, onFormatFieldsValue } = YForm.useFormatFieldsValue();
 
@@ -50,7 +48,7 @@ export default () => {
   ]);
 
   return (
-    <YForm {...layout} onFinish={onFinish} formatFieldsValue={formatFieldsValue}>
+    <YForm onFinish={onFinish} formatFieldsValue={formatFieldsValue}>
       {[
         { type: 'input', label: '姓名', name: 'name' },
         {
@@ -88,8 +86,6 @@ import React from 'react';
 import { Input } from 'antd';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const [form] = YForm.useForm();
   const {
@@ -106,7 +102,7 @@ export default () => {
   return (
     <>
       <h4>{typeName}</h4>
-      <YForm {...layout} onFinish={onFinish} submit={submit} params={{ type: 'create' }}>
+      <YForm onFinish={onFinish} submit={submit} params={{ type: 'create' }}>
         {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
       </YForm>
     </>

@@ -1,11 +1,9 @@
 import React from 'react';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   return (
-    <YForm {...layout}>
+    <YForm>
       {[
         {
           label: '用户',

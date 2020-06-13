@@ -1,8 +1,6 @@
 import React from 'react';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const onFinish = (values: any) => {
     // eslint-disable-next-line no-console
@@ -14,7 +12,7 @@ export default () => {
     console.log('ok');
   };
   return (
-    <YForm {...layout} onFinish={onFinish}>
+    <YForm onFinish={onFinish}>
       {[{ type: 'secureButton', componentProps: { children: '测试', onClick } }]}
     </YForm>
   );

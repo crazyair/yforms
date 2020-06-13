@@ -4,8 +4,6 @@ import { Card } from 'antd';
 import { YForm } from 'yforms';
 import { YFormListComponentProps, YFormListProps } from 'yforms/lib/YForm/component/List';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const [disabled, setDisabled] = useState(false);
 
@@ -16,7 +14,6 @@ export default () => {
   return (
     <YForm
       onFinish={onFinish}
-      {...layout}
       disabled={disabled}
       initialValues={{ phones: [{}, {}], card: [{}], users: [{}] }}
     >

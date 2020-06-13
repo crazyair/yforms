@@ -2,14 +2,12 @@
 import React from 'react';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
   return (
-    <YForm {...layout} onFinish={onFinish}>
+    <YForm onFinish={onFinish}>
       {[{ type: 'input', label: '姓名', name: 'name' }, { type: 'submit' }]}
     </YForm>
   );

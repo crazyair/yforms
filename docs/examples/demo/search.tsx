@@ -11,8 +11,6 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';
 import './index.less';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const [expand, setExpand] = React.useState(false);
   const [form] = Form.useForm();
@@ -64,7 +62,7 @@ export default () => {
         <QueueAnim type={['top', 'top']}>{expand && <Row key="必须">{fieldDom2}</Row>}</QueueAnim>
       </YForm>
       <p>普通场景</p>
-      <YForm {...layout} name="base_form" onFinish={onFinish}>
+      <YForm name="base_form" onFinish={onFinish}>
         {fieldDom}
         {fieldDom2}
         {[{ type: 'submit' }]}

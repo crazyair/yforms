@@ -7,8 +7,6 @@ import React from 'react';
 import { YForm } from 'yforms';
 import moment from 'moment';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 const Demo = () => {
   const [form] = YForm.useForm();
   const onFinish = (values: any) => {
@@ -17,7 +15,6 @@ const Demo = () => {
 
   return (
     <YForm
-      {...layout}
       name="basic"
       form={form}
       initialValues={{ date: '1591943666' }}

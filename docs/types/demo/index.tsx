@@ -3,8 +3,6 @@ import React from 'react';
 import { Input } from 'antd';
 import { YForm } from 'yforms';
 
-const layout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
-
 export default () => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -17,7 +15,7 @@ export default () => {
   };
 
   return (
-    <YForm {...layout} onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
+    <YForm onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
       {[
         { type: 'input', label: '文本', name: 'input' },
         { type: 'money', label: '金额', name: 'money' },
