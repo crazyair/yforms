@@ -1,5 +1,5 @@
 import React from 'react';
-import { map, forEach, isArray, isObject, get } from 'lodash';
+import { map, forEach, isArray, isObject } from 'lodash';
 import { Space } from 'antd';
 import { SpaceProps } from 'antd/lib/space';
 
@@ -16,8 +16,8 @@ export default (props: YFormSpaceProps) => {
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];
   forEach(isArray(items) ? items : [items], (item) => {
-    if (isObject(item) && get(item, 'shouldUpdate')) {
-      shouldUpdates.push(get(item, 'shouldUpdate'));
+    if (isObject(item) && 'shouldUpdate' in item) {
+      shouldUpdates.push(item.shouldUpdate);
     }
   });
   const shouldUpdate = (prevValue, nextValue) => {
@@ -40,14 +40,12 @@ export default (props: YFormSpaceProps) => {
           <Space {...componentProps}>
             {isArray(items)
               ? map(items, (item, index) => {
-                  if (isObject(item)) {
-                    if ('isShow' in item) {
-                      const { isShow } = item;
-                      if (typeof isShow === 'function' && !isShow(form.getFieldsValue())) {
-                        return null;
-                      }
-                      if (typeof isShow === 'boolean' && !isShow) return null;
+                  if (isObject(item) && 'isShow' in item) {
+                    const { isShow } = item;
+                    if (typeof isShow === 'function' && !isShow(form.getFieldsValue())) {
+                      return null;
                     }
+                    if (typeof isShow === 'boolean' && !isShow) return null;
                   }
                   return (
                     <YForm.Items scenes={{ noCol: true }} noStyle key={index}>
