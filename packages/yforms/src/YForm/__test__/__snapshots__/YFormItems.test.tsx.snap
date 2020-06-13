@@ -1396,10 +1396,6 @@ Object {
                       </div>
                       <div
                         class="ant-space-item"
-                        style="margin-right: 8px;"
-                      />
-                      <div
-                        class="ant-space-item"
                       >
                         <button
                           class="ant-btn"
@@ -3683,10 +3679,6 @@ Object {
                     </div>
                     <div
                       class="ant-space-item"
-                      style="margin-right: 8px;"
-                    />
-                    <div
-                      class="ant-space-item"
                     >
                       <button
                         class="ant-btn"
@@ -5040,10 +5032,6 @@ Object {
                               </span>
                             </button>
                           </div>
-                          <div
-                            class="ant-space-item"
-                            style="margin-right: 8px;"
-                          />
                           <div
                             class="ant-space-item"
                           >
