@@ -1,4 +1,5 @@
 export default {
+  hash: true,
   mode: 'site',
   title: 'yforms',
   favicon: '/favicon.ico',
