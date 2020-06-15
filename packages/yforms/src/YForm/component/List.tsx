@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { map, merge, isArray, concat } from 'lodash';
@@ -18,6 +18,7 @@ export interface YFormListComponentProps {
   maxNum?: number;
   minNum?: number;
   showRightIcons?: boolean;
+  useIconsStyle?: boolean;
   showIcons?: ShowIconsType;
   onShowIcons?: (p: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
 }
@@ -39,16 +40,12 @@ export interface YFormListProps extends YFormItemProps {
 }
 
 export default (props: YFormListProps) => {
-  // const formProps = useContext(YForm.YFormContext);
-  // const { scenes, offset, disabled } = merge({}, formProps, itemsProps);
-  const itemsProps = useContext(YForm.YFormItemsContext);
-  const { scenes, disabled } = itemsProps;
-  const { label, items, componentProps = {}, name, addonBefore, offset } = props;
-
+  const { disabled, scenes, label, items, componentProps = {}, name, addonBefore, offset } = props;
   const {
     maxNum,
     minNum,
     showRightIcons = true,
+    useIconsStyle = true,
     showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {},
     onShowIcons,
   } = componentProps;
@@ -111,7 +108,8 @@ export default (props: YFormListProps) => {
                         scenes,
                         offset,
                         componentProps: !disabled &&
-                          showRightIcons && { style: { ..._oneLineStyle[0] } },
+                          showRightIcons &&
+                          useIconsStyle && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
                       },
                       item,

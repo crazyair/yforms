@@ -12,7 +12,7 @@ export interface YFormSpaceProps extends YFormItemProps {
 }
 
 export default (props: YFormSpaceProps) => {
-  const { items, componentProps } = props;
+  const { items, componentProps, scenes } = props;
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];
   forEach(isArray(items) ? items : [items], (item) => {
@@ -48,7 +48,7 @@ export default (props: YFormSpaceProps) => {
                     if (typeof isShow === 'boolean' && !isShow) return null;
                   }
                   return (
-                    <YForm.Items scenes={{ noCol: true }} noStyle key={index}>
+                    <YForm.Items scenes={{ noCol: true, ...scenes }} noStyle key={index}>
                       {[item]}
                     </YForm.Items>
                   );

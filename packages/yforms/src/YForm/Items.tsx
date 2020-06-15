@@ -1,13 +1,14 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
-import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick, concat } from 'lodash';
+import { omit, merge, forEach, isObject, isArray, mapKeys, get, pick, concat, map } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
 import { YFormProps, YFormInstance } from './Form';
 import { YFormItemsTypeArray, YFormFieldBaseProps } from './ItemsType';
 import ItemChildren from './ItemChildren';
+import { getParentNameData } from './utils';
 
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
 export type YFormRenderChildren = (form: YFormInstance) => YFormItemProps['children'];
@@ -16,13 +17,13 @@ type isShowFunc = (values: any) => boolean;
 
 export interface YFormItemProps<T = any>
   extends Omit<FormItemProps, 'children'>,
-    Pick<YFormProps, 'scenes'> {
+    Pick<YFormProps, 'scenes' | 'disabled'> {
   isShow?: boolean | isShowFunc;
   className?: string;
   oldValue?: T;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
-  format?: FormatFieldsValue<T>['format'];
+  format?: FormatFieldsValue<T>['format'] | FormatFieldsValue<T>[];
   unFormat?: FormatFieldsValue<T>['format'];
   style?: React.CSSProperties;
   offset?: number;
@@ -38,7 +39,8 @@ export interface YFormItemProps<T = any>
 
 export interface FormatFieldsValue<T = any> {
   name: FormItemProps['name'];
-  format: (value: any, values: T) => any;
+  isOmit?: boolean;
+  format?: (value: any, parentValues?: any) => any;
 }
 
 // 内部使用，类型不重要
@@ -54,6 +56,7 @@ interface InternalYFormItemProps extends YFormItemProps {
 export interface YFormItemsProps
   extends Omit<YFormProps, 'loading' | 'itemsType' | 'formatFieldsValue' | 'isShow'> {
   isShow?: YFormItemProps['isShow'];
+  scenes?: YFormItemProps['scenes'];
   shouldUpdate?: YFormItemProps['shouldUpdate'];
   offset?: number;
   noStyle?: boolean;
@@ -62,13 +65,14 @@ export interface YFormItemsProps
 const Items = (props: YFormItemsProps) => {
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
-  const context = React.useContext(YForm.ListContent);
+  const listContext = React.useContext(YForm.ListContent);
+  const { prefixName } = listContext;
   const { itemsType, onUnFormatFieldsValue, oldValues } = formProps;
-
-  let mergeProps = merge({}, formProps, itemsProps, props);
-  const { scenes, getScene, onFormatFieldsValue, shouldUpdate } = mergeProps;
+  const { getScene, onFormatFieldsValue } = formProps;
+  let mergeProps = merge({}, pick(formProps, ['scenes', 'offset', 'disabled']), itemsProps, props);
+  const { scenes: thisScenes, shouldUpdate } = mergeProps;
   const _defaultData = { formProps, itemsProps: props };
-  mapKeys(scenes, (value: boolean, key: string) => {
+  mapKeys(thisScenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].items) {
       const data = getScene[key].items(_defaultData);
       if (data) {
@@ -104,22 +108,40 @@ const Items = (props: YFormItemsProps) => {
       if (isObject(item)) {
         if ('isShow' in item && !item.isShow) return undefined;
         // 这里解析出来的参数最好不要在 scenes 中更改
-        const { name, format, unFormat } = item;
+        const { name, format, unFormat, scenes } = item;
+
+        const _scenes = merge({}, thisScenes, scenes);
         let _itemProps = { ...item };
         // List 会有拼接 name ，这里获取 all name path
-        const allName = context.prefixName ? concat(context.prefixName, name) : name;
+        const allName = prefixName ? concat(prefixName, name) : name;
 
         // 提交前格式化
         if (format) {
-          onFormatFieldsValue([{ name: allName, format }]);
+          if (typeof format === 'function') {
+            onFormatFieldsValue([{ name: allName, format }]);
+          } else {
+            const _format = map(format, (item) => {
+              const _item = { ...item };
+              const { name } = item;
+              if (name) {
+                _item.name = prefixName ? concat(prefixName, name) : name;
+              }
+
+              return _item;
+            });
+            onFormatFieldsValue(_format);
+          }
         }
+
         // 获取前格式化
         if (unFormat) {
           onUnFormatFieldsValue({ name: allName, format: unFormat });
-          _itemProps = {
-            oldValue: unFormat(get(oldValues, allName), oldValues),
-            ..._itemProps,
-          };
+          if (oldValues && _scenes.diff) {
+            _itemProps = {
+              oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName)),
+              ..._itemProps,
+            };
+          }
         }
 
         // offset 需要自增
@@ -146,7 +168,6 @@ const Items = (props: YFormItemsProps) => {
           _defaultData = merge({}, defaultData, modifyProps(defaultData));
         }
 
-        const _scenes = merge({}, scenes, item.scenes);
         mapKeys(_scenes, (value: boolean, key: string) => {
           if (value && getScene[key] && getScene[key].item) {
             const data = getScene[key].item(_defaultData);
@@ -159,8 +180,7 @@ const Items = (props: YFormItemsProps) => {
             }
           }
         });
-
-        _itemProps = _defaultData.itemProps;
+        _itemProps = merge({}, pick(mergeProps, ['scenes', 'disabled']), _defaultData.itemProps);
         _componentProps = _defaultData.componentProps;
 
         const { type, dataSource, items, componentProps, ...formItemProps } = _itemProps;

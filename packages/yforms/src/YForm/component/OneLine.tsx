@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { map, merge, get, isArray, isObject } from 'lodash';
 import classNames from 'classnames';
 import warning from 'warning';
@@ -8,17 +8,14 @@ import { oneLineItemStyle } from '../utils';
 import { BaseComponentProps } from '../ItemsType';
 import { YFormItemProps } from '../Items';
 
-export interface YFormOneLineProps extends BaseComponentProps {
+export interface YFormOneLineProps extends YFormItemProps {
   componentProps?: BaseComponentProps & { oneLineStyle?: (string | number)[] };
   items?: (p: { style: React.CSSProperties[] }) => YFormItemProps['children'];
   oneLineStyle?: (string | number)[];
 }
 
 export default (props: YFormOneLineProps) => {
-  const itemsProps = useContext(YForm.YFormItemsContext);
-  const { scenes } = itemsProps;
-
-  const { items, componentProps = {} } = props;
+  const { scenes, items, componentProps = {} } = props;
   const { oneLineStyle, className, style } = componentProps;
   if (get(props, 'name')) {
     warning(false, 'oneLine 不支持 name');

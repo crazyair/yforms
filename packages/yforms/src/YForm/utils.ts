@@ -17,7 +17,7 @@ import { ColProps } from 'antd/lib/col';
 import warning from 'warning';
 import { stringAndFunc } from './ItemsType';
 import { FieldsType, KeyValue, ParamsType } from './Form';
-import { FormatFieldsValue } from './Items';
+import { FormatFieldsValue, YFormItemProps } from './Items';
 
 const nzhcn = require('nzh/cn');
 
@@ -141,31 +141,38 @@ export const getLabelLayout = ({ labelCol, wrapperCol, offset = 0 }: NoLabelLayo
 
   return { noLabelLayoutValue, labelLayoutValue };
 };
+// 返回上一级 name 的数据
+export const getParentNameData = (values: any, name: YFormItemProps['name']) => {
+  const _values = { ...values };
+  const _name = isArray(name) ? name : [name];
+  if (_name.length === 1) {
+    return _values;
+  }
+  return get(_values, _name.slice(0, _name.length - 1), {});
+};
 
 export function submitFormatValues<T>(
   values: FieldsType<T>,
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
-  const _values = cloneDeep(values) as KeyValue;
+  const _values = cloneDeep(values);
   const list: FormatFieldsValue[] = sortBy(formatFieldsValue, (item) => {
     if (!item) return;
     if (isArray(item.name)) {
       return -item.name.length;
     }
     return -`${item.name}`.length;
-  });
+  }).filter((x) => x);
   forEach(list, (item) => {
-    if (item && item.name) {
-      // 如果字段是 undefined 则不需要执行 set 了
-      if (get(_values, item.name) !== undefined) {
-        try {
-          set(_values, item.name, item.format(get(values, item.name), { ...values }));
-        } catch (error) {
-          // 如果 format 代码报错这里抛出异常
-          // eslint-disable-next-line no-console
-          console.error(error);
-          warning(false, error);
-        }
+    const { name, format } = item;
+    if (name && format) {
+      try {
+        set(_values, name, format(get(values, name), getParentNameData(values, name)));
+      } catch (error) {
+        // 如果 format 代码报错这里抛出异常
+        // eslint-disable-next-line no-console
+        console.error(error);
+        warning(false, error);
       }
     }
   });

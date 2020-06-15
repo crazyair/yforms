@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { merge, concat, mapKeys, omit, find, get, set } from 'lodash';
+import { merge, concat, mapKeys, omit, find, get, set, forEach } from 'lodash';
 import classNames from 'classnames';
 import { FormProps, FormInstance } from 'antd/lib/form';
 import warning from 'warning';
@@ -8,7 +8,7 @@ import warning from 'warning';
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
-import { onFormatFieldsValue, submitFormatValues, paramsType } from './utils';
+import { onFormatFieldsValue, submitFormatValues, paramsType, getParentNameData } from './utils';
 import { YFormSubmitComponentProps } from './component/Submit';
 import useForm from './useForm';
 import defaultScene from './scenes';
@@ -66,7 +66,7 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   loading?: boolean;
   form?: YFormInstance;
   submit?: YFormUseSubmitReturnProps['submit'];
-  formatFieldsValue?: FormatFieldsValue[];
+  formatFieldsValue?: FormatFieldsValue<T>[];
   onFormatFieldsValue?: (
     f: FormatFieldsValue<T>[],
   ) => (f: FormatFieldsValue<T>[]) => FormatFieldsValue<T>[];
@@ -189,14 +189,18 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   const { formatFieldsValue, onFormatFieldsValue } = useFormatFieldsValue();
 
   const handleFormatFieldsValue = (value) => {
-    let _value;
-    if (value) {
-      _value = value;
-    } else {
-      _value = getFieldsValue();
-    }
-    return submitFormatValues(_value, concat(formFormatFieldsValue, formatFieldsValue));
+    const _value = value || getFieldsValue();
+    const _formatFieldsValue = concat(formFormatFieldsValue, formatFieldsValue).filter((x) => x);
+
+    // 忽略字段
+    const omitNames = [];
+    forEach(_formatFieldsValue, (item) => {
+      if (item.isOmit) omitNames.push(item.name);
+    });
+    const formatValues = { ...submitFormatValues(_value, _formatFieldsValue) };
+    return omit(formatValues, omitNames);
   };
+
   form.getFormatFieldsValue = handleFormatFieldsValue;
 
   const handleOnFinish = async (value: KeyValue) => {
@@ -227,28 +231,23 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     handleOnDisabled(false);
   };
 
-  // 处理初始化前数据
-  const {
-    formatFieldsValue: unFormatFieldsValue,
-    onFormatFieldsValue: onUnFormatFieldsValue,
-  } = useFormatFieldsValue();
-
-  const unFormatValues = submitFormatValues(initialValues, unFormatFieldsValue);
+  const unFormatValues = { ...initialValues };
 
   const handleUnFormatFieldsValue = useCallback(
     (data: FormatFieldsValue) => {
       const { name, format } = data;
       if (!find(formatRef.current, { name })) {
-        const value = format(get(initialValues, name), initialValues);
-        form.setFields([{ name, value }]);
-        formatRef.current.push({ name, value });
-        // 用来重置表单后的 initialValues 为 unFormat 后的数据
-        onUnFormatFieldsValue([data]);
-        // 点击重置后使用 unFormat 后的数据
-        set(unFormatValues, name, value);
+        const value = format(get(initialValues, name), getParentNameData(initialValues, name));
+        // 如果格式化的值是 undefined 则不处理（针对 List add 数据）
+        if (value !== undefined) {
+          form.setFields([{ name, value }]);
+          formatRef.current.push({ name, value });
+          // 点击重置后使用 unFormat 后的数据
+          set(unFormatValues, name, value);
+        }
       }
     },
-    [initialValues, form, onUnFormatFieldsValue, unFormatValues],
+    [initialValues, form, unFormatValues],
   );
   const providerProps = merge(
     {},
