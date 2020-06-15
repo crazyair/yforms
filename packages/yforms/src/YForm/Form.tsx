@@ -237,9 +237,10 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     (data: FormatFieldsValue) => {
       const { name, format } = data;
       if (!find(formatRef.current, { name })) {
-        const value = format(get(initialValues, name), getParentNameData(initialValues, name));
-        // 如果格式化的值是 undefined 则不处理（针对 List add 数据）
-        if (value !== undefined) {
+        const parentValue = getParentNameData(initialValues, name);
+        // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
+        if (parentValue !== undefined) {
+          const value = format(get(initialValues, name), parentValue || {});
           form.setFields([{ name, value }]);
           formatRef.current.push({ name, value });
           // 点击重置后使用 unFormat 后的数据

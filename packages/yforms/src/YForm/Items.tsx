@@ -138,7 +138,10 @@ const Items = (props: YFormItemsProps) => {
           onUnFormatFieldsValue({ name: allName, format: unFormat });
           if (oldValues && _scenes.diff) {
             _itemProps = {
-              oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName)),
+              oldValue: unFormat(
+                get(oldValues, allName),
+                getParentNameData(oldValues, allName) || {},
+              ),
               ..._itemProps,
             };
           }

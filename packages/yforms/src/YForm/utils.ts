@@ -148,7 +148,7 @@ export const getParentNameData = (values: any, name: YFormItemProps['name']) => 
   if (_name.length === 1) {
     return _values;
   }
-  return get(_values, _name.slice(0, _name.length - 1), {});
+  return get(_values, _name.slice(0, _name.length - 1));
 };
 
 export function submitFormatValues<T>(
@@ -166,8 +166,11 @@ export function submitFormatValues<T>(
   forEach(list, (item) => {
     const { name, format } = item;
     if (name && format) {
+      const parentValue = getParentNameData(values, name);
+      // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
+      if (parentValue === undefined) return;
       try {
-        set(_values, name, format(get(values, name), getParentNameData(values, name)));
+        set(_values, name, format(get(values, name), parentValue || {}));
       } catch (error) {
         // 如果 format 代码报错这里抛出异常
         // eslint-disable-next-line no-console

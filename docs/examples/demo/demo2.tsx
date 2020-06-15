@@ -105,7 +105,7 @@ const Demo = () => {
                 type: 'rangePicker',
                 name: [index, 'range'],
                 unFormat: (_, { start, end }) => {
-                  return [start && moment.unix(start), end && moment.unix(end)];
+                  return (start || end) && [start && moment.unix(start), end && moment.unix(end)];
                 },
                 format: [
                   { name: [index, 'range'], isOmit: true },
