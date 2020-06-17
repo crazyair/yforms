@@ -8,9 +8,6 @@ import Items, { YFormRenderChildren, YFormDataSource } from './Items';
 import { getParentNameData } from './utils';
 import { YFormInstance } from './Form';
 
-console.clear();
-console.log('date', new Date().getTime());
-
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
   const { format, unFormat, scenes, children, ...rest } = props;
@@ -132,7 +129,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       const _component = component || props.component;
       _children = isValidElement(_component)
         ? React.cloneElement(_component, { ...(_component.props as object), ..._componentProps })
-        : children;
+        : _component;
     } else {
       warning(false, `[YFom.Items] ${type} 类型未找到`);
     }
@@ -172,6 +169,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
           'format',
           'oldValue',
           'items',
+          'offset',
         ])}
       >
         {domChildren}

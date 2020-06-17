@@ -1560,7 +1560,6 @@ Object {
                 />
                 <div
                   class="ant-row ant-form-item mb0"
-                  offset="2"
                 >
                   <div
                     class="ant-col ant-col-6 ant-form-item-label"
@@ -1625,10 +1624,24 @@ Object {
                                 </div>
                               </div>
                             </div>
-                            <span
-                              class="dib"
+                            <div
+                              class="ant-row ant-form-item dib"
                               style="display: inline-block; width: 8px;"
-                            />
+                            >
+                              <div
+                                class="ant-col ant-form-item-control"
+                              >
+                                <div
+                                  class="ant-form-item-control-input"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input-content"
+                                  >
+                                    <span />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             <div
                               class="ant-row ant-form-item dib"
                               style="display: inline-block;"
@@ -1727,7 +1740,6 @@ Object {
                 </div>
                 <div
                   class="ant-row ant-form-item mb0"
-                  offset="2"
                 >
                   <div
                     class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -1792,10 +1804,24 @@ Object {
                                 </div>
                               </div>
                             </div>
-                            <span
-                              class="dib"
+                            <div
+                              class="ant-row ant-form-item dib"
                               style="display: inline-block; width: 8px;"
-                            />
+                            >
+                              <div
+                                class="ant-col ant-form-item-control"
+                              >
+                                <div
+                                  class="ant-form-item-control-input"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input-content"
+                                  >
+                                    <span />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             <div
                               class="ant-row ant-form-item dib"
                               style="display: inline-block;"
@@ -1897,7 +1923,6 @@ Object {
                 >
                   <div
                     class="ant-row ant-form-item"
-                    offset="2"
                   >
                     <div
                       class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -2039,7 +2064,6 @@ Object {
                 >
                   <div
                     class="ant-row ant-form-item"
-                    offset="2"
                   >
                     <div
                       class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -2191,7 +2215,6 @@ Object {
                 >
                   <div
                     class="ant-row ant-form-item"
-                    offset="2"
                   >
                     <div
                       class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -3843,7 +3866,6 @@ Object {
               />
               <div
                 class="ant-row ant-form-item mb0"
-                offset="2"
               >
                 <div
                   class="ant-col ant-col-6 ant-form-item-label"
@@ -3908,10 +3930,24 @@ Object {
                               </div>
                             </div>
                           </div>
-                          <span
-                            class="dib"
+                          <div
+                            class="ant-row ant-form-item dib"
                             style="display: inline-block; width: 8px;"
-                          />
+                          >
+                            <div
+                              class="ant-col ant-form-item-control"
+                            >
+                              <div
+                                class="ant-form-item-control-input"
+                              >
+                                <div
+                                  class="ant-form-item-control-input-content"
+                                >
+                                  <span />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div
                             class="ant-row ant-form-item dib"
                             style="display: inline-block;"
@@ -4010,7 +4046,6 @@ Object {
               </div>
               <div
                 class="ant-row ant-form-item mb0"
-                offset="2"
               >
                 <div
                   class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -4075,10 +4110,24 @@ Object {
                               </div>
                             </div>
                           </div>
-                          <span
-                            class="dib"
+                          <div
+                            class="ant-row ant-form-item dib"
                             style="display: inline-block; width: 8px;"
-                          />
+                          >
+                            <div
+                              class="ant-col ant-form-item-control"
+                            >
+                              <div
+                                class="ant-form-item-control-input"
+                              >
+                                <div
+                                  class="ant-form-item-control-input-content"
+                                >
+                                  <span />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div
                             class="ant-row ant-form-item dib"
                             style="display: inline-block;"
@@ -4180,7 +4229,6 @@ Object {
               >
                 <div
                   class="ant-row ant-form-item"
-                  offset="2"
                 >
                   <div
                     class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -4322,7 +4370,6 @@ Object {
               >
                 <div
                   class="ant-row ant-form-item"
-                  offset="2"
                 >
                   <div
                     class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
@@ -4474,7 +4521,6 @@ Object {
               >
                 <div
                   class="ant-row ant-form-item"
-                  offset="2"
                 >
                   <div
                     class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"

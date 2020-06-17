@@ -30,9 +30,7 @@ export default (props: YFormOneLineProps) => {
       if (!item) return;
       const _style = get(styleObj, index, {});
       if (isObject(item)) {
-        return merge({}, { style: { display: 'inline-block', ..._style }, scenes }, item, {
-          className: classNames('dib', get(item, 'className')),
-        });
+        return merge({}, { display: 'inline-block', style: { ..._style }, scenes }, item);
       }
     }).filter((x) => x);
   }
