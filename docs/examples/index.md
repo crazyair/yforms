@@ -26,3 +26,7 @@ nav:
 ## format unFormat 使用
 
 <code src="./demo/demo2.tsx" />
+
+## jsx 写法
+
+<code src="./demo/demo4.tsx" />

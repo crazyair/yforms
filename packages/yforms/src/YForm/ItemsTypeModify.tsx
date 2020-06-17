@@ -94,6 +94,8 @@ export const rangePickerModify: YFormFieldBaseProps<RangePickerProps>['modifyPro
 }) => {
   return {
     itemProps: {
+      // 点击 allerClear 后值为 null ，解构时候 { range=[] } 会失效
+      getValueFromEvent: (e) => e || [],
       viewProps: {
         format: (value, pureValue) => dateFormat(value, componentProps, typeProps.type, pureValue),
       },

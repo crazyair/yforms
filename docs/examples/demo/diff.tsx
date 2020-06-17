@@ -125,7 +125,7 @@ const Demo = () => {
                     componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                     items: (): YFormItemProps['children'] => [
                       { label: '姓名', type: 'input', name: [index, 'name'] },
-                      <span key="center" />,
+                      { type: 'custom', component: <span /> },
                       { label: '年龄', type: 'input', name: [index, 'age'] },
                     ],
                   },
@@ -145,7 +145,7 @@ const Demo = () => {
                 componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                 items: () => [
                   { label: '姓名', type: 'input', name: [index, 'name'] },
-                  <span key="center" />,
+                  { type: 'custom', component: <span /> },
                   { label: '年龄', type: 'input', name: [index, 'age'] },
                 ],
               },

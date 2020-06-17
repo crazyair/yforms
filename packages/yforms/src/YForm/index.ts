@@ -1,5 +1,3 @@
-import { Form as AntForm } from 'antd';
-
 import YForm, { Config, useFormatFieldsValue } from './Form';
 import Items from './Items';
 import useSubmit from './useSubmit';
@@ -8,12 +6,13 @@ import useForm from './useForm';
 import './index.less';
 import { YFormItemsContext, YFormContext, YFormListContent } from './Context';
 import FormModal from './FormModal';
+import Item from './Item';
 
 type InternalYForm = typeof YForm;
 interface RefYForm extends InternalYForm {
   Config: typeof Config;
   Items: typeof Items;
-  Item: typeof AntForm.Item;
+  Item: typeof Item;
   useForm: typeof useForm;
   useFormatFieldsValue: typeof useFormatFieldsValue;
   useSubmit: typeof useSubmit;
@@ -27,7 +26,7 @@ const Form: RefYForm = YForm as RefYForm;
 
 Form.Config = Config;
 Form.Items = Items;
-Form.Item = AntForm.Item;
+Form.Item = Item;
 Form.useForm = useForm;
 Form.useFormatFieldsValue = useFormatFieldsValue;
 Form.useSubmit = useSubmit;

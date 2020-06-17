@@ -230,26 +230,34 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     e.preventDefault();
     handleOnDisabled(false);
   };
+  const {
+    formatFieldsValue: unFormatFieldsValue,
+    onFormatFieldsValue: onUnFormatFieldsValue,
+  } = useFormatFieldsValue();
 
-  const unFormatValues = { ...initialValues };
+  // unFormatFieldsValue 第一次为空需要下面 set(unFormatValues, name, value) 设置值
+  // 当执行 resetFields 后，就需要 unFormatFieldsValue 的格式化。
+  const unFormatValues = submitFormatValues(initialValues, unFormatFieldsValue);
 
   const handleUnFormatFieldsValue = useCallback(
     (data: FormatFieldsValue) => {
       const { name, format } = data;
+      const parentValue = getParentNameData(initialValues, name);
+      const value = format(get(initialValues, name), parentValue || {});
       if (!find(formatRef.current, { name })) {
-        const parentValue = getParentNameData(initialValues, name);
         // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
         if (parentValue !== undefined) {
-          const value = format(get(initialValues, name), parentValue || {});
           form.setFields([{ name, value }]);
           formatRef.current.push({ name, value });
-          // 点击重置后使用 unFormat 后的数据
+          // 初始化使用 unFormat 后的数据
           set(unFormatValues, name, value);
+          onUnFormatFieldsValue([{ name, format }]);
         }
       }
     },
-    [initialValues, form, unFormatValues],
+    [initialValues, form, unFormatValues, onUnFormatFieldsValue],
   );
+
   const providerProps = merge(
     {},
     {
