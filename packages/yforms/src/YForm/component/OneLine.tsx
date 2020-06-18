@@ -14,9 +14,10 @@ export interface YFormOneLineProps extends YFormItemProps {
   oneLineStyle?: (string | number)[];
 }
 
-export default (props: YFormOneLineProps) => {
-  const { scenes, items, componentProps = {} } = props;
-  const { oneLineStyle, className, style } = componentProps;
+export default (props: YFormOneLineProps['componentProps']) => {
+  const itemProps = React.useContext(YForm.YFormItemContext);
+  const { scenes, items } = itemProps;
+  const { oneLineStyle, className, style } = props;
   if (get(props, 'name')) {
     warning(false, 'oneLine 不支持 name');
     return null;

@@ -10,10 +10,13 @@ import { YFormInstance } from './Form';
 
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
-  const { format, unFormat, scenes, children, ...rest } = props;
+  const { format, unFormat, scenes, ...rest } = props;
 
-  const { name } = rest;
+  const { name, children } = rest;
   const formProps = useContext(YForm.YFormContext);
+  const itemsProps = useContext(YForm.YFormItemsContext);
+  const listContext = useContext(YForm.ListContent);
+
   const {
     itemsType = {},
     onUnFormatFieldsValue,
@@ -21,9 +24,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
     getScene,
     onFormatFieldsValue,
   } = formProps;
-  const itemsProps = useContext(YForm.YFormItemsContext);
   const { scenes: thisScenes } = itemsProps;
-  const listContext = useContext(YForm.ListContent);
   const { prefixName } = listContext;
   const mergeProps = merge(
     {},
@@ -85,7 +86,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
   let _defaultData = defaultData;
   const { modifyProps } = typeProps;
   if (modifyProps) {
-    _defaultData = merge({}, defaultData, modifyProps(defaultData));
+    _defaultData = { ...defaultData, ...modifyProps(defaultData) };
   }
 
   mapKeys(_scenes, (value: boolean, key: string) => {
@@ -100,7 +101,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       }
     }
   });
-  _itemProps = merge({}, pick(mergeProps, ['scenes', 'disabled']), _defaultData.itemProps);
+  _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
   _componentProps = _defaultData.componentProps;
 
   const { type, dataSource, componentProps, ...formItemProps } = _itemProps;
@@ -114,12 +115,8 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if (type) {
     const _fieldData = itemsType[type];
     if (_fieldData) {
-      const { component, needItemProps } = _fieldData;
+      const { component } = _fieldData;
       _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
-      // 包含 items 类型把当前 item 属性全部透传过去
-      if (needItemProps) {
-        _componentProps = { ..._itemProps, componentProps: _componentProps };
-      }
       const _component = children || component;
       _children = isValidElement(_component)
         ? React.cloneElement(_component, { ...(_component.props as object), ..._componentProps })
@@ -182,7 +179,11 @@ const Item: React.FC<YFormDataSource> = (props) => {
       </Form.Item>
     );
   }
-  return dom;
+  return (
+    <YForm.YFormItemContext.Provider value={{ ..._itemProps }}>
+      {dom}
+    </YForm.YFormItemContext.Provider>
+  );
 };
 
 export default Item;

@@ -45,7 +45,6 @@ export interface YFormFieldBaseProps<T = any> {
   formItemProps?: YFormItemProps;
   formatStr?: string;
   hasFormItem?: boolean;
-  needItemProps?: boolean; // 组件需要用到 itemProps 参数
   scenes?: YFormConfig['scenes'];
   modifyProps?: (
     props: Required<modifyType<T>>,
@@ -146,20 +145,15 @@ export const itemsType: YFormItemsType = {
     modifyProps: selectModify,
   },
   // 工具类
-  oneLine: { component: <OneLine />, modifyProps: oneLineModify, needItemProps: true },
-  list: { component: <List />, hasFormItem: false, needItemProps: true },
+  oneLine: { component: <OneLine />, modifyProps: oneLineModify },
+  list: { component: <List />, hasFormItem: false },
   button: { component: <Button /> },
   secureButton: { component: <SecureButton /> },
-  submit: {
-    component: <Submit />,
-    hasFormItem: false,
-    needItemProps: true,
-    modifyProps: submitModify,
-  },
+  submit: { component: <Submit />, hasFormItem: false, modifyProps: submitModify },
   // 展示类
   custom: { modifyProps: CustomModify },
-  view: { component: <ComponentView />, needItemProps: true },
-  space: { component: <Space />, modifyProps: SpaceModify, needItemProps: true },
+  view: { component: <ComponentView /> },
+  space: { component: <Space />, modifyProps: SpaceModify },
 };
 
 export default itemsType;

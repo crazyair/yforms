@@ -119,7 +119,7 @@ const Demo = () => {
           type: 'input',
           label: '姓名',
           name: 'name',
-          format: ({ name }) => `${name} 修改了`,
+          format: (value) => `${value} 修改了`,
         },
         {
           type: 'datePicker',
@@ -180,6 +180,7 @@ const Demo = () => {
         },
         {
           type: 'space',
+          scenes: { disabled: false },
           items: [
             { type: 'submit' },
             {

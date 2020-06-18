@@ -79,6 +79,7 @@ export default () => {
         },
         { type: 'submit' },
         {
+          scenes: { disabled: false },
           dataSource: [
             {
               type: 'button',

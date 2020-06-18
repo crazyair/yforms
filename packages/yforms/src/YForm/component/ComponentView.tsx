@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { get, isArray } from 'lodash';
 import { ConfigContext } from 'antd/lib/config-provider';
 
+import { YForm } from '../..';
 import { YFormItemProps } from '../Items';
 
 export const noData = <span style={{ color: '#ccc' }}>-/-</span>;
@@ -20,12 +21,13 @@ export interface YFormComponentViewProps extends YFormItemProps {
   componentProps?: YFormComponentViewComponentProps;
 }
 
-export default (props: YFormComponentViewProps) => {
+export default (props: YFormComponentViewComponentProps) => {
   const AntdConfig = React.useContext(ConfigContext);
-  const { viewProps: { format } = {}, componentProps = {}, valuePropName = 'value' } = props;
-  const { addonBefore, addonAfter, suffix, prefix, className, oldValue } = componentProps;
+  const itemProps = React.useContext(YForm.YFormItemContext);
+  const { viewProps: { format } = {}, valuePropName = 'value' } = itemProps;
+  const { addonBefore, addonAfter, suffix, prefix, className, oldValue } = props;
   // diff 渲染使用 oldValue
-  let _value = 'oldValue' in componentProps ? oldValue : get(props, valuePropName);
+  let _value = 'oldValue' in props ? oldValue : get(props, valuePropName);
   if (format) {
     _value = format(_value);
   }

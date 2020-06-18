@@ -11,8 +11,9 @@ export interface YFormSpaceProps extends YFormItemProps {
   items?: YFormItemProps['children'];
 }
 
-export default (props: YFormSpaceProps) => {
-  const { items, componentProps, scenes } = props;
+export default (props: YFormSpaceProps['componentProps']) => {
+  const itemProps = React.useContext(YForm.YFormItemContext);
+  const { items, scenes } = itemProps;
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];
   forEach(isArray(items) ? items : [items], (item) => {
@@ -38,7 +39,7 @@ export default (props: YFormSpaceProps) => {
     <YForm.Item noStyle shouldUpdate={shouldUpdate}>
       {(form) => {
         return (
-          <Space {...componentProps}>
+          <Space {...props}>
             {isArray(items)
               ? map(items, (item, index) => {
                   if (isObject(item)) {

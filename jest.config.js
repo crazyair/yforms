@@ -7,5 +7,5 @@ module.exports = {
   // coveragePathIgnorePatterns: ['/src/JackBox/'],
   coveragePathIgnorePatterns: ['/__test__/', 'lib'],
   // testPathIgnorePatterns: ['/packages/yforms'],
-  collectCoverage: true,
+  // collectCoverage: true,
 };

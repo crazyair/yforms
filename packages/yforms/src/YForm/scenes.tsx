@@ -1,6 +1,5 @@
 import React from 'react';
 import { merge, forEach } from 'lodash';
-import classNames from 'classnames';
 
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
@@ -101,9 +100,7 @@ const scenes: YFormConfig = {
         let _componentProps;
         if (itemProps.name && typeProps.type !== 'list') {
           // 使用 ComponentView 组件渲染
-          _itemProps = { className: 'mb5', type: 'view' };
-          // ComponentView 组件需要 itemProps 参数
-          _componentProps = { itemProps };
+          _itemProps = { type: 'view' };
         }
         let hasRequired = false;
         forEach(itemProps.rules, (item) => {
@@ -114,7 +111,13 @@ const scenes: YFormConfig = {
         return {
           // 清空 rules ，避免提交会校验
           // 如果之前是必填的，这里则保留红色 *
-          itemProps: { ...itemProps, ..._itemProps, rules: [], required: hasRequired },
+          itemProps: {
+            ...itemProps,
+            ..._itemProps,
+            className: 'mb5',
+            rules: [],
+            required: hasRequired,
+          },
           componentProps: { ...componentProps, ..._componentProps },
         };
       },
@@ -139,39 +142,31 @@ const scenes: YFormConfig = {
     },
     // 搜索场景
     search: {
-      form: ({ formProps }) => ({
-        formProps: {
-          // 搜索成功后不重置表单
-          onCancel: () => {},
-          ...formProps,
-          // 搜索场景表单不必填
-          scenes: merge({}, { required: false }, formProps.scenes),
-          className: classNames('yforms-search-form', formProps.className),
-        },
-      }),
+      form: ({ formProps }) => {
+        return {
+          formProps: {
+            // 搜索成功后不重置表单
+            onCancel: () => {},
+            ...formProps,
+            scenes: merge({}, { noCol: true, required: false }, formProps.scenes),
+          },
+        };
+      },
       items: ({ itemsProps }) => {
         // 字段样式去掉
         return { itemsProps: { noStyle: true, ...itemsProps } };
       },
-      item: ({ itemProps, componentProps }) => {
+      item: ({ itemProps, componentProps, typeProps }) => {
+        let _componentProps;
+        if (typeProps.type !== 'rangePicker') {
+          _componentProps = { placeholder: itemProps.label };
+        }
         return {
-          itemProps: { ...itemProps, label: undefined },
-          componentProps: { ...componentProps, placeholder: itemProps.label },
+          itemProps: { style: { marginRight: 10 }, ...itemProps, label: undefined },
+          componentProps: { ..._componentProps, ...componentProps },
         };
       },
     },
-    // 没有 label 不和有 label 对齐 TODO: 暂时没作用
-    // noLabelLayout: {
-    //   item: ({ formProps, itemsProps, itemProps }) => {
-    //     const { label } = itemProps;
-    //     const _base = merge({}, formProps, itemsProps, itemProps);
-    //     const { wrapperCol } = _base;
-    //     const _itemProps = label ? {} : { labelCol: {}, wrapperCol };
-    //     return {
-    //       itemProps: { ...itemProps, ..._itemProps },
-    //     };
-    //   },
-    // },
   },
 };
 
