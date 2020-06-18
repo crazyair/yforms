@@ -76,7 +76,7 @@ export default () => {
           },
         },
         { label: '文本', name: 'text', type: 'text' },
-        { label: '自定义渲染', type: 'custom', name: 'custom', component: <Input /> },
+        { label: '自定义渲染', type: 'custom', name: 'custom', children: <Input /> },
         { type: 'submit' },
       ]}
     </YForm>

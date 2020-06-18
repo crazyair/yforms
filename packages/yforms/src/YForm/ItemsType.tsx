@@ -104,7 +104,7 @@ export interface YFormItemsTypeDefine {
   list: YFormListProps;
   submit: YFormSubmitProps;
   secureButton: YFormSecureButtonProps;
-  custom: { componentProps?: any; component?: React.ReactNode };
+  custom: { componentProps?: any };
 }
 
 export type YFormItemsType<T = YFormFieldBaseProps> = {

@@ -9,8 +9,9 @@ export default () => {
           label: '自定义渲染',
           type: 'custom',
           name: 'custom',
-          component: <div>这是自定义渲染</div>,
+          children: <div>这是自定义渲染</div>,
         },
+        { label: '文字场景', type: 'custom', children: '文字' },
       ]}
     </YForm>
   );

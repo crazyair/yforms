@@ -4,7 +4,7 @@ import { Space } from 'antd';
 import { SpaceProps } from 'antd/lib/space';
 
 import YForm from '..';
-import { YFormItemProps } from '../Items';
+import { YFormItemProps, YFormDataSource } from '../Items';
 
 export interface YFormSpaceProps extends YFormItemProps {
   componentProps?: SpaceProps;
@@ -16,8 +16,9 @@ export default (props: YFormSpaceProps) => {
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];
   forEach(isArray(items) ? items : [items], (item) => {
-    if (isObject(item) && 'shouldUpdate' in item) {
-      shouldUpdates.push(item.shouldUpdate);
+    if (isObject(item)) {
+      const { shouldUpdate } = item as YFormDataSource;
+      shouldUpdates.push(shouldUpdate);
     }
   });
   const shouldUpdate = (prevValue, nextValue) => {
@@ -40,8 +41,8 @@ export default (props: YFormSpaceProps) => {
           <Space {...componentProps}>
             {isArray(items)
               ? map(items, (item, index) => {
-                  if (isObject(item) && 'isShow' in item) {
-                    const { isShow } = item;
+                  if (isObject(item)) {
+                    const { isShow } = item as YFormDataSource;
                     if (typeof isShow === 'function' && !isShow(form.getFieldsValue())) {
                       return null;
                     }

@@ -3,7 +3,7 @@ import { merge, reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
 import { YForm } from '../..';
-import { YFormItemProps, YFormDataSource } from '../Items';
+import { YFormDataSource } from '../Items';
 import { YFormSecureButtonProps } from './SecureButton';
 import { YFormSpaceProps } from './Space';
 
@@ -72,7 +72,7 @@ export default (props: YFormSubmitProps) => {
     back: { type: 'button', noStyle: true, isShow: !!showBack, componentProps: showBack },
   };
 
-  let btns: YFormItemProps['children'];
+  let btns = [];
   if (disabled) {
     btns = [actionBtns.edit, actionBtns.back];
   } else {

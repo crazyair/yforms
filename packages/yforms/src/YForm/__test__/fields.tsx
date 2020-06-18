@@ -63,7 +63,7 @@ const fields: YFormItemProps['children'] = [
           componentProps: { oneLineStyle: ['50%', 8, '50%'] },
           items: () => [
             { label: '姓名', type: 'input', name: [index, 'name'] },
-            <span key="center" />,
+            { type: 'custom', children: <span /> },
             { label: '年龄', type: 'input', name: [index, 'age'] },
           ],
         },
@@ -149,7 +149,7 @@ const fields: YFormItemProps['children'] = [
     label: '自定义渲染',
     type: 'custom',
     name: 'custom',
-    component: <Input />,
+    children: <Input />,
   },
   { type: 'submit' },
 

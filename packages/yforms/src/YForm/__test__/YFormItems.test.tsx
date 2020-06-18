@@ -123,7 +123,7 @@ describe('YFormItems', () => {
       <YForm>
         <YForm.Items>
           {fields}
-          {[{ type: 'noType', name: 'a' }] as any}
+          {[{ type: 'noType', name: 'a' }]}
           <div>1</div>
           123
         </YForm.Items>
@@ -243,7 +243,7 @@ describe('YFormItems', () => {
             componentProps: { oneLineStyle: ['50%', 8, '50%'] },
             items: () => [
               { label: '姓名', type: 'input', name: 'name' },
-              <span key="center" />,
+              { type: 'custom', children: <span /> },
               { label: '年龄', type: 'input', name: 'age' },
             ],
           },
@@ -379,7 +379,7 @@ describe('YFormItems', () => {
                         componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                         items: (): YFormItemProps['children'] => [
                           { label: '姓名', type: 'input', name: [index, 'name'] },
-                          <span key="center" />,
+                          { type: 'custom', children: <span /> },
                           { label: '年龄', type: 'input', name: [index, 'age'] },
                         ],
                       },

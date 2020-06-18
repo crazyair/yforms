@@ -18,7 +18,7 @@ export interface YFormListComponentProps {
   maxNum?: number;
   minNum?: number;
   showRightIcons?: boolean;
-  useIconsStyle?: boolean;
+  isUseIconStyle?: boolean;
   showIcons?: ShowIconsType;
   onShowIcons?: (p: { index: number }) => Pick<ShowIconsType, 'showAdd' | 'showRemove'>;
 }
@@ -45,7 +45,7 @@ export default (props: YFormListProps) => {
     maxNum,
     minNum,
     showRightIcons = true,
-    useIconsStyle = true,
+    isUseIconStyle = true,
     showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {},
     onShowIcons,
   } = componentProps;
@@ -109,8 +109,9 @@ export default (props: YFormListProps) => {
                         offset,
                         componentProps: !disabled &&
                           showRightIcons &&
-                          useIconsStyle && { style: { ..._oneLineStyle[0] } },
+                          isUseIconStyle && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
+                        hideLable: label,
                       },
                       item,
                       {

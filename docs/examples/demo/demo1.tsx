@@ -74,7 +74,7 @@ const Demo = () => {
         //   scenes: { disabled: false },
         //   componentProps: { onClick: () => setView((c) => !c), children: '查看表单' },
         // },
-        // { type: 'custom', component: 1, label: 'xx' },
+        // { type: 'custom', children: 1, label: 'xx' },
         { type: 'input', label: '空值', name: 'names', scenes: { base: false } },
         {
           type: 'list',
@@ -108,7 +108,7 @@ const Demo = () => {
                 componentProps: { oneLineStyle: ['50%', 8, '50%'] },
                 items: () => [
                   { label: '姓名', type: 'input', name: [index, 'name'] },
-                  <span key="center" />,
+                  { type: 'custom', children: <span /> },
                   { label: '年龄', type: 'input', name: [index, 'age'] },
                 ],
               },
@@ -176,7 +176,7 @@ const Demo = () => {
           label: '自定义渲染',
           type: 'custom',
           name: 'custom',
-          component: <Input />,
+          children: <Input />,
         },
         {
           type: 'space',
