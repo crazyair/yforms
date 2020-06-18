@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { Tag } from 'antd';
 import moment, { isMoment } from 'moment';
 import { CheckboxProps } from 'antd/lib/checkbox';
@@ -8,7 +8,7 @@ import { PickerMode } from 'rc-picker/lib/interface';
 import { SwapRightOutlined } from '@ant-design/icons';
 import { SwitchProps } from 'antd/lib/switch';
 import Numbro from 'numbro';
-import { isArray, map, includes, get, forEach } from 'lodash';
+import { isArray, map, includes, forEach } from 'lodash';
 import { YFormFieldBaseProps } from './ItemsType';
 import { YTextAreaProps } from './component/TextArea';
 import { calculateStrLength } from './utils';
@@ -302,7 +302,7 @@ export const SpaceModify: YFormFieldBaseProps<YFormSpaceProps>['modifyProps'] = 
 
 export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => {
   const { itemProps = {} } = props;
-  const component = get(itemProps, 'component');
+  const { children } = itemProps;
   return {
     itemProps: {
       viewProps: {
@@ -310,7 +310,11 @@ export const CustomModify: YFormFieldBaseProps<any>['modifyProps'] = (props) => 
           if (pureValue) {
             return value;
           }
-          return <component.type disabled value={value} {...component.props} />;
+          return isValidElement(children) ? (
+            <children.type disabled value={value} {...children.props} />
+          ) : (
+            children
+          );
         },
       },
       ...itemProps,

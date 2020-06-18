@@ -111,6 +111,7 @@ export default (props: YFormListProps) => {
                           showRightIcons &&
                           isUseIconStyle && { style: { ..._oneLineStyle[0] } },
                         label: index === 0 && _label,
+                        hideLable: label,
                       },
                       item,
                       {

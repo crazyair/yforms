@@ -27,13 +27,12 @@ export interface YFormItemProps<T = any>
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
-    | React.ReactElement
     | YFormRenderChildren
-    | boolean;
+    | React.ReactNode;
   dataSource?: YFormItemProps['children'];
   viewProps?: YFormFieldBaseProps['viewProps'];
   diffProps?: YFormFieldBaseProps['diffProps'];
-  component?: React.ReactNode;
+  hideLable?: React.ReactNode; // 隐藏公共 label 用于得到 placeholder 和 rules required 的 message
 }
 
 export interface FormatFieldsValue<T = any> {
@@ -47,7 +46,6 @@ export interface InternalYFormItemProps extends YFormItemProps {
   dataSource?: any;
   items?: any;
   scenes?: any;
-  component?: any;
   onSave?: any;
   _addonAfter?: React.ReactNode;
 }

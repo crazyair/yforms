@@ -1588,7 +1588,8 @@ Object {
                             class="yform-items"
                           >
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block;"
                             >
                               <div
@@ -1625,7 +1626,8 @@ Object {
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block; width: 8px;"
                             >
                               <div
@@ -1643,7 +1645,8 @@ Object {
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block;"
                             >
                               <div
@@ -1758,7 +1761,8 @@ Object {
                             class="yform-items"
                           >
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block;"
                             >
                               <div
@@ -1805,7 +1809,8 @@ Object {
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block; width: 8px;"
                             >
                               <div
@@ -1823,7 +1828,8 @@ Object {
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item dib"
+                              class="ant-row ant-form-item"
+                              display="inline-block"
                               style="display: inline-block;"
                             >
                               <div
@@ -3894,7 +3900,8 @@ Object {
                           class="yform-items"
                         >
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block;"
                           >
                             <div
@@ -3931,7 +3938,8 @@ Object {
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block; width: 8px;"
                           >
                             <div
@@ -3949,7 +3957,8 @@ Object {
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block;"
                           >
                             <div
@@ -4064,7 +4073,8 @@ Object {
                           class="yform-items"
                         >
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block;"
                           >
                             <div
@@ -4111,7 +4121,8 @@ Object {
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block; width: 8px;"
                           >
                             <div
@@ -4129,7 +4140,8 @@ Object {
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item dib"
+                            class="ant-row ant-form-item"
+                            display="inline-block"
                             style="display: inline-block;"
                           >
                             <div

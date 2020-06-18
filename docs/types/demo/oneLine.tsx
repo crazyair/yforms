@@ -13,7 +13,7 @@ export default () => {
           componentProps: { oneLineStyle: ['50%', 8, '50%'] },
           items: (): YFormItemProps['children'] => [
             { label: '姓名', type: 'input', name: 'name' },
-            { type: 'custom', component: <span /> },
+            { type: 'custom', children: <span /> },
             { label: '年龄', type: 'input', name: 'age' },
           ],
         },
@@ -24,7 +24,7 @@ export default () => {
           items: ({ style }): YFormItemProps['children'] => {
             return [
               { label: '姓名', type: 'input', name: 'name2' },
-              { type: 'custom', component: <span /> },
+              { type: 'custom', children: <span /> },
               {
                 noStyle: true,
                 shouldUpdate: true,

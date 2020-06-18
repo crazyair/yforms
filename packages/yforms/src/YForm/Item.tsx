@@ -34,11 +34,6 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   if ('isShow' in props && !props.isShow) return null;
 
-  if (props.type && props.children) {
-    warning(false, '传了 type 就不能传 children ');
-    return null;
-  }
-
   const _scenes = merge({}, thisScenes, scenes);
   let _itemProps = { ...rest };
   // offset 层级增加
@@ -75,7 +70,6 @@ const Item: React.FC<YFormDataSource> = (props) => {
       };
     }
   }
-
   let _componentProps = { ...props.componentProps };
   const typeProps = get(itemsType, props.type) || {};
   typeProps.type = props.type;
@@ -126,7 +120,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       if (needItemProps) {
         _componentProps = { ..._itemProps, componentProps: _componentProps };
       }
-      const _component = component || props.component;
+      const _component = children || component;
       _children = isValidElement(_component)
         ? React.cloneElement(_component, { ...(_component.props as object), ..._componentProps })
         : _component;
@@ -170,6 +164,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
           'oldValue',
           'items',
           'offset',
+          'hideLable',
         ])}
       >
         {domChildren}

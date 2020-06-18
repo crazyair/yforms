@@ -41,10 +41,11 @@ const scenes: YFormConfig = {
     required: {
       item: ({ itemProps, typeProps }) => {
         const _itemProps: modifyType['itemProps'] = {};
-        const { label, rules } = itemProps;
+        const { label, hideLable, rules } = itemProps;
         const { formatStr } = merge({}, typeProps, itemProps);
-
-        const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
+        const _label = label || hideLable;
+        const _message =
+          typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
         if (itemProps.name && typeProps.type !== 'list') {
           let hasRequired = false;
           forEach(rules, (item) => {
@@ -66,10 +67,11 @@ const scenes: YFormConfig = {
     placeholder: {
       item: ({ itemProps, componentProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
-        const { label } = itemProps;
+        const { label, hideLable } = itemProps;
         const { formatStr } = merge({}, typeProps, itemProps);
-
-        const _message = typeof label === 'string' && replaceMessage(formatStr || '', { label });
+        const _label = label || hideLable;
+        const _message =
+          typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
         if (itemProps.name && typeProps.type !== 'list') {
           // rangePicker 不需要设置 placeholder
           if (typeProps.type !== 'rangePicker') {

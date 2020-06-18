@@ -70,12 +70,9 @@ describe('YForm', () => {
   test('layout2', () => {
     const itemsType: any = {
       demo: { component: <p>123</p>, formatStr: '请输入${label}' },
-      render: { render: () => <div>1</div> },
     };
     YForm.Config({ itemsType });
-    const wrapper = render(
-      <YForm name="basic">{[{ type: 'demo' }, { type: 'render' }] as any}</YForm>,
-    );
+    const wrapper = render(<YForm name="basic">{[{ type: 'demo' }]}</YForm>);
     expect(wrapper).toMatchSnapshot();
   });
   test('onFinish', () => {
