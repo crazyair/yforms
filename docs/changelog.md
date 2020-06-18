@@ -10,7 +10,7 @@ nav:
 ### Features
 
 - hash ([f4d1054](https://github.com/crazyair/yforms/commit/f4d10540ee13399887c4adf0d4fa102f25bde5a3))
-- 优化 ([#31](https://github.com/crazyair/yforms/issues/31)) ([cbe40c1](https://github.com/crazyair/yforms/commit/cbe40c14f849dad2e462b0d9cc3dd4e0190fb145))
+- 搜索场景优化、type 组件从 Context 获取 Props ([#31](https://github.com/crazyair/yforms/issues/31)) ([cbe40c1](https://github.com/crazyair/yforms/commit/cbe40c14f849dad2e462b0d9cc3dd4e0190fb145))
 - 优化 unFormat 逻辑 ([dcbaddc](https://github.com/crazyair/yforms/commit/dcbaddc66269921bbad97d675b4a3f5c8ff079a2))
 - 优化代码 ([ba4e6cb](https://github.com/crazyair/yforms/commit/ba4e6cb6c05a7415894eb43e61c4987373778cef))
 - 支持 jsx 方式配置表单 ([#30](https://github.com/crazyair/yforms/issues/30)) ([137dcd0](https://github.com/crazyair/yforms/commit/137dcd05433f4b962da9588860382669ceb565d7))
