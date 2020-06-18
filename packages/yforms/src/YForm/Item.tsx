@@ -14,6 +14,9 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   const { name, children } = rest;
   const formProps = useContext(YForm.YFormContext);
+  const itemsProps = useContext(YForm.YFormItemsContext);
+  const listContext = useContext(YForm.ListContent);
+
   const {
     itemsType = {},
     onUnFormatFieldsValue,
@@ -21,9 +24,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
     getScene,
     onFormatFieldsValue,
   } = formProps;
-  const itemsProps = useContext(YForm.YFormItemsContext);
   const { scenes: thisScenes } = itemsProps;
-  const listContext = useContext(YForm.ListContent);
   const { prefixName } = listContext;
   const mergeProps = merge(
     {},
@@ -100,7 +101,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       }
     }
   });
-  _itemProps = { ...pick(mergeProps, ['scenes', 'disabled']), ..._defaultData.itemProps };
+  _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
   _componentProps = _defaultData.componentProps;
 
   const { type, dataSource, componentProps, ...formItemProps } = _itemProps;

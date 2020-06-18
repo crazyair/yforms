@@ -402,4 +402,32 @@ describe('YFormItems', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+  test('scenes offset disabled', () => {
+    const wrapper = render(
+      <YForm offset={2}>
+        {[
+          { type: 'input', name: 'a', label: 'a' },
+          { type: 'input', name: 'a', label: 'a', offset: 2 },
+        ]}
+        <YForm.Items offset={2}>
+          {[
+            { type: 'input', name: 'a', label: 'a' },
+            { type: 'input', name: 'a', label: 'a', offset: 2 },
+          ]}
+          <YForm.Items offset={2}>{[{ type: 'input', name: 'a', label: 'a' }]}</YForm.Items>
+        </YForm.Items>
+        <YForm.Items disabled>{[{ type: 'input', name: 'a', label: 'a' }]}</YForm.Items>
+        <YForm.Items disabled>
+          <YForm.Items disabled={false}>{[{ type: 'input', name: 'a', label: 'a' }]}</YForm.Items>
+        </YForm.Items>
+        <YForm.Items scenes={{ placeholder: false }}>
+          {[{ type: 'input', name: 'a', label: 'a' }]}
+        </YForm.Items>
+        <YForm.Items disabled scenes={{ placeholder: false, disabled: false }}>
+          {[{ type: 'input', name: 'a', label: 'a' }]}
+        </YForm.Items>
+      </YForm>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });
