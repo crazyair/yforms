@@ -4,7 +4,7 @@ import useSubmit from './useSubmit';
 import useForm from './useForm';
 
 import './index.less';
-import { YFormItemsContext, YFormContext, YFormListContent } from './Context';
+import { YFormItemsContext, YFormContext, YFormListContent, YFormItemContext } from './Context';
 import FormModal from './FormModal';
 import Item from './Item';
 
@@ -17,6 +17,7 @@ interface RefYForm extends InternalYForm {
   useFormatFieldsValue: typeof useFormatFieldsValue;
   useSubmit: typeof useSubmit;
   YFormContext: typeof YFormContext;
+  YFormItemContext: typeof YFormItemContext;
   YFormItemsContext: typeof YFormItemsContext;
   ListContent: typeof YFormListContent;
   FormModal: typeof FormModal;
@@ -31,6 +32,7 @@ Form.useForm = useForm;
 Form.useFormatFieldsValue = useFormatFieldsValue;
 Form.useSubmit = useSubmit;
 Form.YFormContext = YFormContext;
+Form.YFormItemContext = YFormItemContext;
 Form.YFormItemsContext = YFormItemsContext;
 Form.ListContent = YFormListContent;
 Form.FormModal = FormModal;

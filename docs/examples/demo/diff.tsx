@@ -255,6 +255,7 @@ const Demo = () => {
         { type: 'submit' },
         {
           type: 'space',
+          scenes: { disabled: false },
           items: [
             {
               type: 'button',

@@ -28,9 +28,8 @@ export interface YFormSubmitProps {
   componentProps?: YFormSubmitComponentProps;
 }
 
-export default (props: YFormSubmitProps) => {
-  const { componentProps = {} } = props;
-  const { showBtns = true, reverseBtns, spaceProps } = componentProps;
+export default (props: YFormSubmitProps['componentProps']) => {
+  const { showBtns = true, reverseBtns, spaceProps } = props;
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
   const { form, onSave, submitComponentProps, disabled } = merge({}, formProps, itemsProps);

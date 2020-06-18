@@ -48,14 +48,13 @@ const DiffDom = (props: modifyType) => {
             }
             return (
               <div style={{ padding: '5px 0' }}>
-                <ComponentView
-                  {...itemProps}
-                  componentProps={{
-                    oldValue,
-                    ...componentProps,
-                    className: classNames('old-value', componentProps.className),
-                  }}
-                />
+                <YForm.YFormItemContext.Provider value={itemProps}>
+                  <ComponentView
+                    {...componentProps}
+                    oldValue={oldValue}
+                    className={classNames('old-value', componentProps.className)}
+                  />
+                </YForm.YFormItemContext.Provider>
               </div>
             );
           },

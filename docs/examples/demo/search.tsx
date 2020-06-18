@@ -9,7 +9,6 @@ import { YForm } from 'yforms';
 import { Form, Button, Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';
-import './index.less';
 
 export default () => {
   const [expand, setExpand] = React.useState(false);
@@ -20,32 +19,26 @@ export default () => {
   };
 
   // 表单字段可以单独抽离单独组建兼容表单搜索交互
-  const fieldDom = (
-    <YForm.Items>
-      {[
-        { type: 'input', name: 'field1', label: 'field1' },
-        { type: 'input', name: 'field2', label: 'field2' },
-        { type: 'input', name: 'field3', label: 'field3' },
-      ]}
-    </YForm.Items>
-  );
-  const fieldDom2 = (
-    <YForm.Items>
-      {[
-        { type: 'input', name: 'field4', label: 'field4' },
-        { type: 'input', name: 'field5', label: 'field5' },
-        { type: 'input', name: 'field6', label: 'field6' },
-        { type: 'input', name: 'field7', label: 'field7' },
-      ]}
-    </YForm.Items>
-  );
+  const fieldDom = [
+    { type: 'input', name: 'field1', label: 'field1' },
+    { type: 'input', name: 'field2', label: 'field2' },
+    { type: 'input', name: 'field2', label: 'field2' },
+  ];
+  const fieldDom2 = [
+    { type: 'input', name: 'field4', label: 'field4' },
+    { type: 'input', name: 'field5', label: 'field5' },
+    { type: 'input', name: 'field6', label: 'field6' },
+    { type: 'input', name: 'field7', label: 'field7' },
+  ];
   return (
     <div>
       <p>搜索场景</p>
       <YForm scenes={{ search: true }} form={form} name="search" onFinish={onFinish}>
         <Row>
           <Col span={18}>
-            <Row>{fieldDom}</Row>
+            <Row>
+              <YForm.Item noStyle type="space" items={fieldDom} />
+            </Row>
           </Col>
           <Col span={6} style={{ textAlign: 'right' }}>
             <Button type="primary" htmlType="submit">
@@ -59,7 +52,13 @@ export default () => {
             </a>
           </Col>
         </Row>
-        <QueueAnim type={['top', 'top']}>{expand && <Row key="必须">{fieldDom2}</Row>}</QueueAnim>
+        <QueueAnim type={['top', 'top']}>
+          {expand && (
+            <Row key="必须">
+              <YForm.Item noStyle type="space" items={fieldDom2} />
+            </Row>
+          )}
+        </QueueAnim>
       </YForm>
       <p>普通场景</p>
       <YForm name="base_form" onFinish={onFinish}>

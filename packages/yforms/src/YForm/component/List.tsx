@@ -39,8 +39,9 @@ export interface YFormListProps extends YFormItemProps {
   addonBefore?: React.ReactNode;
 }
 
-export default (props: YFormListProps) => {
-  const { disabled, scenes, label, items, componentProps = {}, name, addonBefore, offset } = props;
+export default (props: YFormListProps['componentProps']) => {
+  const itemProps = React.useContext(YForm.YFormItemContext);
+  const { disabled, scenes, label, items, name, addonBefore, offset } = itemProps;
   const {
     maxNum,
     minNum,
@@ -48,7 +49,7 @@ export default (props: YFormListProps) => {
     isUseIconStyle = true,
     showIcons: { showBottomAdd = true, showAdd = true, showRemove = true } = {},
     onShowIcons,
-  } = componentProps;
+  } = props;
   const context = React.useContext(YForm.ListContent);
   // 支持多级 List name 拼接
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
