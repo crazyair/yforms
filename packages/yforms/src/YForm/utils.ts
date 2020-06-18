@@ -16,7 +16,7 @@ import { ColProps } from 'antd/lib/col';
 
 import warning from 'warning';
 import { stringAndFunc } from './ItemsType';
-import { FieldsType, KeyValue, ParamsType } from './Form';
+import { KeyValue, ParamsType } from './Form';
 import { FormatFieldsValue, YFormItemProps } from './Items';
 
 const nzhcn = require('nzh/cn');
@@ -151,8 +151,8 @@ export const getParentNameData = (values: any, name: YFormItemProps['name']) => 
   return get(_values, _name.slice(0, _name.length - 1));
 };
 
-export function submitFormatValues<T>(
-  values: FieldsType<T>,
+export function submitFormatValues(
+  values: KeyValue,
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
   const _values = cloneDeep(values);
@@ -182,8 +182,8 @@ export function submitFormatValues<T>(
   return _values;
 }
 
-export const onFormatFieldsValue = <T>(formatFieldsValue: FormatFieldsValue<T>[]) => {
-  return (list: FormatFieldsValue<T>[]) => {
+export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
+  return (list: FormatFieldsValue[]) => {
     const _formatFields = formatFieldsValue;
     forEach(list, (item) => {
       // 已存在不再注册

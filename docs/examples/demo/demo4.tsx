@@ -1,6 +1,6 @@
 /**
  * title: jsx 写法
- * desc: 日期场景下修改初始化值，提交修改提交值，数据对比也可以共享该配置。
+ * desc: jsx 写法
  */
 
 import React from 'react';

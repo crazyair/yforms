@@ -66,10 +66,8 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   loading?: boolean;
   form?: YFormInstance;
   submit?: YFormUseSubmitReturnProps['submit'];
-  formatFieldsValue?: FormatFieldsValue<T>[];
-  onFormatFieldsValue?: (
-    f: FormatFieldsValue<T>[],
-  ) => (f: FormatFieldsValue<T>[]) => FormatFieldsValue<T>[];
+  formatFieldsValue?: FormatFieldsValue[];
+  onFormatFieldsValue?: (f: FormatFieldsValue[]) => (f: FormatFieldsValue[]) => FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onUnFormatFieldsValue?: (p?: FormatFieldsValue) => void;
   onSave?: (values: { [key: string]: any }) => void;
@@ -80,10 +78,10 @@ export interface YFormProps<T = any> extends FormProps, YFormConfig {
   offset?: YFormItemProps['offset'];
 }
 
-export function useFormatFieldsValue<T = any>() {
+export function useFormatFieldsValue() {
   const formatFieldsValue = useRef([]);
   return {
-    onFormatFieldsValue: onFormatFieldsValue<T>(formatFieldsValue.current),
+    onFormatFieldsValue: onFormatFieldsValue(formatFieldsValue.current),
     formatFieldsValue: formatFieldsValue.current,
   };
 }

@@ -21,8 +21,8 @@ export interface YFormItemProps<T = any>
   oldValue?: T;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
-  format?: FormatFieldsValue<T>['format'] | FormatFieldsValue<T>[];
-  unFormat?: FormatFieldsValue<T>['format'];
+  format?: FormatFieldsValue['format'] | FormatFieldsValue[];
+  unFormat?: FormatFieldsValue['format'];
   style?: React.CSSProperties;
   offset?: number;
   children?:
@@ -35,19 +35,10 @@ export interface YFormItemProps<T = any>
   hideLable?: React.ReactNode; // 隐藏公共 label 用于得到 placeholder 和 rules required 的 message
 }
 
-export interface FormatFieldsValue<T = any> {
+export interface FormatFieldsValue {
   name: FormItemProps['name'];
   isOmit?: boolean;
   format?: (value: any, parentValues?: any) => any;
-}
-
-// 内部使用，类型不重要
-export interface InternalYFormItemProps extends YFormItemProps {
-  dataSource?: any;
-  items?: any;
-  scenes?: any;
-  onSave?: any;
-  _addonAfter?: React.ReactNode;
 }
 
 export interface YFormItemsProps
@@ -86,10 +77,7 @@ const Items = (props: YFormItemsProps) => {
 
   const itemList: React.ReactNode[] = [];
 
-  const eachItem = (
-    list: YFormItemsTypeArray<InternalYFormItemProps>[] | React.ReactNode,
-    pIndex?: number,
-  ) => {
+  const eachItem = (list: YFormDataSource[], pIndex?: number) => {
     if (isArray(list)) {
       forEach(list, (item, index) => {
         // 如果还是是数组就回调该方法
