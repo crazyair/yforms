@@ -1,10 +1,10 @@
 import React from 'react';
-import { map, merge, get, isArray, isObject } from 'lodash';
+import { map, get, isArray, isObject } from 'lodash';
 import classNames from 'classnames';
 import warning from 'warning';
 
 import YForm from '..';
-import { oneLineItemStyle } from '../utils';
+import { oneLineItemStyle, mergeWithDom } from '../utils';
 import { BaseComponentProps } from '../ItemsType';
 import { YFormItemProps } from '../Items';
 
@@ -31,7 +31,7 @@ export default (props: YFormOneLineProps['componentProps']) => {
       if (!item) return;
       const _style = get(styleObj, index, {});
       if (isObject(item)) {
-        return merge({}, { display: 'inline-block', style: { ..._style }, scenes }, item);
+        return mergeWithDom({ display: 'inline-block', style: { ..._style }, scenes }, item);
       }
     }).filter((x) => x);
   }

@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import { Form } from 'antd';
-import { merge, forEach, isArray, mapKeys, pick } from 'lodash';
+import { forEach, isArray, mapKeys, pick, merge } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';

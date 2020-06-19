@@ -220,7 +220,7 @@ export const useImmutableValue = (value: any) => {
   return v.current;
 };
 
-export const mergeWithDom = (obj, ...params) => {
+export const mergeWithDom = (obj: any, ...params: any[]) => {
   return mergeWith(obj, ...params, (_, srcValue) => {
     // 如果是元素则返回要更改的值，不是则不处理
     if (isValidElement(srcValue)) {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Form } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { map, merge, isArray, concat } from 'lodash';
+import { map, isArray, concat } from 'lodash';
 import classNames from 'classnames';
 
 import YForm from '../index';
-import { oneLineItemStyle } from '../utils';
+import { oneLineItemStyle, mergeWithDom } from '../utils';
 import { YFormItemProps } from '../Items';
 
 export type ShowIconsType = {
@@ -66,8 +66,7 @@ export default (props: YFormListProps['componentProps']) => {
             <>
               {fields.map((field, index) => {
                 const _showIcons = onShowIcons ? onShowIcons({ index }) : {};
-                const { showAdd: _showAdd, showRemove: _showRemove } = merge(
-                  {},
+                const { showAdd: _showAdd, showRemove: _showRemove } = mergeWithDom(
                   { showAdd, showRemove },
                   _showIcons,
                 );
@@ -103,8 +102,7 @@ export default (props: YFormListProps['componentProps']) => {
                 let _children = dataSource;
                 if (isArray(dataSource)) {
                   _children = map(dataSource, (item, index) => {
-                    const _item = merge(
-                      {},
+                    const _item = mergeWithDom(
                       {
                         scenes,
                         offset,
