@@ -14,8 +14,6 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   const { name, children } = rest;
   const formProps = useContext(YForm.YFormContext);
-  const itemsProps = useContext(YForm.YFormItemsContext);
-  const listContext = useContext(YForm.ListContent);
 
   const {
     itemsType = {},
@@ -24,8 +22,16 @@ const Item: React.FC<YFormDataSource> = (props) => {
     getScene,
     onFormatFieldsValue,
   } = formProps;
+
+  const itemsProps = useContext(YForm.YFormItemsContext);
   const { scenes: thisScenes } = itemsProps;
+
+  const listContext = useContext(YForm.ListContent);
   const { prefixName } = listContext;
+
+  // List 会有拼接 name ，这里获取 all name path
+  const allName = prefixName ? concat(prefixName, name) : name;
+
   const mergeProps = mergeWithDom(
     {},
     pick(formProps, ['scenes', 'offset', 'disabled']),
@@ -36,12 +42,9 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if ('isShow' in props && !props.isShow) return null;
 
   const _scenes = mergeWithDom({}, thisScenes, scenes);
-  let _itemProps = { ...rest };
-  // offset 层级增加
-  _itemProps.offset = (props.offset || 0) + (itemsProps.offset || 0);
-
-  // List 会有拼接 name ，这里获取 all name path
-  const allName = prefixName ? concat(prefixName, name) : name;
+  let _props = mergeWithDom({}, mergeProps, rest, {
+    offset: (props.offset || 0) + (itemsProps.offset || 0),
+  });
 
   // 提交前格式化
   if (format) {
@@ -51,9 +54,8 @@ const Item: React.FC<YFormDataSource> = (props) => {
     } else {
       _format = map(format, (item) => {
         const _item = { ...item };
-        const { name } = item;
-        if (name) {
-          _item.name = prefixName ? concat(prefixName, name) : name;
+        if (item.name) {
+          _item.name = allName;
         }
         return _item;
       });
@@ -65,28 +67,29 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if (unFormat) {
     onUnFormatFieldsValue({ name: allName, format: unFormat });
     if (oldValues && _scenes.diff) {
-      _itemProps = {
+      _props = {
         oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
-        ..._itemProps,
+        ..._props,
       };
     }
   }
   let _componentProps = { ...props.componentProps };
   const typeProps = get(itemsType, props.type) || {};
+  // 原类型
   typeProps.type = props.type;
   const defaultData = {
     formProps,
     itemsProps: mergeProps,
-    typeProps,
-    itemProps: _itemProps,
+    itemProps: _props,
     componentProps: _componentProps,
+    typeProps,
   };
 
   // 参数修改
   const _defaultData = defaultData;
   const { modifyProps } = typeProps;
   if (modifyProps) {
-    mergeWithDom(_defaultData, { ...modifyProps(defaultData) });
+    mergeWithDom(_defaultData, modifyProps(defaultData));
   }
 
   mapKeys(_scenes, (value: boolean, key: string) => {
@@ -101,10 +104,11 @@ const Item: React.FC<YFormDataSource> = (props) => {
       }
     }
   });
-  _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
+  // _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
+  _props = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
   _componentProps = _defaultData.componentProps;
 
-  const { type, dataSource, componentProps, ...formItemProps } = _itemProps;
+  const { type, dataSource, componentProps, ...formItemProps } = _props;
   const _formItemProps = formItemProps;
   const { isShow, shouldUpdate } = _formItemProps;
 
@@ -168,7 +172,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       </ItemChildren>
     );
   } else {
-    dom = <React.Fragment>{domChildren}</React.Fragment>;
+    dom = domChildren;
   }
   if (typeof isShow === 'function') {
     return (
@@ -180,7 +184,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
     );
   }
   return (
-    <YForm.YFormItemContext.Provider value={{ ..._itemProps }}>
+    <YForm.YFormItemContext.Provider value={omit(_props, ['children'])}>
       {dom}
     </YForm.YFormItemContext.Provider>
   );

@@ -106,7 +106,7 @@ export const Config = (options: YFormConfig) => {
 
 const InternalForm = React.memo<YFormProps>((thisProps) => {
   const props = { ...globalConfig.defaultFormProps, ...thisProps };
-  const { scenes, getScene = globalConfig.getScene, offset } = props;
+  const { scenes, getScene = globalConfig.getScene, offset = 0 } = props;
   const _scenes = merge({}, globalConfig.scenes, scenes);
   const _defaultData = { formProps: props };
   mapKeys(_scenes, (value: boolean, key: string) => {

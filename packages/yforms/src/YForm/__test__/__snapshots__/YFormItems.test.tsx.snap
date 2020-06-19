@@ -72,259 +72,271 @@ Object {
                 class="yform-items"
               />
               <div
-                class="ant-row ant-form-item"
+                class="yform-items"
               >
                 <div
-                  class="ant-col ant-col-4 ant-form-item-label"
-                >
-                  <label
-                    class="ant-form-item-required"
-                    title="手机号"
-                  >
-                    手机号
-                  </label>
-                </div>
-                <div
-                  class="ant-col ant-col-20 ant-form-item-control"
+                  class="ant-row ant-form-item"
                 >
                   <div
-                    class="ant-form-item-control-input"
+                    class="ant-col ant-col-4 ant-form-item-label"
                   >
-                    <div
-                      class="ant-form-item-control-input-content"
+                    <label
+                      class="ant-form-item-required"
+                      title="手机号"
                     >
-                      <input
-                        class="ant-input"
-                        id="phones_0_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value="17777777777"
-                      />
-                      <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
-                      >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      />
-                    </div>
+                      手机号
+                    </label>
                   </div>
-                </div>
-              </div>
-              <div
-                class="ant-row ant-form-item"
-              >
-                <div
-                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-                >
                   <div
-                    class="ant-form-item-control-input"
+                    class="ant-col ant-col-20 ant-form-item-control"
                   >
                     <div
-                      class="ant-form-item-control-input-content"
+                      class="ant-form-item-control-input"
                     >
-                      <input
-                        class="ant-input"
-                        id="phones_1_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value="18888888888"
-                      />
                       <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
+                        class="ant-form-item-control-input-content"
                       >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="ant-row ant-form-item"
-              >
-                <div
-                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-                >
-                  <div
-                    class="ant-form-item-control-input"
-                  >
-                    <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <input
-                        class="ant-input"
-                        id="phones_2_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
-                      >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      >
+                        <input
+                          class="ant-input"
+                          id="phones_0_phone"
+                          placeholder="请输入手机号"
+                          style="display: inline-block;"
+                          type="text"
+                          value="17777777777"
+                        />
                         <div
-                          style="padding: 5px 0px;"
+                          class="padding-icons inline-icons"
+                          style="display: inline-block; width: 44px;"
                         >
                           <span
-                            class="ant-form-text old-value"
+                            aria-label="plus-circle"
+                            class="anticon anticon-plus-circle"
+                            role="img"
+                            tabindex="-1"
                           >
-                            18888888888
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="plus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
                           </span>
+                          <span
+                            aria-label="minus-circle"
+                            class="anticon anticon-minus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="minus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                        <div
+                          class="yform-items diff"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="yform-items"
+              >
+                <div
+                  class="ant-row ant-form-item"
+                >
+                  <div
+                    class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <input
+                          class="ant-input"
+                          id="phones_1_phone"
+                          placeholder="请输入手机号"
+                          style="display: inline-block;"
+                          type="text"
+                          value="18888888888"
+                        />
+                        <div
+                          class="padding-icons inline-icons"
+                          style="display: inline-block; width: 44px;"
+                        >
+                          <span
+                            aria-label="plus-circle"
+                            class="anticon anticon-plus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="plus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            aria-label="minus-circle"
+                            class="anticon anticon-minus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="minus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                        <div
+                          class="yform-items diff"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="yform-items"
+              >
+                <div
+                  class="ant-row ant-form-item"
+                >
+                  <div
+                    class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <input
+                          class="ant-input"
+                          id="phones_2_phone"
+                          placeholder="请输入手机号"
+                          style="display: inline-block;"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          class="padding-icons inline-icons"
+                          style="display: inline-block; width: 44px;"
+                        >
+                          <span
+                            aria-label="plus-circle"
+                            class="anticon anticon-plus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="plus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            aria-label="minus-circle"
+                            class="anticon anticon-minus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="minus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                        <div
+                          class="yform-items diff"
+                        >
+                          <div
+                            style="padding: 5px 0px;"
+                          >
+                            <span
+                              class="ant-form-text old-value"
+                            >
+                              18888888888
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1367,44 +1379,48 @@ Object {
               </div>
             </div>
             <div
-              class="ant-row ant-form-item"
+              class="yform-items"
             >
               <div
-                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                class="ant-row ant-form-item"
               >
                 <div
-                  class="ant-form-item-control-input"
+                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
                 >
                   <div
-                    class="ant-form-item-control-input-content"
+                    class="ant-form-item-control-input"
                   >
                     <div
-                      class="ant-space ant-space-horizontal ant-space-align-center"
+                      class="ant-form-item-control-input-content"
                     >
                       <div
-                        class="ant-space-item"
-                        style="margin-right: 8px;"
+                        class="ant-space ant-space-horizontal ant-space-align-center"
                       >
-                        <button
-                          class="ant-btn ant-btn-primary"
-                          type="submit"
+                        <div
+                          class="ant-space-item"
+                          style="margin-right: 8px;"
                         >
-                          <span>
-                            提 交
-                          </span>
-                        </button>
-                      </div>
-                      <div
-                        class="ant-space-item"
-                      >
-                        <button
-                          class="ant-btn"
-                          type="button"
+                          <button
+                            class="ant-btn ant-btn-primary"
+                            type="submit"
+                          >
+                            <span>
+                              提 交
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          class="ant-space-item"
                         >
-                          <span>
-                            取 消
-                          </span>
-                        </button>
+                          <button
+                            class="ant-btn"
+                            type="button"
+                          >
+                            <span>
+                              取 消
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1463,116 +1479,23 @@ Object {
                 class="yform-items"
               />
               <div
-                class="ant-row ant-form-item"
+                class="yform-items"
               >
                 <div
-                  class="ant-col ant-col-4 ant-form-item-label"
-                >
-                  <label
-                    class="ant-form-item-required"
-                    title="手机号"
-                  >
-                    手机号
-                  </label>
-                </div>
-                <div
-                  class="ant-col ant-col-20 ant-form-item-control"
+                  class="ant-row ant-form-item"
                 >
                   <div
-                    class="ant-form-item-control-input"
-                  >
-                    <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <input
-                        class="ant-input"
-                        id="phones_0_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value="17777777777"
-                      />
-                      <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
-                      >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="list"
-              >
-                <div
-                  class="yform-items"
-                />
-                <div
-                  class="ant-row ant-form-item mb0"
-                >
-                  <div
-                    class="ant-col ant-col-6 ant-form-item-label"
+                    class="ant-col ant-col-4 ant-form-item-label"
                   >
                     <label
-                      class=""
-                      title="用户"
+                      class="ant-form-item-required"
+                      title="手机号"
                     >
-                      用户
+                      手机号
                     </label>
                   </div>
                   <div
-                    class="ant-col ant-col-18 ant-form-item-control"
+                    class="ant-col ant-col-20 ant-form-item-control"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -1580,110 +1503,14 @@ Object {
                       <div
                         class="ant-form-item-control-input-content"
                       >
-                        <div
-                          class="one-line"
+                        <input
+                          class="ant-input"
+                          id="phones_0_phone"
+                          placeholder="请输入手机号"
                           style="display: inline-block;"
-                        >
-                          <div
-                            class="yform-items"
-                          >
-                            <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
-                              style="display: inline-block;"
-                            >
-                              <div
-                                class="ant-col ant-form-item-label"
-                              >
-                                <label
-                                  class="ant-form-item-required"
-                                  title="姓名"
-                                >
-                                  姓名
-                                </label>
-                              </div>
-                              <div
-                                class="ant-col ant-form-item-control"
-                              >
-                                <div
-                                  class="ant-form-item-control-input"
-                                >
-                                  <div
-                                    class="ant-form-item-control-input-content"
-                                  >
-                                    <input
-                                      class="ant-input"
-                                      id="phones_0_users_0_name"
-                                      placeholder="请输入姓名"
-                                      type="text"
-                                      value="aaa"
-                                    />
-                                    <div
-                                      class="yform-items diff"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
-                              style="display: inline-block; width: 8px;"
-                            >
-                              <div
-                                class="ant-col ant-form-item-control"
-                              >
-                                <div
-                                  class="ant-form-item-control-input"
-                                >
-                                  <div
-                                    class="ant-form-item-control-input-content"
-                                  >
-                                    <span />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
-                              style="display: inline-block;"
-                            >
-                              <div
-                                class="ant-col ant-form-item-label"
-                              >
-                                <label
-                                  class="ant-form-item-required"
-                                  title="年龄"
-                                >
-                                  年龄
-                                </label>
-                              </div>
-                              <div
-                                class="ant-col ant-form-item-control"
-                              >
-                                <div
-                                  class="ant-form-item-control-input"
-                                >
-                                  <div
-                                    class="ant-form-item-control-input-content"
-                                  >
-                                    <input
-                                      class="ant-input"
-                                      id="phones_0_users_0_age"
-                                      placeholder="请输入年龄"
-                                      type="text"
-                                      value=""
-                                    />
-                                    <div
-                                      class="yform-items diff"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          type="text"
+                          value="17777777777"
+                        />
                         <div
                           class="padding-icons inline-icons"
                           style="display: inline-block; width: 44px;"
@@ -1737,71 +1564,142 @@ Object {
                             </svg>
                           </span>
                         </div>
+                        <div
+                          class="yform-items diff"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
-                  class="ant-row ant-form-item mb0"
+                  class="list"
                 >
                   <div
-                    class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    class="yform-items"
+                  />
+                  <div
+                    class="yform-items"
                   >
                     <div
-                      class="ant-form-item-control-input"
+                      class="ant-row ant-form-item mb0"
                     >
                       <div
-                        class="ant-form-item-control-input-content"
+                        class="ant-col ant-col-6 ant-form-item-label"
+                      >
+                        <label
+                          class=""
+                          title="用户"
+                        >
+                          用户
+                        </label>
+                      </div>
+                      <div
+                        class="ant-col ant-col-18 ant-form-item-control"
                       >
                         <div
-                          class="one-line"
-                          style="display: inline-block;"
+                          class="ant-form-item-control-input"
                         >
                           <div
-                            class="yform-items"
+                            class="ant-form-item-control-input-content"
                           >
                             <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
+                              class="one-line"
                               style="display: inline-block;"
                             >
                               <div
-                                class="ant-col ant-form-item-label"
-                              >
-                                <label
-                                  class="ant-form-item-required"
-                                  title="姓名"
-                                >
-                                  姓名
-                                </label>
-                              </div>
-                              <div
-                                class="ant-col ant-form-item-control"
+                                class="yform-items"
                               >
                                 <div
-                                  class="ant-form-item-control-input"
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block;"
                                 >
                                   <div
-                                    class="ant-form-item-control-input-content"
+                                    class="ant-col ant-form-item-label"
                                   >
-                                    <input
-                                      class="ant-input"
-                                      id="phones_0_users_1_name"
-                                      placeholder="请输入姓名"
-                                      type="text"
-                                      value=""
-                                    />
+                                    <label
+                                      class="ant-form-item-required"
+                                      title="姓名"
+                                    >
+                                      姓名
+                                    </label>
+                                  </div>
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
                                     <div
-                                      class="yform-items diff"
+                                      class="ant-form-item-control-input"
                                     >
                                       <div
-                                        style="padding: 5px 0px;"
+                                        class="ant-form-item-control-input-content"
                                       >
-                                        <span
-                                          class="ant-form-text old-value"
-                                        >
-                                          aaa
-                                        </span>
+                                        <input
+                                          class="ant-input"
+                                          id="phones_0_users_0_name"
+                                          placeholder="请输入姓名"
+                                          type="text"
+                                          value="aaa"
+                                        />
+                                        <div
+                                          class="yform-items diff"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block; width: 8px;"
+                                >
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input"
+                                    >
+                                      <div
+                                        class="ant-form-item-control-input-content"
+                                      >
+                                        <span />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block;"
+                                >
+                                  <div
+                                    class="ant-col ant-form-item-label"
+                                  >
+                                    <label
+                                      class="ant-form-item-required"
+                                      title="年龄"
+                                    >
+                                      年龄
+                                    </label>
+                                  </div>
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input"
+                                    >
+                                      <div
+                                        class="ant-form-item-control-input-content"
+                                      >
+                                        <input
+                                          class="ant-input"
+                                          id="phones_0_users_0_age"
+                                          placeholder="请输入年龄"
+                                          type="text"
+                                          value=""
+                                        />
+                                        <div
+                                          class="yform-items diff"
+                                        />
                                       </div>
                                     </div>
                                   </div>
@@ -1809,64 +1707,329 @@ Object {
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
-                              style="display: inline-block; width: 8px;"
+                              class="padding-icons inline-icons"
+                              style="display: inline-block; width: 44px;"
+                            >
+                              <span
+                                aria-label="plus-circle"
+                                class="anticon anticon-plus-circle"
+                                role="img"
+                                tabindex="-1"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="plus-circle"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                  />
+                                  <path
+                                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                  />
+                                </svg>
+                              </span>
+                              <span
+                                aria-label="minus-circle"
+                                class="anticon anticon-minus-circle"
+                                role="img"
+                                tabindex="-1"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="minus-circle"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                  />
+                                  <path
+                                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="yform-items"
+                  >
+                    <div
+                      class="ant-row ant-form-item mb0"
+                    >
+                      <div
+                        class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                      >
+                        <div
+                          class="ant-form-item-control-input"
+                        >
+                          <div
+                            class="ant-form-item-control-input-content"
+                          >
+                            <div
+                              class="one-line"
+                              style="display: inline-block;"
                             >
                               <div
-                                class="ant-col ant-form-item-control"
+                                class="yform-items"
                               >
                                 <div
-                                  class="ant-form-item-control-input"
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block;"
                                 >
                                   <div
-                                    class="ant-form-item-control-input-content"
+                                    class="ant-col ant-form-item-label"
                                   >
-                                    <span />
+                                    <label
+                                      class="ant-form-item-required"
+                                      title="姓名"
+                                    >
+                                      姓名
+                                    </label>
+                                  </div>
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input"
+                                    >
+                                      <div
+                                        class="ant-form-item-control-input-content"
+                                      >
+                                        <input
+                                          class="ant-input"
+                                          id="phones_0_users_1_name"
+                                          placeholder="请输入姓名"
+                                          type="text"
+                                          value=""
+                                        />
+                                        <div
+                                          class="yform-items diff"
+                                        >
+                                          <div
+                                            style="padding: 5px 0px;"
+                                          >
+                                            <span
+                                              class="ant-form-text old-value"
+                                            >
+                                              aaa
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block; width: 8px;"
+                                >
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input"
+                                    >
+                                      <div
+                                        class="ant-form-item-control-input-content"
+                                      >
+                                        <span />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="ant-row ant-form-item"
+                                  display="inline-block"
+                                  style="display: inline-block;"
+                                >
+                                  <div
+                                    class="ant-col ant-form-item-label"
+                                  >
+                                    <label
+                                      class="ant-form-item-required"
+                                      title="年龄"
+                                    >
+                                      年龄
+                                    </label>
+                                  </div>
+                                  <div
+                                    class="ant-col ant-form-item-control"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input"
+                                    >
+                                      <div
+                                        class="ant-form-item-control-input-content"
+                                      >
+                                        <input
+                                          class="ant-input"
+                                          id="phones_0_users_1_age"
+                                          placeholder="请输入年龄"
+                                          type="text"
+                                          value=""
+                                        />
+                                        <div
+                                          class="yform-items diff"
+                                        />
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <div
-                              class="ant-row ant-form-item"
-                              display="inline-block"
-                              style="display: inline-block;"
+                              class="padding-icons inline-icons"
+                              style="display: inline-block; width: 44px;"
                             >
-                              <div
-                                class="ant-col ant-form-item-label"
+                              <span
+                                aria-label="plus-circle"
+                                class="anticon anticon-plus-circle"
+                                role="img"
+                                tabindex="-1"
                               >
-                                <label
-                                  class="ant-form-item-required"
-                                  title="年龄"
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="plus-circle"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
                                 >
-                                  年龄
-                                </label>
-                              </div>
-                              <div
-                                class="ant-col ant-form-item-control"
+                                  <path
+                                    d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                  />
+                                  <path
+                                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                  />
+                                </svg>
+                              </span>
+                              <span
+                                aria-label="minus-circle"
+                                class="anticon anticon-minus-circle"
+                                role="img"
+                                tabindex="-1"
                               >
-                                <div
-                                  class="ant-form-item-control-input"
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="minus-circle"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
                                 >
-                                  <div
-                                    class="ant-form-item-control-input-content"
-                                  >
-                                    <input
-                                      class="ant-input"
-                                      id="phones_0_users_1_age"
-                                      placeholder="请输入年龄"
-                                      type="text"
-                                      value=""
-                                    />
-                                    <div
-                                      class="yform-items diff"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
+                                  <path
+                                    d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                  />
+                                  <path
+                                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                  />
+                                </svg>
+                              </span>
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="yform-items"
+                  >
+                    <div
+                      class="ant-row ant-form-item"
+                    >
+                      <div
+                        class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                      >
+                        <div
+                          class="ant-form-item-control-input"
+                        >
+                          <div
+                            class="ant-form-item-control-input-content"
+                          >
+                            <button
+                              class="ant-btn ant-btn-dashed"
+                              style="width: 100%;"
+                              type="button"
+                            >
+                              <span
+                                aria-label="plus"
+                                class="anticon anticon-plus"
+                                role="img"
+                                style="padding-right: 5px;"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="plus"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <defs>
+                                    <style />
+                                  </defs>
+                                  <path
+                                    d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                  />
+                                  <path
+                                    d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                  />
+                                </svg>
+                              </span>
+                              添加用户
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="yform-items"
+              >
+                <div
+                  class="ant-row ant-form-item"
+                >
+                  <div
+                    class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <input
+                          class="ant-input"
+                          id="phones_1_phone"
+                          placeholder="请输入手机号"
+                          style="display: inline-block;"
+                          type="text"
+                          value="18888888888"
+                        />
                         <div
                           class="padding-icons inline-icons"
                           style="display: inline-block; width: 44px;"
@@ -1920,59 +2083,69 @@ Object {
                             </svg>
                           </span>
                         </div>
+                        <div
+                          class="yform-items diff"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
-                  class="yform-items"
+                  class="list"
                 >
                   <div
-                    class="ant-row ant-form-item"
+                    class="yform-items"
+                  />
+                  <div
+                    class="yform-items"
                   >
                     <div
-                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                      class="ant-row ant-form-item"
                     >
                       <div
-                        class="ant-form-item-control-input"
+                        class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
                       >
                         <div
-                          class="ant-form-item-control-input-content"
+                          class="ant-form-item-control-input"
                         >
-                          <button
-                            class="ant-btn ant-btn-dashed"
-                            style="width: 100%;"
-                            type="button"
+                          <div
+                            class="ant-form-item-control-input-content"
                           >
-                            <span
-                              aria-label="plus"
-                              class="anticon anticon-plus"
-                              role="img"
-                              style="padding-right: 5px;"
+                            <button
+                              class="ant-btn ant-btn-dashed"
+                              style="width: 100%;"
+                              type="button"
                             >
-                              <svg
-                                aria-hidden="true"
-                                class=""
-                                data-icon="plus"
-                                fill="currentColor"
-                                focusable="false"
-                                height="1em"
-                                viewBox="64 64 896 896"
-                                width="1em"
+                              <span
+                                aria-label="plus"
+                                class="anticon anticon-plus"
+                                role="img"
+                                style="padding-right: 5px;"
                               >
-                                <defs>
-                                  <style />
-                                </defs>
-                                <path
-                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                                />
-                                <path
-                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                                />
-                              </svg>
-                            </span>
-                            添加用户
-                          </button>
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="plus"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <defs>
+                                    <style />
+                                  </defs>
+                                  <path
+                                    d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                  />
+                                  <path
+                                    d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                  />
+                                </svg>
+                              </span>
+                              添加用户
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1980,291 +2153,154 @@ Object {
                 </div>
               </div>
               <div
-                class="ant-row ant-form-item"
+                class="yform-items"
               >
                 <div
-                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                  class="ant-row ant-form-item"
                 >
                   <div
-                    class="ant-form-item-control-input"
+                    class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
                   >
                     <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <input
-                        class="ant-input"
-                        id="phones_1_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value="18888888888"
-                      />
-                      <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
-                      >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="list"
-              >
-                <div
-                  class="yform-items"
-                />
-                <div
-                  class="yform-items"
-                >
-                  <div
-                    class="ant-row ant-form-item"
-                  >
-                    <div
-                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                      class="ant-form-item-control-input"
                     >
                       <div
-                        class="ant-form-item-control-input"
+                        class="ant-form-item-control-input-content"
                       >
+                        <input
+                          class="ant-input"
+                          id="phones_2_phone"
+                          placeholder="请输入手机号"
+                          style="display: inline-block;"
+                          type="text"
+                          value=""
+                        />
                         <div
-                          class="ant-form-item-control-input-content"
-                        >
-                          <button
-                            class="ant-btn ant-btn-dashed"
-                            style="width: 100%;"
-                            type="button"
-                          >
-                            <span
-                              aria-label="plus"
-                              class="anticon anticon-plus"
-                              role="img"
-                              style="padding-right: 5px;"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                class=""
-                                data-icon="plus"
-                                fill="currentColor"
-                                focusable="false"
-                                height="1em"
-                                viewBox="64 64 896 896"
-                                width="1em"
-                              >
-                                <defs>
-                                  <style />
-                                </defs>
-                                <path
-                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                                />
-                                <path
-                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                                />
-                              </svg>
-                            </span>
-                            添加用户
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="ant-row ant-form-item"
-              >
-                <div
-                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-                >
-                  <div
-                    class="ant-form-item-control-input"
-                  >
-                    <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <input
-                        class="ant-input"
-                        id="phones_2_phone"
-                        placeholder="请输入手机号"
-                        style="display: inline-block;"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        class="padding-icons inline-icons"
-                        style="display: inline-block; width: 44px;"
-                      >
-                        <span
-                          aria-label="plus-circle"
-                          class="anticon anticon-plus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="plus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          aria-label="minus-circle"
-                          class="anticon anticon-minus-circle"
-                          role="img"
-                          tabindex="-1"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class=""
-                            data-icon="minus-circle"
-                            fill="currentColor"
-                            focusable="false"
-                            height="1em"
-                            viewBox="64 64 896 896"
-                            width="1em"
-                          >
-                            <path
-                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                            />
-                            <path
-                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <div
-                        class="yform-items diff"
-                      >
-                        <div
-                          style="padding: 5px 0px;"
+                          class="padding-icons inline-icons"
+                          style="display: inline-block; width: 44px;"
                         >
                           <span
-                            class="ant-form-text old-value"
+                            aria-label="plus-circle"
+                            class="anticon anticon-plus-circle"
+                            role="img"
+                            tabindex="-1"
                           >
-                            18888888888
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="plus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
                           </span>
+                          <span
+                            aria-label="minus-circle"
+                            class="anticon anticon-minus-circle"
+                            role="img"
+                            tabindex="-1"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class=""
+                              data-icon="minus-circle"
+                              fill="currentColor"
+                              focusable="false"
+                              height="1em"
+                              viewBox="64 64 896 896"
+                              width="1em"
+                            >
+                              <path
+                                d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                              />
+                              <path
+                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                        <div
+                          class="yform-items diff"
+                        >
+                          <div
+                            style="padding: 5px 0px;"
+                          >
+                            <span
+                              class="ant-form-text old-value"
+                            >
+                              18888888888
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="list"
-              >
                 <div
-                  class="yform-items"
-                />
-                <div
-                  class="yform-items"
+                  class="list"
                 >
                   <div
-                    class="ant-row ant-form-item"
+                    class="yform-items"
+                  />
+                  <div
+                    class="yform-items"
                   >
                     <div
-                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                      class="ant-row ant-form-item"
                     >
                       <div
-                        class="ant-form-item-control-input"
+                        class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
                       >
                         <div
-                          class="ant-form-item-control-input-content"
+                          class="ant-form-item-control-input"
                         >
-                          <button
-                            class="ant-btn ant-btn-dashed"
-                            style="width: 100%;"
-                            type="button"
+                          <div
+                            class="ant-form-item-control-input-content"
                           >
-                            <span
-                              aria-label="plus"
-                              class="anticon anticon-plus"
-                              role="img"
-                              style="padding-right: 5px;"
+                            <button
+                              class="ant-btn ant-btn-dashed"
+                              style="width: 100%;"
+                              type="button"
                             >
-                              <svg
-                                aria-hidden="true"
-                                class=""
-                                data-icon="plus"
-                                fill="currentColor"
-                                focusable="false"
-                                height="1em"
-                                viewBox="64 64 896 896"
-                                width="1em"
+                              <span
+                                aria-label="plus"
+                                class="anticon anticon-plus"
+                                role="img"
+                                style="padding-right: 5px;"
                               >
-                                <defs>
-                                  <style />
-                                </defs>
-                                <path
-                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                                />
-                                <path
-                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                                />
-                              </svg>
-                            </span>
-                            添加用户
-                          </button>
+                                <svg
+                                  aria-hidden="true"
+                                  class=""
+                                  data-icon="plus"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <defs>
+                                    <style />
+                                  </defs>
+                                  <path
+                                    d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                  />
+                                  <path
+                                    d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                  />
+                                </svg>
+                              </span>
+                              添加用户
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2384,259 +2420,271 @@ Object {
               class="yform-items"
             />
             <div
-              class="ant-row ant-form-item"
+              class="yform-items"
             >
               <div
-                class="ant-col ant-col-4 ant-form-item-label"
-              >
-                <label
-                  class="ant-form-item-required"
-                  title="手机号"
-                >
-                  手机号
-                </label>
-              </div>
-              <div
-                class="ant-col ant-col-20 ant-form-item-control"
+                class="ant-row ant-form-item"
               >
                 <div
-                  class="ant-form-item-control-input"
+                  class="ant-col ant-col-4 ant-form-item-label"
                 >
-                  <div
-                    class="ant-form-item-control-input-content"
+                  <label
+                    class="ant-form-item-required"
+                    title="手机号"
                   >
-                    <input
-                      class="ant-input"
-                      id="phones_0_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value="17777777777"
-                    />
-                    <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
-                    >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    />
-                  </div>
+                    手机号
+                  </label>
                 </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-              >
                 <div
-                  class="ant-form-item-control-input"
+                  class="ant-col ant-col-20 ant-form-item-control"
                 >
                   <div
-                    class="ant-form-item-control-input-content"
+                    class="ant-form-item-control-input"
                   >
-                    <input
-                      class="ant-input"
-                      id="phones_1_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value="18888888888"
-                    />
                     <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
+                      class="ant-form-item-control-input-content"
                     >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="phones_2_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value=""
-                    />
-                    <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
-                    >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    >
+                      <input
+                        class="ant-input"
+                        id="phones_0_phone"
+                        placeholder="请输入手机号"
+                        style="display: inline-block;"
+                        type="text"
+                        value="17777777777"
+                      />
                       <div
-                        style="padding: 5px 0px;"
+                        class="padding-icons inline-icons"
+                        style="display: inline-block; width: 44px;"
                       >
                         <span
-                          class="ant-form-text old-value"
+                          aria-label="plus-circle"
+                          class="anticon anticon-plus-circle"
+                          role="img"
+                          tabindex="-1"
                         >
-                          18888888888
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="plus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
                         </span>
+                        <span
+                          aria-label="minus-circle"
+                          class="anticon anticon-minus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="minus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="yform-items diff"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="yform-items"
+            >
+              <div
+                class="ant-row ant-form-item"
+              >
+                <div
+                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input"
+                        id="phones_1_phone"
+                        placeholder="请输入手机号"
+                        style="display: inline-block;"
+                        type="text"
+                        value="18888888888"
+                      />
+                      <div
+                        class="padding-icons inline-icons"
+                        style="display: inline-block; width: 44px;"
+                      >
+                        <span
+                          aria-label="plus-circle"
+                          class="anticon anticon-plus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="plus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                        <span
+                          aria-label="minus-circle"
+                          class="anticon anticon-minus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="minus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="yform-items diff"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="yform-items"
+            >
+              <div
+                class="ant-row ant-form-item"
+              >
+                <div
+                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input"
+                        id="phones_2_phone"
+                        placeholder="请输入手机号"
+                        style="display: inline-block;"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        class="padding-icons inline-icons"
+                        style="display: inline-block; width: 44px;"
+                      >
+                        <span
+                          aria-label="plus-circle"
+                          class="anticon anticon-plus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="plus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                        <span
+                          aria-label="minus-circle"
+                          class="anticon anticon-minus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="minus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="yform-items diff"
+                      >
+                        <div
+                          style="padding: 5px 0px;"
+                        >
+                          <span
+                            class="ant-form-text old-value"
+                          >
+                            18888888888
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3679,44 +3727,48 @@ Object {
             </div>
           </div>
           <div
-            class="ant-row ant-form-item"
+            class="yform-items"
           >
             <div
-              class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+              class="ant-row ant-form-item"
             >
               <div
-                class="ant-form-item-control-input"
+                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
               >
                 <div
-                  class="ant-form-item-control-input-content"
+                  class="ant-form-item-control-input"
                 >
                   <div
-                    class="ant-space ant-space-horizontal ant-space-align-center"
+                    class="ant-form-item-control-input-content"
                   >
                     <div
-                      class="ant-space-item"
-                      style="margin-right: 8px;"
+                      class="ant-space ant-space-horizontal ant-space-align-center"
                     >
-                      <button
-                        class="ant-btn ant-btn-primary"
-                        type="submit"
+                      <div
+                        class="ant-space-item"
+                        style="margin-right: 8px;"
                       >
-                        <span>
-                          提 交
-                        </span>
-                      </button>
-                    </div>
-                    <div
-                      class="ant-space-item"
-                    >
-                      <button
-                        class="ant-btn"
-                        type="button"
+                        <button
+                          class="ant-btn ant-btn-primary"
+                          type="submit"
+                        >
+                          <span>
+                            提 交
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        class="ant-space-item"
                       >
-                        <span>
-                          取 消
-                        </span>
-                      </button>
+                        <button
+                          class="ant-btn"
+                          type="button"
+                        >
+                          <span>
+                            取 消
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3775,116 +3827,23 @@ Object {
               class="yform-items"
             />
             <div
-              class="ant-row ant-form-item"
+              class="yform-items"
             >
               <div
-                class="ant-col ant-col-4 ant-form-item-label"
-              >
-                <label
-                  class="ant-form-item-required"
-                  title="手机号"
-                >
-                  手机号
-                </label>
-              </div>
-              <div
-                class="ant-col ant-col-20 ant-form-item-control"
+                class="ant-row ant-form-item"
               >
                 <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="phones_0_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value="17777777777"
-                    />
-                    <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
-                    >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="list"
-            >
-              <div
-                class="yform-items"
-              />
-              <div
-                class="ant-row ant-form-item mb0"
-              >
-                <div
-                  class="ant-col ant-col-6 ant-form-item-label"
+                  class="ant-col ant-col-4 ant-form-item-label"
                 >
                   <label
-                    class=""
-                    title="用户"
+                    class="ant-form-item-required"
+                    title="手机号"
                   >
-                    用户
+                    手机号
                   </label>
                 </div>
                 <div
-                  class="ant-col ant-col-18 ant-form-item-control"
+                  class="ant-col ant-col-20 ant-form-item-control"
                 >
                   <div
                     class="ant-form-item-control-input"
@@ -3892,110 +3851,14 @@ Object {
                     <div
                       class="ant-form-item-control-input-content"
                     >
-                      <div
-                        class="one-line"
+                      <input
+                        class="ant-input"
+                        id="phones_0_phone"
+                        placeholder="请输入手机号"
                         style="display: inline-block;"
-                      >
-                        <div
-                          class="yform-items"
-                        >
-                          <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
-                            style="display: inline-block;"
-                          >
-                            <div
-                              class="ant-col ant-form-item-label"
-                            >
-                              <label
-                                class="ant-form-item-required"
-                                title="姓名"
-                              >
-                                姓名
-                              </label>
-                            </div>
-                            <div
-                              class="ant-col ant-form-item-control"
-                            >
-                              <div
-                                class="ant-form-item-control-input"
-                              >
-                                <div
-                                  class="ant-form-item-control-input-content"
-                                >
-                                  <input
-                                    class="ant-input"
-                                    id="phones_0_users_0_name"
-                                    placeholder="请输入姓名"
-                                    type="text"
-                                    value="aaa"
-                                  />
-                                  <div
-                                    class="yform-items diff"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
-                            style="display: inline-block; width: 8px;"
-                          >
-                            <div
-                              class="ant-col ant-form-item-control"
-                            >
-                              <div
-                                class="ant-form-item-control-input"
-                              >
-                                <div
-                                  class="ant-form-item-control-input-content"
-                                >
-                                  <span />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
-                            style="display: inline-block;"
-                          >
-                            <div
-                              class="ant-col ant-form-item-label"
-                            >
-                              <label
-                                class="ant-form-item-required"
-                                title="年龄"
-                              >
-                                年龄
-                              </label>
-                            </div>
-                            <div
-                              class="ant-col ant-form-item-control"
-                            >
-                              <div
-                                class="ant-form-item-control-input"
-                              >
-                                <div
-                                  class="ant-form-item-control-input-content"
-                                >
-                                  <input
-                                    class="ant-input"
-                                    id="phones_0_users_0_age"
-                                    placeholder="请输入年龄"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    class="yform-items diff"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        type="text"
+                        value="17777777777"
+                      />
                       <div
                         class="padding-icons inline-icons"
                         style="display: inline-block; width: 44px;"
@@ -4049,71 +3912,142 @@ Object {
                           </svg>
                         </span>
                       </div>
+                      <div
+                        class="yform-items diff"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
               <div
-                class="ant-row ant-form-item mb0"
+                class="list"
               >
                 <div
-                  class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                  class="yform-items"
+                />
+                <div
+                  class="yform-items"
                 >
                   <div
-                    class="ant-form-item-control-input"
+                    class="ant-row ant-form-item mb0"
                   >
                     <div
-                      class="ant-form-item-control-input-content"
+                      class="ant-col ant-col-6 ant-form-item-label"
+                    >
+                      <label
+                        class=""
+                        title="用户"
+                      >
+                        用户
+                      </label>
+                    </div>
+                    <div
+                      class="ant-col ant-col-18 ant-form-item-control"
                     >
                       <div
-                        class="one-line"
-                        style="display: inline-block;"
+                        class="ant-form-item-control-input"
                       >
                         <div
-                          class="yform-items"
+                          class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
+                            class="one-line"
                             style="display: inline-block;"
                           >
                             <div
-                              class="ant-col ant-form-item-label"
-                            >
-                              <label
-                                class="ant-form-item-required"
-                                title="姓名"
-                              >
-                                姓名
-                              </label>
-                            </div>
-                            <div
-                              class="ant-col ant-form-item-control"
+                              class="yform-items"
                             >
                               <div
-                                class="ant-form-item-control-input"
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block;"
                               >
                                 <div
-                                  class="ant-form-item-control-input-content"
+                                  class="ant-col ant-form-item-label"
                                 >
-                                  <input
-                                    class="ant-input"
-                                    id="phones_0_users_1_name"
-                                    placeholder="请输入姓名"
-                                    type="text"
-                                    value=""
-                                  />
+                                  <label
+                                    class="ant-form-item-required"
+                                    title="姓名"
+                                  >
+                                    姓名
+                                  </label>
+                                </div>
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
                                   <div
-                                    class="yform-items diff"
+                                    class="ant-form-item-control-input"
                                   >
                                     <div
-                                      style="padding: 5px 0px;"
+                                      class="ant-form-item-control-input-content"
                                     >
-                                      <span
-                                        class="ant-form-text old-value"
-                                      >
-                                        aaa
-                                      </span>
+                                      <input
+                                        class="ant-input"
+                                        id="phones_0_users_0_name"
+                                        placeholder="请输入姓名"
+                                        type="text"
+                                        value="aaa"
+                                      />
+                                      <div
+                                        class="yform-items diff"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block; width: 8px;"
+                              >
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input-content"
+                                    >
+                                      <span />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block;"
+                              >
+                                <div
+                                  class="ant-col ant-form-item-label"
+                                >
+                                  <label
+                                    class="ant-form-item-required"
+                                    title="年龄"
+                                  >
+                                    年龄
+                                  </label>
+                                </div>
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input-content"
+                                    >
+                                      <input
+                                        class="ant-input"
+                                        id="phones_0_users_0_age"
+                                        placeholder="请输入年龄"
+                                        type="text"
+                                        value=""
+                                      />
+                                      <div
+                                        class="yform-items diff"
+                                      />
                                     </div>
                                   </div>
                                 </div>
@@ -4121,64 +4055,329 @@ Object {
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
-                            style="display: inline-block; width: 8px;"
+                            class="padding-icons inline-icons"
+                            style="display: inline-block; width: 44px;"
+                          >
+                            <span
+                              aria-label="plus-circle"
+                              class="anticon anticon-plus-circle"
+                              role="img"
+                              tabindex="-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="plus-circle"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                />
+                                <path
+                                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                />
+                              </svg>
+                            </span>
+                            <span
+                              aria-label="minus-circle"
+                              class="anticon anticon-minus-circle"
+                              role="img"
+                              tabindex="-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="minus-circle"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                />
+                                <path
+                                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="yform-items"
+                >
+                  <div
+                    class="ant-row ant-form-item mb0"
+                  >
+                    <div
+                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    >
+                      <div
+                        class="ant-form-item-control-input"
+                      >
+                        <div
+                          class="ant-form-item-control-input-content"
+                        >
+                          <div
+                            class="one-line"
+                            style="display: inline-block;"
                           >
                             <div
-                              class="ant-col ant-form-item-control"
+                              class="yform-items"
                             >
                               <div
-                                class="ant-form-item-control-input"
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block;"
                               >
                                 <div
-                                  class="ant-form-item-control-input-content"
+                                  class="ant-col ant-form-item-label"
                                 >
-                                  <span />
+                                  <label
+                                    class="ant-form-item-required"
+                                    title="姓名"
+                                  >
+                                    姓名
+                                  </label>
+                                </div>
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input-content"
+                                    >
+                                      <input
+                                        class="ant-input"
+                                        id="phones_0_users_1_name"
+                                        placeholder="请输入姓名"
+                                        type="text"
+                                        value=""
+                                      />
+                                      <div
+                                        class="yform-items diff"
+                                      >
+                                        <div
+                                          style="padding: 5px 0px;"
+                                        >
+                                          <span
+                                            class="ant-form-text old-value"
+                                          >
+                                            aaa
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block; width: 8px;"
+                              >
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input-content"
+                                    >
+                                      <span />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="ant-row ant-form-item"
+                                display="inline-block"
+                                style="display: inline-block;"
+                              >
+                                <div
+                                  class="ant-col ant-form-item-label"
+                                >
+                                  <label
+                                    class="ant-form-item-required"
+                                    title="年龄"
+                                  >
+                                    年龄
+                                  </label>
+                                </div>
+                                <div
+                                  class="ant-col ant-form-item-control"
+                                >
+                                  <div
+                                    class="ant-form-item-control-input"
+                                  >
+                                    <div
+                                      class="ant-form-item-control-input-content"
+                                    >
+                                      <input
+                                        class="ant-input"
+                                        id="phones_0_users_1_age"
+                                        placeholder="请输入年龄"
+                                        type="text"
+                                        value=""
+                                      />
+                                      <div
+                                        class="yform-items diff"
+                                      />
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div
-                            class="ant-row ant-form-item"
-                            display="inline-block"
-                            style="display: inline-block;"
+                            class="padding-icons inline-icons"
+                            style="display: inline-block; width: 44px;"
                           >
-                            <div
-                              class="ant-col ant-form-item-label"
+                            <span
+                              aria-label="plus-circle"
+                              class="anticon anticon-plus-circle"
+                              role="img"
+                              tabindex="-1"
                             >
-                              <label
-                                class="ant-form-item-required"
-                                title="年龄"
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="plus-circle"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
                               >
-                                年龄
-                              </label>
-                            </div>
-                            <div
-                              class="ant-col ant-form-item-control"
+                                <path
+                                  d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                />
+                                <path
+                                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                />
+                              </svg>
+                            </span>
+                            <span
+                              aria-label="minus-circle"
+                              class="anticon anticon-minus-circle"
+                              role="img"
+                              tabindex="-1"
                             >
-                              <div
-                                class="ant-form-item-control-input"
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="minus-circle"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
                               >
-                                <div
-                                  class="ant-form-item-control-input-content"
-                                >
-                                  <input
-                                    class="ant-input"
-                                    id="phones_0_users_1_age"
-                                    placeholder="请输入年龄"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    class="yform-items diff"
-                                  />
-                                </div>
-                              </div>
-                            </div>
+                                <path
+                                  d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                                />
+                                <path
+                                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                                />
+                              </svg>
+                            </span>
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="yform-items"
+                >
+                  <div
+                    class="ant-row ant-form-item"
+                  >
+                    <div
+                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    >
+                      <div
+                        class="ant-form-item-control-input"
+                      >
+                        <div
+                          class="ant-form-item-control-input-content"
+                        >
+                          <button
+                            class="ant-btn ant-btn-dashed"
+                            style="width: 100%;"
+                            type="button"
+                          >
+                            <span
+                              aria-label="plus"
+                              class="anticon anticon-plus"
+                              role="img"
+                              style="padding-right: 5px;"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="plus"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <defs>
+                                  <style />
+                                </defs>
+                                <path
+                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                />
+                                <path
+                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                />
+                              </svg>
+                            </span>
+                            添加用户
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="yform-items"
+            >
+              <div
+                class="ant-row ant-form-item"
+              >
+                <div
+                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input"
+                        id="phones_1_phone"
+                        placeholder="请输入手机号"
+                        style="display: inline-block;"
+                        type="text"
+                        value="18888888888"
+                      />
                       <div
                         class="padding-icons inline-icons"
                         style="display: inline-block; width: 44px;"
@@ -4232,59 +4431,69 @@ Object {
                           </svg>
                         </span>
                       </div>
+                      <div
+                        class="yform-items diff"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
               <div
-                class="yform-items"
+                class="list"
               >
                 <div
-                  class="ant-row ant-form-item"
+                  class="yform-items"
+                />
+                <div
+                  class="yform-items"
                 >
                   <div
-                    class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    class="ant-row ant-form-item"
                   >
                     <div
-                      class="ant-form-item-control-input"
+                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
                     >
                       <div
-                        class="ant-form-item-control-input-content"
+                        class="ant-form-item-control-input"
                       >
-                        <button
-                          class="ant-btn ant-btn-dashed"
-                          style="width: 100%;"
-                          type="button"
+                        <div
+                          class="ant-form-item-control-input-content"
                         >
-                          <span
-                            aria-label="plus"
-                            class="anticon anticon-plus"
-                            role="img"
-                            style="padding-right: 5px;"
+                          <button
+                            class="ant-btn ant-btn-dashed"
+                            style="width: 100%;"
+                            type="button"
                           >
-                            <svg
-                              aria-hidden="true"
-                              class=""
-                              data-icon="plus"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="64 64 896 896"
-                              width="1em"
+                            <span
+                              aria-label="plus"
+                              class="anticon anticon-plus"
+                              role="img"
+                              style="padding-right: 5px;"
                             >
-                              <defs>
-                                <style />
-                              </defs>
-                              <path
-                                d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                              />
-                              <path
-                                d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                              />
-                            </svg>
-                          </span>
-                          添加用户
-                        </button>
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="plus"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <defs>
+                                  <style />
+                                </defs>
+                                <path
+                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                />
+                                <path
+                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                />
+                              </svg>
+                            </span>
+                            添加用户
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -4292,291 +4501,154 @@ Object {
               </div>
             </div>
             <div
-              class="ant-row ant-form-item"
+              class="yform-items"
             >
               <div
-                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
+                class="ant-row ant-form-item"
               >
                 <div
-                  class="ant-form-item-control-input"
+                  class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
                 >
                   <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="phones_1_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value="18888888888"
-                    />
-                    <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
-                    >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="list"
-            >
-              <div
-                class="yform-items"
-              />
-              <div
-                class="yform-items"
-              >
-                <div
-                  class="ant-row ant-form-item"
-                >
-                  <div
-                    class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    class="ant-form-item-control-input"
                   >
                     <div
-                      class="ant-form-item-control-input"
+                      class="ant-form-item-control-input-content"
                     >
+                      <input
+                        class="ant-input"
+                        id="phones_2_phone"
+                        placeholder="请输入手机号"
+                        style="display: inline-block;"
+                        type="text"
+                        value=""
+                      />
                       <div
-                        class="ant-form-item-control-input-content"
-                      >
-                        <button
-                          class="ant-btn ant-btn-dashed"
-                          style="width: 100%;"
-                          type="button"
-                        >
-                          <span
-                            aria-label="plus"
-                            class="anticon anticon-plus"
-                            role="img"
-                            style="padding-right: 5px;"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class=""
-                              data-icon="plus"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="64 64 896 896"
-                              width="1em"
-                            >
-                              <defs>
-                                <style />
-                              </defs>
-                              <path
-                                d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                              />
-                              <path
-                                d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                              />
-                            </svg>
-                          </span>
-                          添加用户
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-row ant-form-item"
-            >
-              <div
-                class="ant-col ant-col-20 ant-col-offset-4 ant-form-item-control"
-              >
-                <div
-                  class="ant-form-item-control-input"
-                >
-                  <div
-                    class="ant-form-item-control-input-content"
-                  >
-                    <input
-                      class="ant-input"
-                      id="phones_2_phone"
-                      placeholder="请输入手机号"
-                      style="display: inline-block;"
-                      type="text"
-                      value=""
-                    />
-                    <div
-                      class="padding-icons inline-icons"
-                      style="display: inline-block; width: 44px;"
-                    >
-                      <span
-                        aria-label="plus-circle"
-                        class="anticon anticon-plus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="plus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        aria-label="minus-circle"
-                        class="anticon anticon-minus-circle"
-                        role="img"
-                        tabindex="-1"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class=""
-                          data-icon="minus-circle"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
-                          />
-                          <path
-                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="yform-items diff"
-                    >
-                      <div
-                        style="padding: 5px 0px;"
+                        class="padding-icons inline-icons"
+                        style="display: inline-block; width: 44px;"
                       >
                         <span
-                          class="ant-form-text old-value"
+                          aria-label="plus-circle"
+                          class="anticon anticon-plus-circle"
+                          role="img"
+                          tabindex="-1"
                         >
-                          18888888888
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="plus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
                         </span>
+                        <span
+                          aria-label="minus-circle"
+                          class="anticon anticon-minus-circle"
+                          role="img"
+                          tabindex="-1"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class=""
+                            data-icon="minus-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M696 480H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h368c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z"
+                            />
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="yform-items diff"
+                      >
+                        <div
+                          style="padding: 5px 0px;"
+                        >
+                          <span
+                            class="ant-form-text old-value"
+                          >
+                            18888888888
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="list"
-            >
               <div
-                class="yform-items"
-              />
-              <div
-                class="yform-items"
+                class="list"
               >
                 <div
-                  class="ant-row ant-form-item"
+                  class="yform-items"
+                />
+                <div
+                  class="yform-items"
                 >
                   <div
-                    class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
+                    class="ant-row ant-form-item"
                   >
                     <div
-                      class="ant-form-item-control-input"
+                      class="ant-col ant-col-18 ant-col-offset-6 ant-form-item-control"
                     >
                       <div
-                        class="ant-form-item-control-input-content"
+                        class="ant-form-item-control-input"
                       >
-                        <button
-                          class="ant-btn ant-btn-dashed"
-                          style="width: 100%;"
-                          type="button"
+                        <div
+                          class="ant-form-item-control-input-content"
                         >
-                          <span
-                            aria-label="plus"
-                            class="anticon anticon-plus"
-                            role="img"
-                            style="padding-right: 5px;"
+                          <button
+                            class="ant-btn ant-btn-dashed"
+                            style="width: 100%;"
+                            type="button"
                           >
-                            <svg
-                              aria-hidden="true"
-                              class=""
-                              data-icon="plus"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="64 64 896 896"
-                              width="1em"
+                            <span
+                              aria-label="plus"
+                              class="anticon anticon-plus"
+                              role="img"
+                              style="padding-right: 5px;"
                             >
-                              <defs>
-                                <style />
-                              </defs>
-                              <path
-                                d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
-                              />
-                              <path
-                                d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
-                              />
-                            </svg>
-                          </span>
-                          添加用户
-                        </button>
+                              <svg
+                                aria-hidden="true"
+                                class=""
+                                data-icon="plus"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <defs>
+                                  <style />
+                                </defs>
+                                <path
+                                  d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+                                />
+                                <path
+                                  d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+                                />
+                              </svg>
+                            </span>
+                            添加用户
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -5075,32 +5147,36 @@ Object {
                         class="yform-items"
                       >
                         <div
-                          class="ant-space ant-space-horizontal ant-space-align-center"
+                          class="yform-items"
                         >
                           <div
-                            class="ant-space-item"
-                            style="margin-right: 8px;"
+                            class="ant-space ant-space-horizontal ant-space-align-center"
                           >
-                            <button
-                              class="ant-btn"
-                              type="button"
+                            <div
+                              class="ant-space-item"
+                              style="margin-right: 8px;"
                             >
-                              <span>
-                                取 消
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            class="ant-space-item"
-                          >
-                            <button
-                              class="ant-btn ant-btn-primary"
-                              type="submit"
+                              <button
+                                class="ant-btn"
+                                type="button"
+                              >
+                                <span>
+                                  取 消
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              class="ant-space-item"
                             >
-                              <span>
-                                提 交
-                              </span>
-                            </button>
+                              <button
+                                class="ant-btn ant-btn-primary"
+                                type="submit"
+                              >
+                                <span>
+                                  提 交
+                                </span>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>

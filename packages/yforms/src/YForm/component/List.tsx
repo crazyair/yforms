@@ -136,7 +136,7 @@ export default (props: YFormListProps['componentProps']) => {
                     key={field.key}
                     value={{ isList: true, field, prefixName: _name }}
                   >
-                    <YForm.Items noStyle>{_children}</YForm.Items>
+                    <YForm.Items>{_children}</YForm.Items>
                   </YForm.ListContent.Provider>
                 );
               })}
