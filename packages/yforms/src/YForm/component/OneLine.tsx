@@ -16,7 +16,7 @@ export interface YFormOneLineProps extends YFormItemProps {
 
 export default (props: YFormOneLineProps['componentProps']) => {
   const itemProps = React.useContext(YForm.YFormItemContext);
-  const { scenes, items } = itemProps;
+  const { scenes, items } = itemProps as YFormOneLineProps;
   const { oneLineStyle, className, style } = props;
   if (get(props, 'name')) {
     warning(false, 'oneLine 不支持 name');

@@ -12,7 +12,7 @@ export interface YFormSpaceProps extends YFormItemProps {
 }
 
 export default (props: YFormSpaceProps['componentProps']) => {
-  const itemProps = React.useContext(YForm.YFormItemContext);
+  const itemProps = React.useContext(YForm.YFormItemContext) as YFormSpaceProps;
   const { items, scenes } = itemProps;
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];

@@ -11,6 +11,7 @@ import {
   isArray,
   find,
   isEqual,
+  mergeWith,
 } from 'lodash';
 import { ColProps } from 'antd/lib/col';
 
@@ -217,4 +218,13 @@ export const useImmutableValue = (value: any) => {
     v.current = value;
   }
   return v.current;
+};
+
+export const mergeWithDom = (obj, ...params) => {
+  return mergeWith(obj, ...params, (_, srcValue) => {
+    // 如果是元素则返回要更改的值，不是则不处理
+    if (isValidElement(srcValue)) {
+      return srcValue;
+    }
+  });
 };

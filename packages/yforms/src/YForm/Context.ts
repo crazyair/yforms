@@ -11,5 +11,5 @@ export const YFormListContent = React.createContext<{
   prefixName?: YFormItemProps['name'];
 }>({});
 
-export const YFormItemContext = React.createContext<YFormDataSource & { items?: any }>({});
+export const YFormItemContext = React.createContext<YFormDataSource>({});
 export const YFormItemsContext = React.createContext<YFormItemsProps>({});

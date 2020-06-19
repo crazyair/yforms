@@ -41,7 +41,7 @@ export interface YFormListProps extends YFormItemProps {
 
 export default (props: YFormListProps['componentProps']) => {
   const itemProps = React.useContext(YForm.YFormItemContext);
-  const { disabled, scenes, label, items, name, addonBefore, offset } = itemProps;
+  const { disabled, scenes, label, items, name, addonBefore, offset } = itemProps as YFormListProps;
   const {
     maxNum,
     minNum,

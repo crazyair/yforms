@@ -1,9 +1,9 @@
 import React from 'react';
-import { merge, forEach } from 'lodash';
+import { forEach } from 'lodash';
 
 import { YFormConfig } from './Form';
 import { modifyType } from './ItemsType';
-import { replaceMessage, getLabelLayout } from './utils';
+import { replaceMessage, getLabelLayout, mergeWithDom } from './utils';
 import DiffDom from './component/Diff';
 import { DiffSetFields } from './scenesComps';
 
@@ -16,7 +16,7 @@ const scenes: YFormConfig = {
       item: ({ formProps, itemsProps, itemProps }) => {
         let _itemProps: modifyType['itemProps'] = {};
         const { label } = itemProps;
-        const _base = merge({}, formProps, itemsProps, itemProps);
+        const _base = mergeWithDom({}, formProps, itemsProps, itemProps);
 
         const { labelCol, wrapperCol, offset } = _base;
         const { noLabelLayoutValue, labelLayoutValue } = getLabelLayout({
@@ -41,7 +41,7 @@ const scenes: YFormConfig = {
       item: ({ itemProps, typeProps }) => {
         const _itemProps: modifyType['itemProps'] = {};
         const { label, hideLable, rules } = itemProps;
-        const { formatStr } = merge({}, typeProps, itemProps);
+        const { formatStr } = mergeWithDom({}, typeProps, itemProps);
         const _label = label || hideLable;
         const _message =
           typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
@@ -67,7 +67,7 @@ const scenes: YFormConfig = {
       item: ({ itemProps, componentProps, typeProps }) => {
         const _componentProps: modifyType['componentProps'] = {};
         const { label, hideLable } = itemProps;
-        const { formatStr } = merge({}, typeProps, itemProps);
+        const { formatStr } = mergeWithDom({}, typeProps, itemProps);
         const _label = label || hideLable;
         const _message =
           typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
@@ -143,27 +143,38 @@ const scenes: YFormConfig = {
     // 搜索场景
     search: {
       form: ({ formProps }) => {
+        const { form } = formProps;
         return {
           formProps: {
             // 搜索成功后不重置表单
-            onCancel: () => {},
+            onCancel: ({ type }) => {
+              if (type === 'onCancel') {
+                form.resetFields();
+              }
+            },
             ...formProps,
-            scenes: merge({}, { noCol: true, required: false }, formProps.scenes),
           },
         };
       },
       items: ({ itemsProps }) => {
         // 字段样式去掉
-        return { itemsProps: { noStyle: true, ...itemsProps } };
+        const _itemProps = { ...itemsProps };
+        mergeWithDom(_itemProps, { noStyle: true, scenes: { noCol: true, required: false } });
+        return { itemsProps: _itemProps };
       },
       item: ({ itemProps, componentProps, typeProps }) => {
-        let _componentProps;
+        let _componentProps = {};
         if (typeProps.type !== 'rangePicker') {
-          _componentProps = { placeholder: itemProps.label };
+          _componentProps = { ..._componentProps, placeholder: itemProps.label };
+        }
+        if (typeProps.type === 'submit') {
+          _componentProps = {
+            showBtns: { showSubmit: { children: '搜索' }, showCancel: { children: '重置' } },
+          };
         }
         return {
           itemProps: { style: { marginRight: 10 }, ...itemProps, label: undefined },
-          componentProps: { ..._componentProps, ...componentProps },
+          componentProps: mergeWithDom(_componentProps, componentProps),
         };
       },
     },

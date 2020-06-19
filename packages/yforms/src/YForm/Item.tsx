@@ -1,8 +1,8 @@
 import React, { useContext, isValidElement } from 'react';
 import { Form } from 'antd';
-import { merge, concat, map, get, pick, omit, mapKeys } from 'lodash';
+import { concat, map, get, pick, omit, mapKeys } from 'lodash';
 import warning from 'warning';
-import { YForm } from '..';
+import { YForm, mergeWithDom } from '..';
 import ItemChildren from './ItemChildren';
 import Items, { YFormRenderChildren, YFormDataSource } from './Items';
 import { getParentNameData } from './utils';
@@ -26,7 +26,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
   } = formProps;
   const { scenes: thisScenes } = itemsProps;
   const { prefixName } = listContext;
-  const mergeProps = merge(
+  const mergeProps = mergeWithDom(
     {},
     pick(formProps, ['scenes', 'offset', 'disabled']),
     itemsProps,
@@ -35,7 +35,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   if ('isShow' in props && !props.isShow) return null;
 
-  const _scenes = merge({}, thisScenes, scenes);
+  const _scenes = mergeWithDom({}, thisScenes, scenes);
   let _itemProps = { ...rest };
   // offset 层级增加
   _itemProps.offset = (props.offset || 0) + (itemsProps.offset || 0);
@@ -83,10 +83,10 @@ const Item: React.FC<YFormDataSource> = (props) => {
   };
 
   // 参数修改
-  let _defaultData = defaultData;
+  const _defaultData = defaultData;
   const { modifyProps } = typeProps;
   if (modifyProps) {
-    _defaultData = { ...defaultData, ...modifyProps(defaultData) };
+    mergeWithDom(_defaultData, { ...modifyProps(defaultData) });
   }
 
   mapKeys(_scenes, (value: boolean, key: string) => {
