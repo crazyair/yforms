@@ -99,6 +99,7 @@ const Items = (props: YFormItemsProps) => {
   eachItem(isArray(children) ? children : [children]);
   const child = (
     // 移除 children 避免无限极渲染
+    // 移除 noStyle，Items noStyle 跟 Item noStyle 定义不一样，不能合并
     <YForm.YFormItemsContext.Provider value={omit(_props, ['children', 'noStyle'])}>
       {itemList}
     </YForm.YFormItemsContext.Provider>
