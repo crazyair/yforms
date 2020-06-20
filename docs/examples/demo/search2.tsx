@@ -1,6 +1,6 @@
 /**
- * title: 一套字段配置用于搜索和表单场景
- * desc: 只需要全局配置 `getScene` 即可使用该场景
+ * title: 搜索场景 2
+ * desc: 搜索场景 2
  */
 
 /* eslint-disable no-console */
@@ -48,27 +48,13 @@ export default () => {
                   items: [
                     { type: 'submit' },
                     {
-                      dataSource: [
-                        <a
-                          key="a"
-                          style={{ marginLeft: 8, fontSize: 12 }}
-                          onClick={() => setExpand(!expand)}
-                        >
+                      type: 'custom',
+                      children: (
+                        <a onClick={() => setExpand(!expand)}>
                           {expand ? <UpOutlined /> : <DownOutlined />} 更多
-                        </a>,
-                      ],
+                        </a>
+                      ),
                     },
-                    // {
-                    //   type: 'custom',
-                    //   children: (
-                    //     <a
-                    //       style={{ marginLeft: 8, fontSize: 12 }}
-                    //       onClick={() => setExpand(!expand)}
-                    //     >
-                    //       {expand ? <UpOutlined /> : <DownOutlined />} 更多
-                    //     </a>
-                    //   ),
-                    // },
                   ],
                 },
               ]}

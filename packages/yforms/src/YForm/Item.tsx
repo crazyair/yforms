@@ -1,8 +1,8 @@
 import React, { useContext, isValidElement } from 'react';
 import { Form } from 'antd';
-import { merge, concat, map, get, pick, omit, mapKeys } from 'lodash';
+import { concat, map, get, pick, omit, mapKeys } from 'lodash';
 import warning from 'warning';
-import { YForm } from '..';
+import { YForm, mergeWithDom } from '..';
 import ItemChildren from './ItemChildren';
 import Items, { YFormRenderChildren, YFormDataSource } from './Items';
 import { getParentNameData } from './utils';
@@ -10,12 +10,10 @@ import { YFormInstance } from './Form';
 
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
-  const { format, unFormat, scenes, ...rest } = props;
+  const { scenes, ...rest } = props;
 
   const { name, children } = rest;
   const formProps = useContext(YForm.YFormContext);
-  const itemsProps = useContext(YForm.YFormItemsContext);
-  const listContext = useContext(YForm.ListContent);
 
   const {
     itemsType = {},
@@ -24,9 +22,17 @@ const Item: React.FC<YFormDataSource> = (props) => {
     getScene,
     onFormatFieldsValue,
   } = formProps;
+
+  const itemsProps = useContext(YForm.YFormItemsContext);
   const { scenes: thisScenes } = itemsProps;
+
+  const listContext = useContext(YForm.ListContent);
   const { prefixName } = listContext;
-  const mergeProps = merge(
+
+  // List 会有拼接 name ，这里获取 all name path
+  const allName = prefixName ? concat(prefixName, name) : name;
+
+  const mergeProps = mergeWithDom(
     {},
     pick(formProps, ['scenes', 'offset', 'disabled']),
     itemsProps,
@@ -35,13 +41,58 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   if ('isShow' in props && !props.isShow) return null;
 
-  const _scenes = merge({}, thisScenes, scenes);
-  let _itemProps = { ...rest };
-  // offset 层级增加
-  _itemProps.offset = (props.offset || 0) + (itemsProps.offset || 0);
+  const _scenes = mergeWithDom({}, thisScenes, scenes);
+  let _props = mergeWithDom({}, mergeProps, rest, {
+    offset: (props.offset || 0) + (itemsProps.offset || 0),
+  });
 
-  // List 会有拼接 name ，这里获取 all name path
-  const allName = prefixName ? concat(prefixName, name) : name;
+  let _componentProps = { ...props.componentProps };
+  const typeProps = get(itemsType, props.type) || {};
+  // 原类型
+  typeProps.type = props.type;
+  const defaultData = {
+    formProps,
+    itemsProps: mergeProps,
+    itemProps: _props,
+    componentProps: _componentProps,
+    typeProps,
+  };
+
+  // 参数修改
+  const _defaultData = defaultData;
+  const { modifyProps } = typeProps;
+  if (modifyProps) {
+    mergeWithDom(_defaultData, modifyProps(defaultData));
+  }
+  const { unFormat } = _defaultData.itemProps;
+
+  // 获取前格式化 TODO：由于 diff 也在 scenes 中处理，所以 unFormat 不能在 scenes 后面执行
+  if (unFormat) {
+    onUnFormatFieldsValue({ name: allName, format: unFormat });
+    if (oldValues && _scenes.diff) {
+      _defaultData.itemProps = {
+        oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
+        ..._defaultData.itemProps,
+      };
+    }
+  }
+
+  mapKeys(_scenes, (value: boolean, key: string) => {
+    if (value && getScene[key] && getScene[key].item) {
+      const data = getScene[key].item(_defaultData);
+      if (data) {
+        _defaultData.itemProps = { ..._defaultData.itemProps, ...data.itemProps };
+        _defaultData.componentProps = { ..._defaultData.componentProps, ...data.componentProps };
+      }
+    }
+  });
+
+  _props = { ..._defaultData.itemProps };
+  _componentProps = _defaultData.componentProps;
+
+  const { type, dataSource, componentProps, format, ...formItemProps } = _props;
+  const _formItemProps = formItemProps;
+  const { isShow, shouldUpdate } = _formItemProps;
 
   // 提交前格式化
   if (format) {
@@ -51,62 +102,14 @@ const Item: React.FC<YFormDataSource> = (props) => {
     } else {
       _format = map(format, (item) => {
         const _item = { ...item };
-        const { name } = item;
-        if (name) {
-          _item.name = prefixName ? concat(prefixName, name) : name;
+        if (item.name) {
+          _item.name = allName;
         }
         return _item;
       });
     }
     onFormatFieldsValue(_format);
   }
-
-  // 获取前格式化
-  if (unFormat) {
-    onUnFormatFieldsValue({ name: allName, format: unFormat });
-    if (oldValues && _scenes.diff) {
-      _itemProps = {
-        oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
-        ..._itemProps,
-      };
-    }
-  }
-  let _componentProps = { ...props.componentProps };
-  const typeProps = get(itemsType, props.type) || {};
-  typeProps.type = props.type;
-  const defaultData = {
-    formProps,
-    itemsProps: mergeProps,
-    typeProps,
-    itemProps: _itemProps,
-    componentProps: _componentProps,
-  };
-
-  // 参数修改
-  let _defaultData = defaultData;
-  const { modifyProps } = typeProps;
-  if (modifyProps) {
-    _defaultData = { ...defaultData, ...modifyProps(defaultData) };
-  }
-
-  mapKeys(_scenes, (value: boolean, key: string) => {
-    if (value && getScene[key] && getScene[key].item) {
-      const data = getScene[key].item(_defaultData);
-      if (data) {
-        _defaultData.itemProps = { ..._defaultData.itemProps, ...data.itemProps };
-        _defaultData.componentProps = {
-          ..._defaultData.componentProps,
-          ...data.componentProps,
-        };
-      }
-    }
-  });
-  _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
-  _componentProps = _defaultData.componentProps;
-
-  const { type, dataSource, componentProps, ...formItemProps } = _itemProps;
-  const _formItemProps = formItemProps;
-  const { isShow, shouldUpdate } = _formItemProps;
 
   let _children;
   // 默认用 FormItem 包裹
@@ -168,7 +171,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       </ItemChildren>
     );
   } else {
-    dom = <React.Fragment>{domChildren}</React.Fragment>;
+    dom = domChildren;
   }
   if (typeof isShow === 'function') {
     return (
@@ -180,7 +183,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
     );
   }
   return (
-    <YForm.YFormItemContext.Provider value={{ ..._itemProps }}>
+    <YForm.YFormItemContext.Provider value={omit(_props, ['children'])}>
       {dom}
     </YForm.YFormItemContext.Provider>
   );

@@ -11,7 +11,7 @@ import Numbro from 'numbro';
 import { isArray, map, includes, forEach } from 'lodash';
 import { YFormFieldBaseProps } from './ItemsType';
 import { YTextAreaProps } from './component/TextArea';
-import { calculateStrLength } from './utils';
+import { calculateStrLength, mergeWithDom } from './utils';
 import { YFormOneLineProps } from './component/OneLine';
 import { YFormSubmitProps } from './component/Submit';
 import { YCheckGroupProps } from './component/CheckboxGroup';
@@ -175,7 +175,7 @@ export const oneLineModify: YFormFieldBaseProps<YFormOneLineProps>['modifyProps'
 export const submitModify: YFormFieldBaseProps<YFormSubmitProps>['modifyProps'] = ({
   componentProps,
 }) => {
-  return { componentProps: { showBtns: { showSave: false }, ...componentProps } };
+  return { componentProps: mergeWithDom({ showBtns: { showSave: false } }, componentProps) };
 };
 
 export const checkboxGroupModify: YFormFieldBaseProps<YCheckGroupProps>['modifyProps'] = ({

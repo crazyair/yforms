@@ -1,6 +1,6 @@
 /**
  * title: 一套字段配置用于搜索和表单场景
- * desc: 只需要全局配置 `getScene` 即可使用该场景
+ * desc: '只需要 `scenes={{ search: true }}` 即可'
  */
 
 /* eslint-disable no-console */

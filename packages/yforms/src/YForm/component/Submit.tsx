@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { merge, reverse, mergeWith } from 'lodash';
+import { reverse, mergeWith } from 'lodash';
 import { ButtonProps } from 'antd/lib/button';
 
-import { YForm } from '../..';
+import { YForm, mergeWithDom } from '../..';
 import { YFormDataSource } from '../Items';
 import { YFormSecureButtonProps } from './SecureButton';
 import { YFormSpaceProps } from './Space';
@@ -32,7 +32,7 @@ export default (props: YFormSubmitProps['componentProps']) => {
   const { showBtns = true, reverseBtns, spaceProps } = props;
   const formProps = useContext(YForm.YFormContext);
   const itemsProps = useContext(YForm.YFormItemsContext);
-  const { form, onSave, submitComponentProps, disabled } = merge({}, formProps, itemsProps);
+  const { form, onSave, submitComponentProps, disabled } = mergeWithDom({}, formProps, itemsProps);
   const { getFieldsValue, getFormatFieldsValue } = form;
 
   const handleOnSave = async (e) => {
@@ -49,7 +49,7 @@ export default (props: YFormSubmitProps['componentProps']) => {
     showEdit: { children: '编辑' },
     showBack: { children: '返回', type: 'link' },
   };
-  merge(_showBtns, submitComponentProps.showBtns);
+  mergeWithDom(_showBtns, submitComponentProps.showBtns);
   const { showSubmit, showSave, showCancel, showEdit, showBack } = mergeWith(
     _showBtns,
     showBtns,
@@ -58,8 +58,6 @@ export default (props: YFormSubmitProps['componentProps']) => {
       if (typeof srcValue === 'boolean') {
         return srcValue ? objValue : srcValue;
       }
-      // 对象则合并
-      return merge({}, objValue, srcValue);
     },
   );
 
@@ -81,7 +79,7 @@ export default (props: YFormSubmitProps['componentProps']) => {
     btns = reverse(btns);
   }
   return (
-    <YForm.Items noStyle scenes={{ disabled: false }} isShow={!!showBtns}>
+    <YForm.Items scenes={{ disabled: false }} isShow={!!showBtns}>
       {[{ type: 'space', ...spaceProps, items: btns }]}
     </YForm.Items>
   );

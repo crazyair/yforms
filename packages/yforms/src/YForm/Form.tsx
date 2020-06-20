@@ -8,7 +8,13 @@ import warning from 'warning';
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
 import { YFormContext } from './Context';
-import { onFormatFieldsValue, submitFormatValues, paramsType, getParentNameData } from './utils';
+import {
+  onFormatFieldsValue,
+  submitFormatValues,
+  paramsType,
+  getParentNameData,
+  mergeWithDom,
+} from './utils';
 import { YFormSubmitComponentProps } from './component/Submit';
 import useForm from './useForm';
 import defaultScene from './scenes';
@@ -100,7 +106,7 @@ export const Config = (options: YFormConfig) => {
 
 const InternalForm = React.memo<YFormProps>((thisProps) => {
   const props = { ...globalConfig.defaultFormProps, ...thisProps };
-  const { scenes, getScene = globalConfig.getScene, offset } = props;
+  const { scenes, getScene = globalConfig.getScene, offset = 0 } = props;
   const _scenes = merge({}, globalConfig.scenes, scenes);
   const _defaultData = { formProps: props };
   mapKeys(_scenes, (value: boolean, key: string) => {
@@ -256,8 +262,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     [initialValues, form, unFormatValues, onUnFormatFieldsValue],
   );
 
-  const providerProps = merge(
-    {},
+  const providerProps = mergeWithDom(
     {
       form,
       scenes: _scenes,

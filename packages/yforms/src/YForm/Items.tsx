@@ -1,12 +1,13 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import { Form } from 'antd';
-import { merge, forEach, isArray, mapKeys, pick } from 'lodash';
+import { forEach, isArray, mapKeys, pick, merge } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
 import { YFormProps, YFormInstance } from './Form';
 import { YFormItemsTypeArray, YFormFieldBaseProps } from './ItemsType';
+import { mergeWithDom } from './utils';
 
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
 export type YFormRenderChildren = (form: YFormInstance) => YFormItemProps['children'];
@@ -32,7 +33,7 @@ export interface YFormItemProps<T = any>
   dataSource?: YFormItemProps['children'];
   viewProps?: YFormFieldBaseProps['viewProps'];
   diffProps?: YFormFieldBaseProps['diffProps'];
-  hideLable?: React.ReactNode; // 隐藏公共 label 用于得到 placeholder 和 rules required 的 message
+  hideLable?: React.ReactNode; // 隐藏类型 label 用于得到 placeholder 和 rules required 的 message
 }
 
 export interface FormatFieldsValue {
@@ -52,13 +53,16 @@ export interface YFormItemsProps
 
 const Items = (props: YFormItemsProps) => {
   const formProps = useContext(YForm.YFormContext);
+  const { getScene } = formProps;
   const itemsProps = useContext(YForm.YFormItemsContext);
 
-  if ('isShow' in props && !props.isShow) return null;
-
-  const { getScene } = formProps;
-  let mergeProps = merge({}, pick(formProps, ['scenes', 'offset', 'disabled']), itemsProps, props);
-  const { scenes: thisScenes, shouldUpdate } = mergeProps;
+  const mergeProps = merge(
+    {},
+    pick(formProps, ['scenes', 'offset', 'disabled']),
+    itemsProps,
+    props,
+  );
+  const { scenes: thisScenes } = mergeProps;
   const _defaultData = { formProps, itemsProps: props };
   mapKeys(thisScenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].items) {
@@ -68,16 +72,16 @@ const Items = (props: YFormItemsProps) => {
       }
     }
   });
-  mergeProps = merge({}, mergeProps, _defaultData.itemsProps);
-  mergeProps.offset = (props.offset || 0) + (itemsProps.offset || 0);
 
-  const _props = _defaultData.itemsProps;
+  const _props = mergeWithDom({}, mergeProps, _defaultData.itemsProps, {
+    offset: (props.offset || 0) + (itemsProps.offset || 0),
+  });
 
-  const { isShow, children = [], className, style, noStyle } = _props;
+  const { isShow, className, style, children, noStyle, shouldUpdate } = _props;
 
-  const itemList: React.ReactNode[] = [];
+  const itemList = [];
 
-  const eachItem = (list: YFormDataSource[], pIndex?: number) => {
+  const eachItem = (list: YFormItemProps['children'][], pIndex?: number) => {
     if (isArray(list)) {
       forEach(list, (item, index) => {
         // 如果还是是数组就回调该方法
@@ -94,7 +98,7 @@ const Items = (props: YFormItemsProps) => {
   // 遍历元素
   eachItem(isArray(children) ? children : [children]);
   const child = (
-    <YForm.YFormItemsContext.Provider value={mergeProps}>
+    <YForm.YFormItemsContext.Provider value={pick(_props, ['scenes', 'offset', 'disabled'])}>
       {itemList}
     </YForm.YFormItemsContext.Provider>
   );
@@ -113,6 +117,8 @@ const Items = (props: YFormItemsProps) => {
       </Form.Item>
     );
   }
+  if ('isShow' in props && !props.isShow) return null;
+
   return dom;
 };
 
