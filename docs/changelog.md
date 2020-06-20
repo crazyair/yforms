@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.1](https://github.com/crazyair/yforms/compare/v1.1.0...v1.1.1) (2020-06-20)
+
+### Features
+
+- 添加 mergeWithDom 碰到 dom 情况下使用原值 ([#32](https://github.com/crazyair/yforms/issues/32)) ([ccfd34f](https://github.com/crazyair/yforms/commit/ccfd34f94c2b86e148da684a74f13442f3e073eb))
+
 # [1.1.0](https://github.com/crazyair/yforms/compare/v1.0.7...v1.1.0) (2020-06-18)
 
 ### Features
