@@ -10,7 +10,7 @@ import { YFormInstance } from './Form';
 
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
-  const { format, unFormat, scenes, ...rest } = props;
+  const { scenes, ...rest } = props;
 
   const { name, children } = rest;
   const formProps = useContext(YForm.YFormContext);
@@ -46,33 +46,6 @@ const Item: React.FC<YFormDataSource> = (props) => {
     offset: (props.offset || 0) + (itemsProps.offset || 0),
   });
 
-  // 提交前格式化
-  if (format) {
-    let _format = [];
-    if (typeof format === 'function') {
-      _format = [{ name: allName, format }];
-    } else {
-      _format = map(format, (item) => {
-        const _item = { ...item };
-        if (item.name) {
-          _item.name = allName;
-        }
-        return _item;
-      });
-    }
-    onFormatFieldsValue(_format);
-  }
-
-  // 获取前格式化
-  if (unFormat) {
-    onUnFormatFieldsValue({ name: allName, format: unFormat });
-    if (oldValues && _scenes.diff) {
-      _props = {
-        oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
-        ..._props,
-      };
-    }
-  }
   let _componentProps = { ...props.componentProps };
   const typeProps = get(itemsType, props.type) || {};
   // 原类型
@@ -91,26 +64,52 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if (modifyProps) {
     mergeWithDom(_defaultData, modifyProps(defaultData));
   }
+  const { unFormat } = _defaultData.itemProps;
+
+  // 获取前格式化 TODO：由于 diff 也在 scenes 中处理，所以 unFormat 不能在 scenes 后面执行
+  if (unFormat) {
+    onUnFormatFieldsValue({ name: allName, format: unFormat });
+    if (oldValues && _scenes.diff) {
+      defaultData.itemProps = {
+        oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
+        ...defaultData.itemProps,
+      };
+    }
+  }
 
   mapKeys(_scenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].item) {
       const data = getScene[key].item(_defaultData);
       if (data) {
         _defaultData.itemProps = { ..._defaultData.itemProps, ...data.itemProps };
-        _defaultData.componentProps = {
-          ..._defaultData.componentProps,
-          ...data.componentProps,
-        };
+        _defaultData.componentProps = { ..._defaultData.componentProps, ...data.componentProps };
       }
     }
   });
-  // _itemProps = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
-  _props = { ...pick(mergeProps, ['scenes', 'offset', 'disabled']), ..._defaultData.itemProps };
+
+  _props = { ..._defaultData.itemProps };
   _componentProps = _defaultData.componentProps;
 
-  const { type, dataSource, componentProps, ...formItemProps } = _props;
+  const { type, dataSource, componentProps, format, ...formItemProps } = _props;
   const _formItemProps = formItemProps;
   const { isShow, shouldUpdate } = _formItemProps;
+
+  // 提交前格式化
+  if (format) {
+    let _format = [];
+    if (typeof format === 'function') {
+      _format = [{ name: allName, format }];
+    } else {
+      _format = map(format, (item) => {
+        const _item = { ...item };
+        if (item.name) {
+          _item.name = allName;
+        }
+        return _item;
+      });
+    }
+    onFormatFieldsValue(_format);
+  }
 
   let _children;
   // 默认用 FormItem 包裹

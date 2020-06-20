@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import { Form } from 'antd';
-import { forEach, isArray, mapKeys, pick, merge, omit } from 'lodash';
+import { forEach, isArray, mapKeys, pick, merge } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
@@ -98,9 +98,7 @@ const Items = (props: YFormItemsProps) => {
   // 遍历元素
   eachItem(isArray(children) ? children : [children]);
   const child = (
-    // 移除 children 避免无限极渲染
-    // 移除 noStyle，Items noStyle 跟 Item noStyle 定义不一样，不能合并
-    <YForm.YFormItemsContext.Provider value={omit(_props, ['children', 'noStyle'])}>
+    <YForm.YFormItemsContext.Provider value={pick(_props, ['scenes', 'offset', 'disabled'])}>
       {itemList}
     </YForm.YFormItemsContext.Provider>
   );
