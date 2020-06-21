@@ -9,6 +9,7 @@ import { YForm } from 'yforms';
 import { Form, Button, Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';
+import { YFormItemProps } from 'yforms/src/YForm/Items';
 
 export default () => {
   const [expand, setExpand] = React.useState(false);
@@ -19,12 +20,12 @@ export default () => {
   };
 
   // 表单字段可以单独抽离单独组建兼容表单搜索交互
-  const fieldDom = [
+  const fieldDom: YFormItemProps['children'] = [
     { type: 'input', name: 'field1', label: 'field1' },
     { type: 'input', name: 'field2', label: 'field2' },
     { type: 'input', name: 'field2', label: 'field2' },
   ];
-  const fieldDom2 = [
+  const fieldDom2: YFormItemProps['children'] = [
     { type: 'input', name: 'field4', label: 'field4' },
     { type: 'input', name: 'field5', label: 'field5' },
     { type: 'input', name: 'field6', label: 'field6' },

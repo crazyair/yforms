@@ -28,8 +28,10 @@ export interface YFormItemProps<T = any>
   offset?: number;
   children?:
     | (YFormDataSource | YFormDataSource[] | boolean)[]
+    | React.ReactElement
+    | React.ReactFragment[]
     | YFormRenderChildren
-    | React.ReactNode;
+    | boolean;
   dataSource?: YFormItemProps['children'];
   viewProps?: YFormFieldBaseProps['viewProps'];
   diffProps?: YFormFieldBaseProps['diffProps'];
@@ -80,12 +82,17 @@ const Items = (props: YFormItemsProps) => {
   const { isShow, className, style, children, noStyle, shouldUpdate } = _props;
 
   const itemList = [];
-
-  const eachItem = (list: YFormItemProps['children'][], pIndex?: number) => {
+  const eachItem = (
+    list: YFormItemProps['children'][] | React.ReactFragment[],
+    pIndex?: number,
+  ) => {
     if (isArray(list)) {
       forEach(list, (item, index) => {
         // 如果还是是数组就回调该方法
-        if (isArray(item)) return eachItem(item, index);
+        // if (isArray(item)) return eachItem(item, index);
+        if (isArray(item)) {
+          return eachItem(item, index);
+        }
         const _index = pIndex ? `${pIndex}_${index}` : index;
         // 如果是 dom 直接渲染
         if (isValidElement(item)) {
