@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.2](https://github.com/crazyair/yforms/compare/v1.1.1...v1.1.2) (2020-06-21)
+
+### Bug Fixes
+
+- 修复 children 类型
+
 ## [1.1.1](https://github.com/crazyair/yforms/compare/v1.1.0...v1.1.1) (2020-06-20)
 
 ### Features
