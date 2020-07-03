@@ -66,7 +66,7 @@ export interface YFormInstance<T = any> extends FormInstance {
 
 type CancelType = 'onSave' | 'onSubmit' | 'onCancel';
 
-export interface YFormProps<T = any> extends FormProps, YFormConfig {
+export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
   loading?: boolean;
@@ -205,7 +205,9 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     return omit(formatValues, omitNames);
   };
 
-  form.getFormatFieldsValue = handleFormatFieldsValue;
+  if (!form.getFormatFieldsValue) {
+    form.getFormatFieldsValue = handleFormatFieldsValue;
+  }
 
   const handleOnFinish = async (value: KeyValue) => {
     if (onFinish) {
@@ -213,7 +215,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       const begin = new Date().getTime();
       setSubmitLoading(true);
       try {
-        await onFinish(handleFormatFieldsValue(value));
+        await onFinish(form.getFormatFieldsValue(value));
         const end = new Date().getTime();
         timeOut.current = window.setTimeout(
           () => {
