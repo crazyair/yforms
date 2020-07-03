@@ -6,13 +6,13 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { YForm } from 'yforms';
-import { Form, Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { YFormItemProps } from 'yforms/src/YForm/Items';
 
 export default () => {
   const [expand, setExpand] = React.useState(false);
-  const [form] = Form.useForm();
+  const [form] = YForm.useForm();
 
   const onFinish = (values: any) => {
     console.log('Success:', values);

@@ -21,7 +21,7 @@ export interface YFormComponentViewProps extends YFormItemProps {
   componentProps?: YFormComponentViewComponentProps;
 }
 
-export default (props: YFormComponentViewComponentProps) => {
+const View = (props: YFormComponentViewComponentProps, ref: any) => {
   const AntdConfig = React.useContext(ConfigContext);
   const itemProps = React.useContext(YForm.YFormItemContext);
   const { viewProps: { format } = {}, valuePropName = 'value' } = itemProps;
@@ -34,7 +34,7 @@ export default (props: YFormComponentViewComponentProps) => {
   const prefixCls = AntdConfig.getPrefixCls('');
 
   return (
-    <span className={classNames(`${prefixCls}-form-text`, className)}>
+    <span className={classNames(`${prefixCls}-form-text`, className)} ref={ref}>
       {addonBefore && <span style={{ color: '#999' }}>{addonBefore} </span>}
       {prefix && <span style={{ color: '#999' }}>{prefix} </span>}
       {_value === undefined || _value === '' || (isArray(_value) && _value.length === 0)
@@ -45,3 +45,5 @@ export default (props: YFormComponentViewComponentProps) => {
     </span>
   );
 };
+
+export default React.forwardRef(View);
