@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
-    "@babel/runtime": "^7.10.3",
-    "antd": "^4.3.4",
+    "@babel/runtime": "^7.10.4",
+    "antd": "^4.4.0",
     "lodash": "^4.17.15",
     "moment": "^2.27.0",
     "numbro": "^2.3.1",
