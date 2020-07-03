@@ -49,8 +49,8 @@ export default () => {
           label: '下拉框',
           name: '下拉框',
           componentProps: {
-            optionLabelProp: 'checkedValue',
-            onAddProps: (item) => ({ checkedValue: `(${item.name})` }),
+            optionLabelProp: 'label',
+            onAddProps: (item) => ({ label: `(${item.name})` }),
             showField: (record) => (
               <div>
                 <div>{record.id}</div>-{record.name}
