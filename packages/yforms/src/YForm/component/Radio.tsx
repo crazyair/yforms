@@ -35,11 +35,10 @@ export default forwardRef<any, YRadioProps>((props, ref) => {
       );
     }
   });
+  React.useImperativeHandle(ref, () => props);
   return (
-    <div ref={ref}>
-      <Radio.Group value={value} {...rest}>
-        {children}
-      </Radio.Group>
-    </div>
+    <Radio.Group value={value} {...rest}>
+      {children}
+    </Radio.Group>
   );
 });

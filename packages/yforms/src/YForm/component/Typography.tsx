@@ -19,12 +19,11 @@ export default forwardRef<any, TextProps & { value?: any; onChange?: (str: any) 
     } else if (isObject(editable)) {
       _props.editable = { ...editable, onChange: handleChange };
     }
+    React.useImperativeHandle(ref, () => props);
     return (
-      <div ref={ref}>
-        <Typography.Text {..._props} {...rest}>
-          {value}
-        </Typography.Text>
-      </div>
+      <Typography.Text {..._props} {...rest}>
+        {value}
+      </Typography.Text>
     );
   },
 );
