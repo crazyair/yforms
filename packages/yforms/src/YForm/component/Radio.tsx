@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Radio } from 'antd';
 import { map } from 'lodash';
 import { RadioGroupProps } from 'antd/lib/radio';
@@ -8,7 +8,7 @@ import { OptionsProps } from '../ItemsType';
 
 export interface YRadioProps extends OptionsProps, Omit<RadioGroupProps, 'options'> {}
 
-export default (props: YRadioProps) => {
+export default forwardRef<any, YRadioProps>((props, ref) => {
   const {
     value,
     postField = 'id',
@@ -36,8 +36,10 @@ export default (props: YRadioProps) => {
     }
   });
   return (
-    <Radio.Group value={value} {...rest}>
-      {children}
-    </Radio.Group>
+    <div ref={ref}>
+      <Radio.Group value={value} {...rest}>
+        {children}
+      </Radio.Group>
+    </div>
   );
-};
+});

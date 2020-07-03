@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Select } from 'antd';
 import { map } from 'lodash';
 import { SelectProps } from 'antd/lib/select';
@@ -8,7 +8,7 @@ import { OptionsProps } from '../ItemsType';
 
 export interface YSelectProps extends OptionsProps, Omit<SelectProps<any>, 'options'> {}
 
-export default (props: YSelectProps) => {
+export default forwardRef<any, YSelectProps>((props, ref) => {
   const {
     postField = 'id',
     showField = 'name',
@@ -34,5 +34,9 @@ export default (props: YSelectProps) => {
       );
     }
   });
-  return <Select {...rest}>{children}</Select>;
-};
+  return (
+    <Select {...rest} ref={ref}>
+      {children}
+    </Select>
+  );
+});

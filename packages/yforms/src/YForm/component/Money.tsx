@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Numbro from 'numbro';
 import { Input } from 'antd';
 import { InputProps } from 'antd/lib/input';
@@ -8,9 +8,10 @@ export interface YMoneyProps extends InputProps {
   onChange?: (value: any) => void;
 }
 
-class InputMoney extends React.PureComponent<YMoneyProps> {
-  handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange } = this.props;
+export default forwardRef<any, YMoneyProps>((props, ref) => {
+  const { onChange, ...rest } = props;
+  const { value } = rest;
+  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       const { value } = e.target;
       if (value === undefined || value === '') {
@@ -31,16 +32,10 @@ class InputMoney extends React.PureComponent<YMoneyProps> {
       // onChange(number.toFixed(2));
     }
   };
-
-  render() {
-    const { value } = this.props;
-    return (
-      <div className="input-money">
-        <Input onBlur={this.handleNumberChange} {...this.props} />
-        <div className="zh">{convertMoney(`${value || ''}`)}</div>
-      </div>
-    );
-  }
-}
-
-export default InputMoney;
+  return (
+    <div className="input-money">
+      <Input onBlur={handleNumberChange} {...rest} ref={ref} />
+      <div className="zh">{convertMoney(`${value || ''}`)}</div>
+    </div>
+  );
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { map, get, isArray, isObject } from 'lodash';
 import classNames from 'classnames';
 import warning from 'warning';
@@ -14,7 +14,7 @@ export interface YFormOneLineProps extends YFormItemProps {
   oneLineStyle?: (string | number)[];
 }
 
-export default (props: YFormOneLineProps['componentProps']) => {
+export default forwardRef<any, YFormOneLineProps['componentProps']>((props, ref) => {
   const itemProps = React.useContext(YForm.YFormItemContext);
   const { scenes, items } = itemProps as YFormOneLineProps;
   const { oneLineStyle, className, style } = props;
@@ -36,8 +36,8 @@ export default (props: YFormOneLineProps['componentProps']) => {
     }).filter((x) => x);
   }
   return (
-    <div className={classNames('one-line', className)} style={style}>
+    <div className={classNames('one-line', className)} style={style} ref={ref}>
       <YForm.Items scenes={{ noCol: true }}>{_childrenDataSource}</YForm.Items>
     </div>
   );
-};
+});

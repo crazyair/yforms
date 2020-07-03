@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import { get, isArray } from 'lodash';
 import { ConfigContext } from 'antd/lib/config-provider';
@@ -21,7 +21,7 @@ export interface YFormComponentViewProps extends YFormItemProps {
   componentProps?: YFormComponentViewComponentProps;
 }
 
-const View = (props: YFormComponentViewComponentProps, ref: any) => {
+export default forwardRef<any, YFormComponentViewComponentProps>((props, ref) => {
   const AntdConfig = React.useContext(ConfigContext);
   const itemProps = React.useContext(YForm.YFormItemContext);
   const { viewProps: { format } = {}, valuePropName = 'value' } = itemProps;
@@ -44,6 +44,4 @@ const View = (props: YFormComponentViewComponentProps, ref: any) => {
       {addonAfter && <span style={{ color: '#999' }}> {addonAfter}</span>}
     </span>
   );
-};
-
-export default React.forwardRef(View);
+});
