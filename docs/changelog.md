@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.5](https://github.com/crazyair/yforms/compare/v1.1.4...v1.1.5) (2020-07-03)
+
+### Features
+
+- 表单组件添加 ref ([#35](https://github.com/crazyair/yforms/issues/35)) ([d7aa4e3](https://github.com/crazyair/yforms/commit/d7aa4e3820dac562ff87156ca7df5ae0db21c2cf))
+
 ## [1.1.4](https://github.com/crazyair/yforms/compare/v1.1.3...v1.1.4) (2020-07-03)
 
 ### Bug Fixes
