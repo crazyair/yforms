@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Checkbox } from 'antd';
 import { map } from 'lodash';
 import { CheckboxGroupProps } from 'antd/lib/checkbox';
@@ -8,7 +8,7 @@ import { OptionsProps } from '../ItemsType';
 
 export interface YCheckGroupProps extends OptionsProps, Omit<CheckboxGroupProps, 'options'> {}
 
-export default (props: YCheckGroupProps) => {
+export default forwardRef<any, YCheckGroupProps>((props, ref) => {
   const {
     value,
     postField = 'id',
@@ -36,8 +36,8 @@ export default (props: YCheckGroupProps) => {
     }
   });
   return (
-    <Checkbox.Group value={value} {...rest}>
+    <Checkbox.Group value={value} {...rest} ref={ref}>
       {children}
     </Checkbox.Group>
   );
-};
+});
