@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.4](https://github.com/crazyair/yforms/compare/v1.1.3...v1.1.4) (2020-07-03)
+
+### Bug Fixes
+
+- 修复 form 类型 ([#34](https://github.com/crazyair/yforms/issues/34)) ([269caec](https://github.com/crazyair/yforms/commit/269caecb7266a432350502df1393d6a7c52791ed))
+
 ## [1.1.2](https://github.com/crazyair/yforms/compare/v1.1.1...v1.1.2) (2020-06-21)
 
 ### Bug Fixes
