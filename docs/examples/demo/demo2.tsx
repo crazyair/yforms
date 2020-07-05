@@ -140,7 +140,7 @@ const Demo = () => {
             {
               type: 'button',
               componentProps: {
-                onClick: () => console.log(form.getFieldsValue()),
+                onClick: () => console.log(form.getFieldsValue(true)),
                 children: '获取表单当前数据',
               },
             },

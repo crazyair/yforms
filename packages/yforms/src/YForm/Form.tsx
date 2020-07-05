@@ -193,7 +193,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   const { formatFieldsValue, onFormatFieldsValue } = useFormatFieldsValue();
 
   const handleFormatFieldsValue = (value) => {
-    const _value = value || getFieldsValue();
+    const _value = value || getFieldsValue(true);
     const _formatFieldsValue = concat(formFormatFieldsValue, formatFieldsValue).filter((x) => x);
 
     // 忽略字段

@@ -44,7 +44,7 @@ export default (props: YFormSpaceProps['componentProps']) => {
               ? map(items, (item, index) => {
                   if (isObject(item)) {
                     const { isShow } = item as YFormDataSource;
-                    if (typeof isShow === 'function' && !isShow(form.getFieldsValue())) {
+                    if (typeof isShow === 'function' && !isShow(form.getFieldsValue(true))) {
                       return null;
                     }
                     if (typeof isShow === 'boolean' && !isShow) return null;

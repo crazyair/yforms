@@ -42,7 +42,7 @@ const Demo = () => {
           noStyle: true,
           shouldUpdate: (prevValues, curValues) => prevValues.type !== curValues.type,
           children: ({ getFieldsValue }) => {
-            const fieldsValue = getFieldsValue();
+            const fieldsValue = getFieldsValue(true);
             return [
               {
                 noStyle: true,

@@ -30,6 +30,8 @@ export interface YFormListItems {
   remove: (index: number) => void;
   move: (from: number, to: number) => void;
   icons: React.ReactNode;
+  iconsWidth: number;
+  layoutStyles: React.CSSProperties[];
 }
 
 export interface YFormListProps extends YFormItemProps {
@@ -97,18 +99,27 @@ export default (props: YFormListProps['componentProps']) => {
 
                 const _iconsDom = <div className={classNames('padding-icons')}>{icons}</div>;
 
+                const style = {
+                  ...(!disabled && showRightIcons && isUseIconStyle && _oneLineStyle[0]),
+                };
                 const dataSource =
-                  items && items({ index, field, add, remove, move, icons: _iconsDom });
+                  items &&
+                  items({
+                    index,
+                    field,
+                    add,
+                    remove,
+                    move,
+                    icons: _iconsDom,
+                    iconsWidth,
+                    layoutStyles: _oneLineStyle,
+                  });
                 let _children = dataSource;
                 if (isArray(dataSource)) {
                   _children = map(dataSource, (item, index) => {
                     const _item = mergeWithDom(
                       {
-                        scenes,
-                        offset,
-                        componentProps: !disabled &&
-                          showRightIcons &&
-                          isUseIconStyle && { style: { ..._oneLineStyle[0] } },
+                        componentProps: { style },
                         label: index === 0 && _label,
                         hideLable: label,
                       },
@@ -136,7 +147,9 @@ export default (props: YFormListProps['componentProps']) => {
                     key={field.key}
                     value={{ isList: true, field, prefixName: _name }}
                   >
-                    <YForm.Items>{_children}</YForm.Items>
+                    <YForm.Items scenes={scenes} offset={offset}>
+                      {_children}
+                    </YForm.Items>
                   </YForm.ListContent.Provider>
                 );
               })}
