@@ -125,7 +125,7 @@ const Items = (props: YFormItemsProps) => {
   if (typeof isShow === 'function') {
     return (
       <Form.Item noStyle shouldUpdate={shouldUpdate}>
-        {(form) => isShow(form.getFieldsValue()) && dom}
+        {(form) => isShow(form.getFieldsValue(true)) && dom}
       </Form.Item>
     );
   }

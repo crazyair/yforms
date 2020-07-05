@@ -38,7 +38,7 @@ export default (props: YFormSubmitProps['componentProps']) => {
   const handleOnSave = async (e) => {
     e.preventDefault();
     if (onSave) {
-      await onSave(getFormatFieldsValue(getFieldsValue()));
+      await onSave(getFormatFieldsValue(getFieldsValue(true)));
     }
   };
 
