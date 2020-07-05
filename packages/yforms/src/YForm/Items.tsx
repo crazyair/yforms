@@ -1,7 +1,7 @@
 import React, { useContext, isValidElement } from 'react';
 import classNames from 'classnames';
 import { Form } from 'antd';
-import { forEach, isArray, mapKeys, pick, merge } from 'lodash';
+import { forEach, isArray, mapKeys, pick, merge, isObject } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { YForm } from '..';
@@ -31,7 +31,8 @@ export interface YFormItemProps<T = any>
     | React.ReactElement
     | React.ReactFragment[]
     | YFormRenderChildren
-    | boolean;
+    | boolean
+    | string;
   dataSource?: YFormItemProps['children'];
   viewProps?: YFormFieldBaseProps['viewProps'];
   diffProps?: YFormFieldBaseProps['diffProps'];
@@ -96,6 +97,10 @@ const Items = (props: YFormItemsProps) => {
         const _index = pIndex ? `${pIndex}_${index}` : index;
         // 如果是 dom 直接渲染
         if (isValidElement(item)) {
+          return itemList.push(item);
+        }
+        // 如果不是对象直接渲染
+        if (!isObject(item)) {
           return itemList.push(item);
         }
         return itemList.push(<YForm.Item {...item} key={_index} />);

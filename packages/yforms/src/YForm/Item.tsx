@@ -177,7 +177,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
     return (
       <Form.Item noStyle shouldUpdate={shouldUpdate}>
         {(form) => {
-          return isShow(form.getFieldsValue()) && dom;
+          return isShow(form.getFieldsValue(true)) && dom;
         }}
       </Form.Item>
     );

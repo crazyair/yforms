@@ -45,7 +45,7 @@ const scenes: YFormConfig = {
         const _label = label || hideLable;
         const _message =
           typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
-        if (itemProps.name && typeProps.type !== 'list') {
+        if (itemProps.name && typeProps.type && typeProps.type !== 'list') {
           let hasRequired = false;
           forEach(rules, (item) => {
             hasRequired = 'required' in item;
@@ -71,10 +71,10 @@ const scenes: YFormConfig = {
         const _label = label || hideLable;
         const _message =
           typeof _label === 'string' && replaceMessage(formatStr || '', { label: _label });
-        if (itemProps.name && typeProps.type !== 'list') {
+        if (itemProps.name && typeProps.type && typeProps.type !== 'list') {
           // rangePicker 不需要设置 placeholder
-          if (typeProps.type !== 'rangePicker') {
-            _componentProps.placeholder = _message || '';
+          if (typeProps.type !== 'rangePicker' && _message) {
+            _componentProps.placeholder = _message;
           }
         }
         return {

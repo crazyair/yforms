@@ -1367,7 +1367,6 @@ Object {
                     <input
                       class="ant-input"
                       id="custom"
-                      placeholder=""
                       type="text"
                       value=""
                     />
@@ -1447,7 +1446,6 @@ Object {
                     <input
                       class="ant-input"
                       id="xx"
-                      placeholder=""
                       type="text"
                       value=""
                     />
@@ -3715,7 +3713,6 @@ Object {
                   <input
                     class="ant-input"
                     id="custom"
-                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -3795,7 +3792,6 @@ Object {
                   <input
                     class="ant-input"
                     id="xx"
-                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -4812,7 +4808,6 @@ Object {
                     <input
                       class="ant-input"
                       id="demo"
-                      placeholder=""
                       type="text"
                       value=""
                     />
@@ -4853,7 +4848,6 @@ Object {
                   <input
                     class="ant-input"
                     id="demo"
-                    placeholder=""
                     type="text"
                     value=""
                   />
@@ -5368,7 +5362,6 @@ Object {
                     <input
                       class="ant-input"
                       id="demo"
-                      placeholder=""
                       type="text"
                       value=""
                     />
@@ -5474,7 +5467,6 @@ Object {
                   <input
                     class="ant-input"
                     id="demo"
-                    placeholder=""
                     type="text"
                     value=""
                   />
