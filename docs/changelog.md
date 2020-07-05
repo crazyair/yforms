@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.6](https://github.com/crazyair/yforms/compare/v1.1.5...v1.1.6) (2020-07-05)
+
+### Bug Fixes
+
+- 修复 isShow 中 getFieldsValue 未拿 Store ([#36](https://github.com/crazyair/yforms/issues/36)) ([b3be944](https://github.com/crazyair/yforms/commit/b3be9444951d3cc7bbca81eb85984916304486b0))
+
 ## [1.1.5](https://github.com/crazyair/yforms/compare/v1.1.4...v1.1.5) (2020-07-03)
 
 ### Features
