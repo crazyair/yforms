@@ -21,5 +21,6 @@ module.exports = {
     'no-lonely-if': 0,
     'no-shadow': 0,
     'no-console': 0,
+    '@typescript-eslint/naming-convention': 0,
   },
 };
