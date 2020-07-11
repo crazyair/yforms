@@ -1,5 +1,10 @@
 module.exports = {
   plugins: ['react-hooks'],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    project: './tsconfig.json',
+    createDefaultProgram: true,
+  },
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
@@ -21,5 +26,6 @@ module.exports = {
     'no-lonely-if': 0,
     'no-shadow': 0,
     'no-console': 0,
+    '@typescript-eslint/naming-convention': 0,
   },
 };
