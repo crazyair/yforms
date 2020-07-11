@@ -7,7 +7,6 @@
     "jsx": "preserve",
     "declaration": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true
+    "esModuleInterop": true
   }
 }

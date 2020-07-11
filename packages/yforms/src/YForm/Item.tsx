@@ -29,7 +29,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
   const listContext = useContext(YForm.ListContent);
   const { prefixName } = listContext;
 
-  // List 会有拼接 name ，这里获取 all name path
+  // List 会有拼接 name ，这里获取 all name path。
   const allName = prefixName ? concat(prefixName, name) : name;
 
   const mergeProps = mergeWithDom(

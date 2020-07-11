@@ -1,7 +1,6 @@
 module.exports = {
   plugins: ['react-hooks'],
   parserOptions: {
-    parser: '@typescript-eslint/parser',
     project: './tsconfig.json',
     createDefaultProgram: true,
   },
