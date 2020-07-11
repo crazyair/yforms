@@ -1,5 +1,10 @@
 module.exports = {
   plugins: ['react-hooks'],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    project: './tsconfig.json',
+    createDefaultProgram: true,
+  },
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
