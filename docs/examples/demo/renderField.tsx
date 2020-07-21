@@ -7,20 +7,13 @@ import React from 'react';
 import { YForm } from 'yforms';
 
 const Demo = () => {
-  const [form] = YForm.useForm();
-
   const onFinish = async (values: any) => {
     console.log('Success:', values);
   };
 
   return (
     <>
-      <YForm
-        form={form}
-        initialValues={{ name: '张三', age: '10' }}
-        name="basic"
-        onFinish={onFinish}
-      >
+      <YForm initialValues={{ name: '张三', age: '10' }} name="basic" onFinish={onFinish}>
         <YForm.Item shouldUpdate={(prevValues, curValues) => prevValues !== curValues}>
           {(form) => {
             const fieldsValue = form.getFieldsValue();
