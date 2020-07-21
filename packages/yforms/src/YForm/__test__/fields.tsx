@@ -74,14 +74,14 @@ const fields: YFormItemProps['children'] = [
     type: 'input',
     label: '姓名',
     name: 'name',
-    format: ({ name }) => `${name} 修改了`,
+    format: (name) => `${name} 修改了`,
   },
   {
     type: 'datePicker',
     label: '日期',
     name: 'date',
     componentProps: { style: { width: '100%' } },
-    format: ({ date }) => moment(date).format('YYYY-MM-DD'),
+    format: (date) => moment(date).format('YYYY-MM-DD'),
   },
   {
     type: 'money',

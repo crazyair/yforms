@@ -126,7 +126,7 @@ const Demo = () => {
           label: '日期',
           name: 'date',
           componentProps: { style: { width: '100%' } },
-          format: ({ date }) => moment(date).format('YYYY-MM-DD'),
+          format: (date) => moment(date).format('YYYY-MM-DD'),
         },
         {
           type: 'money',
