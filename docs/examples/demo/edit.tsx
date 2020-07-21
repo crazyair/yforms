@@ -1,9 +1,3 @@
-/**
- * title: edit 源码
- * desc: 上方点击按钮进入详情页面代码
- */
-
-/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';

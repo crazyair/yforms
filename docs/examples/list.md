@@ -8,8 +8,6 @@ nav:
 
 <code src="./demo/list.tsx" />
 
-<code src="./demo/edit.tsx" />
-
 ## FAQ
 
 - `submit` 文档<a href="/types/submit">点此</a>
