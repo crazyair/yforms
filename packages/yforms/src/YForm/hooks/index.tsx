@@ -19,7 +19,7 @@ export const useGetOptions = (props: YUseGetOptionsProps) => {
     (async () => {
       if (getOptions) {
         const parentValue = getParentNameData(form.getFieldsValue(true), name);
-        const data = await getOptions(parentValue);
+        const data = await getOptions(parentValue, form.getFieldsValue(true));
         setList(data);
       }
     })();

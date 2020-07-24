@@ -76,7 +76,7 @@ export type optionsType = {
 
 export interface OptionsProps<T = any> {
   options?: optionsType;
-  getOptions?: (values: Object) => optionsType | Promise<optionsType>;
+  getOptions?: (parentValues: any, values: any) => optionsType | Promise<optionsType>;
   postField?: stringAndFunc<T>;
   showField?: stringAndFunc<T>;
   renderOption?: (item: any) => any;

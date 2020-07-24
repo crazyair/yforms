@@ -193,7 +193,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       <Form.Item noStyle shouldUpdate={shouldUpdate || defaultShouldUpdate}>
         {(form) => {
           const parentValue = getParentNameData(form.getFieldsValue(true), name);
-          return isShow(parentValue) && getDom();
+          return isShow(parentValue, form.getFieldsValue(true)) && getDom();
         }}
       </Form.Item>,
     );
