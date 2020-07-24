@@ -1,9 +1,9 @@
 ---
-title: getData
+title: getOptions
 nav:
   title: 文档
 ---
 
-# GetData
+# getOptions
 
 <code src="./demo/getData.tsx" />

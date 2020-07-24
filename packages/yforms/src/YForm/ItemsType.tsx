@@ -67,13 +67,16 @@ export interface BaseComponentProps {
 }
 
 export type stringAndFunc<T> = string | ((record: T, index: number) => React.ReactNode);
+export type optionsType = {
+  id?: React.ReactNode;
+  name?: CheckboxValueType;
+  disabled?: boolean;
+  [key: string]: any;
+}[];
 
 export interface OptionsProps<T = any> {
-  options?: {
-    id?: React.ReactNode;
-    name?: CheckboxValueType;
-    disabled?: boolean;
-  }[];
+  options?: optionsType;
+  getOptions?: (values: Object) => optionsType | Promise<optionsType>;
   postField?: stringAndFunc<T>;
   showField?: stringAndFunc<T>;
   renderOption?: (item: any) => any;
