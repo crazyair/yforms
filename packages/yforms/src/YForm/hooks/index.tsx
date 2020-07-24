@@ -16,12 +16,13 @@ export const useGetOptions = (props: YUseGetOptionsProps) => {
   const { getOptions, form, name, reRender, options } = props;
   const [list, setList] = useState(options);
   useEffect(() => {
-    if (getOptions) {
-      const parentValue = getParentNameData(form.getFieldsValue(true), name);
-      Promise.resolve(getOptions(parentValue)).then((data) => {
+    (async () => {
+      if (getOptions) {
+        const parentValue = getParentNameData(form.getFieldsValue(true), name);
+        const data = await getOptions(parentValue);
         setList(data);
-      });
-    }
+      }
+    })();
   }, [form, getOptions, reRender, name]);
   return list;
 };
