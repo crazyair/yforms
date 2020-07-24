@@ -6,4 +6,4 @@ nav:
 
 # getOptions
 
-<code src="./demo/getData.tsx" />
+<code src="./demo/getOptions.tsx" />
