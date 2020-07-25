@@ -74,7 +74,11 @@ const Item: React.FC<YFormDataSource> = (props) => {
     onUnFormatFieldsValue({ name: allName, format: unFormat });
     if (oldValues && _scenes.diff) {
       _defaultData.itemProps = {
-        oldValue: unFormat(get(oldValues, allName), getParentNameData(oldValues, allName) || {}),
+        oldValue: unFormat(
+          get(oldValues, allName),
+          getParentNameData(oldValues, allName),
+          oldValues,
+        ),
         ..._defaultData.itemProps,
       };
     }

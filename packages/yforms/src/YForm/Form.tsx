@@ -249,7 +249,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     (data: FormatFieldsValue) => {
       const { name, format } = data;
       const parentValue = getParentNameData(initialValues, name);
-      const value = format(get(initialValues, name), parentValue || {});
+      const value = format(get(initialValues, name), parentValue, initialValues);
       if (!find(formatRef.current, { name })) {
         // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
         if (parentValue !== undefined) {

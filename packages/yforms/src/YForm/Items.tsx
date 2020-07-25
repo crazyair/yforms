@@ -42,7 +42,7 @@ export interface YFormItemProps<T = any>
 export interface FormatFieldsValue {
   name: FormItemProps['name'];
   isOmit?: boolean;
-  format?: (value: any, parentValues?: any) => any;
+  format?: (value: any, parentsValue: any, fieldsValue: any) => any;
 }
 
 export interface YFormItemsProps

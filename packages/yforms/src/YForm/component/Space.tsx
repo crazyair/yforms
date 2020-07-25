@@ -5,6 +5,7 @@ import { SpaceProps } from 'antd/lib/space';
 
 import YForm from '..';
 import { YFormItemProps, YFormDataSource } from '../Items';
+import { getParentNameData } from '../utils';
 
 export interface YFormSpaceProps extends YFormItemProps {
   componentProps?: SpaceProps;
@@ -13,7 +14,7 @@ export interface YFormSpaceProps extends YFormItemProps {
 
 export default (props: YFormSpaceProps['componentProps']) => {
   const itemProps = React.useContext(YForm.YFormItemContext) as YFormSpaceProps;
-  const { items, scenes } = itemProps;
+  const { items, scenes, name } = itemProps;
   // 获取子集所有 shouldUpdate
   const shouldUpdates = [];
   forEach(isArray(items) ? items : [items], (item) => {
@@ -44,7 +45,11 @@ export default (props: YFormSpaceProps['componentProps']) => {
               ? map(items, (item, index) => {
                   if (isObject(item)) {
                     const { isShow } = item as YFormDataSource;
-                    if (typeof isShow === 'function' && !isShow(form.getFieldsValue(true))) {
+                    const parentValue = getParentNameData(form.getFieldsValue(true), name);
+                    if (
+                      typeof isShow === 'function' &&
+                      !isShow(parentValue, form.getFieldsValue(true))
+                    ) {
                       return null;
                     }
                     if (typeof isShow === 'boolean' && !isShow) return null;

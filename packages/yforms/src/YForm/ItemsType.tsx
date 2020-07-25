@@ -67,16 +67,16 @@ export interface BaseComponentProps {
 }
 
 export type stringAndFunc<T> = string | ((record: T, index: number) => React.ReactNode);
-export type optionsType = {
+export type OptionsType = {
   id?: React.ReactNode;
   name?: CheckboxValueType;
   disabled?: boolean;
   [key: string]: any;
-}[];
+};
 
 export interface OptionsProps<T = any> {
-  options?: optionsType;
-  getOptions?: (parentValues: any, values: any) => optionsType | Promise<optionsType>;
+  options?: OptionsType[];
+  getOptions?: (value: any, parentValues: any, values: any) => OptionsType[];
   postField?: stringAndFunc<T>;
   showField?: stringAndFunc<T>;
   renderOption?: (item: any) => any;
@@ -84,23 +84,22 @@ export interface OptionsProps<T = any> {
 }
 
 export interface YFormItemsTypeDefine {
-  // 字段类型
+  // antd 类型
   input: { componentProps?: InputProps };
-  view: YFormComponentViewProps;
   datePicker: { componentProps?: DatePickerProps };
   rangePicker: { componentProps?: RangePickerProps };
   password: { componentProps?: PasswordProps };
-  textarea: { componentProps?: YTextAreaProps };
-  money: { componentProps?: YMoneyProps };
   checkbox: { componentProps?: CheckboxProps };
   switch: { componentProps?: SwitchProps };
+  text: { componentProps?: TextProps };
+  button: { componentProps?: ButtonProps };
+  // 封装类型
+  textarea: { componentProps?: YTextAreaProps };
+  view: YFormComponentViewProps;
+  money: { componentProps?: YMoneyProps };
   checkboxGroup: { componentProps?: YCheckGroupProps };
   select: { componentProps?: YSelectProps };
   radio: { componentProps?: YRadioProps };
-  text: { componentProps?: TextProps };
-  // 展示类型
-  button: { componentProps?: ButtonProps };
-  // 其它功能类型
   oneLine: YFormOneLineProps;
   space: YFormSpaceProps;
   list: YFormListProps;

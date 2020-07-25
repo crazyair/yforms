@@ -25,8 +25,7 @@ export default forwardRef<any, YRadioProps & { reRender?: boolean }>((props, ref
     ...rest
   } = props;
   // 可以是方法返回的异步数据
-  const list = useGetOptions({ form, name, getOptions, options, reRender });
-
+  const list = useGetOptions({ form, name, getOptions, reRender, options });
   const children = map(list, (item, index: number) => {
     if (item) {
       const _postField = getFieldKeyValue(item, index, postField);
