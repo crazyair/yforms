@@ -12,7 +12,7 @@ import { mergeWithDom } from './utils';
 export type YFormDataSource = YFormItemsTypeArray<YFormItemProps>;
 export type YFormRenderChildren = (form: YFormInstance) => YFormItemProps['children'];
 
-type isShowFunc = (values: any) => boolean;
+type isShowFunc = (parentValues: any, values: any) => boolean;
 
 export interface YFormItemProps<T = any>
   extends Omit<FormItemProps, 'children'>,
@@ -42,7 +42,7 @@ export interface YFormItemProps<T = any>
 export interface FormatFieldsValue {
   name: FormItemProps['name'];
   isOmit?: boolean;
-  format?: (value: any, parentValues?: any) => any;
+  format?: (value: any, parentsValue: any, fieldsValue: any) => any;
 }
 
 export interface YFormItemsProps

@@ -171,7 +171,7 @@ export function submitFormatValues(
       // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
       if (parentValue === undefined) return;
       try {
-        set(_values, name, format(get(values, name), parentValue || {}));
+        set(_values, name, format(get(values, name), parentValue, values));
       } catch (error) {
         // 如果 format 代码报错这里抛出异常
         // eslint-disable-next-line no-console
