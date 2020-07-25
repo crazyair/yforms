@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.7](https://github.com/crazyair/yforms/compare/v1.1.6...v1.1.7) (2020-07-25)
+
+### Features
+
+- Select、Radio 添加 getOptions ([#38](https://github.com/crazyair/yforms/issues/38)) ([d9a2175](https://github.com/crazyair/yforms/commit/d9a21752db6ac886cf20e008db8d56089329e7c1))
+
 ## [1.1.6](https://github.com/crazyair/yforms/compare/v1.1.5...v1.1.6) (2020-07-05)
 
 ### Bug Fixes
