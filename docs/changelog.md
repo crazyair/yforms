@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.1.8](https://github.com/crazyair/yforms/compare/v1.1.7...v1.1.8) (2020-07-28)
+
+### Bug Fixes
+
+- 修复 money 类型不能改值 ([#39](https://github.com/crazyair/yforms/issues/39)) ([25a13c5](https://github.com/crazyair/yforms/commit/25a13c57a410cc9f65c61c0a76d5374df2088f77))
+
 ## [1.1.7](https://github.com/crazyair/yforms/compare/v1.1.6...v1.1.7) (2020-07-25)
 
 ### Features
