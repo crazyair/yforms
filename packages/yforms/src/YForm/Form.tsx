@@ -38,8 +38,9 @@ export interface YFormConfig {
   scenes?: {
     labelLayout?: boolean;
     noCol?: boolean;
-    disabled?: boolean;
+    required?: boolean;
     placeholder?: boolean;
+    disabled?: boolean;
     view?: boolean;
     diff?: boolean;
     search?: boolean;
