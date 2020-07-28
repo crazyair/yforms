@@ -34,7 +34,7 @@ export default forwardRef<any, YMoneyProps>((props, ref) => {
   };
   return (
     <div className="input-money">
-      <Input onBlur={handleNumberChange} {...rest} ref={ref} />
+      <Input onBlur={handleNumberChange} {...props} ref={ref} />
       <div className="zh">{convertMoney(`${value || ''}`)}</div>
     </div>
   );
