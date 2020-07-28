@@ -31,7 +31,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.5",
-    "antd": "^4.4.3",
+    "antd": "^4.5.0",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "numbro": "^2.3.1",
