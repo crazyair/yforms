@@ -8,8 +8,6 @@ import Items, { YFormRenderChildren, YFormDataSource } from './Items';
 import { getParentNameData } from './utils';
 import { YFormInstance } from './Form';
 
-const defaultShouldUpdate = (pre, cur) => pre !== cur;
-
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
   const { scenes, ...rest } = props;
@@ -118,102 +116,97 @@ const Item: React.FC<YFormDataSource> = (props) => {
     onFormatFieldsValue(_format);
   }
 
-  const getDom = (componentProps?: any) => {
-    let _children;
-    // 默认用 FormItem 包裹
-    let _hasFormItem = true;
-    const thisComponentProps = mergeWithDom(_componentProps, componentProps);
-    if (type) {
-      const _fieldData = itemsType[type];
-      if (_fieldData) {
-        const { component } = _fieldData;
-        _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
-        const _component = children || component;
-        _children = isValidElement(_component)
-          ? React.cloneElement(_component, {
-              ...(_component.props as object),
-              ...thisComponentProps,
-            })
-          : _component;
-      } else {
-        warning(false, `[YFom.Items] ${type} 类型未找到`);
-      }
+  let _children;
+  // 默认用 FormItem 包裹
+  let _hasFormItem = true;
+  const thisComponentProps = _componentProps;
+  if (type) {
+    const _fieldData = itemsType[type];
+    if (_fieldData) {
+      const { component } = _fieldData;
+      _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
+      const _component = children || component;
+      _children = isValidElement(_component)
+        ? React.cloneElement(_component, {
+            ...(_component.props as object),
+            ...thisComponentProps,
+          })
+        : _component;
     } else {
-      // 没有 type 单独有 dataSource 情况
-      if (dataSource) {
-        _children = (
-          <Items scenes={_scenes} {...thisComponentProps}>
-            {dataSource}
-          </Items>
-        );
-      } else {
-        _children = isValidElement(children)
-          ? React.cloneElement(children, { ...children.props, ...thisComponentProps })
-          : children;
-      }
+      warning(false, `[YFom.Items] ${type} 类型未找到`);
     }
-    const domChildren =
-      typeof _children === 'function'
-        ? (form: YFormInstance) => {
-            return (
-              <Items noStyle scenes={_scenes}>
-                {(_children as YFormRenderChildren)(form)}
-              </Items>
-            );
-          }
-        : _children;
-    let dom = domChildren;
-    if (_hasFormItem) {
-      dom = (
-        <ItemChildren
-          {...omit(_formItemProps, [
-            'component',
-            'scenes',
-            'viewProps',
-            'unFormat',
-            'format',
-            'oldValue',
-            'items',
-            'offset',
-            'hideLable',
-          ])}
-        >
-          {domChildren}
-        </ItemChildren>
+  } else {
+    // 没有 type 单独有 dataSource 情况
+    if (dataSource) {
+      _children = (
+        <Items scenes={_scenes} {...thisComponentProps}>
+          {dataSource}
+        </Items>
       );
+    } else {
+      _children = isValidElement(children)
+        ? React.cloneElement(children, { ...children.props, ...thisComponentProps })
+        : children;
     }
-    return dom;
-  };
+  }
+  const domChildren =
+    typeof _children === 'function'
+      ? (form: YFormInstance) => {
+          return (
+            <Items noStyle scenes={_scenes}>
+              {(_children as YFormRenderChildren)(form)}
+            </Items>
+          );
+        }
+      : _children;
+  let dom = domChildren;
+  if (_hasFormItem) {
+    dom = (
+      <ItemChildren
+        {...omit(_formItemProps, [
+          'component',
+          'scenes',
+          'viewProps',
+          'unFormat',
+          'format',
+          'oldValue',
+          'items',
+          'offset',
+          'hideLable',
+        ])}
+      >
+        {domChildren}
+      </ItemChildren>
+    );
+  }
 
-  const render = (dom: React.ReactNode) => {
+  const render = (props?: any) => {
     return (
-      <YForm.YFormItemContext.Provider value={omit(_props, ['children'])}>
+      <YForm.YFormItemContext.Provider value={mergeWithDom(omit(_props, ['children']), props)}>
         {dom}
       </YForm.YFormItemContext.Provider>
     );
   };
-  if (typeof isShow === 'function') {
-    return render(
-      <Form.Item noStyle shouldUpdate={shouldUpdate || defaultShouldUpdate}>
-        {(form) => {
-          const parentValue = getParentNameData(form.getFieldsValue(true), name);
-          return isShow(parentValue, form.getFieldsValue(true)) && getDom();
-        }}
-      </Form.Item>,
-    );
-  }
-  if (_componentProps.getOptions) {
+
+  if (shouldUpdate) {
     let reRender = false;
-    return render(
-      <Form.Item noStyle shouldUpdate={shouldUpdate || defaultShouldUpdate}>
-        {() => {
+    return (
+      <Form.Item noStyle shouldUpdate={shouldUpdate}>
+        {(form) => {
+          if (typeof isShow === 'function') {
+            const fieldsValue = form.getFieldsValue(true);
+            const parentValue = getParentNameData(fieldsValue, name);
+            if (!isShow(parentValue, fieldsValue)) {
+              return;
+            }
+          }
           reRender = !reRender;
-          return getDom({ reRender });
+          return render({ reRender });
         }}
-      </Form.Item>,
+      </Form.Item>
     );
   }
-  return render(getDom());
+  return render();
 };
 
 export default Item;

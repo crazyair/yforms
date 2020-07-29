@@ -3,16 +3,13 @@ import { Checkbox } from 'antd';
 import { map } from 'lodash';
 import { CheckboxGroupProps } from 'antd/lib/checkbox';
 
-import YForm from '../index';
 import { getFieldKeyValue } from '../utils';
 import { OptionsProps } from '../ItemsType';
 import { useGetOptions } from '../hooks';
 
 export interface YCheckGroupProps extends OptionsProps, Omit<CheckboxGroupProps, 'options'> {}
 
-export default forwardRef<any, YCheckGroupProps & { reRender?: boolean }>((props, ref) => {
-  const { form } = React.useContext(YForm.YFormContext);
-  const { name } = React.useContext(YForm.YFormItemContext);
+export default forwardRef<any, YCheckGroupProps>((props, ref) => {
   const {
     value,
     postField = 'id',
@@ -21,10 +18,9 @@ export default forwardRef<any, YCheckGroupProps & { reRender?: boolean }>((props
     renderOption,
     onAddProps,
     getOptions,
-    reRender,
     ...rest
   } = props;
-  const list = useGetOptions({ form, name, getOptions, options, reRender });
+  const list = useGetOptions();
 
   const children = map(list, (item, index: number) => {
     if (item) {
