@@ -140,7 +140,7 @@ export const itemsType: YFormItemsType = {
     formatStr: '请选择${label}',
     modifyProps: checkboxGroupModify,
   },
-  radio: { component: <Radio />, modifyProps: radioModify },
+  radio: { component: <Radio />, modifyProps: radioModify, formatStr: '请选择${label}' },
   select: {
     component: <Select {...searchSelect} />,
     formatStr: '请选择${label}',

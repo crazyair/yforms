@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { get } from 'lodash';
 
+import YForm from '../index';
 import { getParentNameData } from '../utils';
-import { OptionsProps, OptionsType } from '../ItemsType';
-import { YFormItemProps } from '../Items';
-import { YFormProps } from '../Form';
+import { OptionsType } from '../ItemsType';
 
-export interface YUseGetOptionsProps {
-  form?: YFormProps['form'];
-  name?: YFormItemProps['name'];
-  reRender?: boolean;
-  getOptions?: OptionsProps['getOptions'];
-  options?: OptionsProps['options'];
-}
+export const useGetOptions = () => {
+  const { form } = useContext(YForm.YFormContext);
+  const { name, reRender, componentProps } = useContext(YForm.YFormItemContext);
+  const { getOptions, options } = componentProps;
 
-export const useGetOptions = (props: YUseGetOptionsProps) => {
-  const { getOptions, form, name, reRender, options } = props;
   const [list, setList] = useState<OptionsType[]>();
   useEffect(() => {
     (async () => {

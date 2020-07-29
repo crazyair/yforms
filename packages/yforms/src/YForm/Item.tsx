@@ -8,8 +8,6 @@ import Items, { YFormRenderChildren, YFormDataSource } from './Items';
 import { getParentNameData } from './utils';
 import { YFormInstance } from './Form';
 
-const defaultShouldUpdate = (pre, cur) => pre !== cur;
-
 const Item: React.FC<YFormDataSource> = (props) => {
   // 这里解析出来的参数最好不要在 scenes 中更改
   const { scenes, ...rest } = props;
@@ -185,32 +183,30 @@ const Item: React.FC<YFormDataSource> = (props) => {
     return dom;
   };
 
-  const render = (dom: React.ReactNode) => {
+  const render = (dom: React.ReactNode, props?: any) => {
     return (
-      <YForm.YFormItemContext.Provider value={omit(_props, ['children'])}>
+      <YForm.YFormItemContext.Provider value={mergeWithDom(omit(_props, ['children']), props)}>
         {dom}
       </YForm.YFormItemContext.Provider>
     );
   };
-  if (typeof isShow === 'function') {
-    return render(
-      <Form.Item noStyle shouldUpdate={shouldUpdate || defaultShouldUpdate}>
-        {(form) => {
-          const parentValue = getParentNameData(form.getFieldsValue(true), name);
-          return isShow(parentValue, form.getFieldsValue(true)) && getDom();
-        }}
-      </Form.Item>,
-    );
-  }
-  if (_componentProps.getOptions) {
+
+  if (shouldUpdate) {
     let reRender = false;
-    return render(
-      <Form.Item noStyle shouldUpdate={shouldUpdate || defaultShouldUpdate}>
-        {() => {
+    return (
+      <Form.Item noStyle shouldUpdate={shouldUpdate}>
+        {(form) => {
+          if (typeof isShow === 'function') {
+            const fieldsValue = form.getFieldsValue(true);
+            const parentValue = getParentNameData(fieldsValue, name);
+            if (!isShow(parentValue, fieldsValue)) {
+              return;
+            }
+          }
           reRender = !reRender;
-          return getDom({ reRender });
+          return render(getDom(), { reRender });
         }}
-      </Form.Item>,
+      </Form.Item>
     );
   }
   return render(getDom());

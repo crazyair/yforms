@@ -3,16 +3,13 @@ import { Radio } from 'antd';
 import { map } from 'lodash';
 import { RadioGroupProps } from 'antd/lib/radio';
 
-import YForm from '../index';
 import { getFieldKeyValue } from '../utils';
 import { OptionsProps } from '../ItemsType';
 import { useGetOptions } from '../hooks';
 
 export interface YRadioProps extends OptionsProps, Omit<RadioGroupProps, 'options'> {}
 
-export default forwardRef<any, YRadioProps & { reRender?: boolean }>((props, ref) => {
-  const { form } = React.useContext(YForm.YFormContext);
-  const { name } = React.useContext(YForm.YFormItemContext);
+export default forwardRef<any, YRadioProps>((props, ref) => {
   const {
     value,
     postField = 'id',
@@ -21,11 +18,10 @@ export default forwardRef<any, YRadioProps & { reRender?: boolean }>((props, ref
     renderOption,
     onAddProps,
     getOptions,
-    reRender,
     ...rest
   } = props;
   // 可以是方法返回的异步数据
-  const list = useGetOptions({ form, name, getOptions, reRender, options });
+  const list = useGetOptions();
   const children = map(list, (item, index: number) => {
     if (item) {
       const _postField = getFieldKeyValue(item, index, postField);
