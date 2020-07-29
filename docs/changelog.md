@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.0](https://github.com/crazyair/yforms/compare/v1.1.8...v1.2.0) (2020-07-29)
+
+### Bug Fixes
+
+- 修复 getOptions 每次变更都会调用请求 ([#40](https://github.com/crazyair/yforms/issues/40)) ([5dc1313](https://github.com/crazyair/yforms/commit/5dc131305feb714824b9f3588280fbc8ac351f98))
+
 ## [1.1.8](https://github.com/crazyair/yforms/compare/v1.1.7...v1.1.8) (2020-07-28)
 
 ### Bug Fixes
