@@ -116,74 +116,71 @@ const Item: React.FC<YFormDataSource> = (props) => {
     onFormatFieldsValue(_format);
   }
 
-  const getDom = (componentProps?: any) => {
-    let _children;
-    // 默认用 FormItem 包裹
-    let _hasFormItem = true;
-    const thisComponentProps = mergeWithDom(_componentProps, componentProps);
-    if (type) {
-      const _fieldData = itemsType[type];
-      if (_fieldData) {
-        const { component } = _fieldData;
-        _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
-        const _component = children || component;
-        _children = isValidElement(_component)
-          ? React.cloneElement(_component, {
-              ...(_component.props as object),
-              ...thisComponentProps,
-            })
-          : _component;
-      } else {
-        warning(false, `[YFom.Items] ${type} 类型未找到`);
-      }
+  let _children;
+  // 默认用 FormItem 包裹
+  let _hasFormItem = true;
+  const thisComponentProps = _componentProps;
+  if (type) {
+    const _fieldData = itemsType[type];
+    if (_fieldData) {
+      const { component } = _fieldData;
+      _hasFormItem = 'hasFormItem' in _fieldData ? _fieldData.hasFormItem : _hasFormItem;
+      const _component = children || component;
+      _children = isValidElement(_component)
+        ? React.cloneElement(_component, {
+            ...(_component.props as object),
+            ...thisComponentProps,
+          })
+        : _component;
     } else {
-      // 没有 type 单独有 dataSource 情况
-      if (dataSource) {
-        _children = (
-          <Items scenes={_scenes} {...thisComponentProps}>
-            {dataSource}
-          </Items>
-        );
-      } else {
-        _children = isValidElement(children)
-          ? React.cloneElement(children, { ...children.props, ...thisComponentProps })
-          : children;
-      }
+      warning(false, `[YFom.Items] ${type} 类型未找到`);
     }
-    const domChildren =
-      typeof _children === 'function'
-        ? (form: YFormInstance) => {
-            return (
-              <Items noStyle scenes={_scenes}>
-                {(_children as YFormRenderChildren)(form)}
-              </Items>
-            );
-          }
-        : _children;
-    let dom = domChildren;
-    if (_hasFormItem) {
-      dom = (
-        <ItemChildren
-          {...omit(_formItemProps, [
-            'component',
-            'scenes',
-            'viewProps',
-            'unFormat',
-            'format',
-            'oldValue',
-            'items',
-            'offset',
-            'hideLable',
-          ])}
-        >
-          {domChildren}
-        </ItemChildren>
+  } else {
+    // 没有 type 单独有 dataSource 情况
+    if (dataSource) {
+      _children = (
+        <Items scenes={_scenes} {...thisComponentProps}>
+          {dataSource}
+        </Items>
       );
+    } else {
+      _children = isValidElement(children)
+        ? React.cloneElement(children, { ...children.props, ...thisComponentProps })
+        : children;
     }
-    return dom;
-  };
+  }
+  const domChildren =
+    typeof _children === 'function'
+      ? (form: YFormInstance) => {
+          return (
+            <Items noStyle scenes={_scenes}>
+              {(_children as YFormRenderChildren)(form)}
+            </Items>
+          );
+        }
+      : _children;
+  let dom = domChildren;
+  if (_hasFormItem) {
+    dom = (
+      <ItemChildren
+        {...omit(_formItemProps, [
+          'component',
+          'scenes',
+          'viewProps',
+          'unFormat',
+          'format',
+          'oldValue',
+          'items',
+          'offset',
+          'hideLable',
+        ])}
+      >
+        {domChildren}
+      </ItemChildren>
+    );
+  }
 
-  const render = (dom: React.ReactNode, props?: any) => {
+  const render = (props?: any) => {
     return (
       <YForm.YFormItemContext.Provider value={mergeWithDom(omit(_props, ['children']), props)}>
         {dom}
@@ -204,12 +201,12 @@ const Item: React.FC<YFormDataSource> = (props) => {
             }
           }
           reRender = !reRender;
-          return render(getDom(), { reRender });
+          return render({ reRender });
         }}
       </Form.Item>
     );
   }
-  return render(getDom());
+  return render();
 };
 
 export default Item;
