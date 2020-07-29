@@ -9,7 +9,7 @@ import { useGetOptions } from '../hooks';
 
 export interface YSelectProps extends OptionsProps, Omit<SelectProps<any>, 'options'> {}
 
-export default forwardRef<any, YSelectProps & { reRender?: boolean }>((props, ref) => {
+export default forwardRef<any, YSelectProps>((props, ref) => {
   const {
     postField = 'id',
     showField = 'name',
@@ -17,7 +17,6 @@ export default forwardRef<any, YSelectProps & { reRender?: boolean }>((props, re
     renderOption,
     onAddProps,
     getOptions,
-    reRender,
     ...rest
   } = props;
   const list = useGetOptions();

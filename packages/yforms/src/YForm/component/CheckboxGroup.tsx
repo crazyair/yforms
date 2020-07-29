@@ -9,7 +9,7 @@ import { useGetOptions } from '../hooks';
 
 export interface YCheckGroupProps extends OptionsProps, Omit<CheckboxGroupProps, 'options'> {}
 
-export default forwardRef<any, YCheckGroupProps & { reRender?: boolean }>((props, ref) => {
+export default forwardRef<any, YCheckGroupProps>((props, ref) => {
   const {
     value,
     postField = 'id',
@@ -18,7 +18,6 @@ export default forwardRef<any, YCheckGroupProps & { reRender?: boolean }>((props
     renderOption,
     onAddProps,
     getOptions,
-    reRender,
     ...rest
   } = props;
   const list = useGetOptions();
