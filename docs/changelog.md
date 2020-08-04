@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.1](https://github.com/crazyair/yforms/compare/v1.2.0...v1.2.1) (2020-08-04)
+
+### Bug Fixes
+
+- 过滤 initialValues 的 merge 处理 ([b9fc580](https://github.com/crazyair/yforms/commit/b9fc580056f18c6fa9ba5fe8a2f72c64420c41ef))
+
 ## [1.2.0](https://github.com/crazyair/yforms/compare/v1.1.8...v1.2.0) (2020-07-29)
 
 ### Bug Fixes
