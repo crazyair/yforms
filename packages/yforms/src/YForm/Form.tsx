@@ -284,8 +284,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
         },
       },
     },
-    { ...omit(_props, ['name']) },
-    { initialValues: unFormatValues },
+    { ...omit(_props, ['name', 'initialValues']) },
   );
   if ('isShow' in _props && !_props.isShow) {
     return null;
@@ -305,7 +304,9 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
     >
-      <YFormContext.Provider value={{ ...providerProps, itemsType: itemsTypeAll }}>
+      <YFormContext.Provider
+        value={{ ...providerProps, initialValues: unFormatFieldsValue, itemsType: itemsTypeAll }}
+      >
         <Items offset={offset}>{children}</Items>
       </YFormContext.Provider>
     </Form>

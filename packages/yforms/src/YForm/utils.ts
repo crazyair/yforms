@@ -6,7 +6,6 @@ import {
   set,
   mapKeys,
   forEach,
-  cloneDeep,
   sortBy,
   isArray,
   find,
@@ -156,7 +155,7 @@ export function submitFormatValues(
   values: KeyValue,
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
-  const _values = cloneDeep(values);
+  const _values = { ...values };
   const list: FormatFieldsValue[] = sortBy(formatFieldsValue, (item) => {
     if (!item) return;
     if (isArray(item.name)) {
