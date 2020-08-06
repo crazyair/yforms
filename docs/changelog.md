@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.4](https://github.com/crazyair/yforms/compare/v1.2.3...v1.2.4) (2020-08-06)
+
+### Bug Fixes
+
+- 修复数组 format 为空 ([#42](https://github.com/crazyair/yforms/issues/42)) ([bcc91d9](https://github.com/crazyair/yforms/commit/bcc91d91bf1fc2a2aa816c57eeac697668c3a4b6))
+
 ## [1.2.2](https://github.com/crazyair/yforms/compare/v1.2.1...v1.2.2) (2020-08-06)
 
 ### Refactor
