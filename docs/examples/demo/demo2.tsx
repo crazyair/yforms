@@ -1,11 +1,12 @@
 /**
- * title: format unFormat 使用
+ * title: format deFormat 使用
  * desc: 日期场景下修改初始化值，提交修改提交值，数据对比也可以共享该配置。
  */
 
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { YForm } from 'yforms';
 import moment from 'moment';
+import Immutable from 'immutable';
 
 const Demo = () => {
   const [form] = YForm.useForm();
@@ -17,6 +18,7 @@ const Demo = () => {
   const loadData = useCallback(() => {
     setTimeout(() => {
       setData({
+        map: Immutable.Map({ a: 1, b: 2, c: 3 }),
         name: `原值_${count.current}`,
         start: '1591943666',
         end: '1592116466',
@@ -57,23 +59,30 @@ const Demo = () => {
       {[
         {
           type: 'input',
+          label: 'immutable',
+          name: 'map',
+          deFormat: (value) => value && value.set('d', 4),
+          format: (value) => value && value.set('e', 5),
+        },
+        {
+          type: 'input',
           label: '全格式化',
           name: 'name',
-          unFormat: (value) => value && `${value}_unFormat`,
+          deFormat: (value) => value && `${value}_deFormat`,
           format: (value) => value && `${value}_format`,
         },
         {
           type: 'datePicker',
           label: '日期',
           name: 'date',
-          unFormat: (value) => value && moment.unix(value),
+          deFormat: (value) => value && moment.unix(value),
           format: (value) => value && `${moment(value).unix()}`,
         },
         {
           type: 'rangePicker',
           name: 'range',
           label: '日期区间',
-          unFormat: (_, { start, end }) => {
+          deFormat: (_, { start, end }) => {
             return [start && moment.unix(start), end && moment.unix(end)];
           },
           format: [
@@ -98,7 +107,7 @@ const Demo = () => {
               {
                 type: 'rangePicker',
                 name: [index, 'range'],
-                unFormat: (_, { start, end }) => {
+                deFormat: (_, { start, end }) => {
                   return [start && moment.unix(start), end && moment.unix(end)];
                 },
                 format: [
@@ -125,8 +134,8 @@ const Demo = () => {
               {
                 type: 'input',
                 name: [index, 'age'],
-                unFormat: (value) => {
-                  return value && `${value}_unFormat`;
+                deFormat: (value) => {
+                  return value && `${value}_deFormat`;
                 },
               },
             ];

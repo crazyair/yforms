@@ -23,7 +23,7 @@ nav:
 
 <code src="./demo/diff.tsx" />
 
-## format unFormat 使用
+## format deFormat 使用
 
 <code src="./demo/demo2.tsx" />
 

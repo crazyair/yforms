@@ -76,7 +76,7 @@ export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfi
   formatFieldsValue?: FormatFieldsValue[];
   onFormatFieldsValue?: (f: FormatFieldsValue[]) => (f: FormatFieldsValue[]) => FormatFieldsValue[];
   children?: YFormItemProps['children'];
-  onUnFormatFieldsValue?: (p?: FormatFieldsValue) => void;
+  onDeFormatFieldsValue?: (p?: FormatFieldsValue) => void;
   onSave?: (values: { [key: string]: any }) => void;
   submitComponentProps?: YFormSubmitComponentProps;
   onCancel?: (p: { type: CancelType }) => void;
@@ -238,15 +238,15 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     handleOnDisabled(false);
   };
   const {
-    formatFieldsValue: unFormatFieldsValue,
-    onFormatFieldsValue: onUnFormatFieldsValue,
+    formatFieldsValue: deFormatFieldsValue,
+    onFormatFieldsValue: onDeFormatFieldsValue,
   } = useFormatFieldsValue();
 
-  // unFormatFieldsValue 第一次为空需要下面 set(unFormatValues, name, value) 设置值
-  // 当执行 resetFields 后，就需要 unFormatFieldsValue 的格式化。
-  const unFormatValues = submitFormatValues(initialValues, unFormatFieldsValue);
+  // deFormatFieldsValue 第一次为空需要下面 set(deFormatValues, name, value) 设置值
+  // 当执行 resetFields 后，就需要 deFormatFieldsValue 的格式化。
+  const deFormatValues = submitFormatValues(initialValues, deFormatFieldsValue);
 
-  const handleUnFormatFieldsValue = useCallback(
+  const handleDeFormatFieldsValue = useCallback(
     (data: FormatFieldsValue) => {
       const { name, format } = data;
       const parentValue = getParentNameData(initialValues, name);
@@ -256,13 +256,13 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
         if (parentValue !== undefined) {
           form.setFields([{ name, value }]);
           formatRef.current.push({ name, value });
-          // 初始化使用 unFormat 后的数据
-          set(unFormatValues, name, value);
-          onUnFormatFieldsValue([{ name, format }]);
+          // 初始化使用 deFormat 后的数据
+          set(deFormatValues, name, value);
+          onDeFormatFieldsValue([{ name, format }]);
         }
       }
     },
-    [initialValues, form, unFormatValues, onUnFormatFieldsValue],
+    [initialValues, form, deFormatValues, onDeFormatFieldsValue],
   );
 
   const providerProps = mergeWithDom(
@@ -272,7 +272,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       disabled: _thisDisabled,
       getScene,
       onFormatFieldsValue,
-      onUnFormatFieldsValue: handleUnFormatFieldsValue,
+      onDeFormatFieldsValue: handleDeFormatFieldsValue,
       submitComponentProps: {
         showBtns: {
           // form submit 触发后设置 loading = true
@@ -285,6 +285,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       },
     },
     { ...omit(_props, ['name', 'initialValues']) },
+    { initialValues: deFormatValues },
   );
   if ('isShow' in _props && !_props.isShow) {
     return null;
@@ -299,14 +300,12 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   return (
     <Form
       {...omit(rest, ['scenes', 'oldValues'])}
-      initialValues={unFormatValues}
+      initialValues={deFormatValues}
       form={form}
       className={classNames('yforms', className)}
       onFinish={handleOnFinish}
     >
-      <YFormContext.Provider
-        value={{ ...providerProps, initialValues: unFormatFieldsValue, itemsType: itemsTypeAll }}
-      >
+      <YFormContext.Provider value={{ ...providerProps, itemsType: itemsTypeAll }}>
         <Items offset={offset}>{children}</Items>
       </YFormContext.Provider>
     </Form>

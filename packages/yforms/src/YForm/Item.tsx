@@ -17,7 +17,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
 
   const {
     itemsType = {},
-    onUnFormatFieldsValue,
+    onDeFormatFieldsValue,
     oldValues,
     getScene,
     onFormatFieldsValue,
@@ -65,14 +65,14 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if (modifyProps) {
     mergeWithDom(_defaultData, modifyProps(defaultData));
   }
-  const { unFormat } = _defaultData.itemProps;
+  const { deFormat } = _defaultData.itemProps;
 
-  // 获取前格式化 TODO：由于 diff 也在 scenes 中处理，所以 unFormat 不能在 scenes 后面执行
-  if (unFormat) {
-    onUnFormatFieldsValue({ name: allName, format: unFormat });
+  // 获取前格式化 TODO：由于 diff 也在 scenes 中处理，所以 deFormat 不能在 scenes 后面执行
+  if (deFormat) {
+    onDeFormatFieldsValue({ name: allName, format: deFormat });
     if (oldValues && _scenes.diff) {
       _defaultData.itemProps = {
-        oldValue: unFormat(
+        oldValue: deFormat(
           get(oldValues, allName),
           getParentNameData(oldValues, allName),
           oldValues,
@@ -167,7 +167,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
           'component',
           'scenes',
           'viewProps',
-          'unFormat',
+          'deFormat',
           'format',
           'oldValue',
           'items',
