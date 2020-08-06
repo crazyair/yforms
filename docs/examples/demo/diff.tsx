@@ -167,7 +167,7 @@ const Demo = () => {
           componentProps: { picker: 'quarter' },
           // viewProps: { format: (value) => moment(value).format('YYYY-MM-DD') },
           // format: (date) => moment(date).format('YYYY-MM-DD'),
-          // unFormat: () => moment('2021-01-01 12:00:00'),
+          // deFormat: () => moment('2021-01-01 12:00:00'),
         },
         { label: '开关', type: 'radio', name: 'type', componentProps: { options } },
         {

@@ -23,7 +23,7 @@ export interface YFormItemProps<T = any>
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
   format?: FormatFieldsValue['format'] | FormatFieldsValue[];
-  unFormat?: FormatFieldsValue['format'];
+  deFormat?: FormatFieldsValue['format'];
   style?: React.CSSProperties;
   offset?: number;
   children?:

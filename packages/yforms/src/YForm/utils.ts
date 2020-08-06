@@ -1,4 +1,5 @@
 import { isValidElement, useRef } from 'react';
+import { isImmutable } from 'immutable';
 import {
   get,
   map,
@@ -33,6 +34,19 @@ export function replaceMessage(template: string, kv: Record<string, string>): st
     return kv[key];
   });
 }
+
+export const mergeWithDom = (obj: any, ...params: any[]) => {
+  return mergeWith(obj, ...params, (_, srcValue) => {
+    // 如果是元素则返回要更改的值，不是则不处理
+    if (isValidElement(srcValue)) {
+      return srcValue;
+    }
+    // 如果是不可变数据，不处理合并
+    if (isImmutable(srcValue)) {
+      return srcValue;
+    }
+  });
+};
 
 // 获取一行多组件的 width
 export const oneLineItemStyle = (list?: Array<number | string>) => {
@@ -155,7 +169,7 @@ export function submitFormatValues(
   values: KeyValue,
   formatFieldsValue?: FormatFieldsValue[],
 ): KeyValue {
-  const _values = { ...values };
+  const _values = mergeWithDom({}, values);
   const list: FormatFieldsValue[] = sortBy(formatFieldsValue, (item) => {
     if (!item) return;
     if (isArray(item.name)) {
@@ -217,13 +231,4 @@ export const useImmutableValue = (value: any) => {
     v.current = value;
   }
   return v.current;
-};
-
-export const mergeWithDom = (obj: any, ...params: any[]) => {
-  return mergeWith(obj, ...params, (_, srcValue) => {
-    // 如果是元素则返回要更改的值，不是则不处理
-    if (isValidElement(srcValue)) {
-      return srcValue;
-    }
-  });
 };
