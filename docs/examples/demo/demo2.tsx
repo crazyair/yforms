@@ -6,7 +6,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { YForm } from 'yforms';
 import moment from 'moment';
-import Immutable from 'immutable';
+import { Map } from 'immutable';
 
 const Demo = () => {
   const [form] = YForm.useForm();
@@ -18,7 +18,7 @@ const Demo = () => {
   const loadData = useCallback(() => {
     setTimeout(() => {
       setData({
-        map: Immutable.Map({ a: 1, b: 2, c: 3 }),
+        map: Map({ a: 1, b: 2, c: 3 }),
         name: `原值_${count.current}`,
         start: '1591943666',
         end: '1592116466',

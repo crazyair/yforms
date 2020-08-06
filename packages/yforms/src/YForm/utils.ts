@@ -1,5 +1,5 @@
 import { isValidElement, useRef } from 'react';
-import Immutable from 'immutable';
+import { isImmutable } from 'immutable';
 import {
   get,
   map,
@@ -42,7 +42,7 @@ export const mergeWithDom = (obj: any, ...params: any[]) => {
       return srcValue;
     }
     // 如果是不可变数据，不处理合并
-    if (Immutable.isImmutable(srcValue)) {
+    if (isImmutable(srcValue)) {
       return srcValue;
     }
   });
