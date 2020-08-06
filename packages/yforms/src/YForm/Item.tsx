@@ -108,7 +108,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       _format = map(format, (item) => {
         const _item = { ...item };
         if (item.name) {
-          _item.name = allName;
+          _item.name = prefixName ? concat(prefixName, item.name) : item.name;
         }
         return _item;
       });

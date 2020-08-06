@@ -162,7 +162,7 @@ export const getParentNameData = (values: any, name: YFormItemProps['name']) => 
   if (_name.length === 1) {
     return _values;
   }
-  return get(_values, _name.slice(0, _name.length - 1));
+  return get(_values, _name.slice(0, _name.length - 1), {});
 };
 
 export function submitFormatValues(
