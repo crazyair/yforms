@@ -1,6 +1,6 @@
 {
   "name": "yforms",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -36,6 +36,7 @@
     "moment": "^2.27.0",
     "numbro": "^2.3.1",
     "nzh": "^1.0.4",
+    "immutable": "^4.0.0-rc.12",
     "warning": "^4.0.3"
   },
   "license": "MIT"
