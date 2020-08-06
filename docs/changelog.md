@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.2](https://github.com/crazyair/yforms/compare/v1.2.1...v1.2.2) (2020-08-06)
+
+### Refactor
+
+- refactor: unFormat 更改为 deFormat ([6af5ce8](https://github.com/crazyair/yforms/commit/6af5ce8c74828ccf8e0e4784c14b34c6e827e5f4))
+
 ## [1.2.1](https://github.com/crazyair/yforms/compare/v1.2.0...v1.2.1) (2020-08-04)
 
 ### Bug Fixes
