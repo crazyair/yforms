@@ -65,22 +65,6 @@ const Item: React.FC<YFormDataSource> = (props) => {
   if (modifyProps) {
     mergeWithDom(_defaultData, modifyProps(defaultData));
   }
-  const { deFormat } = _defaultData.itemProps;
-
-  // 获取前格式化 TODO：由于 diff 也在 scenes 中处理，所以 deFormat 不能在 scenes 后面执行
-  if (deFormat) {
-    onDeFormatFieldsValue({ name: allName, format: deFormat });
-    if (oldValues && _scenes.diff) {
-      _defaultData.itemProps = {
-        oldValue: deFormat(
-          get(oldValues, allName),
-          getParentNameData(oldValues, allName),
-          oldValues,
-        ),
-        ..._defaultData.itemProps,
-      };
-    }
-  }
 
   mapKeys(_scenes, (value: boolean, key: string) => {
     if (value && getScene[key] && getScene[key].item) {
@@ -98,6 +82,23 @@ const Item: React.FC<YFormDataSource> = (props) => {
   const { type, dataSource, componentProps, format, ...formItemProps } = _props;
   const _formItemProps = formItemProps;
   const { isShow, shouldUpdate } = _formItemProps;
+
+  const { deFormat } = _defaultData.itemProps;
+
+  // 获取前格式化
+  if (deFormat) {
+    onDeFormatFieldsValue({ name: allName, format: deFormat });
+    if (oldValues && _scenes.diff) {
+      _defaultData.itemProps = {
+        oldValue: deFormat(
+          get(oldValues, allName),
+          getParentNameData(oldValues, allName),
+          oldValues,
+        ),
+        ..._defaultData.itemProps,
+      };
+    }
+  }
 
   // 提交前格式化
   if (format) {
