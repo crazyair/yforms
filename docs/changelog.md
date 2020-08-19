@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.5](https://github.com/crazyair/yforms/compare/v1.2.4...v1.2.5) (2020-08-19)
+
+### Bug Fixes
+
+- deFormat 可以在 scenes 使用 ([528da40](https://github.com/crazyair/yforms/commit/528da401c1c8ef7aff223c766ae75fa2cc99f99c))
+
 ## [1.2.4](https://github.com/crazyair/yforms/compare/v1.2.3...v1.2.4) (2020-08-06)
 
 ### Bug Fixes
