@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.6](https://github.com/crazyair/yforms/compare/v1.2.5...v1.2.6) (2020-08-20)
+
+### Bug Fixes
+
+- 获取上级数据没有则返回 undefined ([cb95d15](https://github.com/crazyair/yforms/commit/cb95d158a9d0dd512deeca535d58a99423b703b8))
+
 ## [1.2.5](https://github.com/crazyair/yforms/compare/v1.2.4...v1.2.5) (2020-08-19)
 
 ### Bug Fixes
