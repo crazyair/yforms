@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.2.7](https://github.com/crazyair/yforms/compare/v1.2.6...v1.2.7) (2020-08-24)
+
+### Bug Fixes
+
+- 修复 required 合并问题 ([a889e6d](https://github.com/crazyair/yforms/commit/a889e6d14e40f7a9c2a892db93a08254157b57af))
+
 ## [1.2.6](https://github.com/crazyair/yforms/compare/v1.2.5...v1.2.6) (2020-08-20)
 
 ### Bug Fixes

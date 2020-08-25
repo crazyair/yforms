@@ -1410,6 +1410,9 @@ Object {
                         </div>
                         <div
                           class="ant-space-item"
+                        />
+                        <div
+                          class="ant-space-item"
                         >
                           <button
                             class="ant-btn"
@@ -3756,6 +3759,9 @@ Object {
                       </div>
                       <div
                         class="ant-space-item"
+                      />
+                      <div
+                        class="ant-space-item"
                       >
                         <button
                           class="ant-btn"
@@ -5159,6 +5165,9 @@ Object {
                                 </span>
                               </button>
                             </div>
+                            <div
+                              class="ant-space-item"
+                            />
                             <div
                               class="ant-space-item"
                             >

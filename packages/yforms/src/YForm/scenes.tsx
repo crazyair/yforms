@@ -48,7 +48,9 @@ const scenes: YFormConfig = {
         if (itemProps.name && typeProps.type && typeProps.type !== 'list') {
           let hasRequired = false;
           forEach(rules, (item) => {
-            hasRequired = 'required' in item;
+            if ('required' in item) {
+              hasRequired = true;
+            }
           });
           if (!hasRequired) {
             _itemProps.rules = [
@@ -58,7 +60,7 @@ const scenes: YFormConfig = {
           }
         }
         return {
-          itemProps: { ..._itemProps, ...itemProps },
+          itemProps: { ...itemProps, ..._itemProps },
         };
       },
     },
