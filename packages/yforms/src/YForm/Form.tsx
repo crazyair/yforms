@@ -83,6 +83,7 @@ export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfi
   params?: ParamsType;
   oldValues?: T;
   offset?: YFormItemProps['offset'];
+  minBtnLoadingTime?: number;
 }
 
 export function useFormatFieldsValue() {
@@ -135,6 +136,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     submitComponentProps,
     submit,
     initialValues,
+    minBtnLoadingTime = 500,
     ...rest
   } = _props;
   const [form] = useForm(propsForm);
@@ -224,7 +226,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
             handleReset({ type: 'onSubmit' });
           },
           // loading 时间不到 0.5s 的加载 0.5s，超过的立刻结束。
-          end - begin > 500 ? 0 : 500,
+          end - begin > minBtnLoadingTime ? 0 : minBtnLoadingTime,
         );
       } catch (error) {
         warning(false, error || 'onSubmit error');
