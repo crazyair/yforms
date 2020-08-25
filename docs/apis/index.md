@@ -30,6 +30,7 @@ nav:
 | onCancel | 点击取消、返回调用的方法（需用到 `submit` 类型） | () => void | - |
 | params | 当前表单状态（需用到 `submit` 类型） | <a href="/apis/hooks#paramsobjtype">ParamsObjType</a> | - |
 | submitComponentProps | 与 `submit` 类型参数结合使用（用户无需传） | <a href="/types/submit#api">YFormSubmitComponentProps</a> | - |
+| minBtnLoadingTime | 按钮最低 loading 时间 | number | 500 |
 
 ## YForm.Items
 

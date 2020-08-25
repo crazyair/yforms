@@ -3,11 +3,11 @@ import { Button } from 'antd';
 import { ButtonProps } from 'antd/lib/button';
 
 export interface YFormSecureButtonProps {
-  componentProps?: ButtonProps & { onLoaded?: () => void };
+  componentProps?: ButtonProps & { onLoaded?: () => void; minBtnLoadingTime?: number };
 }
 
 const SecureButton: React.FC<YFormSecureButtonProps['componentProps']> = (props) => {
-  const { onClick, onLoaded, ...rest } = props;
+  const { onClick, onLoaded, minBtnLoadingTime = 500, ...rest } = props;
   const [loading, setLoading] = useState(false);
   const timeOut = useRef<number | null>(null);
 
@@ -19,7 +19,7 @@ const SecureButton: React.FC<YFormSecureButtonProps['componentProps']> = (props)
     (end: number, begin: number, err?: any) => {
       if (err) {
         setLoading(false);
-      } else if (end - begin > 500) {
+      } else if (end - begin > minBtnLoadingTime) {
         // 如果 onClick 执行时间大于 0.5s，就立刻取消 loading
         setLoading(false);
         if (onLoaded) onLoaded();
@@ -28,10 +28,10 @@ const SecureButton: React.FC<YFormSecureButtonProps['componentProps']> = (props)
         timeOut.current = window.setTimeout(() => {
           setLoading(false);
           if (onLoaded) onLoaded();
-        }, 500);
+        }, minBtnLoadingTime);
       }
     },
-    [onLoaded],
+    [onLoaded, minBtnLoadingTime],
   );
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
