@@ -38,6 +38,7 @@ import {
   CustomModify,
 } from './ItemsTypeModify';
 import Space, { YFormSpaceProps } from './component/Space';
+import Card, { YFormCardProps } from './component/Card';
 
 export interface YFormFieldBaseProps<T = any> {
   component?: React.ReactElement;
@@ -101,6 +102,7 @@ export interface YFormItemsTypeDefine {
   select: { componentProps?: YSelectProps };
   radio: { componentProps?: YRadioProps };
   oneLine: YFormOneLineProps;
+  card: YFormCardProps;
   space: YFormSpaceProps;
   list: YFormListProps;
   submit: YFormSubmitProps;
@@ -148,6 +150,7 @@ export const itemsType: YFormItemsType = {
   },
   // 工具类
   oneLine: { component: <OneLine />, modifyProps: oneLineModify },
+  card: { component: <Card /> },
   list: { component: <List />, hasFormItem: false },
   button: { component: <Button /> },
   secureButton: { component: <SecureButton /> },
