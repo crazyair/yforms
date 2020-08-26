@@ -4,6 +4,7 @@ import { merge, concat, mapKeys, omit, find, get, set, forEach } from 'lodash';
 import classNames from 'classnames';
 import { FormProps, FormInstance } from 'antd/lib/form';
 import warning from 'warning';
+import { usePersistFn } from 'ahooks';
 
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
 import Items, { FormatFieldsValue, YFormItemProps } from './Items';
@@ -84,6 +85,7 @@ export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfi
   oldValues?: T;
   offset?: YFormItemProps['offset'];
   minBtnLoadingTime?: number;
+  getInitialValues?: (p?: any) => Promise<Object> | Object;
 }
 
 export function useFormatFieldsValue() {
@@ -137,8 +139,10 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     submit,
     initialValues,
     minBtnLoadingTime = 500,
+    getInitialValues,
     ...rest
   } = _props;
+
   const [form] = useForm(propsForm);
   const formatRef = useRef([]);
   const { resetFields, getFieldsValue } = form;
@@ -164,6 +168,22 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     },
     [submit],
   );
+
+  const [_getInitialValues, setGetInitialValues] = useState({});
+  const [getLoading, setGetLoading] = useState(true);
+  const immutableGetDetail = usePersistFn((...p) => getInitialValues && getInitialValues(...p));
+
+  // 默认使用 initialValues、loading 无则使用 getInitialValues 的数据
+  // const _initialValues = 'initialValues' in _props ? initialValues : _getInitialValues;
+  // const _loading = 'loading' in _props ? loading : getLoading;
+  const _initialValues = getInitialValues ? _getInitialValues : initialValues;
+  const _loading = getInitialValues ? getLoading : loading;
+  useEffect(() => {
+    (async () => {
+      setGetInitialValues(await immutableGetDetail());
+      setGetLoading(false);
+    })();
+  }, [immutableGetDetail]);
 
   useEffect(() => {
     return () => {
@@ -246,13 +266,13 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
 
   // deFormatFieldsValue 第一次为空需要下面 set(deFormatValues, name, value) 设置值
   // 当执行 resetFields 后，就需要 deFormatFieldsValue 的格式化。
-  const deFormatValues = submitFormatValues(initialValues, deFormatFieldsValue);
+  const deFormatValues = submitFormatValues(_initialValues, deFormatFieldsValue);
 
   const handleDeFormatFieldsValue = useCallback(
     (data: FormatFieldsValue) => {
       const { name, format } = data;
-      const parentValue = getParentNameData(initialValues, name);
-      const value = format(get(initialValues, name), parentValue, initialValues);
+      const parentValue = getParentNameData(_initialValues, name);
+      const value = format(get(_initialValues, name), parentValue, _initialValues);
       if (!find(formatRef.current, { name })) {
         // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
         if (parentValue !== undefined) {
@@ -264,9 +284,8 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
         }
       }
     },
-    [initialValues, form, deFormatValues, onDeFormatFieldsValue],
+    [_initialValues, form, deFormatValues, onDeFormatFieldsValue],
   );
-
   const providerProps = mergeWithDom(
     {
       form,
@@ -292,7 +311,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   if ('isShow' in _props && !_props.isShow) {
     return null;
   }
-  if (loading) {
+  if (_loading) {
     return (
       <div className="form-spin">
         <Spin />
