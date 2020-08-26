@@ -5,14 +5,17 @@ nav:
   order: 5
 ---
 
-
-## [1.2.8](https://github.com/crazyair/yforms/compare/v1.2.7...v1.2.8) (2020-08-25)
-
+## [1.2.9](https://github.com/crazyair/yforms/compare/v1.2.8...v1.2.9) (2020-08-26)
 
 ### Features
 
-* 添加 card 类型、提交按钮添加时间控制 ([#44](https://github.com/crazyair/yforms/issues/44)) ([e44595e](https://github.com/crazyair/yforms/commit/e44595eded7853538ebb6125a4038403abd32ba7))
+- form 添加 getInitialValues 方法 ([#45](https://github.com/crazyair/yforms/issues/45)) ([c1a17ed](https://github.com/crazyair/yforms/commit/c1a17edfff84f22f6f9ef3166c93e8297f21efce))
 
+## [1.2.8](https://github.com/crazyair/yforms/compare/v1.2.7...v1.2.8) (2020-08-25)
+
+### Features
+
+- 添加 card 类型、提交按钮添加时间控制 ([#44](https://github.com/crazyair/yforms/issues/44)) ([e44595e](https://github.com/crazyair/yforms/commit/e44595eded7853538ebb6125a4038403abd32ba7))
 
 ## [1.2.7](https://github.com/crazyair/yforms/compare/v1.2.6...v1.2.7) (2020-08-24)
 
