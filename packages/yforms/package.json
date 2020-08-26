@@ -37,6 +37,7 @@
     "numbro": "^2.3.1",
     "nzh": "^1.0.4",
     "immutable": "^4.0.0-rc.12",
+    "ahooks": "^2.5.0",
     "warning": "^4.0.3"
   },
   "license": "MIT"
