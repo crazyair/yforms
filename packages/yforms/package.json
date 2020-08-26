@@ -1,6 +1,6 @@
 {
   "name": "yforms",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
