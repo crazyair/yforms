@@ -173,9 +173,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   const [getLoading, setGetLoading] = useState(true);
   const immutableGetDetail = usePersistFn((...p) => getInitialValues && getInitialValues(...p));
 
-  // 默认使用 initialValues、loading 无则使用 getInitialValues 的数据
-  // const _initialValues = 'initialValues' in _props ? initialValues : _getInitialValues;
-  // const _loading = 'loading' in _props ? loading : getLoading;
+  // 传了 getInitialValues 则使用该数据，没传则使用 initialValues、loading
   const _initialValues = getInitialValues ? _getInitialValues : initialValues;
   const _loading = getInitialValues ? getLoading : loading;
   useEffect(() => {
