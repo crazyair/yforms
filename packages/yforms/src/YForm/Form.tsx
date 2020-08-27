@@ -68,6 +68,11 @@ export interface YFormInstance<T = any> extends FormInstance {
 
 type CancelType = 'onSave' | 'onSubmit' | 'onCancel';
 
+type getInitialValuesParamsType = {
+  // 是否是第一次加载
+  isInit: boolean;
+};
+
 export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfig {
   isShow?: boolean;
   disabled?: boolean;
@@ -85,7 +90,7 @@ export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfi
   oldValues?: T;
   offset?: YFormItemProps['offset'];
   minBtnLoadingTime?: number;
-  getInitialValues?: (p?: any) => Promise<Object> | Object;
+  getInitialValues?: (p: getInitialValuesParamsType) => Promise<Object> | Object;
 }
 
 export function useFormatFieldsValue() {
@@ -168,20 +173,29 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
     },
     [submit],
   );
-
   const [_getInitialValues, setGetInitialValues] = useState({});
   const [getLoading, setGetLoading] = useState(true);
-  const immutableGetDetail = usePersistFn((...p) => getInitialValues && getInitialValues(...p));
+  const immutableGetDetail = usePersistFn<YFormProps['getInitialValues']>(getInitialValues);
 
   // 传了 getInitialValues 则使用该数据，没传则使用 initialValues、loading
   const _initialValues = getInitialValues ? _getInitialValues : initialValues;
   const _loading = getInitialValues ? getLoading : loading;
+
+  const hasGetInitialValues = typeof getInitialValues === 'function';
+  const loadData = useCallback(
+    async (params: getInitialValuesParamsType) => {
+      // 只有传了 getInitialValues 调用
+      if (hasGetInitialValues) {
+        setGetInitialValues(await immutableGetDetail(params));
+        setGetLoading(false);
+      }
+    },
+    [hasGetInitialValues, immutableGetDetail],
+  );
+
   useEffect(() => {
-    (async () => {
-      setGetInitialValues(await immutableGetDetail());
-      setGetLoading(false);
-    })();
-  }, [immutableGetDetail]);
+    loadData({ isInit: true });
+  }, [loadData]);
 
   useEffect(() => {
     return () => {
@@ -194,7 +208,8 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
   };
 
   const handleReset: (p: { type: CancelType }) => void = useCallback(
-    ({ type }) => {
+    async ({ type }) => {
+      await loadData({ isInit: false });
       if (typeof onCancel === 'function') {
         onCancel({ type });
       } else {
@@ -206,7 +221,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
         }
       }
     },
-    [create, edit, handleOnDisabled, onCancel, resetFields, view],
+    [create, edit, handleOnDisabled, loadData, onCancel, resetFields, view],
   );
   const itemsTypeAll = { ...baseItemsType, ...globalConfig.itemsType, ...itemsType };
 

@@ -31,7 +31,7 @@ nav:
 | params | 当前表单状态（需用到 `submit` 类型） | <a href="/apis/hooks#paramsobjtype">ParamsObjType</a> | - |
 | submitComponentProps | 与 `submit` 类型参数结合使用（用户无需传） | <a href="/types/submit#api">YFormSubmitComponentProps</a> | - |
 | minBtnLoadingTime | 按钮最低 loading 时间 | number | 500 |
-| getInitialValues | 获取表单默认值 | - | - |
+| getInitialValues | 获取表单默认值 | (p:[getInitialValuesParamsType](/apis/#getInitialValuesParamsType)) => Promise<Object\> \| Object | - |
 
 ## YForm.Items
 
@@ -46,6 +46,12 @@ nav:
 | --- | --- | --- | --- |
 | isShow | 是否隐藏， `isShow` 为 `function` 情况下实现该功能 <a href="/examples#依赖使用">查看</a> | boolean \|(values: any) => boolean | - |
 | componentProps | 当前类型下组件的参数 | - | - |
+
+## getInitialValuesParamsType
+
+| 参数   | 说明                   | 类型    | 默认值 |
+| ------ | ---------------------- | ------- | ------ |
+| isInit | 是否第一次获取表单数据 | boolean | -      |
 
 ## 字段 dataSource
 
