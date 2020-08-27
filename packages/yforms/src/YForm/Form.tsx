@@ -209,7 +209,6 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
 
   const handleReset: (p: { type: CancelType }) => void = useCallback(
     async ({ type }) => {
-      await loadData({ isInit: false });
       if (typeof onCancel === 'function') {
         onCancel({ type });
       } else {
@@ -221,7 +220,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
         }
       }
     },
-    [create, edit, handleOnDisabled, loadData, onCancel, resetFields, view],
+    [create, edit, handleOnDisabled, onCancel, resetFields, view],
   );
   const itemsTypeAll = { ...baseItemsType, ...globalConfig.itemsType, ...itemsType };
 
@@ -252,6 +251,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       setSubmitLoading(true);
       try {
         await onFinish(form.getFormatFieldsValue(value));
+        await loadData({ isInit: false });
         const end = new Date().getTime();
         timeOut.current = window.setTimeout(
           () => {
