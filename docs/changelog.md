@@ -5,6 +5,13 @@ nav:
   order: 5
 ---
 
+# [1.3.0](https://github.com/crazyair/yforms/compare/v1.2.9...v1.3.0) (2020-08-27)
+
+### Features
+
+- getInitialValues 方法添加提交成功后的 reload 操作 ([09c1f27](https://github.com/crazyair/yforms/commit/09c1f27b11f93ba40d058ddedc920df338b41bde))
+- 修改 loadData 执行位置 ([0164a5c](https://github.com/crazyair/yforms/commit/0164a5c83978bc7b744753ccae3d2b4719bda863))
+
 ## [1.2.9](https://github.com/crazyair/yforms/compare/v1.2.8...v1.2.9) (2020-08-26)
 
 ### Features
