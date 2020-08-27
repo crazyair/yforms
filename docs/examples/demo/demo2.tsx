@@ -59,6 +59,12 @@ const Demo = () => {
       {[
         {
           type: 'input',
+          label: '支持多层对象',
+          name: ['first', 'second'],
+          deFormat: (value) => `${value || ''} first 为 undefined `,
+        },
+        {
+          type: 'input',
           label: 'immutable',
           name: 'map',
           deFormat: (value) => value && value.set('d', 4),

@@ -287,14 +287,11 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
       const parentValue = getParentNameData(_initialValues, name);
       const value = format(get(_initialValues, name), parentValue, _initialValues);
       if (!find(formatRef.current, { name })) {
-        // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
-        if (parentValue !== undefined) {
-          form.setFields([{ name, value }]);
-          formatRef.current.push({ name, value });
-          // 初始化使用 deFormat 后的数据
-          set(deFormatValues, name, value);
-          onDeFormatFieldsValue([{ name, format }]);
-        }
+        form.setFields([{ name, value }]);
+        formatRef.current.push({ name, value });
+        // 初始化使用 deFormat 后的数据
+        set(deFormatValues, name, value);
+        onDeFormatFieldsValue([{ name, format }]);
       }
     },
     [_initialValues, form, deFormatValues, onDeFormatFieldsValue],
