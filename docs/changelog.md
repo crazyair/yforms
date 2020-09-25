@@ -5,11 +5,12 @@ nav:
   order: 5
 ---
 
-## [1.3.1](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.1) (2020-08-27)
+## [1.3.2](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.2) (2020-08-27)
 
 ### Bug Fixes
 
 - 修复 deFormat 对数据处理失效 ([5972e6f](https://github.com/crazyair/yforms/commit/5972e6f415fdf9b60d0f6146c1a146fabb45c06a))
+- sideEffects ([f5d86d7](https://github.com/crazyair/yforms/commit/f5d86d70ca2b0eb1818867b39a2adf8d2f13bd22))
 
 # [1.3.0](https://github.com/crazyair/yforms/compare/v1.2.9...v1.3.0) (2020-08-27)
 
