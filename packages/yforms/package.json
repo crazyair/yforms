@@ -13,6 +13,9 @@
     "lib",
     "dist"
   ],
+  "sideEffects": [
+    "*.less"
+  ],
   "scripts": {
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
     "build": "father-build"
