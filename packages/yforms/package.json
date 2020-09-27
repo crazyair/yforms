@@ -31,11 +31,13 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "peerDependencies": {
+    "antd": "4.x",
+    "@ant-design/icons": "^4.x"
+  },
   "dependencies": {
-    "@ant-design/icons": "^4.2.2",
     "@babel/runtime": "^7.11.2",
     "ahooks": "^2.5.0",
-    "antd": "^4.6.1",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.20",
     "moment": "^2.27.0",
