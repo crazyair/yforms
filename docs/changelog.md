@@ -5,7 +5,7 @@ nav:
   order: 5
 ---
 
-## [1.3.3](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.3) (2020-08-27)
+## [1.3.3](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.3) (2020-09-27)
 
 ### Bug Fixes
 
@@ -13,7 +13,7 @@ nav:
 - sideEffects ([f5d86d7](https://github.com/crazyair/yforms/commit/f5d86d70ca2b0eb1818867b39a2adf8d2f13bd22))
 - 修复部署丢失样式 ([07ff570](https://github.com/crazyair/yforms/commit/07ff570841491c7bc4012a3172512daf1ce5a050))
 
-# [1.3.0](https://github.com/crazyair/yforms/compare/v1.2.9...v1.3.0) (2020-08-27)
+## [1.3.0](https://github.com/crazyair/yforms/compare/v1.2.9...v1.3.0) (2020-08-27)
 
 ### Features
 
