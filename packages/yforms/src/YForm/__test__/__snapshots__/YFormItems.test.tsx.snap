@@ -943,10 +943,8 @@ Object {
                             autocomplete="off"
                             class="ant-select-selection-search-input"
                             id="下拉框"
-                            readonly=""
                             role="combobox"
-                            style="opacity: 0;"
-                            unselectable="on"
+                            type="search"
                             value=""
                           />
                         </span>
@@ -1035,6 +1033,7 @@ Object {
                             readonly=""
                             role="combobox"
                             style="opacity: 0;"
+                            type="search"
                             unselectable="on"
                             value=""
                           />
@@ -1410,6 +1409,7 @@ Object {
                         </div>
                         <div
                           class="ant-space-item"
+                          style="margin-right: 8px;"
                         />
                         <div
                           class="ant-space-item"
@@ -3292,10 +3292,8 @@ Object {
                           autocomplete="off"
                           class="ant-select-selection-search-input"
                           id="下拉框"
-                          readonly=""
                           role="combobox"
-                          style="opacity: 0;"
-                          unselectable="on"
+                          type="search"
                           value=""
                         />
                       </span>
@@ -3384,6 +3382,7 @@ Object {
                           readonly=""
                           role="combobox"
                           style="opacity: 0;"
+                          type="search"
                           unselectable="on"
                           value=""
                         />
@@ -3759,6 +3758,7 @@ Object {
                       </div>
                       <div
                         class="ant-space-item"
+                        style="margin-right: 8px;"
                       />
                       <div
                         class="ant-space-item"
@@ -5167,6 +5167,7 @@ Object {
                             </div>
                             <div
                               class="ant-space-item"
+                              style="margin-right: 8px;"
                             />
                             <div
                               class="ant-space-item"
