@@ -176,7 +176,7 @@ const scenes: YFormConfig = {
         }
         return {
           itemProps: { style: { marginRight: 10 }, ...itemProps, label: undefined },
-          componentProps: mergeWithDom(_componentProps, componentProps),
+          componentProps: mergeWithDom(componentProps, _componentProps),
         };
       },
     },
