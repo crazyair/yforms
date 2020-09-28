@@ -5,7 +5,13 @@ nav:
   order: 5
 ---
 
-## [1.3.3](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.3) (2020-09-27)
+## [1.3.5](https://github.com/crazyair/yforms/compare/v1.3.4...v1.3.5) (2020-09-27)
+
+### Bug Fixes
+
+- 删除 Space 特殊判断 ([446b376](https://github.com/crazyair/yforms/commit/446b3765a62731b2f952fd85f84a0d13c8532403))
+
+## [1.3.4](https://github.com/crazyair/yforms/compare/v1.3.0...v1.3.4) (2020-09-27)
 
 ### Bug Fixes
 
