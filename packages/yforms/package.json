@@ -14,7 +14,10 @@
     "dist"
   ],
   "sideEffects": [
-    "./src/**/style/**"
+    "./src/**/style/**",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
   ],
   "scripts": {
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
