@@ -78,16 +78,16 @@
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
     "rc-util": "^5.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^16.13.1",
     "typescript": "^4.0.5",
     "umi": "^3.2.26"
   },
   "license": "MIT",
   "dependencies": {
-    "antd": "^4.8.0",
+    "antd": "^4.8.1",
     "immutable": "^4.0.0-rc.12",
     "rc-queue-anim": "^1.8.5"
   }
