@@ -5,7 +5,7 @@ nav:
   order: 5
 ---
 
-## [1.3.5](https://github.com/crazyair/yforms/compare/v1.3.5...v1.3.7) (2020-12-09)
+## [1.3.7](https://github.com/crazyair/yforms/compare/v1.3.5...v1.3.7) (2020-12-09)
 
 ### Chore
 
