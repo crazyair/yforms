@@ -4,6 +4,9 @@ export default {
   title: 'yforms',
   favicon: '/favicon.ico',
   logo: '/logo.png',
+  analytics: {
+    baidu: 'e371ec7cfcef646cea084692d993074f',
+  },
   menus: {
     '/guide': [
       {
