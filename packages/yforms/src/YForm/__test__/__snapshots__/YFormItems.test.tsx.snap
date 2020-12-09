@@ -116,7 +116,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -140,7 +139,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -200,7 +198,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -224,7 +221,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -284,7 +280,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -308,7 +303,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -371,7 +365,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus"
                               fill="currentColor"
                               focusable="false"
@@ -432,7 +425,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus"
                               fill="currentColor"
                               focusable="false"
@@ -543,7 +535,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="calendar"
                               fill="currentColor"
                               focusable="false"
@@ -967,7 +958,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="down"
                             fill="currentColor"
                             focusable="false"
@@ -1319,7 +1309,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="edit"
                             fill="currentColor"
                             focusable="false"
@@ -1524,7 +1513,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -1548,7 +1536,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -1719,7 +1706,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="plus-circle"
                                   fill="currentColor"
                                   focusable="false"
@@ -1743,7 +1729,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="minus-circle"
                                   fill="currentColor"
                                   focusable="false"
@@ -1906,7 +1891,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="plus-circle"
                                   fill="currentColor"
                                   focusable="false"
@@ -1930,7 +1914,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="minus-circle"
                                   fill="currentColor"
                                   focusable="false"
@@ -1980,7 +1963,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="plus"
                                   fill="currentColor"
                                   focusable="false"
@@ -2043,7 +2025,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -2067,7 +2048,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -2125,7 +2105,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="plus"
                                   fill="currentColor"
                                   focusable="false"
@@ -2188,7 +2167,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -2212,7 +2190,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="minus-circle"
                               fill="currentColor"
                               focusable="false"
@@ -2280,7 +2257,6 @@ Object {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  class=""
                                   data-icon="plus"
                                   fill="currentColor"
                                   focusable="false"
@@ -2336,7 +2312,6 @@ Object {
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus"
                               fill="currentColor"
                               focusable="false"
@@ -2465,7 +2440,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2489,7 +2463,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2549,7 +2522,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2573,7 +2545,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2633,7 +2604,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2657,7 +2627,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -2720,7 +2689,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus"
                             fill="currentColor"
                             focusable="false"
@@ -2781,7 +2749,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus"
                             fill="currentColor"
                             focusable="false"
@@ -2892,7 +2859,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="calendar"
                             fill="currentColor"
                             focusable="false"
@@ -3316,7 +3282,6 @@ Object {
                       >
                         <svg
                           aria-hidden="true"
-                          class=""
                           data-icon="down"
                           fill="currentColor"
                           focusable="false"
@@ -3668,7 +3633,6 @@ Object {
                       >
                         <svg
                           aria-hidden="true"
-                          class=""
                           data-icon="edit"
                           fill="currentColor"
                           focusable="false"
@@ -3873,7 +3837,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -3897,7 +3860,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -4068,7 +4030,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="plus-circle"
                                 fill="currentColor"
                                 focusable="false"
@@ -4092,7 +4053,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="minus-circle"
                                 fill="currentColor"
                                 focusable="false"
@@ -4255,7 +4215,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="plus-circle"
                                 fill="currentColor"
                                 focusable="false"
@@ -4279,7 +4238,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="minus-circle"
                                 fill="currentColor"
                                 focusable="false"
@@ -4329,7 +4287,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="plus"
                                 fill="currentColor"
                                 focusable="false"
@@ -4392,7 +4349,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -4416,7 +4372,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -4474,7 +4429,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="plus"
                                 fill="currentColor"
                                 focusable="false"
@@ -4537,7 +4491,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -4561,7 +4514,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="minus-circle"
                             fill="currentColor"
                             focusable="false"
@@ -4629,7 +4581,6 @@ Object {
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="plus"
                                 fill="currentColor"
                                 focusable="false"
@@ -4685,7 +4636,6 @@ Object {
                         >
                           <svg
                             aria-hidden="true"
-                            class=""
                             data-icon="plus"
                             fill="currentColor"
                             focusable="false"
@@ -5064,7 +5014,6 @@ Object {
                   >
                     <svg
                       aria-hidden="true"
-                      class=""
                       data-icon="close"
                       fill="currentColor"
                       focusable="false"
