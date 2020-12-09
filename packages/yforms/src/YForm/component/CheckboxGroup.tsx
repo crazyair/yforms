@@ -39,8 +39,10 @@ export default forwardRef<any, YCheckGroupProps>((props, ref) => {
       );
     }
   });
+  React.useImperativeHandle(ref, () => props);
+
   return (
-    <Checkbox.Group value={value} {...rest} ref={ref}>
+    <Checkbox.Group value={value} {...rest}>
       {children}
     </Checkbox.Group>
   );

@@ -18,6 +18,12 @@ export default () => {
     <YForm onFinish={onFinish} onFinishFailed={onFinishFailed} onSave={onSave}>
       {[
         { type: 'input', label: '文本', name: 'input' },
+        {
+          type: 'datePicker',
+          label: '日期',
+          name: 'date',
+          componentProps: { picker: 'date', mode: 'date' },
+        },
         { type: 'money', label: '金额', name: 'money' },
         {
           type: 'textarea',

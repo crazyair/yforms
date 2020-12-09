@@ -23,7 +23,7 @@ import { noData } from './component/ComponentView';
 
 const dateFormat = (
   value?: any,
-  props?: { picker?: PickerMode; format?: string | string[] },
+  props?: { picker?: PickerMode; format?: any },
   type?: string,
   pureValue?: boolean,
 ) => {
