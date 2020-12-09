@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.3.5](https://github.com/crazyair/yforms/compare/v1.3.5...v1.3.7) (2020-12-09)
+
+### Chore
+
+- 升级 antd 版本
+
 ## [1.3.5](https://github.com/crazyair/yforms/compare/v1.3.4...v1.3.5) (2020-09-27)
 
 ### Bug Fixes
