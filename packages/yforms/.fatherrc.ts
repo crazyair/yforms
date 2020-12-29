@@ -5,6 +5,7 @@ const options = {
   // target: 'node',
   runtimeHelpers: true,
   cjs: { type: 'babel', lazy: true },
+  esm: 'babel',
   cssModules: false, // https://github.com/umijs/father/issues/131
   // extractCSS: true,
   lessInBabelMode: true,
