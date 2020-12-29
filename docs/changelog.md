@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.3.8](https://github.com/crazyair/yforms/compare/v1.3.7...v1.3.8) (2020-12-29)
+
+### Features
+
+- add esm ([f1182f9](https://github.com/crazyair/yforms/commit/f1182f978092ee8a85741ec8d0684ee1300cd295))
+
 ## [1.3.7](https://github.com/crazyair/yforms/compare/v1.3.5...v1.3.7) (2020-12-09)
 
 ### Chore
