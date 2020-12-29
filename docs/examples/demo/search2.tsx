@@ -8,7 +8,7 @@ import React from 'react';
 import { YForm } from 'yforms';
 import { Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { YFormItemProps } from 'yforms/src/YForm/Items';
+import { YFormItemProps } from 'yforms/es/YForm/Items';
 
 export default () => {
   const [expand, setExpand] = React.useState(false);

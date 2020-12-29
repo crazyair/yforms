@@ -9,7 +9,7 @@ import { YForm } from 'yforms';
 import { Button, Row, Col } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';
-import { YFormItemProps } from 'yforms/src/YForm/Items';
+import { YFormItemProps } from 'yforms/es/YForm/Items';
 
 export default () => {
   const [expand, setExpand] = React.useState(false);

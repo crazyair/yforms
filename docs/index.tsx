@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 import { YForm } from 'yforms';
-import { YFormItemProps } from 'yforms/src/YForm/Items';
+import { YFormItemProps } from 'yforms/es/YForm/Items';
 
 const Demo = () => {
   return (

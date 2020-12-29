@@ -8,5 +8,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["tsconfig.json", "node_modules", "lib", "es", "src/**/__test__/*"],
+  "include": ["src/**/*", "docs/**/*", ".eslintrc.js", "jest.config.js", "setupTests.js"]
 }

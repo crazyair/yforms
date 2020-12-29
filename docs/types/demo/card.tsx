@@ -1,6 +1,6 @@
 import React from 'react';
 import { YForm } from 'yforms';
-import { YFormProps } from 'yforms/src/YForm/Form';
+import { YFormProps } from 'yforms/es/YForm/Form';
 
 export default () => {
   const onFinish = (values: any) => {
