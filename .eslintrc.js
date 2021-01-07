@@ -3,6 +3,7 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser',
     project: './tsconfig.json',
+    createDefaultProgram: true,
   },
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {

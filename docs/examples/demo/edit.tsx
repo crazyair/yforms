@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
-import { RouteComponentProps } from 'react-router-dom';
+import type { RouteComponentProps } from 'react-router-dom';
 import { YForm } from 'yforms';
 
 const Demo: React.FC<RouteComponentProps> = (props) => {
@@ -41,7 +41,7 @@ const Demo: React.FC<RouteComponentProps> = (props) => {
         reject();
         message.error('提交错误', 0.5);
       } else {
-        resolve();
+        resolve('');
         message.success('提交成功', 0.5);
       }
     });

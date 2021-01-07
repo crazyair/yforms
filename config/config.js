@@ -15,6 +15,10 @@ export default {
       },
     ],
   },
+  theme: {
+    // ['primary-color']: 'red',
+    // ['ant-prefix']: 'ant-v4',
+  },
   extraBabelPlugins: [
     [
       'import',
