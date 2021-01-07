@@ -5,6 +5,12 @@ nav:
   order: 5
 ---
 
+## [1.3.9](https://github.com/crazyair/yforms/compare/v1.3.8...v1.3.9) (2021-01-07)
+
+### Bug Fixes
+
+- prefix 变量问题 ([22dd90a](https://github.com/crazyair/yforms/commit/22dd90a2e6a904590499c60084c65898157bac4a))
+
 ## [1.3.8](https://github.com/crazyair/yforms/compare/v1.3.7...v1.3.8) (2020-12-29)
 
 ### Features
