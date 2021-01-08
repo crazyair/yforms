@@ -61,7 +61,7 @@ export default (props: YFormSubmitProps['componentProps']) => {
     },
   );
 
-  const actionBtns: { [key: string]: YFormDataSource } = {
+  const actionBtns: Record<string, YFormDataSource> = {
     submit: { type: 'button', noStyle: true, isShow: !!showSubmit, componentProps: showSubmit },
     save: { type: 'secureButton', noStyle: true, isShow: !!showSave, componentProps: showSave },
     cancel: { type: 'button', noStyle: true, isShow: !!showCancel, componentProps: showCancel },

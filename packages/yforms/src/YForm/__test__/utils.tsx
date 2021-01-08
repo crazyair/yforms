@@ -6,7 +6,7 @@ export const delay = (timeout = 0) =>
     setTimeout(resolve, timeout);
   });
 
-export async function waitForComponentToPaint<P = {}>(wrapper: ReactWrapper<P>, amount = 0) {
+export async function waitForComponentToPaint<P = any>(wrapper: ReactWrapper<P>, amount = 0) {
   await act(async () => {
     await new Promise((resolve) => setTimeout(resolve, amount));
     wrapper.update();
