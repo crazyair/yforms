@@ -129,7 +129,7 @@ const Item: React.FC<YFormDataSource> = (props) => {
       const _component = children || component;
       _children = isValidElement(_component)
         ? React.cloneElement(_component, {
-            ...(_component.props as object),
+            ...(_component.props as Record<string, any>),
             ...thisComponentProps,
           })
         : _component;

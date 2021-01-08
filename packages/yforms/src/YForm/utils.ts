@@ -49,7 +49,7 @@ export const mergeWithDom = (obj: any, ...params: any[]) => {
 };
 
 // 获取一行多组件的 width
-export const oneLineItemStyle = (list?: Array<number | string>) => {
+export const oneLineItemStyle = (list?: (number | string)[]) => {
   if (!list || !Array.isArray(list)) return [];
   const _list: { display: string; width: string }[] = [];
   let width = 0;
@@ -106,15 +106,17 @@ export const searchSelect = {
 
 // jiesuan 项目中使用的计算中文、全角字符 x2
 export const calculateStrLength = (name?: string | number): number => {
-  if (name === null || name === void 0) return 0;
+  if (name === null || name === 0) return 0;
   if (typeof name === 'number') {
+    // eslint-disable-next-line no-param-reassign
     name = `${name}`;
   }
   let count = 0;
   const strArr = Array.from(name);
   strArr.forEach((c) => {
+    // eslint-disable-next-line no-control-regex
     if (/[\x00-\xff]/.test(c)) {
-      count++;
+      count += 1;
     } else {
       count += 2;
     }

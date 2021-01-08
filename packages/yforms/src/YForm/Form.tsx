@@ -21,7 +21,7 @@ import useForm from './useForm';
 import defaultScene from './scenes';
 import { YFormUseSubmitReturnProps } from './useSubmit';
 
-export type KeyValue = { [key: string]: any };
+export type KeyValue = Record<string, any>;
 export type FieldsType<T> = { [K in keyof T]: string };
 
 export type YFormScene = {
@@ -34,7 +34,7 @@ export type YFormScene = {
 
 export interface YFormConfig {
   itemsType?: YFormItemsType;
-  getScene?: { [key: string]: YFormScene };
+  getScene?: Record<string, YFormScene>;
   defaultFormProps?: YFormProps;
   scenes?: {
     labelLayout?: boolean;
@@ -83,14 +83,16 @@ export interface YFormProps<T = any> extends Omit<FormProps, 'form'>, YFormConfi
   onFormatFieldsValue?: (f: FormatFieldsValue[]) => (f: FormatFieldsValue[]) => FormatFieldsValue[];
   children?: YFormItemProps['children'];
   onDeFormatFieldsValue?: (p?: FormatFieldsValue) => void;
-  onSave?: (values: { [key: string]: any }) => void;
+  onSave?: (values: Record<string, any>) => void;
   submitComponentProps?: YFormSubmitComponentProps;
   onCancel?: (p: { type: CancelType }) => void;
   params?: ParamsType;
   oldValues?: T;
   offset?: YFormItemProps['offset'];
   minBtnLoadingTime?: number;
-  getInitialValues?: (p: getInitialValuesParamsType) => Promise<Object> | Object;
+  getInitialValues?: (
+    p: getInitialValuesParamsType,
+  ) => Promise<Record<string, any>> | Record<string, any>;
 }
 
 export function useFormatFieldsValue() {
