@@ -18,7 +18,12 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              lessOptions: { javascriptEnabled: true, modifyVars: { '@ant-prefix': 'demo' } },
+              lessOptions: {
+                javascriptEnabled: true,
+                modifyVars: {
+                  //  '@ant-prefix': 'demo'
+                },
+              },
             },
           },
         ],
