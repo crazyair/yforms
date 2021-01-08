@@ -106,7 +106,7 @@ export const searchSelect = {
 
 // jiesuan 项目中使用的计算中文、全角字符 x2
 export const calculateStrLength = (name?: string | number): number => {
-  if (name === null || name === 0) return 0;
+  if (name === null || name === void 0) return 0;
   if (typeof name === 'number') {
     // eslint-disable-next-line no-param-reassign
     name = `${name}`;

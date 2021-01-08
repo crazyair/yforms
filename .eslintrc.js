@@ -12,5 +12,6 @@ module.exports = {
     'prefer-promise-reject-errors': 0,
     'no-lonely-if': 0,
     'no-console': 0,
+    'no-void': 0,
   },
 };
