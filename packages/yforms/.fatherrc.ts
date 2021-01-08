@@ -1,4 +1,6 @@
-const options = {
+import { IBundleOptions } from 'father-build/src/types';
+
+const options: IBundleOptions = {
   // entry: 'src/index.tsx',
   // cjs: 'rollup',
   // esm: 'rollup',

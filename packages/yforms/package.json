@@ -1,6 +1,6 @@
 {
   "name": "yforms",
-  "version": "1.3.9",
+  "version": "1.4.0",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
-    "build": "father-build"
+    "build": "father-build",
+    "compile": "webpack --progress --profile"
   },
   "repository": {
     "type": "git",
