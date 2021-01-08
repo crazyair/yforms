@@ -8,7 +8,7 @@ const options = {
   esm: 'babel',
   cssModules: false, // https://github.com/umijs/father/issues/131
   // extractCSS: true,
-  lessInBabelMode: true,
+  // lessInBabelMode: true,
   extraBabelPlugins: [
     ['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   ],
