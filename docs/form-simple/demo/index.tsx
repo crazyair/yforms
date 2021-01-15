@@ -1,3 +1,4 @@
+import { Input } from 'antd';
 import React from 'react';
 import { Form } from 'yforms-simple';
 
@@ -10,23 +11,40 @@ declare module 'yforms-simple/lib/itemsType' {
   }
 }
 
-Form.config({ itemsType: { demo: { component: <>1232</> } } });
+Form.config({ itemsType: { demo: { component: <Input /> } } });
+
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 4, span: 16 },
+};
 
 const Demo = () => {
   return (
     <div>
       <Form<Fields>
+        {...layout}
         onFinish={(values) => {
           console.log('v', values);
         }}
+        initialValues={{ age: '1' }}
       >
-        <div>header</div>
+        <div>这里自定义显示</div>
         {[
-          { type: 'demo', label: 'demo', componentProps: { str: '1' } },
+          {
+            type: 'demo',
+            initialValue: '1',
+            label: 'demo',
+            name: 'demo',
+            componentProps: { str: '1' },
+          },
           {
             label: '年龄',
             type: 'input',
             name: 'age',
+            deFormat: (value) => value + 1,
             componentProps: { placeholder: '请输入年龄' },
           },
           {
@@ -39,9 +57,12 @@ const Demo = () => {
             name: 'name',
             componentProps: { placeholder: '请输入姓名' },
           },
-          { type: 'button', componentProps: { children: '提交', htmlType: 'submit' } },
+          {
+            type: 'button',
+            ...tailLayout,
+            componentProps: { children: '提交', htmlType: 'submit' },
+          },
         ]}
-        <div>footer</div>
       </Form>
     </div>
   );

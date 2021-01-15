@@ -6,16 +6,14 @@ import { FormProps, ItemsType } from './form';
 import { getOnlyKey } from './utils';
 import { FormContext } from './Context';
 
-export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
-  children?: FormProps['children'];
-}
-
 const _getOnlyKey = getOnlyKey();
 
-const renderChildren = (children: FormProps['children'], itemsType: any, pIndex?: string) => {
+// 渲染 children
+const renderChildren = (children: FormProps['children'], formProps: FormProps, pIndex?: string) => {
+  const { itemsType } = formProps;
   const dom = map(children, (item, index) => {
     if (isArray(item)) {
-      return renderChildren(item, itemsType, index);
+      return renderChildren(item, formProps, index);
     }
 
     if (React.isValidElement(item)) {
@@ -23,7 +21,7 @@ const renderChildren = (children: FormProps['children'], itemsType: any, pIndex?
     }
     if (isObject(item)) {
       const _item = item as ItemsType;
-      const { componentProps, isShow, ...rest } = _item;
+      const { componentProps, format, deFormat, isShow, ...rest } = _item;
       const { name, shouldUpdate } = rest;
       const key = _getOnlyKey(index, pIndex, name);
       const typeProps = get(itemsType, _item.type);
@@ -54,12 +52,15 @@ const renderChildren = (children: FormProps['children'], itemsType: any, pIndex?
   return dom;
 };
 
+export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
+  children?: FormProps['children'];
+}
+
 const Item = (props: FormItemProps) => {
   const { children } = props;
   const formProps = useContext(FormContext);
-  const { itemsType } = formProps;
 
-  const dom = renderChildren(isArray(children) ? children : [children], itemsType);
+  const dom = renderChildren(isArray(children) ? children : [children], formProps);
   return <>{dom}</>;
 };
 
