@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form as AntdForm } from 'antd';
+import { Form as AntdForm, Spin } from 'antd';
 import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
 import { merge } from 'lodash';
@@ -29,6 +29,7 @@ type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
 
 export interface FormProps<Values = any> extends FormConfig, AntdFormProps<Values> {
   children?: childrenType<Values> | childrenType<Values>[];
+  loading?: boolean;
 }
 
 // 全局默认值
@@ -39,7 +40,7 @@ export const config = (options: FormConfig) => {
 };
 
 const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props, ref) => {
-  const { children, form, itemsType: thisItemsType, initialValues, ...rest } = props;
+  const { children, form, itemsType: thisItemsType, initialValues, loading, ...rest } = props;
   const [wrapForm] = AntdForm.useForm(form);
   // 合并全部 type
   const itemsType = { ...baseItemsType, ...globalConfig.itemsType, ...thisItemsType };
@@ -49,6 +50,14 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
 
   // dom 渲染后的 children
   const { dom, formatValues } = useRenderChildren({ ...props, itemsType });
+
+  if ('loading' in props && loading) {
+    return (
+      <div className="form-spin">
+        <Spin />
+      </div>
+    );
+  }
 
   const formProps = {
     form: wrapForm,

@@ -2,6 +2,8 @@ import { FormContext } from './Context';
 import InternalForm, { config } from './form';
 import Items from './items';
 
+import './styles/index.less';
+
 type InternalFormType = typeof InternalForm;
 
 interface FormInterface extends InternalFormType {
