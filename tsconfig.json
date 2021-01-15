@@ -8,7 +8,8 @@
       "yforms/lib/*": ["yforms/src/*"],
       "yforms/es/*": ["yforms/src/*"],
       "yforms-simple": ["form/src"],
-      "yforms-simple/es/*": ["form/src/*"]
+      "yforms-simple/es/*": ["form/src/*"],
+      "yforms-simple/lib/*": ["form/src/*"]
     },
     "jsx": "preserve",
     "declaration": true,

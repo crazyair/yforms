@@ -1,41 +1,28 @@
-// import { Button } from 'antd';
 import React from 'react';
-// import { Form as AntdForm, Button, Input } from 'antd';
 import { Form } from 'yforms-simple';
 
 type Fields = {
   age?: string;
 };
+declare module 'yforms-simple/lib/itemsType' {
+  export interface FormItemsTypeDefine {
+    demo?: BaseItemsType<'demo', { str: string }>;
+  }
+}
+
+Form.config({ itemsType: { demo: { component: <>1232</> } } });
 
 const Demo = () => {
   return (
     <div>
-      {/* <Form
+      <Form<Fields>
         onFinish={(values) => {
           console.log('v', values);
         }}
       >
-        {[
-          {
-            label: '年龄',
-            type: 'input',
-            name: 'age',
-            componentProps: { placeholder: '请输入年龄' },
-          },
-          { type: 'button', componentProps: { children: '测试', htmlType: 'submit' } },
-        ]}
-      </Form> */}
-
-      {/* <div>1</div> */}
-      {/* <Form>
-        <Button />
-        {[{ type: 'button', componentProps: { htmlType: 'submit' } }]}
-      </Form> */}
-
-      {/* <div>header</div> */}
-      <Form<Fields>>
         <div>header</div>
         {[
+          { type: 'demo', label: 'demo', componentProps: { str: '1' } },
           {
             label: '年龄',
             type: 'input',
@@ -43,30 +30,19 @@ const Demo = () => {
             componentProps: { placeholder: '请输入年龄' },
           },
           {
-            label: '年龄',
+            label: '姓名',
             type: 'input',
-            name: 'age',
-            componentProps: { placeholder: '请输入年龄' },
-          },
-          {
-            label: '年龄',
-            type: 'input',
+            shouldUpdate: (prev, current) => prev.age !== current.age,
+            isShow: (values) => {
+              return values.age === '1';
+            },
             name: 'name',
-            componentProps: { placeholder: '请输入年龄' },
+            componentProps: { placeholder: '请输入姓名' },
           },
+          { type: 'button', componentProps: { children: '提交', htmlType: 'submit' } },
         ]}
         <div>footer</div>
       </Form>
-
-      {/* <AntdForm<Fields>
-        onValuesChange={(v) => {
-          console.log('v', v);
-        }}
-      >
-        <AntdForm.Item name="age">
-          <Input />
-        </AntdForm.Item>
-      </AntdForm> */}
     </div>
   );
 };

@@ -1,23 +1,27 @@
 import { Input, Button } from 'antd';
 import { ButtonProps } from 'antd/lib/button';
-import { FormItemProps } from 'antd/lib/form';
 import { InputProps, PasswordProps } from 'antd/lib/input';
 
-interface BaseComp<T = any, P = any> {
+export interface BaseItemsType<T = any, P = any> {
   type?: T;
-  component?: React.ReactElement;
   componentProps?: P;
+  /** 内部定义渲染组件使用，可覆盖 */
+  component?: React.ReactElement;
 }
 
-export type FormItemsType = Omit<FormItemProps, 'children'> &
-  (
-    | BaseComp<'input', InputProps>
-    | BaseComp<'button', ButtonProps>
-    | BaseComp<'password', PasswordProps>
-  );
+export interface FormItemsTypeDefine {
+  input: BaseItemsType<'input', InputProps>;
+  button: BaseItemsType<'button', ButtonProps>;
+  password: BaseItemsType<'password', PasswordProps>;
+}
 
-export const itemsType: FormItemsType[] = [
-  { type: 'input', component: <Input /> },
-  { type: 'button', component: <Button /> },
-  { type: 'password', component: <Input.Password /> },
-];
+// type 做可为空处理
+export type FormItemsType = {
+  [P in keyof FormItemsTypeDefine]?: FormItemsTypeDefine[P];
+};
+
+export const itemsType: FormItemsType = {
+  input: { component: <Input /> },
+  button: { component: <Button /> },
+  password: { component: <Input.Password /> },
+};
