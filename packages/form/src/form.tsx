@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form as AntdForm, Spin } from 'antd';
 import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
 import { merge } from 'lodash';
 import { FormContext } from './Context';
-import { useRenderChildren } from './children';
+import Items from './items';
+import { deFormatValues } from './utils';
 
 export interface FormatFieldsValue<Values = any> {
   name: FormItemProps['name'];
@@ -48,10 +49,14 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   // 返回 form 实例
   React.useImperativeHandle(ref, () => wrapForm);
 
-  // dom 渲染后的 children
-  const { dom, formatValues } = useRenderChildren({ ...props, itemsType });
-
-  if ('loading' in props && loading) {
+  const [childrenState] = useState(children);
+  const [initialValuesState] = useState(initialValues);
+  // 获取所有 deFormat 修改后的值
+  const { formatValues } = React.useMemo(
+    () => deFormatValues({ children: childrenState, initialValues: initialValuesState }),
+    [initialValuesState, childrenState],
+  );
+  if (loading) {
     return (
       <div className="form-spin">
         <Spin />
@@ -65,10 +70,11 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
     initialValues: merge({}, initialValues, formatValues),
     ...rest,
   };
-
   return (
     <AntdForm {...formProps}>
-      <FormContext.Provider value={{ ...formProps, itemsType }}>{dom}</FormContext.Provider>
+      <FormContext.Provider value={{ itemsType }}>
+        <Items>{children}</Items>
+      </FormContext.Provider>
     </AntdForm>
   );
 };

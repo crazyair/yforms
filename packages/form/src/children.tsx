@@ -1,13 +1,27 @@
 import React from 'react';
 import { Form } from 'antd';
-import { get, isArray, isObject, map, set } from 'lodash';
+import { get, isArray, isObject, map } from 'lodash';
 import { FormProps, ItemsType } from './form';
 import { getOnlyKey } from './utils';
 
 const _getOnlyKey = getOnlyKey();
 
+export const isShowFunc = (props: any) => {
+  const { isShow, key, shouldUpdate, _dom } = props;
+  if ('isShow' in props) {
+    if (!isShow) return null;
+    if (typeof isShow === 'function') {
+      return (
+        <Form.Item noStyle key={key} shouldUpdate={shouldUpdate}>
+          {(form) => isShow(form.getFieldsValue(true)) && _dom}
+        </Form.Item>
+      );
+    }
+  }
+};
+
 export const useRenderChildren = (props: FormProps) => {
-  const { itemsType, children, initialValues } = props;
+  const { itemsType, children } = props;
   const formatValues = {};
   const each = (children: FormProps['children'], pIndex?: number) => {
     const dom = map(isArray(children) ? children : [children], (item, index) => {
@@ -21,10 +35,6 @@ export const useRenderChildren = (props: FormProps) => {
         const _item = item as ItemsType;
         const { componentProps, format, deFormat, isShow, ...rest } = _item;
         const { name, shouldUpdate } = rest;
-
-        if (deFormat) {
-          set(formatValues, name, deFormat(get(initialValues, name), initialValues));
-        }
 
         const key = _getOnlyKey(index, pIndex, name);
         const typeProps = get(itemsType, _item.type);

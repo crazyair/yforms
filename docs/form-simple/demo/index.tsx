@@ -1,9 +1,10 @@
-import { Input } from 'antd';
-import React from 'react';
+import { Button, Input } from 'antd';
+import React, { useState } from 'react';
 import { Form } from 'yforms-simple';
 
 type Fields = {
   age?: string;
+  nei?: string;
 };
 declare module 'yforms-simple/lib/itemsType' {
   export interface FormItemsTypeDefine {
@@ -22,16 +23,33 @@ const tailLayout = {
 };
 
 const Demo = () => {
+  const [enable, setEnable] = useState(true);
   return (
     <div>
+      <Button onClick={() => setEnable((c) => !c)}>刷新</Button>
+      {JSON.stringify(enable)}
       <Form<Fields>
         {...layout}
         onFinish={(values) => {
           console.log('v', values);
         }}
-        initialValues={{ age: '1' }}
+        initialValues={{ age: '1', nei: 'nei' }}
       >
         <div>这里自定义显示</div>
+        <div>
+          1
+          <Form.Items<Fields> isShow={() => enable} shouldUpdate>
+            {[
+              {
+                type: 'input',
+                label: '内部form',
+                deFormat: (value, values) => values.age,
+                name: 'nei',
+              },
+            ]}
+          </Form.Items>
+          2
+        </div>
         {[
           {
             type: 'demo',

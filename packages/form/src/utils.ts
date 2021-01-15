@@ -30,25 +30,29 @@ export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
   };
 };
 
-export const getChildrenTypes = (children: FormProps['children'], initialValues = {}) => {
-  const obj = {};
-  const each = (children: FormProps['children'], initialValues = {}) => {
+export const deFormatValues = (props: FormProps) => {
+  const { children, initialValues } = props;
+  const formatValues = {};
+  const each = (children: FormProps['children']) => {
     forEach(isArray(children) ? children : [children], (item) => {
       if (isArray(item)) {
-        return each(item, initialValues);
+        return each(item);
       }
-      if (React.isValidElement(item)) {
-        return;
+      if (React.isValidElement<{ children?: FormProps['children'] }>(item)) {
+        // 如果 Element 还是数组则接着遍历
+        if (item.props && item.props.children && isArray(item.props.children)) {
+          return each(item.props.children);
+        }
+        return item;
       }
       if (isObject(item)) {
         const { name, deFormat } = item as ItemsType;
         if (deFormat) {
-          set(obj, name, deFormat(get(initialValues, name), initialValues));
+          set(formatValues, name, deFormat(get(initialValues, name), initialValues));
         }
       }
     });
-    return obj;
   };
-  each(children, initialValues);
-  return obj;
+  each(children);
+  return { formatValues };
 };
