@@ -45,7 +45,7 @@ const Demo = () => {
               {
                 type: 'input',
                 label: '内部form',
-                deFormat: (_, values) => `${values.age}values.age`,
+                initFormat: (_, values) => `${values.age}values.age`,
                 name: 'nei',
               },
             ]}
@@ -58,7 +58,7 @@ const Demo = () => {
             label: '年龄',
             type: 'input',
             name: 'age',
-            deFormat: (value) => value + 1,
+            initFormat: (value) => value + 1,
             componentProps: { placeholder: '请输入年龄' },
           },
           {

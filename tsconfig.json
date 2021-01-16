@@ -18,6 +18,7 @@
   },
   "exclude": ["tsconfig.json", "node_modules", "lib", "es", "src/**/__test__/*"],
   "include": [
+    "src/**/*",
     "packages/**/src",
     "docs/**/*",
     ".eslintrc.js",

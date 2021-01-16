@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
 import { get, isArray, isObject, map } from 'lodash';
+import warning from 'warning';
 import { FormProps, ItemsType } from './form';
 import { getOnlyKey } from './utils';
 
@@ -32,7 +33,7 @@ export const useRenderChildren = (props: FormProps) => {
       }
       if (isObject(item)) {
         const _item = item as ItemsType;
-        const { componentProps, format, deFormat, isShow, ...rest } = _item;
+        const { componentProps, format, initFormat, isShow, ...rest } = _item;
         const { name, shouldUpdate } = rest;
 
         const key = _getOnlyKey(index, pIndex, name);
@@ -59,6 +60,8 @@ export const useRenderChildren = (props: FormProps) => {
           }
           return _dom;
         }
+        warning(false, `错误: ${JSON.stringify(item)}`);
+        return null;
       }
       // 不是 Element 或者不是字段 type
       return item;

@@ -5,7 +5,7 @@ import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from '
 import { merge } from 'lodash';
 import { FormContext } from './Context';
 import Items from './items';
-import { deFormatValues } from './utils';
+import { initFormatValues } from './utils';
 
 export interface FormatFieldsValue<Values = any> {
   name: FormItemProps['name'];
@@ -15,7 +15,7 @@ export interface FormatFieldsValue<Values = any> {
 
 export interface FormItemsTypeProps<Values = any> extends FormItemProps {
   isShow?: boolean | ((values: Values) => boolean | undefined);
-  deFormat?: (thisValue: any, values: Values) => unknown;
+  initFormat?: (thisValue: any, values: Values) => unknown;
   format?: (thisValue: any, values: Values) => unknown;
 }
 
@@ -51,7 +51,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
 
   const initRef = useRef<Record<string, any>>();
   const handleInitFormat = useCallback((children, initialValues) => {
-    initRef.current = deFormatValues({ children, initialValues });
+    initRef.current = initFormatValues({ children, initialValues });
     return initRef.current;
   }, []);
 

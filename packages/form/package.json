@@ -40,8 +40,10 @@
     "antd": "4.x"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/runtime": "^7.12.5",
     "ahooks": "^2.9.4",
+    "antd": "^4.10.2",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",

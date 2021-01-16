@@ -31,7 +31,7 @@ export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
   };
 };
 
-export const deFormatValues = (props: FormProps) => {
+export const initFormatValues = (props: FormProps) => {
   const { children, initialValues } = props;
   const formatValues = { ...initialValues };
   const each = (children: FormProps['children']) => {
@@ -45,9 +45,9 @@ export const deFormatValues = (props: FormProps) => {
         }
       }
       if (isObject(item)) {
-        const { name, deFormat } = item as ItemsType;
-        if (deFormat) {
-          set(formatValues, name, deFormat(get(initialValues, name), initialValues));
+        const { name, initFormat } = item as ItemsType;
+        if (initFormat) {
+          set(formatValues, name, initFormat(get(initialValues, name), initialValues));
         }
       }
     });
