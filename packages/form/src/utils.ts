@@ -85,3 +85,27 @@ export function submitFormatValues(values: any, formatFieldsValue?: FormatFields
   });
   return _values;
 }
+
+// 获取一行多组件的 width
+export const oneLineItemStyle = (list?: (number | string)[]) => {
+  if (!list || !Array.isArray(list)) return [];
+  const _list: { display: string; width: string }[] = [];
+  let width = 0;
+  let count = 0;
+  list.forEach((item) => {
+    if (typeof item === 'number') {
+      width += item;
+    } else {
+      count += 1;
+    }
+  });
+
+  list.forEach((item) => {
+    if (typeof item === 'number') {
+      _list.push({ display: 'inline-block', width: `${item}px` });
+    } else {
+      _list.push({ display: 'inline-block', width: `calc(${item} - ${width / count}px)` });
+    }
+  });
+  return _list;
+};

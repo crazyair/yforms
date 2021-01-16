@@ -10,4 +10,5 @@ nav:
 <!-- <code src="./demo/index.tsx" /> -->
 
 <!-- 默认值 -->
-<code src="./demo/init.tsx" />
+<!-- <code src="./demo/init.tsx" /> -->
+<code src="./demo/list.tsx" />

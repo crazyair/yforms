@@ -1,5 +1,5 @@
 import { Form as AntdForm } from 'antd';
-import { FormContext } from './Context';
+import { FormContext, FormItemContext } from './Context';
 import InternalForm, { config } from './form';
 import Items from './items';
 
@@ -12,12 +12,14 @@ interface FormInterface extends InternalFormType {
   config: typeof config;
   useForm: typeof AntdForm.useForm;
   FormContext: typeof FormContext;
+  FormItemContext: typeof FormItemContext;
 }
 
 const Form = InternalForm as FormInterface;
 Form.Items = Items;
-Form.FormContext = FormContext;
 Form.config = config;
 Form.useForm = AntdForm.useForm;
+Form.FormContext = FormContext;
+Form.FormItemContext = FormItemContext;
 
 export { Form };

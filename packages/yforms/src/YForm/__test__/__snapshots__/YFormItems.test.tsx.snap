@@ -4973,6 +4973,7 @@ exports[`YFormItems modal form 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
+    class="ant-scrolling-effect"
     style="overflow: hidden; overflow-x: hidden; overflow-y: hidden;"
   >
     <textarea
@@ -5581,6 +5582,7 @@ exports[`YFormItems scenes offset disabled 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body
+    class=""
     style=""
   >
     <textarea

@@ -4,6 +4,7 @@ import { get, isArray, isObject, map } from 'lodash';
 import warning from 'warning';
 import { FormProps, ItemsType } from './form';
 import { getOnlyKey } from './utils';
+import { FormItemContext } from './Context';
 
 const _getOnlyKey = getOnlyKey();
 
@@ -41,10 +42,12 @@ export const useRenderChildren = (props: FormProps) => {
         if (typeProps) {
           const _component = _item.component || typeProps.component;
           const _dom = (
-            <Form.Item {...rest} key={key}>
-              {/* 如果有传 component 则使用当前的 */}
-              {React.cloneElement(_component, componentProps as Record<string, any>)}
-            </Form.Item>
+            <FormItemContext.Provider value={{ name }} key={key}>
+              <Form.Item {...rest}>
+                {/* 如果有传 component 则使用当前的 */}
+                {React.cloneElement(_component, componentProps as Record<string, any>)}
+              </Form.Item>
+            </FormItemContext.Provider>
           );
 
           // 传 isShow 判断

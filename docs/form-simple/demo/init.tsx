@@ -84,11 +84,11 @@ const Demo = () => {
               { name: 'range', removeField: true },
               {
                 name: 'start',
-                format: (_, { range = [] }) => range[0] && `${moment(range[0]).format('LLLL')}`,
+                format: (_, { range = [] }) => range[0] && `${moment(range[0]).format('L')}`,
               },
               {
                 name: 'end',
-                format: (_, { range = [] }) => range[1] && `${moment(range[1]).format('LLLL')}`,
+                format: (_, { range = [] }) => range[1] && `${moment(range[1]).format('L')}`,
               },
             ],
           },
