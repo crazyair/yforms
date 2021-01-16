@@ -1,18 +1,16 @@
-import { Button, Input } from 'antd';
-import React, { useState } from 'react';
+import { Button } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Form } from 'yforms-simple';
+
+export const delay = (timeout = 0) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
 
 type Fields = {
   age?: string;
   nei?: string;
 };
-declare module 'yforms-simple/lib/itemsType' {
-  export interface FormItemsTypeDefine {
-    demo?: BaseItemsType<'demo', { str: string }>;
-  }
-}
-
-Form.config({ itemsType: { demo: { component: <Input /> } } });
 
 const layout = {
   labelCol: { span: 4 },
@@ -25,21 +23,32 @@ const tailLayout = {
 const Demo = () => {
   const [enable, setEnable] = useState(true);
   const [form] = Form.useForm();
+  const [detail, setDetail] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const loadData = useCallback(async () => {
+    await delay(250);
+    setDetail({ age: '1', nei: 'nei', demo: 'demo' });
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
   return (
     <div>
       <Button onClick={() => setEnable((c) => !c)}>刷新</Button>
       {JSON.stringify(enable)}
       <Form<Fields>
         {...layout}
+        loading={loading}
         form={form}
         onFinish={(values) => {
           console.log('v', values);
         }}
-        initialValues={{ age: '1', nei: 'nei', demo: 'demo' }}
+        initialValues={detail}
       >
-        <div>这里自定义显示</div>
         <div>
-          1
           <Form.Items<Fields> isShow={() => enable} shouldUpdate>
             {[
               {
@@ -50,7 +59,6 @@ const Demo = () => {
               },
             ]}
           </Form.Items>
-          2
         </div>
         {[
           { type: 'demo', label: 'demo', name: 'demo', componentProps: { str: '1' } },
@@ -58,18 +66,8 @@ const Demo = () => {
             label: '年龄',
             type: 'input',
             name: 'age',
-            deFormat: (value) => value + 1,
+            deFormat: (value) => `${value}format`,
             componentProps: { placeholder: '请输入年龄' },
-          },
-          {
-            label: '姓名',
-            type: 'input',
-            shouldUpdate: (prev, current) => prev.age !== current.age,
-            isShow: (values) => {
-              return values.age === '1';
-            },
-            name: 'name',
-            componentProps: { placeholder: '请输入姓名' },
           },
           {
             type: 'button',

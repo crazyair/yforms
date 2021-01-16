@@ -1,5 +1,5 @@
-import { find, forEach, get, isArray, isObject, set } from 'lodash';
 import React from 'react';
+import { find, forEach, get, isArray, isObject, set } from 'lodash';
 import { FormatFieldsValue, FormProps, ItemsType } from './form';
 
 // 获取唯一 key
@@ -17,6 +17,7 @@ export const getOnlyKey = () => {
   };
 };
 
+// TODO 暂未使用
 export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
   return (list: FormatFieldsValue[]) => {
     const _formatFields = formatFieldsValue;
@@ -32,18 +33,16 @@ export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
 
 export const deFormatValues = (props: FormProps) => {
   const { children, initialValues } = props;
-  const formatValues = {};
+  const formatValues = { ...initialValues };
   const each = (children: FormProps['children']) => {
     forEach(isArray(children) ? children : [children], (item) => {
       if (isArray(item)) {
         return each(item);
       }
       if (React.isValidElement<{ children?: FormProps['children'] }>(item)) {
-        // 如果 Element 还是数组则接着遍历
-        if (item.props && item.props.children && isArray(item.props.children)) {
-          return each(item.props.children);
+        if (item.props && item.props.children) {
+          return each(isArray(item.props.children) ? item.props.children : [item.props.children]);
         }
-        return item;
       }
       if (isObject(item)) {
         const { name, deFormat } = item as ItemsType;

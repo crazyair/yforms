@@ -22,7 +22,6 @@ export const isShowFunc = (props: any) => {
 
 export const useRenderChildren = (props: FormProps) => {
   const { itemsType, children } = props;
-  const formatValues = {};
   const each = (children: FormProps['children'], pIndex?: number) => {
     const dom = map(isArray(children) ? children : [children], (item, index) => {
       if (isArray(item)) {
@@ -61,9 +60,11 @@ export const useRenderChildren = (props: FormProps) => {
           return _dom;
         }
       }
+      // 不是 Element 或者不是字段 type
+      return item;
     });
     return dom;
   };
   const dom = each(children);
-  return { formatValues, dom };
+  return { dom };
 };

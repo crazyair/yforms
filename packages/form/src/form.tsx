@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Form as AntdForm, Spin } from 'antd';
 import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
@@ -42,20 +42,19 @@ export const config = (options: FormConfig) => {
 
 const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props, ref) => {
   const { children, form, itemsType: thisItemsType, initialValues, loading, ...rest } = props;
-  const [wrapForm] = AntdForm.useForm(form);
   // 合并全部 type
   const itemsType = { ...baseItemsType, ...globalConfig.itemsType, ...thisItemsType };
-
+  // 获取 form 实例
+  const [wrapForm] = AntdForm.useForm(form);
   // 返回 form 实例
   React.useImperativeHandle(ref, () => wrapForm);
 
-  const [childrenState] = useState(children);
-  const [initialValuesState] = useState(initialValues);
-  // 获取所有 deFormat 修改后的值
-  const { formatValues } = React.useMemo(
-    () => deFormatValues({ children: childrenState, initialValues: initialValuesState }),
-    [initialValuesState, childrenState],
-  );
+  const initRef = useRef<Record<string, any>>();
+  const handleInitFormat = useCallback((children, initialValues) => {
+    initRef.current = deFormatValues({ children, initialValues });
+    return initRef.current;
+  }, []);
+
   if (loading) {
     return (
       <div className="form-spin">
@@ -63,11 +62,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
       </div>
     );
   }
+  // 此时 initialValues 有值
+  const { formatValues } = initRef.current || handleInitFormat(children, initialValues);
 
   const formProps = {
     form: wrapForm,
     // 格式化后的初始值
-    initialValues: merge({}, initialValues, formatValues),
+    initialValues: formatValues,
     ...rest,
   };
   return (
