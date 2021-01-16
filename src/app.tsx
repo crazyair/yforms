@@ -4,7 +4,7 @@ import { Form } from 'yforms-simple';
 
 declare module 'yforms-simple/lib/itemsType' {
   export interface FormItemsTypeDefine {
-    demo?: BaseItemsType<'demo', { str: string }>;
+    demo?: BaseTypeProps<'demo', { str: string }>;
   }
 }
 

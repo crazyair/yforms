@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Form } from 'yforms-simple';
+import moment from 'moment';
 
 export const delay = (timeout = 0) =>
   new Promise((resolve) => {
@@ -10,6 +11,8 @@ export const delay = (timeout = 0) =>
 type Fields = {
   age?: string;
   nei?: string;
+  start?: string;
+  end?: string;
 };
 
 const layout = {
@@ -23,12 +26,12 @@ const tailLayout = {
 const Demo = () => {
   const [enable, setEnable] = useState(true);
   const [form] = Form.useForm();
-  const [detail, setDetail] = useState({});
+  const [detail, setDetail] = useState<Fields>({});
   const [loading, setLoading] = useState(true);
 
   const loadData = useCallback(async () => {
     await delay(250);
-    setDetail({ age: '1', nei: 'nei', demo: 'demo' });
+    setDetail({ age: '1', nei: 'nei', start: '1610767167', end: '1611767667' });
     setLoading(false);
   }, []);
 
@@ -55,6 +58,7 @@ const Demo = () => {
                 type: 'input',
                 label: '内部form',
                 initFormat: (_, values) => `${values.age}values.age`,
+                format: (value) => `${value}-提交修改值`,
                 name: 'nei',
               },
             ]}
@@ -66,7 +70,27 @@ const Demo = () => {
             type: 'input',
             name: 'age',
             initFormat: (value) => `${value}format`,
+            format: (value) => `${value}-提交修改值`,
             componentProps: { placeholder: '请输入年龄' },
+          },
+          {
+            type: 'rangePicker',
+            name: 'range',
+            label: '日期区间',
+            initFormat: (_, { start, end }) => {
+              return [start && moment.unix(Number(start)), end && moment.unix(Number(end))];
+            },
+            format: [
+              { name: 'range', removeField: true },
+              {
+                name: 'start',
+                format: (_, { range = [] }) => range[0] && `${moment(range[0]).format('LLLL')}`,
+              },
+              {
+                name: 'end',
+                format: (_, { range = [] }) => range[1] && `${moment(range[1]).format('LLLL')}`,
+              },
+            ],
           },
           {
             type: 'button',

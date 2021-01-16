@@ -1,5 +1,5 @@
 import React from 'react';
-import { find, forEach, get, isArray, isObject, set } from 'lodash';
+import { find, forEach, get, isArray, isObject, merge, set, sortBy } from 'lodash';
 import { FormatFieldsValue, FormProps, ItemsType } from './form';
 
 // 获取唯一 key
@@ -31,9 +31,10 @@ export const onFormatFieldsValue = (formatFieldsValue: FormatFieldsValue[]) => {
   };
 };
 
-export const initFormatValues = (props: FormProps) => {
+export const eachChildren = (props: FormProps) => {
   const { children, initialValues } = props;
   const formatValues = { ...initialValues };
+  const list = [];
   const each = (children: FormProps['children']) => {
     forEach(isArray(children) ? children : [children], (item) => {
       if (isArray(item)) {
@@ -45,13 +46,42 @@ export const initFormatValues = (props: FormProps) => {
         }
       }
       if (isObject(item)) {
-        const { name, initFormat } = item as ItemsType;
+        const { name, format, initFormat } = item as ItemsType;
         if (initFormat) {
           set(formatValues, name, initFormat(get(initialValues, name), initialValues));
+        }
+        if (format) {
+          if (typeof format === 'function') {
+            list.push({ name, format });
+          } else {
+            forEach(format, (item) => {
+              const { name, format, removeField } = item;
+              list.push({ name, format, removeField });
+            });
+          }
         }
       }
     });
   };
   each(children);
-  return { formatValues };
+  // 根据 name 长度倒序排序，先格式化内层值，再格式化外层值
+  const _list = sortBy(list, (item) => {
+    if (isArray(item.name)) {
+      return -item.name.length;
+    }
+    return -`${item.name}`.length;
+  });
+
+  return { formatValues, formatList: _list };
 };
+
+export function submitFormatValues(values: any, formatFieldsValue?: FormatFieldsValue[]) {
+  const _values = merge({}, values);
+  forEach(formatFieldsValue, (item) => {
+    const { name, format } = item;
+    if (name && format) {
+      set(_values, name, format(get(values, name), values));
+    }
+  });
+  return _values;
+}
