@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import { FormProps } from '../form';
 import { FormItemContext, FormListContent } from '../context';
 import { oneLineItemStyle } from '../utils';
@@ -14,7 +14,6 @@ export interface FormListItems {
   remove: (index: number) => void;
   move: (from: number, to: number) => void;
   icons: React.ReactNode;
-  iconsWidth: number;
   layoutStyles: React.CSSProperties[];
 }
 
@@ -36,23 +35,22 @@ export default (props: FormListProps) => {
         return (
           <>
             {fields.map((field, index) => {
-              const icons: React.ReactNode[] = [];
-              icons.push(
-                <PlusCircleOutlined
-                  key="plus"
-                  onClick={() => {
-                    // 先增加一位
-                    add();
-                    // 再把最后一位移动到当前
-                    move(fields.length, index);
-                  }}
-                />,
+              const icons = (
+                <Space>
+                  <PlusCircleOutlined
+                    key="plus"
+                    onClick={() => {
+                      // 先增加一位
+                      add();
+                      // 再把最后一位移动到当前
+                      move(fields.length, index);
+                    }}
+                  />
+                  <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
+                </Space>
               );
-              icons.push(<MinusCircleOutlined key="minus" onClick={() => remove(index)} />);
-
-              const iconsWidth = icons.length * (8 + 14);
+              const iconsWidth = icons.props.children.length * (8 + 14);
               const _oneLineStyle = oneLineItemStyle(['100%', iconsWidth]);
-
               const dataSource = items({
                 index,
                 field,
@@ -60,7 +58,6 @@ export default (props: FormListProps) => {
                 remove,
                 move,
                 icons,
-                iconsWidth: 1,
                 layoutStyles: _oneLineStyle,
               });
 

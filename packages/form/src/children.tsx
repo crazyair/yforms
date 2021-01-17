@@ -3,13 +3,12 @@ import { concat, forEach, get, isArray, isObject, map } from 'lodash';
 import warning from 'warning';
 import { FormProps, ItemsType } from './form';
 import { Form } from '.';
-import { FormItemContext, FormListContent } from './context';
+import { FormContextProps, FormItemContext, FormListContent } from './context';
 
-export const useRenderChildren = (props: FormProps) => {
-  const { itemsType, children, demo } = props;
+export const useRenderChildren = (children: FormProps['children'], props: FormContextProps) => {
+  const { itemsType, onInitFormat, onFormat } = props;
   const listContext = useContext(FormListContent);
   const { prefixName } = listContext;
-  const list = [];
 
   const each = (children: FormProps['children']) => {
     const dom = map(isArray(children) ? children : [children], (item, index) => {
@@ -28,19 +27,16 @@ export const useRenderChildren = (props: FormProps) => {
         const allName = prefixName ? concat(prefixName, name) : name;
 
         if (initFormat) {
-          demo({ name: allName, format: initFormat });
+          onInitFormat({ name: allName, format: initFormat });
         }
         if (format) {
           if (typeof format === 'function') {
-            list.push({ name: allName, format });
+            onFormat({ name: allName, format });
           } else {
             forEach(format, (item) => {
               const { name, format, removeField } = item;
-              list.push({
-                name: prefixName ? concat(prefixName, name) : name,
-                format,
-                removeField,
-              });
+              const _name = prefixName ? concat(prefixName, name) : name;
+              onFormat({ name: _name, format, removeField });
             });
           }
         }

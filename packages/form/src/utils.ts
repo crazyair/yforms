@@ -1,6 +1,7 @@
 import React from 'react';
 import { find, forEach, get, isArray, isObject, merge, set, sortBy } from 'lodash';
 import { FormatFieldsValue, FormProps, ItemsType } from './form';
+import { FormItemProps } from 'antd/lib/form';
 
 // 获取唯一 key
 export const getOnlyKey = () => {
@@ -15,6 +16,16 @@ export const getOnlyKey = () => {
     keyMap.add(key);
     return key;
   };
+};
+
+// 返回上一级 name 的数据
+export const getParentNameData = (values: any, name: FormItemProps['name']) => {
+  const _values = { ...values };
+  const _name = isArray(name) ? name : [name];
+  if (_name.length === 1) {
+    return _values;
+  }
+  return get(_values, _name.slice(0, _name.length - 1));
 };
 
 // TODO 暂未使用
@@ -79,6 +90,9 @@ export function submitFormatValues(values: any, formatFieldsValue?: FormatFields
   const _values = merge({}, values);
   forEach(formatFieldsValue, (item) => {
     const { name, format } = item;
+    const parentValue = getParentNameData(values, name);
+    // 如果上一级是 undefined，则不处理该字段。（List add 会生成空对象）
+    if (parentValue === undefined) return;
     if (name && format) {
       set(_values, name, format(get(values, name), values));
     }

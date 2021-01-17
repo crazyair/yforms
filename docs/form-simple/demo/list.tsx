@@ -24,7 +24,13 @@ const Demo = () => {
       initialValues={initialValues}
     >
       {[
-        { type: 'input', label: 'aa', name: 'demo', initFormat: () => 'initFormat' },
+        {
+          type: 'input',
+          label: 'aa',
+          name: 'demo',
+          initFormat: () => 'initFormat',
+          format: () => 'format',
+        },
         {
           label: 'list',
           type: 'list',
@@ -39,7 +45,7 @@ const Demo = () => {
                   initFormat: (value) => value && `${value}+initFormat`,
                   componentProps: { suffix: icons },
                   // componentProps: { style: { width: '90%' } },
-                  format: () => 111,
+                  format: (value) => value && `${value}+format`,
                   ...field,
                   name: [index, 'age'],
                 },

@@ -2,10 +2,10 @@ import React, { useCallback, useRef } from 'react';
 import { Form as AntdForm, Spin } from 'antd';
 import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
-import { find, forEach, get, merge, omit, set } from 'lodash';
+import { find, forEach, get, isArray, merge, omit, set, sortBy } from 'lodash';
 import { FormContext } from './context';
 import Items from './items';
-import { eachChildren, submitFormatValues } from './utils';
+import { submitFormatValues } from './utils';
 
 export interface FormatFieldsValue<Values = any> {
   name: FormItemProps['name'];
@@ -35,7 +35,6 @@ type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
 export interface FormProps<Values = any> extends FormConfig, AntdFormProps<Values> {
   children?: childrenType<Values> | childrenType<Values>[];
   loading?: boolean;
-  demo?: any;
 }
 
 // 全局默认值
@@ -62,12 +61,6 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   // 返回 form 实例
   React.useImperativeHandle(ref, () => wrapForm);
 
-  const initRef = useRef<Record<string, any>>();
-  const handleInitFormat = useCallback((children, initialValues) => {
-    initRef.current = eachChildren({ children, initialValues });
-    return initRef.current;
-  }, []);
-
   const handleOnFinish = useCallback(
     (values) => {
       if (onFinish) onFinish(values);
@@ -75,7 +68,35 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
     [onFinish],
   );
 
-  const formatRef = useRef([]);
+  // 存储初始格式花值
+  const initFormatRef = useRef([]);
+  // 存储提交格式化值
+  const formatListRef = useRef([]);
+
+  const onFormat = useCallback((data) => {
+    const { name } = data;
+    if (!find(formatListRef.current, { name })) {
+      formatListRef.current.push(data);
+    }
+  }, []);
+
+  const handleFormatFieldsValue = useCallback((value) => {
+    const _value = { ...value };
+    // 根据 name 长度倒序排序，先格式化内层值，再格式化外层值
+    const _list = sortBy(formatListRef.current, (item) => {
+      if (isArray(item.name)) {
+        return -item.name.length;
+      }
+      return -`${item.name}`.length;
+    });
+    // 忽略字段
+    const omitNames = [];
+    forEach(_list, (item) => {
+      if (item.removeField) omitNames.push(item.name);
+    });
+    const formatValues = submitFormatValues(_value, _list);
+    return omit(formatValues, omitNames);
+  }, []);
 
   if (loading) {
     return (
@@ -84,30 +105,17 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
       </div>
     );
   }
+
   // 此时 initialValues 有值
-  const { formatValues, formatList } = initRef.current || handleInitFormat(children, initialValues);
-
-  const handleFormatFieldsValue = (value) => {
-    const _value = { ...value };
-    // 忽略字段
-    const omitNames = [];
-    forEach(formatList, (item) => {
-      if (item.removeField) omitNames.push(item.name);
-    });
-    const formatValues = { ...submitFormatValues(_value, formatList) };
-    return omit(formatValues, omitNames);
-  };
-
-  const list = [];
-  const demo = (data) => {
+  const _initialValues = merge({}, initialValues);
+  const onInitFormat = (data) => {
     const { name, format } = data;
     const value = format(get(initialValues, name));
-    if (!find(formatRef.current, { name })) {
+    if (!find(initFormatRef.current, { name })) {
       if (value !== undefined) {
-        list.push(data);
-        set(formatValues, name, value);
+        set(_initialValues, name, value);
         wrapForm.setFields([{ name, value }]);
-        formatRef.current.push({ name, value });
+        initFormatRef.current.push({ name, value });
       }
     }
   };
@@ -115,13 +123,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   const formProps = {
     form: wrapForm,
     // 格式化后的初始值
-    initialValues: formatValues,
+    initialValues: _initialValues,
     onFinish: (values) => handleOnFinish(handleFormatFieldsValue(values)),
     ...rest,
   };
   return (
     <AntdForm {...formProps}>
-      <FormContext.Provider value={{ itemsType, demo }}>
+      <FormContext.Provider value={{ itemsType, onInitFormat, onFormat }}>
         <Items>{children}</Items>
       </FormContext.Provider>
     </AntdForm>

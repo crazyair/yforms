@@ -16,7 +16,7 @@ function Items<Values = any>(props: FormItemsProps<Values>) {
   const { children, isShow, shouldUpdate } = props;
   const formProps = useContext(FormContext);
 
-  const { dom } = useRenderChildren({ ...formProps, children });
+  const { dom } = useRenderChildren(children, formProps);
 
   if ('isShow' in props) {
     if (!isShow) return null;

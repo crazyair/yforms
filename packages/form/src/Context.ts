@@ -1,8 +1,14 @@
 import { createContext } from 'react';
 import { FormListItems } from './components/list';
-import { FormProps } from './form';
+import { FormatFieldsValue, FormConfig, FormProps } from './form';
 
-export const FormContext = createContext<FormProps>({});
+export interface FormContextProps {
+  itemsType?: FormConfig['itemsType'];
+  onInitFormat?: (p: FormatFieldsValue) => void;
+  onFormat?: (p: FormatFieldsValue) => void;
+}
+
+export const FormContext = createContext<FormContextProps>({});
 
 export const FormItemContext = createContext<any>({});
 
