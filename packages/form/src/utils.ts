@@ -40,7 +40,7 @@ export const eachChildren = (props: FormProps) => {
       if (isArray(item)) {
         return each(item);
       }
-      if (React.isValidElement<{ children?: FormProps['children'] }>(item)) {
+      if (React.isValidElement<Pick<FormProps, 'children'>>(item)) {
         if (item.props && item.props.children) {
           return each(isArray(item.props.children) ? item.props.children : [item.props.children]);
         }
@@ -48,7 +48,7 @@ export const eachChildren = (props: FormProps) => {
       if (isObject(item)) {
         const { name, format, initFormat } = item as ItemsType;
         if (initFormat) {
-          set(formatValues, name, initFormat(get(initialValues, name), initialValues));
+          // set(formatValues, name, initFormat(get(initialValues, name), initialValues));
         }
         if (format) {
           if (typeof format === 'function') {

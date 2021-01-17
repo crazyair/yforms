@@ -4,7 +4,7 @@ import { FormItemProps } from 'antd/lib/form';
 
 import { FormItemsTypeProps, FormProps } from './form';
 import { useRenderChildren } from './children';
-import { FormContext } from './Context';
+import { FormContext } from './context';
 
 export interface FormItemsProps<Values = any> {
   children?: FormProps<Values>['children'];

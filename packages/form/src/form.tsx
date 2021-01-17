@@ -2,8 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { Form as AntdForm, Spin } from 'antd';
 import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
-import { forEach, merge, omit } from 'lodash';
-import { FormContext } from './Context';
+import { find, forEach, get, merge, omit, set } from 'lodash';
+import { FormContext } from './context';
 import Items from './items';
 import { eachChildren, submitFormatValues } from './utils';
 
@@ -15,6 +15,10 @@ export interface FormatFieldsValue<Values = any> {
 
 export interface FormItemsTypeProps<Values = any> extends FormItemProps {
   isShow?: boolean | ((values: Values) => boolean | undefined);
+  /**
+   * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues
+   * 2. 返回 undefined 则不修改 initialValues
+   */
   initFormat?: FormatFieldsValue['format'];
   format?: FormatFieldsValue['format'] | FormatFieldsValue[];
 }
@@ -31,6 +35,7 @@ type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
 export interface FormProps<Values = any> extends FormConfig, AntdFormProps<Values> {
   children?: childrenType<Values> | childrenType<Values>[];
   loading?: boolean;
+  demo?: any;
 }
 
 // 全局默认值
@@ -65,12 +70,12 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
 
   const handleOnFinish = useCallback(
     (values) => {
-      if (onFinish) {
-        onFinish(values);
-      }
+      if (onFinish) onFinish(values);
     },
     [onFinish],
   );
+
+  const formatRef = useRef([]);
 
   if (loading) {
     return (
@@ -93,6 +98,20 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
     return omit(formatValues, omitNames);
   };
 
+  const list = [];
+  const demo = (data) => {
+    const { name, format } = data;
+    const value = format(get(initialValues, name));
+    if (!find(formatRef.current, { name })) {
+      if (value !== undefined) {
+        list.push(data);
+        set(formatValues, name, value);
+        wrapForm.setFields([{ name, value }]);
+        formatRef.current.push({ name, value });
+      }
+    }
+  };
+
   const formProps = {
     form: wrapForm,
     // 格式化后的初始值
@@ -102,7 +121,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   };
   return (
     <AntdForm {...formProps}>
-      <FormContext.Provider value={{ itemsType }}>
+      <FormContext.Provider value={{ itemsType, demo }}>
         <Items>{children}</Items>
       </FormContext.Provider>
     </AntdForm>

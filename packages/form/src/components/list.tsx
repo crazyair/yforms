@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Form as AntdForm } from 'antd';
-import { FormProps } from '../Form';
-import { FormItemContext } from '../Context';
+import { Button } from 'antd';
+import { FormProps } from '../form';
+import { FormItemContext, FormListContent } from '../context';
 import { oneLineItemStyle } from '../utils';
-import { MinusCircleOutlined } from '@ant-design/icons';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Form } from '..';
+import { concat } from 'lodash';
 
 export interface FormListItems {
   index: number;
@@ -17,57 +18,70 @@ export interface FormListItems {
   layoutStyles: React.CSSProperties[];
 }
 
-export interface FormListProps extends FormProps {
+export interface FormListProps {
   items?: (p: FormListItems) => FormProps['children'];
 }
 
 export default (props: FormListProps) => {
   const { items } = props;
   const itemProps = useContext(FormItemContext);
+  const { name } = itemProps;
+  const context = React.useContext(FormListContent);
+  // 支持多级 List name 拼接
+  const _name = context.prefixName ? concat(context.prefixName, name) : name;
 
   return (
-    <div className="list">
-      <AntdForm.List name={itemProps.name}>
-        {(fields, { add, remove, move }) => {
-          // console.log('fields', fields);
-          // console.log('1', add, remove, move);
-          return (
-            <>
-              {fields.map((field, index) => {
-                const icons: React.ReactNode[] = [];
-                icons.push(
-                  <MinusCircleOutlined
-                    key="plus"
-                    onClick={() => {
-                      // 先增加一位
-                      add();
-                      // 再把最后一位移动到当前
-                      move(fields.length, index);
-                    }}
-                  />,
-                );
-                icons.push(<MinusCircleOutlined key="minus" onClick={() => remove(index)} />);
+    <Form.List name={name}>
+      {(fields, { add, remove, move }, { errors }) => {
+        return (
+          <>
+            {fields.map((field, index) => {
+              const icons: React.ReactNode[] = [];
+              icons.push(
+                <PlusCircleOutlined
+                  key="plus"
+                  onClick={() => {
+                    // 先增加一位
+                    add();
+                    // 再把最后一位移动到当前
+                    move(fields.length, index);
+                  }}
+                />,
+              );
+              icons.push(<MinusCircleOutlined key="minus" onClick={() => remove(index)} />);
 
-                const iconsWidth = icons.length * (8 + 14);
-                const _oneLineStyle = oneLineItemStyle(['100%', iconsWidth]);
+              const iconsWidth = icons.length * (8 + 14);
+              const _oneLineStyle = oneLineItemStyle(['100%', iconsWidth]);
 
-                const dataSource = items({
-                  index,
-                  field,
-                  add,
-                  remove,
-                  move,
-                  icons: '_iconsDom',
-                  iconsWidth: 1,
-                  layoutStyles: _oneLineStyle,
-                });
+              const dataSource = items({
+                index,
+                field,
+                add,
+                remove,
+                move,
+                icons,
+                iconsWidth: 1,
+                layoutStyles: _oneLineStyle,
+              });
 
-                return <Form.Items key={field.key}>{dataSource}</Form.Items>;
-              })}
-            </>
-          );
-        }}
-      </AntdForm.List>
-    </div>
+              return (
+                <FormListContent.Provider
+                  value={{ isList: true, field, prefixName: _name }}
+                  key={field.key}
+                >
+                  <Form.Items>{dataSource}</Form.Items>
+                </FormListContent.Provider>
+              );
+            })}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()}>
+                Add field
+              </Button>
+              <Form.ErrorList errors={errors} />
+            </Form.Item>
+          </>
+        );
+      }}
+    </Form.List>
   );
 };

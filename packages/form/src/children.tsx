@@ -1,33 +1,20 @@
-import React from 'react';
-import { Form } from 'antd';
-import { get, isArray, isObject, map } from 'lodash';
+import React, { useContext } from 'react';
+import { concat, forEach, get, isArray, isObject, map } from 'lodash';
 import warning from 'warning';
 import { FormProps, ItemsType } from './form';
-import { getOnlyKey } from './utils';
-import { FormItemContext } from './Context';
-
-const _getOnlyKey = getOnlyKey();
-
-export const isShowFunc = (props: any) => {
-  const { isShow, key, shouldUpdate, _dom } = props;
-  if ('isShow' in props) {
-    if (!isShow) return null;
-    if (typeof isShow === 'function') {
-      return (
-        <Form.Item noStyle key={key} shouldUpdate={shouldUpdate}>
-          {(form) => isShow(form.getFieldsValue(true)) && _dom}
-        </Form.Item>
-      );
-    }
-  }
-};
+import { Form } from '.';
+import { FormItemContext, FormListContent } from './context';
 
 export const useRenderChildren = (props: FormProps) => {
-  const { itemsType, children } = props;
-  const each = (children: FormProps['children'], pIndex?: number) => {
+  const { itemsType, children, demo } = props;
+  const listContext = useContext(FormListContent);
+  const { prefixName } = listContext;
+  const list = [];
+
+  const each = (children: FormProps['children']) => {
     const dom = map(isArray(children) ? children : [children], (item, index) => {
       if (isArray(item)) {
-        return each(item, index);
+        return each(item);
       }
       if (React.isValidElement(item)) {
         return item;
@@ -37,12 +24,32 @@ export const useRenderChildren = (props: FormProps) => {
         const { componentProps, format, initFormat, isShow, ...rest } = _item;
         const { name, shouldUpdate } = rest;
 
-        const key = _getOnlyKey(index, pIndex, name);
+        // List 会有拼接 name ，这里获取 all name path
+        const allName = prefixName ? concat(prefixName, name) : name;
+
+        if (initFormat) {
+          demo({ name: allName, format: initFormat });
+        }
+        if (format) {
+          if (typeof format === 'function') {
+            list.push({ name: allName, format });
+          } else {
+            forEach(format, (item) => {
+              const { name, format, removeField } = item;
+              list.push({
+                name: prefixName ? concat(prefixName, name) : name,
+                format,
+                removeField,
+              });
+            });
+          }
+        }
+
         const typeProps = get(itemsType, _item.type);
         if (typeProps) {
           const _component = _item.component || typeProps.component;
           const _dom = (
-            <FormItemContext.Provider value={{ name }} key={key}>
+            <FormItemContext.Provider value={{ name }} key={index}>
               <Form.Item {...rest}>
                 {/* 如果有传 component 则使用当前的 */}
                 {React.cloneElement(_component, componentProps as Record<string, any>)}
@@ -55,7 +62,7 @@ export const useRenderChildren = (props: FormProps) => {
             if (!isShow) return null;
             if (typeof isShow === 'function') {
               return (
-                <Form.Item noStyle key={key} shouldUpdate={shouldUpdate}>
+                <Form.Item noStyle key={index} shouldUpdate={shouldUpdate}>
                   {(form) => isShow(form.getFieldsValue(true)) && _dom}
                 </Form.Item>
               );

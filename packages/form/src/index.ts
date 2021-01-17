@@ -1,5 +1,5 @@
 import { Form as AntdForm } from 'antd';
-import { FormContext, FormItemContext } from './Context';
+import { FormContext, FormItemContext } from './context';
 import InternalForm, { config } from './form';
 import Items from './items';
 
@@ -8,17 +8,27 @@ import './styles/index.less';
 type InternalFormType = typeof InternalForm;
 
 interface FormInterface extends InternalFormType {
+  Item: typeof AntdForm.Item;
+  List: typeof AntdForm.List;
+  ErrorList: typeof AntdForm.ErrorList;
+  useForm: typeof AntdForm.useForm;
+  Provider: typeof AntdForm.Provider;
   Items: typeof Items;
   config: typeof config;
-  useForm: typeof AntdForm.useForm;
   FormContext: typeof FormContext;
   FormItemContext: typeof FormItemContext;
 }
 
 const Form = InternalForm as FormInterface;
+// 默认
+Form.Item = AntdForm.Item;
+Form.List = AntdForm.List;
+Form.ErrorList = AntdForm.ErrorList;
+Form.Provider = AntdForm.Provider;
+Form.useForm = AntdForm.useForm;
+// 自定义
 Form.Items = Items;
 Form.config = config;
-Form.useForm = AntdForm.useForm;
 Form.FormContext = FormContext;
 Form.FormItemContext = FormItemContext;
 

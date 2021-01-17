@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form } from 'yforms-simple';
 
+const initialValues = { demo: '12', list: [{ age: '10' }, { age: '12' }] };
+
 const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 16 },
@@ -19,27 +21,49 @@ const Demo = () => {
       onFinish={(values) => {
         console.log(JSON.stringify(values, null, 2));
       }}
-      initialValues={{ list: [{ age: '10' }, { age: '12' }] }}
+      initialValues={initialValues}
     >
       {[
+        { type: 'input', label: 'aa', name: 'demo', initFormat: () => 'initFormat' },
         {
           label: 'list',
           type: 'list',
           name: 'list',
+          // noStyle: true,
           componentProps: {
-            items: ({ index }) => {
+            items: ({ field, index, icons }) => {
               return [
                 {
                   type: 'input',
                   rules: [{ required: true }],
-                  initFormat: (value) => {
-                    console.log('c', value);
-                    return `${value}+1`;
-                  },
+                  initFormat: (value) => value && `${value}+initFormat`,
+                  componentProps: { suffix: icons },
+                  // componentProps: { style: { width: '90%' } },
                   format: () => 111,
+                  ...field,
                   name: [index, 'age'],
                 },
               ];
+              // return (
+              //   <Form.Item label="list" key={field.key}>
+              //     <Form.Items>
+              //       {[
+              //         {
+              //           type: 'input',
+              //           noStyle: true,
+              //           rules: [{ required: true }],
+              //           initFormat: (value) => value && `${value}+initFormat`,
+              //           componentProps: { style: { width: '90%' } },
+              //           format: () => 111,
+              //           ...field,
+              //           fieldKey: [field.fieldKey, 'age'],
+              //           name: [index, 'age'],
+              //         },
+              //       ]}
+              //       <>{icons}</>
+              //     </Form.Items>
+              //   </Form.Item>
+              // );
             },
           },
         },
@@ -47,6 +71,17 @@ const Demo = () => {
           type: 'button',
           ...tailLayout,
           componentProps: { children: '提交', htmlType: 'submit' },
+        },
+        {
+          type: 'button',
+          ...tailLayout,
+          componentProps: {
+            children: '重置',
+            onClick: () => {
+              form.resetFields();
+              console.log('initialValues', initialValues);
+            },
+          },
         },
       ]}
     </Form>
