@@ -110,7 +110,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   const _initialValues = merge({}, initialValues);
   const onInitFormat = (data) => {
     const { name, format } = data;
-    const value = format(get(initialValues, name));
+    const value = format(get(initialValues, name), initialValues);
     if (!find(initFormatRef.current, { name })) {
       if (value !== undefined) {
         set(_initialValues, name, value);

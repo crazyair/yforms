@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Button, Space } from 'antd';
+import { concat } from 'lodash';
+import { FormListProps as AntdFormListProps } from 'antd/es/form';
+
 import { FormProps } from '../form';
 import { FormItemContext, FormListContent } from '../context';
 import { oneLineItemStyle } from '../utils';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Form } from '..';
-import { concat } from 'lodash';
 
 export interface FormListItems {
   index: number;
@@ -17,20 +19,26 @@ export interface FormListItems {
   layoutStyles: React.CSSProperties[];
 }
 
-export interface FormListProps {
+export interface FormListProps extends AntdFormListProps {
   items?: (p: FormListItems) => FormProps['children'];
 }
 
 export default (props: FormListProps) => {
-  const { items } = props;
+  const { items, children, ...rest } = props;
   const itemProps = useContext(FormItemContext);
   const { name } = itemProps;
   const context = React.useContext(FormListContent);
   // 支持多级 List name 拼接
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
-
+  if (children) {
+    return (
+      <Form.List name={name} {...rest}>
+        {children}
+      </Form.List>
+    );
+  }
   return (
-    <Form.List name={name}>
+    <Form.List name={name} {...rest}>
       {(fields, { add, remove, move }, { errors }) => {
         return (
           <>

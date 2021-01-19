@@ -4,7 +4,7 @@ import { FormItemProps } from 'antd/lib/form';
 
 import { FormItemsTypeProps, FormProps } from './form';
 import { useRenderChildren } from './children';
-import { FormContext } from './context';
+import { FormContext, FormListContent } from './context';
 
 export interface FormItemsProps<Values = any> {
   children?: FormProps<Values>['children'];
@@ -15,8 +15,10 @@ export interface FormItemsProps<Values = any> {
 function Items<Values = any>(props: FormItemsProps<Values>) {
   const { children, isShow, shouldUpdate } = props;
   const formProps = useContext(FormContext);
+  const listContext = useContext(FormListContent);
+  const { prefixName } = listContext;
 
-  const { dom } = useRenderChildren(children, formProps);
+  const { dom } = useRenderChildren(children, formProps, prefixName);
 
   if ('isShow' in props) {
     if (!isShow) return null;

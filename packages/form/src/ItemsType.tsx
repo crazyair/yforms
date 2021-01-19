@@ -6,6 +6,7 @@ import locale from 'antd/es/date-picker/locale/zh_CN';
 import { InputProps, PasswordProps } from 'antd/lib/input';
 
 import List, { FormListProps } from './components/list';
+import Custom, { FormItemCustomProps } from './components/custom';
 
 export interface BaseTypeProps<T = any, P = any> {
   type?: T;
@@ -20,6 +21,7 @@ export interface FormItemsTypeDefine {
   password: BaseTypeProps<'password', PasswordProps>;
   rangePicker: BaseTypeProps<'rangePicker', RangePickerProps>;
   list: BaseTypeProps<'list', FormListProps>;
+  custom: BaseTypeProps<'custom', FormItemCustomProps>;
 }
 
 // type 做可为空处理
@@ -33,4 +35,5 @@ export const itemsType: FormItemsType = {
   password: { component: <Input.Password /> },
   rangePicker: { component: <DatePicker.RangePicker locale={locale} /> },
   list: { component: <List /> },
+  custom: { component: <Custom /> },
 };

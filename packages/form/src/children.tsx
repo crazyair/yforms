@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { concat, forEach, get, isArray, isObject, map } from 'lodash';
 import warning from 'warning';
 import { FormProps, ItemsType } from './form';
 import { Form } from '.';
-import { FormContextProps, FormItemContext, FormListContent } from './context';
+import { FormContextProps, FormItemContext } from './context';
+import { NamePath } from 'antd/lib/form/interface';
 
-export const useRenderChildren = (children: FormProps['children'], props: FormContextProps) => {
+export const useRenderChildren = (
+  children: FormProps['children'],
+  props: FormContextProps,
+  prefixName: NamePath,
+) => {
   const { itemsType, onInitFormat, onFormat } = props;
-  const listContext = useContext(FormListContent);
-  const { prefixName } = listContext;
-
   const each = (children: FormProps['children']) => {
     const dom = map(isArray(children) ? children : [children], (item, index) => {
       if (isArray(item)) {
@@ -53,7 +55,7 @@ export const useRenderChildren = (children: FormProps['children'], props: FormCo
             </FormItemContext.Provider>
           );
 
-          // 传 isShow 判断
+          // isShow 判断
           if ('isShow' in _item) {
             if (!isShow) return null;
             if (typeof isShow === 'function') {
