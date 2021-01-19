@@ -1,11 +1,10 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'antd';
 import { concat, forEach, get } from 'lodash';
 import { FormItemProps } from 'antd/lib/form';
 
 import { FormItemsTypeProps, ItemsType } from './form';
 import { FormContext, FormItemContext, FormListContent } from './context';
-import warning from 'warning';
 
 export interface FormItemsProps<Values = any> extends FormItemProps<Values> {
   isShow?: FormItemsTypeProps<Values>['isShow'];
@@ -20,19 +19,6 @@ function Item<Values = any>(props: FormItemsProps<Values> & ItemsType<Values>) {
   const listContext = useContext(FormListContent);
   const { prefixName } = listContext;
 
-  const render = useCallback(
-    (com: FormItemsProps['children']) => (
-      <FormItemContext.Provider value={{ name }}>
-        <Form.Item {...rest}>
-          {/* 如果是 Element 则把 componentProps 添加到 children props 上 */}
-          {React.isValidElement(com)
-            ? React.cloneElement(com, componentProps as Record<string, any>)
-            : com}
-        </Form.Item>
-      </FormItemContext.Provider>
-    ),
-    [componentProps, name, rest],
-  );
   const allName = prefixName ? concat(prefixName, name) : name;
 
   if (initFormat) {
@@ -50,17 +36,18 @@ function Item<Values = any>(props: FormItemsProps<Values> & ItemsType<Values>) {
     }
   }
 
-  let dom = render(children);
-
+  // 根据类型解析渲染组件
   const typeProps = get(itemsType, type);
-  if (typeProps) {
-    // 如果有传 component 则使用当前的
-    const _component = component || typeProps.component;
-    dom = render(_component);
-  } else {
-    warning(false, `错误: ${JSON.stringify(props)}`);
-    return null;
-  }
+
+  const dom = (
+    <FormItemContext.Provider value={{ name }}>
+      <Form.Item {...rest}>
+        {typeProps
+          ? React.cloneElement(component || typeProps.component, componentProps)
+          : children}
+      </Form.Item>
+    </FormItemContext.Provider>
+  );
 
   // isShow 判断
   if ('isShow' in props) {
