@@ -123,3 +123,10 @@ export const oneLineItemStyle = (list?: (number | string)[]) => {
   });
   return _list;
 };
+
+export type stringAndFunc<T> = string | ((record: T, index: number) => React.ReactNode);
+
+export function getFieldKeyValue<T>(record: T, index: number, field: stringAndFunc<T>) {
+  const recordKey = typeof field === 'function' ? field(record, index) : get(record, field);
+  return recordKey === undefined ? index : recordKey;
+}

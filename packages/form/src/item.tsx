@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { Form } from 'antd';
 import { concat, forEach, get } from 'lodash';
-import { FormItemProps } from 'antd/lib/form';
+import { FormItemProps as AntdFormItemProps } from 'antd/lib/form';
 
 import { FormItemsTypeProps, ItemsType } from './form';
 import { FormContext, FormItemContext, FormListContent } from './context';
 
-export interface FormItemsProps<Values = any> extends FormItemProps<Values> {
+export interface FormItemProps<Values = any> extends AntdFormItemProps<Values> {
   isShow?: FormItemsTypeProps<Values>['isShow'];
 }
 
-function Item<Values = any>(props: FormItemsProps<Values> & ItemsType<Values>) {
+function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   const { children, componentProps, format, initFormat, isShow, component, type, ...rest } = props;
 
   const { name, shouldUpdate } = rest;

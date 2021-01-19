@@ -7,6 +7,7 @@ import { InputProps, PasswordProps } from 'antd/lib/input';
 
 import List, { FormListProps } from './components/list';
 import Custom, { FormItemCustomProps } from './components/custom';
+import Radio, { RadioProps } from './components/radio';
 
 export interface BaseTypeProps<T = any, P = any> {
   type?: T;
@@ -18,6 +19,7 @@ export interface BaseTypeProps<T = any, P = any> {
 export interface FormItemsTypeDefine {
   input: BaseTypeProps<'input', InputProps>;
   button: BaseTypeProps<'button', ButtonProps>;
+  radio: BaseTypeProps<'radio', RadioProps>;
   password: BaseTypeProps<'password', PasswordProps>;
   rangePicker: BaseTypeProps<'rangePicker', RangePickerProps>;
   list: BaseTypeProps<'list', FormListProps>;
@@ -31,9 +33,10 @@ export type FormItemsType = {
 
 export const itemsType: FormItemsType = {
   input: { component: <Input /> },
+  radio: { component: <Radio /> },
   button: { component: <Button /> },
   password: { component: <Input.Password /> },
   rangePicker: { component: <DatePicker.RangePicker locale={locale} /> },
-  list: { component: <List /> },
+  list: { component: <List name={undefined} children={undefined} /> },
   custom: { component: <Custom /> },
 };

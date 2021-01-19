@@ -32,7 +32,17 @@ const Demo = () => {
           isShow: (values) => values.age === '1',
           name: 'age2',
         },
-        <Form.Item name="aaa" label="aaa" key="aaa" type="input" />,
+        {
+          type: 'radio',
+          name: 'radio',
+          label: 'radio',
+          componentProps: {
+            options: [
+              { id: '1', name: '男' },
+              { id: '2', name: '女' },
+            ],
+          },
+        },
         {
           type: 'button',
           ...tailLayout,
