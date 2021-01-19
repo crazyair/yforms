@@ -13,7 +13,7 @@ export interface FormatFieldsValue<Values = any> {
   format?: (thisValue: any, values: Values) => unknown;
 }
 
-export interface FormItemsTypeProps<Values = any> extends FormItemProps {
+export interface FormItemsTypeProps<Values = any> extends FormItemProps<Values> {
   isShow?: boolean | ((values: Values) => boolean | undefined);
   /**
    * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues

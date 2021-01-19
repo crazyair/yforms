@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { Form } from 'antd';
+import React from 'react';
+import { isArray, isObject, map } from 'lodash';
+import { Form as AntdForm } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 
+import { Form } from '.';
 import { FormItemsTypeProps, FormProps } from './form';
-import { useRenderChildren } from './children';
-import { FormContext, FormListContent } from './context';
 
 export interface FormItemsProps<Values = any> {
   children?: FormProps<Values>['children'];
@@ -12,21 +12,43 @@ export interface FormItemsProps<Values = any> {
   isShow?: FormItemsTypeProps<Values>['isShow'];
 }
 
+export const useRenderChildren = (children: FormProps['children']) => {
+  const each = (children: FormProps['children']) => {
+    const dom = map(isArray(children) ? children : [children], (item, index) => {
+      if (isArray(item)) {
+        return each(item);
+      }
+      if (React.isValidElement(item)) {
+        return item;
+      }
+      if (isObject(item)) {
+        return (
+          <Form.Item key={index} {...item}>
+            {children}
+          </Form.Item>
+        );
+      }
+      // 不是 Element 或者不是字段 type
+      return item;
+    });
+    return dom;
+  };
+  const dom = each(children);
+  return { dom };
+};
+
 function Items<Values = any>(props: FormItemsProps<Values>) {
   const { children, isShow, shouldUpdate } = props;
-  const formProps = useContext(FormContext);
-  const listContext = useContext(FormListContent);
-  const { prefixName } = listContext;
 
-  const { dom } = useRenderChildren(children, formProps, prefixName);
+  const { dom } = useRenderChildren(children);
 
   if ('isShow' in props) {
     if (!isShow) return null;
     if (typeof isShow === 'function') {
       return (
-        <Form.Item noStyle shouldUpdate={shouldUpdate}>
+        <AntdForm.Item noStyle shouldUpdate={shouldUpdate}>
           {(form) => isShow(form.getFieldsValue(true)) && dom}
-        </Form.Item>
+        </AntdForm.Item>
       );
     }
   }
