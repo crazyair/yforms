@@ -26,3 +26,7 @@ nav:
 ## plugins
 
 <code src="./demo/plugins.tsx" />
+
+## formModal
+
+<code src="./demo/formModal.tsx" />

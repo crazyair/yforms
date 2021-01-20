@@ -28,10 +28,8 @@ export interface FormConfig {
   plugins?: FormPluginsType;
 }
 
-type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
-
 export interface FormProps<Values = any> extends AntdFormProps<Values> {
-  children?: childrenType<Values> | childrenType<Values>[];
+  children?: FormItemProps['children'];
   loading?: boolean;
   // 默认配置
   config?: FormConfig;

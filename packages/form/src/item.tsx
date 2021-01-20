@@ -9,9 +9,13 @@ import { mergeWithDom } from './utils';
 import { FormItemsProps } from './items';
 import warning from 'warning';
 
+type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
+
 export interface FormItemProps<Values = any> extends AntdFormItemProps<Values> {
   isShow?: FormItemsProps['isShow'];
   plugins?: FormProps['plugins'];
+  children?: childrenType<Values> | childrenType<Values>[];
+
   /**
    * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues
    * 2. 返回 undefined 则不修改 initialValues
