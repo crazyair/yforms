@@ -8,6 +8,7 @@ import { InputProps, PasswordProps } from 'antd/lib/input';
 import List, { FormListProps } from './components/list';
 import Custom, { FormItemCustomProps } from './components/custom';
 import Radio, { RadioProps } from './components/radio';
+import Space, { SpaceProps } from './components/space';
 
 export interface BaseTypeProps<T = any, P = any> {
   type?: T;
@@ -24,6 +25,7 @@ export interface FormItemsTypeDefine {
   rangePicker: BaseTypeProps<'rangePicker', RangePickerProps>;
   list: BaseTypeProps<'list', FormListProps>;
   custom: BaseTypeProps<'custom', FormItemCustomProps>;
+  space: BaseTypeProps<'space', SpaceProps>;
 }
 
 // type 做可为空处理
@@ -39,4 +41,5 @@ export const itemsType: FormItemsType = {
   rangePicker: { component: <DatePicker.RangePicker locale={locale} /> },
   list: { component: <List name={undefined} children={undefined} /> },
   custom: { component: <Custom /> },
+  space: { component: <Space /> },
 };

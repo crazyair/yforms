@@ -1,40 +1,42 @@
 import React, { useCallback, useRef } from 'react';
 import { Form as AntdForm, Spin } from 'antd';
-import { FormInstance, FormItemProps, FormProps as AntdFormProps } from 'antd/lib/form';
+import {
+  FormInstance,
+  FormItemProps as AntdFormItemProps,
+  FormProps as AntdFormProps,
+} from 'antd/lib/form';
 import { FormItemsType, FormItemsTypeDefine, itemsType as baseItemsType } from './itemsType';
+import { plugins as basePlugins } from './plugins';
 import { find, forEach, get, isArray, merge, omit, set, sortBy } from 'lodash';
 import { FormContext } from './context';
 import Items from './items';
-import { submitFormatValues } from './utils';
+import { mergeWithDom, submitFormatValues } from './utils';
+import { FormPluginsType } from './plugins';
+import { FormItemProps } from './item';
 
 export interface FormatFieldsValue<Values = any> {
-  name: FormItemProps['name'];
+  name: AntdFormItemProps['name'];
   removeField?: boolean;
   format?: (thisValue: any, values: Values) => unknown;
 }
 
-export interface FormItemsTypeProps<Values = any> extends FormItemProps<Values> {
-  isShow?: boolean | ((values: Values) => boolean | undefined);
-  /**
-   * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues
-   * 2. 返回 undefined 则不修改 initialValues
-   */
-  initFormat?: FormatFieldsValue['format'];
-  format?: FormatFieldsValue['format'] | FormatFieldsValue[];
-}
-
 export type ItemsType<Values = any> = FormItemsTypeDefine[keyof FormItemsTypeDefine] &
-  FormItemsTypeProps<Values>;
+  FormItemProps<Values>;
 
 export interface FormConfig {
   itemsType?: FormItemsType;
+  plugins?: FormPluginsType;
 }
 
 type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
 
-export interface FormProps<Values = any> extends FormConfig, AntdFormProps<Values> {
+export interface FormProps<Values = any> extends AntdFormProps<Values> {
   children?: childrenType<Values> | childrenType<Values>[];
   loading?: boolean;
+  // 默认配置
+  config?: FormConfig;
+  // 插件
+  plugins?: FormConfig['plugins'];
 }
 
 // 全局默认值
@@ -45,17 +47,14 @@ export const config = (options: FormConfig) => {
 };
 
 const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props, ref) => {
-  const {
-    children,
-    form,
-    itemsType: thisItemsType,
-    initialValues,
-    loading,
-    onFinish,
-    ...rest
-  } = props;
-  // 合并全部 type
-  const itemsType = { ...baseItemsType, ...globalConfig.itemsType, ...thisItemsType };
+  const { children, form, config = {}, initialValues, loading, plugins, onFinish, ...rest } = props;
+
+  const { itemsType: thisItemsType, plugins: thisPlugins } = config;
+  // 全部 type
+  const allItemsType = mergeWithDom({}, baseItemsType, globalConfig.itemsType, thisItemsType);
+  // 全部插件
+  const allPlugins = mergeWithDom({}, basePlugins, globalConfig.plugins, thisPlugins);
+
   // 获取 form 实例
   const [wrapForm] = AntdForm.useForm(form);
   // 返回 form 实例
@@ -129,7 +128,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   };
   return (
     <AntdForm {...formProps}>
-      <FormContext.Provider value={{ itemsType, onInitFormat, onFormat }}>
+      <FormContext.Provider
+        value={{
+          onInitFormat,
+          onFormat,
+          config: { plugins: allPlugins, itemsType: allItemsType },
+        }}
+      >
         <Items>{children}</Items>
       </FormContext.Provider>
     </AntdForm>

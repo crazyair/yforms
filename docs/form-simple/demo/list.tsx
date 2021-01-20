@@ -355,18 +355,20 @@ const Demo = () => {
         //   },
         // },
         {
-          type: 'button',
-          ...tailLayout,
-          componentProps: { children: '提交', htmlType: 'submit' },
-        },
-        {
-          type: 'button',
+          type: 'space',
           ...tailLayout,
           componentProps: {
-            children: '重置',
-            onClick: () => {
-              form.resetFields();
-              console.log('initialValues', initialValues);
+            items: () => {
+              return [
+                {
+                  type: 'button',
+                  componentProps: { children: '提交', type: 'primary', htmlType: 'submit' },
+                },
+                {
+                  type: 'button',
+                  componentProps: { children: '重置', onClick: () => form.resetFields() },
+                },
+              ];
             },
           },
         },

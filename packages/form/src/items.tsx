@@ -4,12 +4,12 @@ import { Form as AntdForm } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 
 import { Form } from '.';
-import { FormItemsTypeProps, FormProps } from './form';
+import { FormProps } from './form';
 
 export interface FormItemsProps<Values = any> {
   children?: FormProps<Values>['children'];
   shouldUpdate?: FormItemProps<Values>['shouldUpdate'];
-  isShow?: FormItemsTypeProps<Values>['isShow'];
+  isShow?: boolean | ((values: Values) => boolean | undefined);
 }
 
 export const useRenderChildren = (children: FormProps['children']) => {
@@ -22,11 +22,7 @@ export const useRenderChildren = (children: FormProps['children']) => {
         return item;
       }
       if (isObject(item)) {
-        return (
-          <Form.Item key={index} {...item}>
-            {children}
-          </Form.Item>
-        );
+        return <Form.Item key={index} {...item} />;
       }
       // 不是 Element 或者不是字段 type
       return item;

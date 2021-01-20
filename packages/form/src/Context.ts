@@ -1,12 +1,12 @@
 import { FormItemProps } from 'antd/lib/form';
 import { createContext } from 'react';
 import { FormListItems } from './components/list';
-import { FormatFieldsValue, FormConfig } from './form';
+import { FormatFieldsValue, FormProps } from './form';
 
 export interface FormContextProps {
-  itemsType?: FormConfig['itemsType'];
   onInitFormat?: (p: FormatFieldsValue) => void;
   onFormat?: (p: FormatFieldsValue) => void;
+  config?: FormProps['config'];
 }
 
 export const FormContext = createContext<FormContextProps>({});
