@@ -20,6 +20,7 @@
   "include": [
     "src/**/*",
     "packages/**/src",
+    "packages/**/tests",
     "docs/**/*",
     ".eslintrc.js",
     "jest.config.js",

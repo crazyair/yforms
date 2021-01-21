@@ -7,9 +7,7 @@ nav:
 
 # 文档
 
-## index
-
-<code src="./demo/index.tsx" />
+<code src="./demo/index.tsx" debug/>
 
 ## init
 

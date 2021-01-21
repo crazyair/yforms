@@ -3,6 +3,7 @@ import { ItemsType } from '../form';
 
 export interface BasePluginsProps {
   item?: (p: { itemProps: ItemsType }) => ItemsType;
+  enable?: boolean;
 }
 
 export interface FormPluginsTypeDefine {
@@ -12,7 +13,7 @@ export interface FormPluginsTypeDefine {
 
 // type 做可为空处理
 export type FormPluginsType = {
-  [P in keyof FormPluginsTypeDefine]?: FormPluginsTypeDefine[P] | boolean;
+  [P in keyof FormPluginsTypeDefine]?: FormPluginsTypeDefine[P];
 };
 
 const getTypeMessage = (itemProps: ItemsType) => {

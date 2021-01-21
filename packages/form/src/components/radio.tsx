@@ -4,10 +4,12 @@ import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio';
 import { map } from 'lodash';
 import { getFieldKeyValue } from '../utils';
 
+export type stringAndFunc<T> = string | ((record: T, index: number) => React.ReactNode);
+
 export interface RadioProps extends Omit<AntdRadioGroupProps, 'options'> {
   options?: Record<string, any>[];
-  postField?: string;
-  showField?: string;
+  postField?: stringAndFunc<Record<string, any>>;
+  showField?: stringAndFunc<Record<string, any>>;
   renderOption?: (item: any) => any;
   onAddProps?: (
     item: Record<string, any>,

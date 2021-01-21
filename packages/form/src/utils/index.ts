@@ -4,6 +4,7 @@ import { isImmutable } from 'immutable';
 import { FormItemProps } from 'antd/lib/form';
 
 import { FormatFieldsValue } from '../form';
+import { stringAndFunc } from '../components/radio';
 
 // 返回上一级 name 的数据
 export const getParentNameData = (values: any, name: FormItemProps['name']) => {
@@ -53,14 +54,12 @@ export const oneLineItemStyle = (list?: (number | string)[]) => {
   return _list;
 };
 
-export type stringAndFunc<T> = string | ((record: T, index: number) => React.ReactNode);
-
 export function getFieldKeyValue<T>(record: T, index: number, field: stringAndFunc<T>) {
   const recordKey = typeof field === 'function' ? field(record, index) : get(record, field);
   return recordKey === undefined ? index : recordKey;
 }
 
-export const mergeWithDom = (obj: any, ...params: any[]) => {
+export function mergeWithDom<T = any, K = any>(obj: T, ...params: K[]): T & K {
   return mergeWith(obj, ...params, (_, srcValue) => {
     // 如果是元素则返回要更改的值，不是则不处理
     if (React.isValidElement(srcValue)) {
@@ -70,12 +69,5 @@ export const mergeWithDom = (obj: any, ...params: any[]) => {
     if (isImmutable(srcValue)) {
       return srcValue;
     }
-  });
-};
-
-export function replaceMessage(template: string, kv: Record<string, string>): string {
-  return template.replace(/\$\{\w+\}/g, (str: string) => {
-    const key = str.slice(2, -1);
-    return kv[key];
   });
 }

@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Form } from 'antd';
-import { concat, forEach, get, isObject, mapKeys } from 'lodash';
+import { concat, forEach, get, mapKeys } from 'lodash';
 import { FormItemProps as AntdFormItemProps } from 'antd/lib/form';
 
 import { FormatFieldsValue, FormProps, ItemsType } from './form';
 import { FormContext, FormItemContext, FormListContent } from './context';
 import { mergeWithDom } from './utils';
 import { FormItemsProps } from './items';
-import warning from 'warning';
 
 type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
 
@@ -26,30 +25,22 @@ export interface FormItemProps<Values = any> extends AntdFormItemProps<Values> {
 
 function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   const formProps = useContext(FormContext);
-  const { config = {}, onInitFormat, onFormat } = formProps;
-  const { itemsType, plugins } = config;
+  const { itemsType, plugins, onInitFormat, onFormat } = formProps;
   const listContext = useContext(FormListContent);
   const { prefixName } = listContext;
   // 合并插件
   const allPlugins = mergeWithDom({}, plugins, props.plugins);
   const _itemProps = {};
-  mapKeys(allPlugins, (value, key) => {
-    if (value) {
-      // 如果是对象，就使用传入的配置  如果是 boolean 则使用默认的配置
-      const obj = isObject(value) ? value : get(allPlugins, key);
-      if (typeof obj === 'object') {
-        if (obj.item) {
-          const dd = obj.item({ itemProps: props });
-          mergeWithDom(_itemProps, dd);
-        }
-      } else {
-        warning(false, `config 配置 ${key} 必须是对象`);
+  mapKeys(allPlugins, (value) => {
+    const { enable, item } = value;
+    if (enable) {
+      if (item) {
+        mergeWithDom(_itemProps, item({ itemProps: props }));
       }
     }
   });
-
   // 修改默认值
-  const _props = mergeWithDom({}, _itemProps, props);
+  const _props = mergeWithDom<ItemsType>({}, _itemProps, props);
 
   const { children, componentProps, format, initFormat, isShow, component, type, ...rest } = _props;
   const { name, shouldUpdate } = rest;
@@ -83,7 +74,6 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
       </Form.Item>
     </FormItemContext.Provider>
   );
-
   // isShow 判断
   if ('isShow' in _props) {
     if (!isShow) return null;

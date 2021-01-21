@@ -14,16 +14,7 @@ const Demo = () => {
     <Form
       {...layout}
       form={form}
-      // config={{
-      //   plugins: {
-      //     placeholder: {
-      //       item: ({ itemProps }) => {
-      //         return { componentProps: { placeholder: `${itemProps.label}-必填` } };
-      //       },
-      //     },
-      //   },
-      // }}
-      plugins={{ placeholder: true, required: true }}
+      plugins={{ placeholder: { enable: true }, required: { enable: true } }}
       onFinish={(values) => {
         console.log(JSON.stringify(values, null, 2));
       }}

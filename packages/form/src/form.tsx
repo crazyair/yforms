@@ -31,10 +31,9 @@ export interface FormConfig {
 export interface FormProps<Values = any> extends AntdFormProps<Values> {
   children?: FormItemProps['children'];
   loading?: boolean;
-  // 默认配置
-  config?: FormConfig;
   // 插件
   plugins?: FormConfig['plugins'];
+  itemsType?: FormItemsType;
 }
 
 // 全局默认值
@@ -45,9 +44,18 @@ export const config = (options: FormConfig) => {
 };
 
 const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props, ref) => {
-  const { children, form, config = {}, initialValues, loading, plugins, onFinish, ...rest } = props;
+  const {
+    children,
+    form,
+    initialValues,
+    loading,
+    itemsType: thisItemsType,
+    plugins: thisPlugins,
+    onFinish,
+    ...rest
+  } = props;
 
-  const { itemsType: thisItemsType, plugins: thisPlugins } = config;
+  // const { itemsType: thisItemsType, plugins: thisPlugins } = config;
   // 全部 type
   const allItemsType = mergeWithDom({}, baseItemsType, globalConfig.itemsType, thisItemsType);
   // 全部插件
@@ -127,11 +135,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   return (
     <AntdForm {...formProps}>
       <FormContext.Provider
-        value={{
-          onInitFormat,
-          onFormat,
-          config: { plugins: allPlugins, itemsType: allItemsType },
-        }}
+        value={{ onInitFormat, onFormat, plugins: allPlugins, itemsType: allItemsType }}
       >
         <Items>{children}</Items>
       </FormContext.Provider>

@@ -6,7 +6,8 @@ import { FormatFieldsValue, FormProps } from './form';
 export interface FormContextProps {
   onInitFormat?: (p: FormatFieldsValue) => void;
   onFormat?: (p: FormatFieldsValue) => void;
-  config?: FormProps['config'];
+  itemsType?: FormProps['itemsType'];
+  plugins?: FormProps['plugins'];
 }
 
 export const FormContext = createContext<FormContextProps>({});
