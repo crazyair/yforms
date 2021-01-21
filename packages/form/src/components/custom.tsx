@@ -2,11 +2,11 @@ import React from 'react';
 import { FormProps } from '../form';
 import { Form } from '..';
 
-export interface FormItemCustomProps {
+export interface CustomProps {
   items?: () => FormProps['children'];
 }
 
-const Custom = (props: FormItemCustomProps) => {
+const Custom = (props: CustomProps) => {
   const { items } = props;
 
   return <Form.Items>{items && items()}</Form.Items>;

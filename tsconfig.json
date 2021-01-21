@@ -25,6 +25,7 @@
     "jest.config.js",
     "setupTests.js",
     "config/config.js",
-    "packages/yforms/webpack.config.js"
+    "packages/yforms/webpack.config.js",
+    "webpack.config.js"
   ]
 }

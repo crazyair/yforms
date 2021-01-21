@@ -1,12 +1,11 @@
+import React from 'react';
 import { Input, Button, DatePicker } from 'antd';
 import { ButtonProps } from 'antd/lib/button';
-import { RangePickerProps } from 'antd/lib/date-picker';
-// TODO 使用 ConfigProvider 无法设置到 DatePicker
-import locale from 'antd/es/date-picker/locale/zh_CN';
+import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { InputProps, PasswordProps } from 'antd/lib/input';
 
 import List, { FormListProps } from './components/list';
-import Custom, { FormItemCustomProps } from './components/custom';
+import Custom, { CustomProps } from './components/custom';
 import Radio, { RadioProps } from './components/radio';
 import Space, { SpaceProps } from './components/space';
 
@@ -22,9 +21,10 @@ export interface FormItemsTypeDefine {
   button: BaseTypeProps<'button', ButtonProps>;
   radio: BaseTypeProps<'radio', RadioProps>;
   password: BaseTypeProps<'password', PasswordProps>;
+  datePicker: BaseTypeProps<'datePicker', DatePickerProps>;
   rangePicker: BaseTypeProps<'rangePicker', RangePickerProps>;
   list: BaseTypeProps<'list', FormListProps>;
-  custom: BaseTypeProps<'custom', FormItemCustomProps>;
+  custom: BaseTypeProps<'custom', CustomProps>;
   space: BaseTypeProps<'space', SpaceProps>;
 }
 
@@ -38,7 +38,8 @@ export const itemsType: FormItemsType = {
   radio: { component: <Radio /> },
   button: { component: <Button /> },
   password: { component: <Input.Password /> },
-  rangePicker: { component: <DatePicker.RangePicker locale={locale} /> },
+  rangePicker: { component: <DatePicker.RangePicker /> },
+  datePicker: { component: <DatePicker /> },
   list: { component: <List name={undefined} children={undefined} /> },
   custom: { component: <Custom /> },
   space: { component: <Space /> },
