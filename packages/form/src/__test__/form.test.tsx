@@ -12,7 +12,14 @@ describe('form', () => {
       <Form plugins={{ placeholder: { enable: true }, required: { enable: true } }}>
         {[
           { type: 'input', name: 'age', label: 'age' },
-          { type: 'radio', name: 'radio', rules: [{ required: true }] },
+          {
+            type: 'radio',
+            name: 'radio',
+            componentProps: {
+              options: [{ id: '1', name: 'age' }],
+            },
+            rules: [{ required: true }],
+          },
           {
             type: 'radio',
             name: 'radio2',
@@ -28,6 +35,8 @@ describe('form', () => {
             componentProps: {
               showField: (item) => item.id,
               postField: () => undefined,
+              onAddProps: () => ({ disabled: true }),
+              renderOption: (item) => item.id,
               options: [{ id: '1', name: 'age' }],
             },
           },

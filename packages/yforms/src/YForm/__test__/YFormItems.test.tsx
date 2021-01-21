@@ -430,22 +430,22 @@ describe('YFormItems', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
-  test('getInitialValues', async () => {
-    const init = { name: '张飞', money: '99' };
-    const onFinish = (value) => {
-      expect(value).toEqual(init);
-    };
-    const wrapper = await mount(
-      <YForm onFinish={onFinish} getInitialValues={async () => Promise.resolve(init)}>
-        {[
-          { type: 'input', label: '姓名', name: 'name' },
-          { type: 'money', label: '金额', name: 'money' },
-          { type: 'submit' },
-        ]}
-      </YForm>,
-    );
-    await delay(0);
-    wrapper.update();
-    await wrapper.find('.ant-btn').at(0).simulate('submit');
-  });
+  // test('getInitialValues', async () => {
+  //   const init = { name: '张飞', money: '99' };
+  //   const onFinish = (value) => {
+  //     expect(value).toEqual(init);
+  //   };
+  //   const wrapper = await mount(
+  //     <YForm onFinish={onFinish} getInitialValues={async () => Promise.resolve(init)}>
+  //       {[
+  //         { type: 'input', label: '姓名', name: 'name' },
+  //         { type: 'money', label: '金额', name: 'money' },
+  //         { type: 'submit' },
+  //       ]}
+  //     </YForm>,
+  //   );
+  //   await delay(0);
+  //   wrapper.update();
+  //   await wrapper.find('.ant-btn').at(0).simulate('submit');
+  // });
 });

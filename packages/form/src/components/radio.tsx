@@ -28,20 +28,14 @@ const InternalRadio: React.ForwardRefRenderFunction<HTMLDivElement, RadioProps> 
   } = props;
 
   const _children = map(options, (item, index) => {
-    if (item) {
-      const _postField = getFieldKeyValue(item, index, postField);
-      const _showField = getFieldKeyValue(item, index, showField);
-      return (
-        <AntdRadio
-          key={_postField}
-          value={_postField}
-          disabled={item.disabled}
-          {...(onAddProps && onAddProps(item, index))}
-        >
-          {renderOption ? renderOption(item) : _showField}
-        </AntdRadio>
-      );
-    }
+    const _postField = getFieldKeyValue(item, index, postField);
+    const _showField = getFieldKeyValue(item, index, showField);
+    const _props = onAddProps && onAddProps(item, index);
+    return (
+      <AntdRadio key={_postField} value={_postField} disabled={item.disabled} {..._props}>
+        {renderOption ? renderOption(item) : _showField}
+      </AntdRadio>
+    );
   });
 
   return (
