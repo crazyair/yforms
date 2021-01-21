@@ -8,12 +8,9 @@ import { FormContext, FormItemContext, FormListContent } from './context';
 import { mergeWithDom } from './utils';
 import { FormItemsProps } from './items';
 
-type childrenType<Values> = ItemsType<Values> | ItemsType<Values>[];
-
 export interface FormItemProps<Values = any> extends AntdFormItemProps<Values> {
   isShow?: FormItemsProps['isShow'];
   plugins?: FormProps['plugins'];
-  children?: childrenType<Values> | childrenType<Values>[];
 
   /**
    * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues
@@ -66,7 +63,7 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   const typeProps = get(itemsType, type);
 
   const dom = (
-    <FormItemContext.Provider value={{ name }}>
+    <FormItemContext.Provider value={{ ..._props }}>
       <Form.Item {...rest}>
         {typeProps
           ? React.cloneElement(component || typeProps.component, componentProps)

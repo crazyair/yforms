@@ -14,7 +14,7 @@
     "doc:build": "dumi build",
     "now-build": "yarn && yarn doc:build",
     "fa:build": "father build",
-    "test": "umi-test -u --coverage",
+    "test": "umi-test -u --coverage --watchAll",
     "test:ci": "umi-test",
     "lint": "eslint --ext .js,jsx,ts,tsx packages/**/src --fix",
     "lint:es": "eslint --ext .js,jsx,ts,tsx packages/**/src",

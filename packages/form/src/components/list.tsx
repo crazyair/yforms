@@ -19,8 +19,9 @@ export interface FormListItems {
   layoutStyles: React.CSSProperties[];
 }
 
-export interface FormListProps extends AntdFormListProps {
+export interface FormListProps extends Omit<AntdFormListProps, 'children'> {
   items?: (p: FormListItems) => FormProps['children'];
+  children?: any;
 }
 
 export default (props: FormListProps) => {
@@ -30,43 +31,50 @@ export default (props: FormListProps) => {
   const context = React.useContext(FormListContent);
   // 支持多级 List name 拼接
   const _name = context.prefixName ? concat(context.prefixName, name) : name;
+
+  const lineStyle = (fields, props: any, index) => {
+    const { add, move, remove } = props;
+    const icons = (
+      <Space size={5}>
+        <PlusCircleOutlined
+          key="plus"
+          onClick={() => {
+            // 先增加一位
+            add();
+            // 再把最后一位移动到当前
+            move(fields.length, index);
+          }}
+        />
+        <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
+      </Space>
+    );
+    const iconsWidth = icons.props.children.length * (8 + 14);
+    const layoutStyles = oneLineItemStyle(['100%', iconsWidth]);
+    return { icons, layoutStyles };
+  };
+
   if (children) {
     return (
       <Form.List name={name} {...rest}>
-        {children}
+        {(...p) => children(...p, lineStyle)}
       </Form.List>
     );
   }
+
   return (
     <Form.List name={name} {...rest}>
       {(fields, { add, remove, move }, { errors }) => {
         return (
           <>
             {fields.map((field, index) => {
-              const icons = (
-                <Space>
-                  <PlusCircleOutlined
-                    key="plus"
-                    onClick={() => {
-                      // 先增加一位
-                      add();
-                      // 再把最后一位移动到当前
-                      move(fields.length, index);
-                    }}
-                  />
-                  <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
-                </Space>
-              );
-              const iconsWidth = icons.props.children.length * (8 + 14);
-              const _oneLineStyle = oneLineItemStyle(['100%', iconsWidth]);
+              const _oneLineStyle = lineStyle(fields, { add, move, remove }, index);
               const dataSource = items({
                 index,
                 field,
                 add,
                 remove,
                 move,
-                icons,
-                layoutStyles: _oneLineStyle,
+                ..._oneLineStyle,
               });
 
               return (

@@ -22,7 +22,7 @@ export const useRenderChildren = (children: FormProps['children']) => {
         return item;
       }
       if (isObject(item)) {
-        return <Form.Item key={index} {...item} />;
+        return <Form.Item {...item} key={index} />;
       }
       // 不是 Element 或者不是字段 type
       return item;
