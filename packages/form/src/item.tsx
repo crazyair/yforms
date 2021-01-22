@@ -27,7 +27,7 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   const { prefixName } = listContext;
   // 合并插件
   const allPlugins = mergeWithDom({}, plugins, props.plugins);
-  const _itemProps = {};
+  const _itemProps: ItemsType = {};
   mapKeys(allPlugins, (value) => {
     const { enable, item } = value;
     if (enable) {
@@ -37,7 +37,7 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
     }
   });
   // 修改默认值
-  const _props = mergeWithDom<ItemsType>({}, _itemProps, props);
+  const _props = mergeWithDom({}, _itemProps, props);
 
   const { children, componentProps, format, initFormat, isShow, component, type, ...rest } = _props;
   const { name, shouldUpdate } = rest;
@@ -65,9 +65,8 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   const dom = (
     <FormItemContext.Provider value={{ ..._props }}>
       <Form.Item {...rest}>
-        {typeProps
-          ? React.cloneElement(component || typeProps.component, componentProps)
-          : children}
+        {children ||
+          (typeProps && React.cloneElement(component || typeProps.component, componentProps))}
       </Form.Item>
     </FormItemContext.Provider>
   );

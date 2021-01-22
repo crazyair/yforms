@@ -1,7 +1,8 @@
 import React from 'react';
-import { forEach, get, isArray, merge, mergeWith, set } from 'lodash';
+import { forEach, get, isArray, mapKeys, merge, mergeWith, set } from 'lodash';
 import { isImmutable } from 'immutable';
 import { FormItemProps } from 'antd/lib/form';
+import { ColProps } from 'antd/lib/col';
 
 import { FormatFieldsValue } from '../form';
 import { stringAndFunc } from '../components/radio';
@@ -71,3 +72,34 @@ export function mergeWithDom<T = any, K = any>(obj: T, ...params: K[]): T & K {
     }
   });
 }
+
+interface NoLabelLayoutValueProps {
+  labelCol?: ColProps;
+  wrapperCol?: ColProps;
+  offset?: number;
+}
+
+// 处理 label 宽度
+export const getLabelLayout = ({ labelCol, wrapperCol, offset = 0 }: NoLabelLayoutValueProps) => {
+  const labelLayoutValue: { labelCol?: ColProps; wrapperCol?: ColProps } = {};
+  const noLabelLayoutValue: { labelCol?: ColProps; wrapperCol?: ColProps } = {};
+  const labelSpan = get(labelCol, 'span');
+  const wrapperSpan = get(wrapperCol, 'span');
+  if (labelSpan) {
+    set(labelLayoutValue, ['labelCol', 'span'], Number(labelSpan) + offset);
+    set(labelLayoutValue, ['wrapperCol', 'span'], Number(wrapperSpan) - offset);
+    set(noLabelLayoutValue, ['wrapperCol', 'offset'], Number(labelSpan) + offset);
+    set(noLabelLayoutValue, ['wrapperCol', 'span'], Number(wrapperSpan) - offset);
+  } else {
+    mapKeys(labelCol, (value, key) => {
+      set(labelLayoutValue, ['labelCol', key, 'span'], value.span + offset);
+      set(noLabelLayoutValue, ['wrapperCol', key, 'offset'], value.span + offset);
+    });
+    mapKeys(wrapperCol, (value, key) => {
+      set(labelLayoutValue, ['wrapperCol', key, 'span'], value.span - offset);
+      set(noLabelLayoutValue, ['wrapperCol', key, 'span'], value.span - offset);
+    });
+  }
+
+  return { noLabelLayoutValue, labelLayoutValue };
+};

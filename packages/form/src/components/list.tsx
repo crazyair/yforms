@@ -1,100 +1,100 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Space } from 'antd';
 import { concat } from 'lodash';
 import { FormListProps as AntdFormListProps } from 'antd/es/form';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { FormListFieldData, FormListOperation } from 'antd/lib/form/FormList';
 
 import { FormProps } from '../form';
-import { FormItemContext, FormListContent } from '../context';
-import { oneLineItemStyle } from '../utils';
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { FormContext, FormItemContext, FormListContent } from '../context';
+import { getLabelLayout, oneLineItemStyle } from '../utils';
 import { Form } from '..';
 
 export interface FormListItems {
   index: number;
-  field: { name: number; key: number; fieldKey: number; isListField?: boolean };
-  add: () => void;
-  remove: (index: number) => void;
-  move: (from: number, to: number) => void;
+  fields: FormListFieldData[];
+  field: FormListFieldData;
+  operation: FormListOperation;
   icons: React.ReactNode;
   layoutStyles: React.CSSProperties[];
+}
+export interface FormListBottomItems {
+  operation: FormListOperation;
+  meta: { errors: React.ReactNode[] };
 }
 
 export interface FormListProps extends Omit<AntdFormListProps, 'children'> {
   items?: (p: FormListItems) => FormProps['children'];
-  children?: any;
+  bottomItems?: (p: FormListBottomItems) => FormProps['children'];
+  children?: AntdFormListProps['children'];
+  disabled?: boolean;
 }
 
-export default (props: FormListProps) => {
-  const { items, children, ...rest } = props;
-  const itemProps = useContext(FormItemContext);
-  const { name } = itemProps;
-  const context = React.useContext(FormListContent);
-  // 支持多级 List name 拼接
-  const _name = context.prefixName ? concat(context.prefixName, name) : name;
+const List = (props: FormListProps) => {
+  const { items, bottomItems, children, name, disabled, ...rest } = props;
+  const formProps = React.useContext(FormContext);
+  const { labelCol, wrapperCol } = formProps;
+  const { noLabelLayoutValue } = getLabelLayout({ labelCol, wrapperCol });
+  const itemProps = React.useContext(FormItemContext);
 
-  const lineStyle = (fields, props: any, index) => {
-    const { add, move, remove } = props;
-    const icons = (
-      <Space size={5}>
-        <PlusCircleOutlined
-          key="plus"
-          onClick={() => {
-            // 先增加一位
-            add();
-            // 再把最后一位移动到当前
-            move(fields.length, index);
-          }}
-        />
-        <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
-      </Space>
-    );
-    const iconsWidth = icons.props.children.length * (8 + 14);
-    const layoutStyles = oneLineItemStyle(['100%', iconsWidth]);
-    return { icons, layoutStyles };
-  };
+  const listProps = React.useContext(FormListContent);
+  // 支持多级 List name 拼接
+  const prefixName = listProps.prefixName ? concat(listProps.prefixName, name) : name;
 
   if (children) {
     return (
-      <Form.List name={name} {...rest}>
-        {(...p) => children(...p, lineStyle)}
-      </Form.List>
+      <FormListContent.Provider value={{ prefixName }}>
+        <Form.List name={name} {...rest}>
+          {children}
+        </Form.List>
+      </FormListContent.Provider>
     );
   }
 
   return (
-    <Form.List name={name} {...rest}>
-      {(fields, { add, remove, move }, { errors }) => {
-        return (
-          <>
-            {fields.map((field, index) => {
-              const _oneLineStyle = lineStyle(fields, { add, move, remove }, index);
-              const dataSource = items({
-                index,
-                field,
-                add,
-                remove,
-                move,
-                ..._oneLineStyle,
-              });
+    <FormListContent.Provider value={{ prefixName }}>
+      <Form.List name={name} {...rest}>
+        {(fields, operation, meta) => {
+          const { errors } = meta;
+          return (
+            <>
+              {fields.map((field, index) => {
+                const { add, move, remove } = operation;
+                const icons = (
+                  <Space size={5}>
+                    <PlusCircleOutlined
+                      key="plus"
+                      onClick={() => {
+                        // 先增加一位
+                        add();
+                        // 再把最后一位移动到当前
+                        move(fields.length, index);
+                      }}
+                    />
+                    <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
+                  </Space>
+                );
+                const iconsWidth = icons.props.children.length * (8 + 14);
+                const layoutStyles = oneLineItemStyle(['100%', iconsWidth]);
 
-              return (
-                <FormListContent.Provider
-                  value={{ isList: true, field, prefixName: _name }}
-                  key={field.key}
-                >
-                  <Form.Items>{dataSource}</Form.Items>
-                </FormListContent.Provider>
-              );
-            })}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()}>
-                Add field
-              </Button>
-              <Form.ErrorList errors={errors} />
-            </Form.Item>
-          </>
-        );
-      }}
-    </Form.List>
+                const dataSource = items({ field, index, fields, operation, icons, layoutStyles });
+                return <Form.Items key={field.key}>{dataSource}</Form.Items>;
+              })}
+              {bottomItems
+                ? bottomItems({ operation, meta })
+                : !disabled && (
+                    <Form.Item {...noLabelLayoutValue}>
+                      <Button type="dashed" block onClick={() => operation.add()}>
+                        添加{itemProps.label}
+                      </Button>
+                      <Form.ErrorList errors={errors} />
+                    </Form.Item>
+                  )}
+            </>
+          );
+        }}
+      </Form.List>
+    </FormListContent.Provider>
   );
 };
+export default List;

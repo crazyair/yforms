@@ -1,8 +1,13 @@
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import React, { useState } from 'react';
 import { Form } from 'yforms-simple';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
-const initialValues = { demo: '12', list: [{ age: '10' }, { age: '12' }, {}, {}] };
+const initialValues = {
+  demo: '12',
+  list: [{ age: '10' }, { age: '12' }, {}, {}],
+  new_list: [{ age: '10' }],
+};
 
 const layout = {
   labelCol: { span: 4 },
@@ -20,71 +25,124 @@ const Demo = () => {
     <Form
       {...layout}
       form={form}
-      plugins={{ placeholder: { enable: true } }}
+      plugins={{ placeholder: { enable: true }, required: { enable: true } }}
       onFinish={(values) => {
         console.log(JSON.stringify(values, null, 2));
       }}
       initialValues={initialValues}
     >
       {[
-        { type: 'input', label: 'age', name: 'age' },
+        { type: 'input', label: 'age', initFormat: () => '11', name: 'age' },
         {
           type: 'list',
           noStyle: true,
           componentProps: {
             name: 'list',
-            children: (fields, { add, move, remove }, _, lineStyle) => {
-              return (
-                <>
-                  {fields.map((field, index) => {
-                    const { icons } = lineStyle(fields, { add, move, remove }, index);
-                    return (
-                      <Form.Items key={field.key}>
-                        {[
-                          {
-                            type: 'custom',
-                            ...(index === 0 ? layout : tailLayout),
-                            label: index === 0 ? 'age' : undefined,
-                            componentProps: {
-                              items: () => {
-                                return [
-                                  {
-                                    type: 'input',
-                                    ...field,
-                                    label: 'age',
-                                    rules: [{ required: true }],
-                                    fieldKey: [field.fieldKey, 'age'],
-                                    name: [field.name, 'age'],
-                                    noStyle: true,
-                                    componentProps: { disabled },
-                                  },
-                                  {
-                                    type: 'custom',
-                                    noStyle: true,
-                                    isShow: !disabled,
-                                    children: (
-                                      <span
-                                        style={{ position: 'absolute', paddingLeft: 5, top: 4 }}
-                                      >
-                                        {icons}
-                                      </span>
-                                    ),
-                                  },
-                                ];
-                              },
+            children: (fields, { add, move, remove }) => (
+              <>
+                {fields.map((field, index) => {
+                  return (
+                    <Form.Items key={field.key}>
+                      {[
+                        {
+                          type: 'custom',
+                          ...(index === 0 ? layout : tailLayout),
+                          label: index === 0 ? 'age' : undefined,
+                          componentProps: {
+                            items: () => {
+                              return [
+                                {
+                                  type: 'input',
+                                  label: 'age',
+                                  ...field,
+                                  rules: [{ required: true }],
+                                  fieldKey: [field.fieldKey, 'age'],
+                                  name: [field.name, 'age'],
+                                  noStyle: true,
+                                  componentProps: { disabled },
+                                },
+                                {
+                                  type: 'custom',
+                                  noStyle: true,
+                                  isShow: !disabled,
+                                  children: (
+                                    <span style={{ position: 'absolute', top: 4, paddingLeft: 5 }}>
+                                      <Space>
+                                        <PlusCircleOutlined
+                                          key="plus"
+                                          onClick={() => {
+                                            // 先增加一位
+                                            add();
+                                            // 再把最后一位移动到当前
+                                            move(fields.length, index);
+                                          }}
+                                        />
+                                        <MinusCircleOutlined
+                                          key="minus"
+                                          onClick={() => remove(index)}
+                                        />
+                                      </Space>
+                                    </span>
+                                  ),
+                                },
+                              ];
                             },
                           },
-                        ]}
-                      </Form.Items>
-                    );
-                  })}
-                  <Form.Item {...tailLayout}>
-                    <Button block onClick={() => add()}>
-                      添加
-                    </Button>
-                  </Form.Item>
-                </>
-              );
+                        },
+                      ]}
+                    </Form.Items>
+                  );
+                })}
+                <Form.Item {...tailLayout}>
+                  <Button block onClick={() => add()}>
+                    添加
+                  </Button>
+                </Form.Item>
+              </>
+            ),
+          },
+        },
+        {
+          type: 'list',
+          noStyle: true,
+          label: '年龄段',
+          componentProps: {
+            name: 'new_list',
+            disabled,
+            items: ({ index, field, icons }) => {
+              return [
+                {
+                  type: 'custom',
+                  ...(index === 0 ? layout : tailLayout),
+                  label: index === 0 ? 'age' : undefined,
+                  componentProps: {
+                    items: () => {
+                      return [
+                        {
+                          type: 'input',
+                          ...field,
+                          label: 'age',
+                          rules: [{ required: true }],
+                          fieldKey: [field.fieldKey, 'age'],
+                          name: [field.name, 'age'],
+                          noStyle: true,
+                          componentProps: { disabled },
+                        },
+                        {
+                          type: 'custom',
+                          noStyle: true,
+                          isShow: !disabled,
+                          children: (
+                            <span style={{ position: 'absolute', top: 4, paddingLeft: 5 }}>
+                              {icons}
+                            </span>
+                          ),
+                        },
+                      ];
+                    },
+                  },
+                },
+              ];
             },
           },
         },

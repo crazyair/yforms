@@ -57,7 +57,6 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
     ...rest
   } = props;
 
-  // const { itemsType: thisItemsType, plugins: thisPlugins } = config;
   // 全部 type
   const allItemsType = mergeWithDom({}, baseItemsType, globalConfig.itemsType, thisItemsType);
   // 全部插件
@@ -75,8 +74,10 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
     [onFinish],
   );
 
-  // 存储初始格式花值
+  // 存储初始格式花值，判断 name 是否格式化
   const initFormatRef = useRef([]);
+  // 已经格式化的值，重新渲染保留
+  const initRef = useRef({});
   // 存储提交格式化值
   const formatListRef = useRef([]);
 
@@ -112,21 +113,22 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
       </div>
     );
   }
-
-  // 此时 initialValues 有值
-  const _initialValues = merge({}, initialValues);
+  // loading 后 initialValues 有值
+  // initialValues 合并修改后的值
+  const _initialValues = merge({}, initialValues, initRef.current);
   const onInitFormat = (data) => {
     const { name, format } = data;
     const value = format(get(initialValues, name), initialValues);
     if (!find(initFormatRef.current, { name })) {
       if (value !== undefined) {
         set(_initialValues, name, value);
+        // 暂存修改后的值
+        initRef.current = _initialValues;
         wrapForm.setFields([{ name, value }]);
         initFormatRef.current.push({ name, value });
       }
     }
   };
-
   const formProps = {
     form: wrapForm,
     // 格式化后的初始值
@@ -137,7 +139,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (props,
   return (
     <AntdForm {...formProps}>
       <FormContext.Provider
-        value={{ onInitFormat, onFormat, plugins: allPlugins, itemsType: allItemsType }}
+        value={{
+          ...formProps,
+          onInitFormat,
+          onFormat,
+          plugins: allPlugins,
+          itemsType: allItemsType,
+        }}
       >
         <Items>{children}</Items>
       </FormContext.Provider>
