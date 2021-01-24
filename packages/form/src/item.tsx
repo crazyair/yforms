@@ -8,7 +8,31 @@ import { FormContext, FormItemContext, FormListContent } from './context';
 import { mergeWithDom } from './utils';
 import { FormItemsProps } from './items';
 
-export interface FormItemProps<Values = any> extends AntdFormItemProps<Values> {
+interface ItemChildrenWrapperProps {
+  container?: (c: React.ReactNode) => React.ReactElement;
+  before?: React.ReactNode;
+  after?: React.ReactNode;
+  children?: React.ReactNode;
+}
+const ItemChildrenWrapper = (props: ItemChildrenWrapperProps) => {
+  const { before, after, container, children, ...rest } = props;
+  const _children = React.isValidElement(children) ? React.cloneElement(children, rest) : children;
+
+  if (container) {
+    return container(_children);
+  }
+  return (
+    <>
+      {before}
+      {_children}
+      {after}
+    </>
+  );
+};
+
+export interface FormItemProps<Values = any>
+  extends AntdFormItemProps<Values>,
+    Omit<ItemChildrenWrapperProps, 'children'> {
   isShow?: FormItemsProps['isShow'];
   plugins?: FormProps['plugins'];
 
@@ -39,7 +63,19 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
   // 修改默认值
   const _props = mergeWithDom({}, _itemProps, props);
 
-  const { children, componentProps, format, initFormat, isShow, component, type, ...rest } = _props;
+  const {
+    type,
+    children,
+    component,
+    container,
+    after,
+    before,
+    format,
+    initFormat,
+    componentProps,
+    isShow,
+    ...rest
+  } = _props;
   const { name, shouldUpdate } = rest;
 
   const allName = prefixName ? concat(prefixName, name) : name;
@@ -61,12 +97,18 @@ function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {
 
   // 根据类型解析渲染组件
   const typeProps = get(itemsType, type);
-
+  const _children =
+    children || (typeProps && React.cloneElement(component || typeProps.component, componentProps));
   const dom = (
     <FormItemContext.Provider value={{ ..._props }}>
       <Form.Item {...rest}>
-        {children ||
-          (typeProps && React.cloneElement(component || typeProps.component, componentProps))}
+        {typeof _children === 'function' ? (
+          _children
+        ) : (
+          <ItemChildrenWrapper before={before} after={after} container={container}>
+            {_children}
+          </ItemChildrenWrapper>
+        )}
       </Form.Item>
     </FormItemContext.Provider>
   );
