@@ -1,20 +1,18 @@
+/**
+ * title: list
+ * desc: list 调试
+ */
+
 import { Button, Space } from 'antd';
 import React, { useState } from 'react';
 import { Form } from 'yforms-simple';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { layout, tailLayout } from './utils';
 
 const initialValues = {
   demo: '12',
   list: [{ age: '10' }, { age: '12' }, {}, {}],
   new_list: [{ age: '10' }],
-};
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 14 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 4, span: 14 },
 };
 
 const Demo = () => {
@@ -52,22 +50,32 @@ const Demo = () => {
                           rules: [{ required: true }],
                           fieldKey: [field.fieldKey, 'age'],
                           name: [field.name, 'age'],
-                          after: !disabled && (
-                            <span style={{ position: 'absolute', top: 4, paddingLeft: 5 }}>
-                              <Space>
-                                <PlusCircleOutlined
-                                  key="plus"
-                                  onClick={() => {
-                                    // 先增加一位
-                                    add();
-                                    // 再把最后一位移动到当前
-                                    move(fields.length, index);
-                                  }}
-                                />
-                                <MinusCircleOutlined key="minus" onClick={() => remove(index)} />
-                              </Space>
-                            </span>
-                          ),
+                          container: (children) => {
+                            return (
+                              <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <div style={{ flex: 1 }}>{children}</div>
+                                {!disabled && (
+                                  <div style={{ paddingLeft: 5 }}>
+                                    <Space>
+                                      <PlusCircleOutlined
+                                        key="plus"
+                                        onClick={() => {
+                                          // 先增加一位
+                                          add();
+                                          // 再把最后一位移动到当前
+                                          move(fields.length, index);
+                                        }}
+                                      />
+                                      <MinusCircleOutlined
+                                        key="minus"
+                                        onClick={() => remove(index)}
+                                      />
+                                    </Space>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          },
                           componentProps: { disabled },
                         },
                       ]}
@@ -81,32 +89,6 @@ const Demo = () => {
                 </Form.Item>
               </>
             ),
-          },
-        },
-        {
-          type: 'list',
-          noStyle: true,
-          label: '年龄段',
-          componentProps: {
-            name: 'new_list',
-            disabled,
-            items: ({ index, field, icons }) => {
-              return [
-                {
-                  type: 'input',
-                  label: index === 0 ? 'age' : undefined,
-                  ...(index === 0 ? layout : tailLayout),
-                  rules: [{ required: true }],
-                  ...field,
-                  fieldKey: [field.fieldKey, 'age'],
-                  name: [field.name, 'age'],
-                  after: !disabled && (
-                    <span style={{ position: 'absolute', top: 4, paddingLeft: 5 }}>{icons}</span>
-                  ),
-                  componentProps: { disabled },
-                },
-              ];
-            },
           },
         },
         {

@@ -1,6 +1,6 @@
 /**
- * title: 我是标题
- * desc: 我是简介，我可以用 `Markdown` 来编写
+ * title: debug
+ * desc: 测试用例
  */
 
 import { Button } from 'antd';
@@ -13,11 +13,12 @@ export const delay = (timeout = 0) =>
     setTimeout(resolve, timeout);
   });
 
-type Fields = {
+type FieldsType = {
   age?: string;
-  nei?: string;
   start?: string;
   end?: string;
+  nei?: string;
+  range?: moment.Moment[];
 };
 
 const layout = {
@@ -31,7 +32,7 @@ const tailLayout = {
 const Demo = () => {
   const [enable, setEnable] = useState(true);
   const [form] = Form.useForm();
-  const [detail, setDetail] = useState<Fields>({});
+  const [detail, setDetail] = useState<FieldsType>({});
   const [loading, setLoading] = useState(true);
 
   const loadData = useCallback(async () => {
@@ -47,7 +48,7 @@ const Demo = () => {
     <div>
       <Button onClick={() => setEnable((c) => !c)}>刷新</Button>
       {JSON.stringify(enable)}
-      <Form<Fields>
+      <Form<FieldsType>
         {...layout}
         loading={loading}
         form={form}
@@ -57,7 +58,7 @@ const Demo = () => {
         initialValues={detail}
       >
         <div>
-          <Form.Items<Fields> isShow={() => enable} shouldUpdate>
+          <Form.Items<FieldsType> isShow={() => enable} shouldUpdate>
             {[
               {
                 type: 'input',

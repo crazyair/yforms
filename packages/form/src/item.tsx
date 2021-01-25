@@ -40,8 +40,8 @@ export interface FormItemProps<Values = any>
    * 1. 会改变 initialValues 值，所以执行该方法改变后的值，点击重置后会恢复改变后的 initialValues
    * 2. 返回 undefined 则不修改 initialValues
    */
-  initFormat?: FormatFieldsValue['format'];
-  format?: FormatFieldsValue['format'] | FormatFieldsValue[];
+  initFormat?: FormatFieldsValue<Values>['format'];
+  format?: FormatFieldsValue<Values>['format'] | FormatFieldsValue<Values>[];
 }
 
 function Item<Values = any>(props: FormItemProps<Values> & ItemsType<Values>) {

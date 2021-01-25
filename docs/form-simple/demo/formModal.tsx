@@ -1,16 +1,11 @@
+/**
+ * title: formModal
+ * desc: 模态表单
+ */
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { Form } from 'yforms-simple';
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 16 },
-};
-
-export const delay = (timeout = 0) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
+import { layout } from './utils';
 
 const Demo = () => {
   const [form] = Form.useForm();
@@ -21,14 +16,16 @@ const Demo = () => {
   };
   return (
     <div>
-      <Button onClick={() => setVisible(true)}>点击打开</Button>
+      <Button onClick={() => setVisible(true)}>点击打开表单</Button>
       <Form.FormModal
         title="模态表单"
         visible={visible}
         onCancel={() => handleOnChange()}
+        destroyOnClose
         formProps={{
           ...layout,
           form,
+          plugins: { required: { enable: true } },
           onFinish: (values) => {
             console.log('v', values);
             handleOnChange();
@@ -47,7 +44,15 @@ const Demo = () => {
           },
         ]}
       >
-        {[{ type: 'input', name: 'age', label: 'age' }]}
+        {[
+          {
+            type: 'input',
+            componentProps: { autoFocus: true },
+            name: 'age',
+            label: 'age',
+            rules: [{ required: true }],
+          },
+        ]}
       </Form.FormModal>
     </div>
   );

@@ -1,101 +1,142 @@
 /**
- * title: 调试
- * desc: 我是简介，我可以用 `Markdown` 来编写
+ * title: 基础使用
+ * desc: 默认使用场景
  */
-import { Button, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Form } from 'yforms-simple';
+import moment from 'moment';
 
-type Fields = {
+import { delay, layout, tailLayout } from './utils';
+
+type FieldsType = {
   age?: string;
-  nei?: string;
-};
-declare module 'yforms-simple/lib/itemsType' {
-  export interface FormItemsTypeDefine {
-    demo?: BaseTypeProps<'demo', { str: string }>;
-  }
-}
-
-Form.config({ itemsType: { demo: { component: <Input /> } } });
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 4, span: 16 },
+  start?: string;
+  end?: string;
+  gender?: string;
+  range?: moment.Moment[];
+  list?: { age?: string }[];
 };
 
 const Demo = () => {
-  const [enable, setEnable] = useState(true);
   const [form] = Form.useForm();
+  const [detail, setDetail] = useState<FieldsType>({});
+  const [loading, setLoading] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+
+  const loadData = useCallback(async () => {
+    await delay(250);
+    setDetail({
+      age: '1',
+      gender: '1',
+      start: '1610767167',
+      end: '1611767667',
+      list: [{ age: '10' }],
+    });
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
   return (
-    <div>
-      <Button onClick={() => setEnable((c) => !c)}>刷新</Button>
-      {JSON.stringify(enable)}
-      <Form<Fields>
-        {...layout}
-        form={form}
-        onFinish={(values) => {
-          console.log('v', values);
-        }}
-        initialValues={{ age: '1', nei: 'nei', demo: 'demo' }}
-      >
-        <div>这里自定义显示</div>
-        <div>
-          1
-          <Form.Items<Fields> isShow={() => enable} shouldUpdate>
-            {[
-              {
-                type: 'input',
-                label: '内部form',
-                initFormat: (_, values) => `${values.age}values.age`,
-                name: 'nei',
-              },
-            ]}
-          </Form.Items>
-          2
-        </div>
-        {[
-          { type: 'demo', label: 'demo', name: 'demo', componentProps: { str: '1' } },
-          {
-            label: '年龄',
-            type: 'input',
-            name: 'age',
-            initFormat: (value) => value + 1,
-            componentProps: { placeholder: '请输入年龄' },
+    <Form<FieldsType>
+      {...layout}
+      form={form}
+      onFinish={(values) => {
+        console.log('v', values);
+      }}
+      loading={loading}
+      initialValues={detail}
+    >
+      {[
+        { label: '年龄', type: 'input', name: 'age', componentProps: { disabled } },
+        {
+          label: '性别',
+          type: 'radio',
+          name: 'gender',
+          componentProps: {
+            disabled,
+            options: [
+              { id: '1', name: '男' },
+              { id: '2', name: '女' },
+            ],
           },
-          {
-            label: '姓名',
-            type: 'input',
-            shouldUpdate: (prev, current) => prev.age !== current.age,
-            isShow: (values) => {
-              return values.age === '1';
+        },
+        {
+          type: 'rangePicker',
+          name: 'range',
+          label: '日期区间',
+          componentProps: { disabled },
+          initFormat: (_, { start, end }) => {
+            return [start && moment.unix(Number(start)), end && moment.unix(Number(end))];
+          },
+          format: [
+            { name: 'range', removeField: true },
+            {
+              name: 'start',
+              format: (_, { range = [] }) => range[0] && `${moment(range[0]).format('L')}`,
             },
-            name: 'name',
-            componentProps: { placeholder: '请输入姓名' },
-          },
-          {
-            type: 'space',
-            ...tailLayout,
-            componentProps: {
-              items: () => {
-                return [
-                  {
-                    type: 'button',
-                    componentProps: { children: '提交', type: 'primary', htmlType: 'submit' },
+            {
+              name: 'end',
+              format: (_, { range = [] }) => range[1] && `${moment(range[1]).format('L')}`,
+            },
+          ],
+        },
+        {
+          type: 'list',
+          noStyle: true,
+          label: '动态数组',
+          componentProps: {
+            name: 'list',
+            disabled,
+            items: ({ index, field, icons }) => {
+              return [
+                {
+                  type: 'input',
+                  ...field,
+                  label: index === 0 ? '动态数组' : undefined,
+                  ...(index === 0 ? layout : tailLayout),
+                  fieldKey: [field.fieldKey, 'age'],
+                  name: [field.name, 'age'],
+                  container: (children) => {
+                    return (
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ flex: 1 }}>{children}</div>
+                        {!disabled && <div style={{ paddingLeft: 5 }}>{icons}</div>}
+                      </div>
+                    );
                   },
-                  {
-                    type: 'button',
-                    componentProps: { children: '重置', onClick: () => form.resetFields() },
-                  },
-                ];
-              },
+                  componentProps: { disabled },
+                },
+              ];
             },
           },
-        ]}
-      </Form>
-    </div>
+        },
+        {
+          type: 'space',
+          ...tailLayout,
+          componentProps: {
+            items: () => {
+              return [
+                {
+                  type: 'button',
+                  componentProps: { children: '提交', type: 'primary', htmlType: 'submit' },
+                },
+                {
+                  type: 'button',
+                  componentProps: { children: '重置', onClick: () => form.resetFields() },
+                },
+                {
+                  type: 'button',
+                  componentProps: { children: '切换状态', onClick: () => setDisabled((c) => !c) },
+                },
+              ];
+            },
+          },
+        },
+      ]}
+    </Form>
   );
 };
 export default Demo;

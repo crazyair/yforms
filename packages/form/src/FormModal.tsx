@@ -4,12 +4,11 @@ import { ModalProps } from 'antd/lib/modal';
 import { ConfigContext } from 'antd/lib/config-provider';
 
 import { Form } from '.';
-import { FormItemProps } from './item';
 import { FormProps } from './form';
 
-interface YFormModalProps extends ModalProps {
-  children?: FormItemProps['children'];
-  formFooter?: FormItemProps['children'];
+interface YFormModalProps extends Omit<ModalProps, 'children'> {
+  children?: FormProps['children'];
+  formFooter?: FormProps['children'];
   formProps?: FormProps;
 }
 
