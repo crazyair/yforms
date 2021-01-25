@@ -68,14 +68,17 @@ nav:
 
 ### itemsType 内置字段类型
 
-| 参数        | 说明                          |
-| ----------- | ----------------------------- |
-| input       | `Input` 组件                  |
-| radio       | `Radio.Group` 组件            |
-| button      | `Button` 组件                 |
-| password    | `Input.Password` 组件         |
-| rangePicker | `DatePicker.RangePicker` 组件 |
-| datePicker  | `DatePicker` 组件             |
-| list        | `Form.List` 组件              |
-| space       | `Space` 组件                  |
-| custom      | 自定义组件                    |
+| 参数         | 说明                          |
+| ------------ | ----------------------------- |
+| input        | `Input` 组件                  |
+| radio        | `Radio.Group` 组件            |
+| checkbox     | `Checkbox.Group` 组件         |
+| select       | `Select` 组件                 |
+| button       | `Button` 组件                 |
+| password     | `Input.Password` 组件         |
+| rangePicker  | `DatePicker.RangePicker` 组件 |
+| datePicker   | `DatePicker` 组件             |
+| list         | `Form.List` 组件              |
+| space        | `Space` 组件                  |
+| custom       | 自定义组件                    |
+| secureButton | 防连击按钮组件                |

@@ -1,13 +1,15 @@
 import React from 'react';
-import { Radio as AntdRadio } from 'antd';
-import { RadioGroupProps as AntdRadioGroupProps } from 'antd/lib/radio';
+import { Select as AntdSelect } from 'antd';
+import { RefSelectProps, SelectProps as AntdSelectProps } from 'antd/lib/select';
 import { map } from 'lodash';
 import { getFieldKeyValue } from '../utils';
 import { OptionsBaeProps } from '.';
 
-export interface RadioProps extends Omit<AntdRadioGroupProps, 'options'>, OptionsBaeProps {}
+export interface SelectProps<T = any>
+  extends Omit<AntdSelectProps<T>, 'options'>,
+    OptionsBaeProps {}
 
-const InternalRadio: React.ForwardRefRenderFunction<HTMLDivElement, RadioProps> = (props, ref) => {
+const InternalRadio: React.ForwardRefRenderFunction<RefSelectProps, SelectProps> = (props, ref) => {
   const {
     postField = 'id',
     showField = 'name',
@@ -22,19 +24,19 @@ const InternalRadio: React.ForwardRefRenderFunction<HTMLDivElement, RadioProps> 
     const _showField = getFieldKeyValue(item, index, showField);
     const _props = onAddProps && onAddProps(item, index);
     return (
-      <AntdRadio key={_postField} value={_postField} disabled={item.disabled} {..._props}>
+      <AntdSelect.Option key={_postField} value={_postField} disabled={item.disabled} {..._props}>
         {renderOption ? renderOption(item) : _showField}
-      </AntdRadio>
+      </AntdSelect.Option>
     );
   });
 
   return (
-    <AntdRadio.Group {...rest} ref={ref}>
+    <AntdSelect {...rest} ref={ref}>
       {_children}
-    </AntdRadio.Group>
+    </AntdSelect>
   );
 };
 
-const Radio = React.forwardRef<HTMLDivElement, RadioProps>(InternalRadio);
+const Select = React.forwardRef<RefSelectProps, SelectProps>(InternalRadio);
 
-export default Radio;
+export default Select;

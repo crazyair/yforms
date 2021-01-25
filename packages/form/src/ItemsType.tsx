@@ -8,6 +8,9 @@ import List, { FormListProps } from './components/list';
 import Custom, { CustomProps } from './components/custom';
 import Radio, { RadioProps } from './components/radio';
 import Space, { SpaceProps } from './components/space';
+import CheckboxGroup, { CheckboxGroupProps } from './components/checkbox';
+import Select, { SelectProps } from './components/select';
+import SecureButton, { SecureButtonProps } from './components/SecureButton';
 
 export interface BaseTypeProps<T = any, P = any> {
   type?: T;
@@ -20,12 +23,15 @@ export interface FormItemsTypeDefine {
   input: BaseTypeProps<'input', InputProps>;
   button: BaseTypeProps<'button', ButtonProps>;
   radio: BaseTypeProps<'radio', RadioProps>;
+  checkbox: BaseTypeProps<'checkbox', CheckboxGroupProps>;
+  select: BaseTypeProps<'select', SelectProps>;
   password: BaseTypeProps<'password', PasswordProps>;
   datePicker: BaseTypeProps<'datePicker', DatePickerProps>;
   rangePicker: BaseTypeProps<'rangePicker', RangePickerProps>;
   list: BaseTypeProps<'list', FormListProps>;
   custom: BaseTypeProps<'custom', CustomProps>;
   space: BaseTypeProps<'space', SpaceProps>;
+  secureButton: BaseTypeProps<'secureButton', SecureButtonProps>;
 }
 
 // type 做可为空处理
@@ -36,6 +42,8 @@ export type FormItemsType = {
 export const itemsType: FormItemsType = {
   input: { component: <Input /> },
   radio: { component: <Radio /> },
+  checkbox: { component: <CheckboxGroup /> },
+  select: { component: <Select /> },
   button: { component: <Button /> },
   password: { component: <Input.Password /> },
   rangePicker: { component: <DatePicker.RangePicker /> },
@@ -43,4 +51,5 @@ export const itemsType: FormItemsType = {
   list: { component: <List name={undefined} children={undefined} /> },
   custom: { component: <Custom /> },
   space: { component: <Space /> },
+  secureButton: { component: <SecureButton /> },
 };

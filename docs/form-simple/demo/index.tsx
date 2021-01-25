@@ -12,11 +12,17 @@ type FieldsType = {
   age?: string;
   start?: string;
   end?: string;
+  select?: string;
+  checkbox?: string[];
   gender?: string;
   range?: moment.Moment[];
   list?: { age?: string }[];
 };
 
+const options = [
+  { id: '1', name: '男' },
+  { id: '2', name: '女' },
+];
 const Demo = () => {
   const [form] = Form.useForm();
   const [detail, setDetail] = useState<FieldsType>({});
@@ -26,8 +32,10 @@ const Demo = () => {
   const loadData = useCallback(async () => {
     await delay(250);
     setDetail({
-      age: '1',
+      age: '10',
       gender: '1',
+      select: '1',
+      checkbox: ['1'],
       start: '1610767167',
       end: '1611767667',
       list: [{ age: '10' }],
@@ -51,18 +59,14 @@ const Demo = () => {
     >
       {[
         { label: '年龄', type: 'input', name: 'age', componentProps: { disabled } },
+        { label: '性别', type: 'radio', name: 'gender', componentProps: { disabled, options } },
         {
-          label: '性别',
-          type: 'radio',
-          name: 'gender',
-          componentProps: {
-            disabled,
-            options: [
-              { id: '1', name: '男' },
-              { id: '2', name: '女' },
-            ],
-          },
+          label: 'checkbox',
+          type: 'checkbox',
+          name: 'checkbox',
+          componentProps: { disabled, options },
         },
+        { label: 'select', type: 'select', name: 'select', componentProps: { disabled, options } },
         {
           type: 'rangePicker',
           name: 'range',
