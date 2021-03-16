@@ -4,12 +4,9 @@
     "moduleResolution": "node",
     "baseUrl": "./packages",
     "paths": {
-      "yforms": ["yforms/src"],
-      "yforms/lib/*": ["yforms/src/*"],
-      "yforms/es/*": ["yforms/src/*"],
-      "yforms-simple": ["form/src"],
-      "yforms-simple/es/*": ["form/src/*"],
-      "yforms-simple/lib/*": ["form/src/*"]
+      "yforms-provider": ["yforms/src"],
+      "yforms-provider/lib/*": ["yforms/src/*"],
+      "yforms-provider/es/*": ["yforms/src/*"]
     },
     "jsx": "preserve",
     "declaration": true,

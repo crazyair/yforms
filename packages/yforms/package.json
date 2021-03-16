@@ -1,6 +1,6 @@
 {
-  "name": "yforms",
-  "version": "1.4.2",
+  "name": "yforms-provider",
+  "version": "1.0.0",
   "description": "自定义表单组件",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -39,14 +39,7 @@
     "antd": "4.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
-    "ahooks": "^2.9.2",
-    "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.20",
-    "moment": "^2.29.1",
-    "numbro": "^2.3.2",
-    "nzh": "^1.0.4",
-    "warning": "^4.0.3"
+    "@babel/runtime": "^7.12.5"
   },
   "license": "MIT",
   "devDependencies": {}
