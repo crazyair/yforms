@@ -10,7 +10,7 @@
   "scripts": {
     "start": "dumi dev",
     "bootstrap": "lerna bootstrap",
-    "build": "father-build && yarn compile",
+    "build": "father-build",
     "doc:build": "dumi build",
     "now-build": "yarn && yarn doc:build",
     "fa:build": "father build",
