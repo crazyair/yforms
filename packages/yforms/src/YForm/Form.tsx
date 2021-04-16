@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { merge, concat, mapKeys, omit, find, get, set, forEach } from 'lodash';
 import classNames from 'classnames';
 import { FormProps, FormInstance } from 'antd/lib/form';
-import warning from 'warning';
 import { usePersistFn } from 'ahooks';
 
 import baseItemsType, { YFormItemsType, modifyType } from './ItemsType';
@@ -264,7 +263,7 @@ const InternalForm = React.memo<YFormProps>((thisProps) => {
           end - begin > minBtnLoadingTime ? 0 : minBtnLoadingTime,
         );
       } catch (error) {
-        warning(false, error || 'onSubmit error');
+        console.log('error', error);
         setSubmitLoading(false);
       }
     }
