@@ -2,7 +2,7 @@
 
 ## Usage & Guide
 
-To check out live examples and docs, visit [yforms now](https://yforms.now.sh/).
+To check out live examples and docs, visit [yforms](https://yforms.crazyair.cn/).
 
 ## Development
 
