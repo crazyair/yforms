@@ -11,7 +11,6 @@
     "start": "dumi dev",
     "build": "father-build && cd packages/yforms && yarn compile && cd ../..",
     "docs:build": "dumi build",
-    "now-build": "yarn && yarn docs:build",
     "fa:build": "father build",
     "test": "umi-test -u --coverage",
     "test:ci": "umi-test",
